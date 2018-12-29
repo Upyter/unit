@@ -28,6 +28,7 @@ implementations like a scaling size
 */
 
 import java.util.function.BiFunction;
+import java.util.function.ObjIntConsumer;
 
 /**
  * The two dimensional cartesian based size of a rectangular area.
@@ -45,4 +46,20 @@ public interface Size {
      * @return The result of the applied function.
      */
     <R> R result(BiFunction<Integer, Integer, R> target);
+
+    /**
+     * Gives the given consumer the x and y coordinates of this pos.
+     * @param size The size that provides the {@link #result(BiFunction)} method
+     *  on which this method is based on.
+     * @param target Target that gets the Coordinates.
+     */
+    @SuppressWarnings("PMD.ProhibitPublicStaticMethods")
+    static void applyOn(final Size size, final ObjIntConsumer<Integer> target) {
+        size.result(
+            (width, height) -> {
+                target.accept(width, height);
+                return null;
+            }
+        );
+    }
 }
