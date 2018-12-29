@@ -36,14 +36,15 @@ public class PosTest {
      */
     @Test
     public void givesCorrectCoordinates() {
-        final int width = 52;
-        final int height = 43;
+        // @checkstyle LocalFinalVariableName (2 lines)
+        final int x = 52;
+        final int y = 43;
         Pos.applyOn(
-            new Pos2D(width, height),
+            new Pos2D(x, y),
             // @checkstyle ParameterName (1 line)
-            (resWidth, resHeight) -> {
-                MatcherAssert.assertThat(resWidth, Matchers.equalTo(width));
-                MatcherAssert.assertThat(resHeight, Matchers.equalTo(height));
+            (resX, resY) -> {
+                MatcherAssert.assertThat(resX, Matchers.equalTo(x));
+                MatcherAssert.assertThat(resY, Matchers.equalTo(y));
             }
         );
     }

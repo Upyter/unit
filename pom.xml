@@ -6,7 +6,7 @@
 
     <groupId>com.uni</groupId>
     <artifactId>unit</artifactId>
-    <version>0.5.0</version>
+    <version>0.5.1</version>
     <dependencies>
         <!-- test framework -->
         <dependency>
