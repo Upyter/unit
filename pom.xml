@@ -34,7 +34,7 @@
                         <exclude>dependencies:.*</exclude>
                         -->
                     </excludes>
-                    <license>file:${basedir}/LICENSE.md</license>
+                    <license>file:${basedir}/LICENSE</license>
                 </configuration>
                 <executions>
                     <execution>
