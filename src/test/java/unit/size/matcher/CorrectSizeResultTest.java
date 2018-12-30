@@ -50,7 +50,7 @@ public final class CorrectSizeResultTest {
     }
 
     /**
-     * Fails  matching when the expected width isn't met by the given size
+     * Fails matching when the expected width isn't met by the given size
      * instance.
      */
     @Test
@@ -91,7 +91,7 @@ public final class CorrectSizeResultTest {
     }
 
     /**
-     * Fails  matching when the expected height isn't met by the given size
+     * Fails matching when the expected height isn't met by the given size
      * instance.
      */
     @Test
