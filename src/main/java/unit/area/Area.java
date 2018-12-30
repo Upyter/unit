@@ -21,6 +21,7 @@
 
 package unit.area;
 
+import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
 import unit.functional.QuadFunction;
 import unit.pos.Pos;
@@ -79,6 +80,22 @@ public interface Area {
                     (width, height) -> target.apply(x, y, width, height)
                 )
             )
+        );
+    }
+
+    /**
+     * Gives the given consumer the pos and the size which define the area.
+     * @param area The area that provides the {@link #result(BiFunction)} method
+     *  on which this method is based on.
+     * @param target Target that gets the pos and the size.
+     */
+    @SuppressWarnings("PMD.ProhibitPublicStaticMethods")
+    static void applyOn(final Area area, final BiConsumer<Pos, Size> target) {
+        area.result(
+            (pos, size) -> {
+                target.accept(pos, size);
+                return null;
+            }
         );
     }
 }
