@@ -19,7 +19,7 @@
  * DEALINGS IN THE SOFTWARE.
  */
 
-package unit.pos;
+package unit.size;
 
 import java.util.function.ObjIntConsumer;
 import org.hamcrest.MatcherAssert;
@@ -27,24 +27,24 @@ import org.hamcrest.Matchers;
 import org.junit.Test;
 
 /**
- * Tests for {@link Pos}.
- * @since 0.3.0
+ * Tests for {@link Size}.
+ * @since 0.5.0
  */
-public class PosTest {
+public class SizeTest {
     /**
-     * {@link Pos#applyOn(Pos, ObjIntConsumer)} gives the correct coordinates.
+     * {@link Size#applyOn(Size, ObjIntConsumer)} gives the correct width and
+     * height.
      */
     @Test
-    public void givesCorrectCoordinates() {
-        // @checkstyle LocalFinalVariableName (2 lines)
-        final int x = 52;
-        final int y = 43;
-        Pos.applyOn(
-            new Pos2D(x, y),
+    public void givesCorrectWidthAndHeight() {
+        final int width = 52;
+        final int height = 43;
+        Size.applyOn(
+            new Size2D(width, height),
             // @checkstyle ParameterName (1 line)
-            (resX, resY) -> {
-                MatcherAssert.assertThat(resX, Matchers.equalTo(x));
-                MatcherAssert.assertThat(resY, Matchers.equalTo(y));
+            (resWidth, resHeight) -> {
+                MatcherAssert.assertThat(resWidth, Matchers.equalTo(width));
+                MatcherAssert.assertThat(resHeight, Matchers.equalTo(height));
             }
         );
     }

@@ -19,33 +19,34 @@
  * DEALINGS IN THE SOFTWARE.
  */
 
-package unit.pos;
+package unit.functional;
 
-import java.util.function.ObjIntConsumer;
-import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
-import org.junit.Test;
-
+/*
+Personally, I may've called this class differently, but in this case I thought
+it may be better to follow the standard libraries way. Otherwise users might
+be confused
+*/
 /**
- * Tests for {@link Pos}.
- * @since 0.3.0
+ * This interface defines a function like {@link java.util.function.Function}.
+ * The difference is that this function takes four arguments.
+ * @param <A> The type of the first argument.
+ * @param <B> The type of the second argument.
+ * @param <C> The type of the third argument.
+ * @param <D> The type of the fourth argument.
+ * @param <R> The type of the result of that function.
+ * @since 0.7.0
  */
-public class PosTest {
+@FunctionalInterface
+public interface QuadFunction<A, B, C, D, R> {
     /**
-     * {@link Pos#applyOn(Pos, ObjIntConsumer)} gives the correct coordinates.
+     * Accepts the given arguments and returns its result.
+     * @param a The first argument.
+     * @param b The second argument.
+     * @param c The third argument.
+     * @param d The fourth argument.
+     * @return The result of the call.
+     * @checkstyle ParameterNumber (3 lines)
+     * @checkstyle ParameterNameCheck (2 lines)
      */
-    @Test
-    public void givesCorrectCoordinates() {
-        // @checkstyle LocalFinalVariableName (2 lines)
-        final int x = 52;
-        final int y = 43;
-        Pos.applyOn(
-            new Pos2D(x, y),
-            // @checkstyle ParameterName (1 line)
-            (resX, resY) -> {
-                MatcherAssert.assertThat(resX, Matchers.equalTo(x));
-                MatcherAssert.assertThat(resY, Matchers.equalTo(y));
-            }
-        );
-    }
+    R apply(A a, B b, C c, D d);
 }

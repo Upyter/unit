@@ -19,32 +19,56 @@
  * DEALINGS IN THE SOFTWARE.
  */
 
-package unit.pos;
+package unit.size;
 
-import java.util.function.ObjIntConsumer;
+import java.util.function.BiFunction;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
 
 /**
- * Tests for {@link Pos}.
- * @since 0.3.0
+ * Tests for {@link Size2D}.
+ * @since 0.4.0
  */
-public class PosTest {
+public class Size2DTest {
     /**
-     * {@link Pos#applyOn(Pos, ObjIntConsumer)} gives the correct coordinates.
+     * {@link Size#result(BiFunction)} returns the right result.
      */
     @Test
-    public void givesCorrectCoordinates() {
-        // @checkstyle LocalFinalVariableName (2 lines)
-        final int x = 52;
-        final int y = 43;
-        Pos.applyOn(
-            new Pos2D(x, y),
-            // @checkstyle ParameterName (1 line)
-            (resX, resY) -> {
-                MatcherAssert.assertThat(resX, Matchers.equalTo(x));
-                MatcherAssert.assertThat(resY, Matchers.equalTo(y));
+    public void correctResult() {
+        final var width = 3445;
+        final var height = 432;
+        MatcherAssert.assertThat(
+            new Size2D(width, height).result(Integer::sum),
+            Matchers.equalTo(width + height)
+        );
+    }
+
+    /**
+     * {@link Size2D#toString()}} returns the right string.
+     */
+    @Test
+    public void correctToString() {
+        final var width = 313;
+        final var height = 238;
+        MatcherAssert.assertThat(
+            new Size2D(width, height),
+            Matchers.hasToString(
+                String.format("Size(width=%d, height=%d)", width, height)
+            )
+        );
+    }
+
+    /**
+     * {@link Size2D#Size2D()} creates a size with width = 0 and height = 0.
+     */
+    @Test
+    public void defaultConstructorCorrectCoordinates() {
+        new Size2D().result(
+            (width, height) -> {
+                MatcherAssert.assertThat(width, Matchers.equalTo(0));
+                MatcherAssert.assertThat(height, Matchers.equalTo(0));
+                return null;
             }
         );
     }

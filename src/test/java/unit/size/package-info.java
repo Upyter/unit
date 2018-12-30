@@ -19,33 +19,8 @@
  * DEALINGS IN THE SOFTWARE.
  */
 
-package unit.pos;
-
-import java.util.function.ObjIntConsumer;
-import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
-import org.junit.Test;
-
 /**
- * Tests for {@link Pos}.
- * @since 0.3.0
+ * Tests regarding the size components.
+ * @since 0.4.0
  */
-public class PosTest {
-    /**
-     * {@link Pos#applyOn(Pos, ObjIntConsumer)} gives the correct coordinates.
-     */
-    @Test
-    public void givesCorrectCoordinates() {
-        // @checkstyle LocalFinalVariableName (2 lines)
-        final int x = 52;
-        final int y = 43;
-        Pos.applyOn(
-            new Pos2D(x, y),
-            // @checkstyle ParameterName (1 line)
-            (resX, resY) -> {
-                MatcherAssert.assertThat(resX, Matchers.equalTo(x));
-                MatcherAssert.assertThat(resY, Matchers.equalTo(y));
-            }
-        );
-    }
-}
+package unit.size;
