@@ -69,4 +69,34 @@ public class Area2DTest {
             }
         );
     }
+
+    /**
+     * {@link Area2D#Area2D(Pos)} has a width of 0 and a height of 0.
+     */
+    @Test
+    public void constructsZeroSize() {
+        // @checkstyle LocalFinalVariableName (4 lines)
+        final var resX = 76;
+        final var resY = 52;
+        Area.applyOn(
+            new Area2D(new Pos2D(resX, resY)),
+            (pos, size) -> {
+                Pos.applyOn(
+                    pos,
+                    // @checkstyle ParameterName (1 line)
+                    (x, y) -> {
+                        MatcherAssert.assertThat(x, Matchers.equalTo(resX));
+                        MatcherAssert.assertThat(y, Matchers.equalTo(resY));
+                    }
+                );
+                Size.applyOn(
+                    size,
+                    (width, height) -> {
+                        MatcherAssert.assertThat(width, Matchers.equalTo(0));
+                        MatcherAssert.assertThat(height, Matchers.equalTo(0));
+                    }
+                );
+            }
+        );
+    }
 }

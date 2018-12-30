@@ -31,6 +31,7 @@ chance that a user might use the class name as a parameter type
 import java.util.function.BiFunction;
 import unit.pos.Pos;
 import unit.size.Size;
+import unit.size.Size2D;
 
 /**
  * Basic concrete implementation of {@link Area}.
@@ -50,6 +51,14 @@ public class Area2D implements Area {
      * The size of this area.
      */
     private final Size size;
+
+    /**
+     * Ctor. Uses width = 0 and height = 0 as its size.
+     * @param pos The pos of the area.
+     */
+    public Area2D(final Pos pos) {
+        this(pos, new Size2D());
+    }
 
     /**
      * Ctor.
