@@ -75,7 +75,7 @@ public class Area2DTest {
      */
     @Test
     public void constructsZeroSize() {
-        // @checkstyle LocalFinalVariableName (4 lines)
+        // @checkstyle LocalFinalVariableName (2 lines)
         final var resX = 76;
         final var resY = 52;
         Area.applyOn(
