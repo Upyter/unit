@@ -62,8 +62,8 @@ public class Area2DTest {
                     size,
                     (width, height) -> {
                         MatcherAssert.assertThat(width, Matchers.equalTo(resW));
-                        MatcherAssert.assertThat(height,
-                            Matchers.equalTo(resH)
+                        MatcherAssert.assertThat(
+                            height, Matchers.equalTo(resH)
                         );
                     }
                 );

@@ -83,4 +83,19 @@ public class Area2D implements Area {
     public final <R> R result(final BiFunction<Pos, Size, R> target) {
         return target.apply(this.pos, this.size);
     }
+
+    @Override
+    public final String toString() {
+        return Area.result(
+            this,
+            // @checkstyle ParameterName (1 line)
+            (x, y, width, height) -> new StringBuilder("Area")
+                .append("(x = ").append(x)
+                .append(", y = ").append(y)
+                .append(", width = ").append(width)
+                .append(", height = ").append(height)
+                .append(')')
+            .toString()
+        );
+    }
 }

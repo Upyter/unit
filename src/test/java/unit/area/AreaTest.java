@@ -123,4 +123,32 @@ public class AreaTest {
             }
         );
     }
+
+    /**
+     * {@link Area2D#toString()} returns the right string.
+     */
+    @Test
+    public void correctToString() {
+        // @checkstyle LocalFinalVariableName (2 lines)
+        final var x = -3123;
+        final var y = 4553;
+        final var width = -432;
+        final var height = 4585;
+        MatcherAssert.assertThat(
+            // @checkstyle LocalFinalVariableName (1 line)
+            new Area2D(
+                new Pos2D(x, y),
+                new Size2D(width, height)
+            ),
+            Matchers.hasToString(
+                String.format(
+                    "Area(x = %d, y = %d, width = %d, height = %d)",
+                    x,
+                    y,
+                    width,
+                    height
+                )
+            )
+        );
+    }
 }
