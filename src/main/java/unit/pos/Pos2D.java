@@ -74,8 +74,8 @@ public class Pos2D implements Pos {
     @Override
     public final String toString() {
         return new StringBuilder("Pos")
-            .append("(x=").append(this.x)
-            .append(", y=").append(this.y)
+            .append("(x = ").append(this.x)
+            .append(", y = ").append(this.y)
             .append(')')
             .toString();
     }
