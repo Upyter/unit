@@ -59,7 +59,7 @@ public class Pos2DTest {
             // @checkstyle LocalFinalVariableName (1 line)
             new Pos2D(x, y),
             Matchers.hasToString(
-                String.format("Pos(x=%d, y=%d)", x, y)
+                String.format("Pos(x = %d, y = %d)", x, y)
             )
         );
     }

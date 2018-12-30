@@ -30,7 +30,9 @@ chance that a user might use the class name as a parameter type
 
 import java.util.function.BiFunction;
 import unit.pos.Pos;
+import unit.pos.Pos2D;
 import unit.size.Size;
+import unit.size.Size2D;
 
 /**
  * Basic concrete implementation of {@link Area}.
@@ -53,6 +55,38 @@ public class Area2D implements Area {
 
     /**
      * Ctor.
+     * @param x The x coordinate of the area.
+     * @param y The y coordinate of the area.
+     * @param width The width of the area.
+     * @param height The height of the area.
+     * @checkstyle ParameterNumber (3 lines)
+     * @checkstyle ParameterName (2 lines)
+     */
+    public Area2D(final int x, final int y, final int width, final int height) {
+        this(
+            new Pos2D(x, y),
+            new Size2D(width, height)
+        );
+    }
+
+    /**
+     * Ctor. Uses x = 0 and y = 0 as its coordinates.
+     * @param size The size of the area.
+     */
+    public Area2D(final Size size) {
+        this(new Pos2D(0, 0), size);
+    }
+
+    /**
+     * Ctor. Uses width = 0 and height = 0 as its size.
+     * @param pos The pos of the area.
+     */
+    public Area2D(final Pos pos) {
+        this(pos, new Size2D());
+    }
+
+    /**
+     * Ctor.
      * @param pos The pos of the area.
      * @param size The size of the area.
      */
@@ -64,5 +98,20 @@ public class Area2D implements Area {
     @Override
     public final <R> R result(final BiFunction<Pos, Size, R> target) {
         return target.apply(this.pos, this.size);
+    }
+
+    @Override
+    public final String toString() {
+        return Area.result(
+            this,
+            // @checkstyle ParameterName (1 line)
+            (x, y, width, height) -> new StringBuilder("Area")
+                .append("(x = ").append(x)
+                .append(", y = ").append(y)
+                .append(", width = ").append(width)
+                .append(", height = ").append(height)
+                .append(')')
+            .toString()
+        );
     }
 }

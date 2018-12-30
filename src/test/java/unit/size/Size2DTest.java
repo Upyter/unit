@@ -54,7 +54,7 @@ public class Size2DTest {
         MatcherAssert.assertThat(
             new Size2D(width, height),
             Matchers.hasToString(
-                String.format("Size(width=%d, height=%d)", width, height)
+                String.format("Size(width = %d, height = %d)", width, height)
             )
         );
     }

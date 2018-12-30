@@ -54,18 +54,117 @@ public class Area2DTest {
                     pos,
                     // @checkstyle ParameterName (1 line)
                     (x, y) -> {
-                        MatcherAssert.assertThat(x, Matchers.is(resX));
-                        MatcherAssert.assertThat(y, Matchers.is(resY));
+                        MatcherAssert.assertThat(x, Matchers.equalTo(resX));
+                        MatcherAssert.assertThat(y, Matchers.equalTo(resY));
                     }
                 );
                 Size.applyOn(
                     size,
                     (width, height) -> {
-                        MatcherAssert.assertThat(width, Matchers.is(resW));
-                        MatcherAssert.assertThat(height, Matchers.is(resH));
+                        MatcherAssert.assertThat(width, Matchers.equalTo(resW));
+                        MatcherAssert.assertThat(
+                            height, Matchers.equalTo(resH)
+                        );
                     }
                 );
                 return null;
+            }
+        );
+    }
+
+    /**
+     * {@link Area2D#Area2D(Pos)} has a width of 0 and a height of 0.
+     */
+    @Test
+    public void constructsZeroSize() {
+        // @checkstyle LocalFinalVariableName (2 lines)
+        final var resX = 76;
+        final var resY = 52;
+        Area.applyOn(
+            new Area2D(new Pos2D(resX, resY)),
+            (pos, size) -> {
+                Pos.applyOn(
+                    pos,
+                    // @checkstyle ParameterName (1 line)
+                    (x, y) -> {
+                        MatcherAssert.assertThat(x, Matchers.equalTo(resX));
+                        MatcherAssert.assertThat(y, Matchers.equalTo(resY));
+                    }
+                );
+                Size.applyOn(
+                    size,
+                    (width, height) -> {
+                        MatcherAssert.assertThat(width, Matchers.equalTo(0));
+                        MatcherAssert.assertThat(height, Matchers.equalTo(0));
+                    }
+                );
+            }
+        );
+    }
+
+    /**
+     * {@link Area2D#Area2D(Size)} has a pos of x = 0 and y = 0.
+     */
+    @Test
+    public void constructsZeroPos() {
+        // @checkstyle LocalFinalVariableName (2 lines)
+        final var resW = -566;
+        final var resH = -54;
+        Area.applyOn(
+            new Area2D(new Size2D(resW, resH)),
+            (pos, size) -> {
+                Pos.applyOn(
+                    pos,
+                    // @checkstyle ParameterName (1 line)
+                    (x, y) -> {
+                        MatcherAssert.assertThat(x, Matchers.equalTo(0));
+                        MatcherAssert.assertThat(y, Matchers.equalTo(0));
+                    }
+                );
+                Size.applyOn(
+                    size,
+                    (width, height) -> {
+                        MatcherAssert.assertThat(width, Matchers.equalTo(resW));
+                        MatcherAssert.assertThat(
+                            height, Matchers.equalTo(resH)
+                        );
+                    }
+                );
+            }
+        );
+    }
+
+    /**
+     * {@link Area2D#Area2D(int, int, int, int)} )} constructs an area with the
+     * right x, y, width and height.
+     */
+    @Test
+    public void distributedConstruct() {
+        // @checkstyle LocalFinalVariableName (4 lines)
+        final var resX = 4535;
+        final var resY = 12;
+        final var resW = 423;
+        final var resH = 4534;
+        Area.applyOn(
+            new Area2D(resX, resY, resW, resH),
+            (pos, size) -> {
+                Pos.applyOn(
+                    pos,
+                    // @checkstyle ParameterName (1 line)
+                    (x, y) -> {
+                        MatcherAssert.assertThat(x, Matchers.equalTo(resX));
+                        MatcherAssert.assertThat(y, Matchers.equalTo(resY));
+                    }
+                );
+                Size.applyOn(
+                    size,
+                    (width, height) -> {
+                        MatcherAssert.assertThat(width, Matchers.equalTo(resW));
+                        MatcherAssert.assertThat(
+                            height, Matchers.equalTo(resH)
+                        );
+                    }
+                );
             }
         );
     }

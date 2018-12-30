@@ -80,15 +80,17 @@ public class AreaTest {
                 pos.result(
                     // @checkstyle ParameterName (1 line)
                     (x, y) -> {
-                        MatcherAssert.assertThat(x, Matchers.is(resX));
-                        MatcherAssert.assertThat(y, Matchers.is(resY));
+                        MatcherAssert.assertThat(x, Matchers.equalTo(resX));
+                        MatcherAssert.assertThat(y, Matchers.equalTo(resY));
                         return null;
                     }
                 );
                 size.result(
                     (width, height) -> {
-                        MatcherAssert.assertThat(width, Matchers.is(resW));
-                        MatcherAssert.assertThat(height, Matchers.is(resH));
+                        MatcherAssert.assertThat(width, Matchers.equalTo(resW));
+                        MatcherAssert.assertThat(
+                            height, Matchers.equalTo(resH)
+                        );
                         return null;
                     }
                 );
@@ -114,11 +116,39 @@ public class AreaTest {
             ),
             // @checkstyle ParameterName (1 line)
             (x, y, width, height) -> {
-                MatcherAssert.assertThat(x, Matchers.is(resX));
-                MatcherAssert.assertThat(y, Matchers.is(resY));
-                MatcherAssert.assertThat(width, Matchers.is(resW));
-                MatcherAssert.assertThat(height, Matchers.is(resH));
+                MatcherAssert.assertThat(x, Matchers.equalTo(resX));
+                MatcherAssert.assertThat(y, Matchers.equalTo(resY));
+                MatcherAssert.assertThat(width, Matchers.equalTo(resW));
+                MatcherAssert.assertThat(height, Matchers.equalTo(resH));
             }
+        );
+    }
+
+    /**
+     * {@link Area2D#toString()} returns the right string.
+     */
+    @Test
+    public void correctToString() {
+        // @checkstyle LocalFinalVariableName (2 lines)
+        final var x = -3123;
+        final var y = 4553;
+        final var width = -432;
+        final var height = 4585;
+        MatcherAssert.assertThat(
+            // @checkstyle LocalFinalVariableName (1 line)
+            new Area2D(
+                new Pos2D(x, y),
+                new Size2D(width, height)
+            ),
+            Matchers.hasToString(
+                String.format(
+                    "Area(x = %d, y = %d, width = %d, height = %d)",
+                    x,
+                    y,
+                    width,
+                    height
+                )
+            )
         );
     }
 }
