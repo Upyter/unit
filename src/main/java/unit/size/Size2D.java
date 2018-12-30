@@ -70,8 +70,8 @@ public class Size2D implements Size {
     @Override
     public final String toString() {
         return new StringBuilder("Size")
-            .append("(width=").append(this.width)
-            .append(", height=").append(this.height)
+            .append("(width = ").append(this.width)
+            .append(", height = ").append(this.height)
             .append(')')
             .toString();
     }
