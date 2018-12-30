@@ -22,6 +22,7 @@
 package unit.area;
 
 import java.util.function.BiFunction;
+import unit.functional.QuadFunction;
 import unit.pos.Pos;
 import unit.size.Size;
 
@@ -44,4 +45,40 @@ public interface Area {
      * @return The result.
      */
     <R> R result(BiFunction<Pos, Size, R> target);
+
+    /*
+    The result(BiConsumer<Pos, Size>) method is not enough, because the
+    concrete graphic libraries are based on single values (x, y), instead of
+    the classes of this library. Without this method, one would've to use
+    two lambdas in multiple places. Additionally I don't want to use this method
+    alone, because my classes depend on Position, Size and the others and I
+    would've to convert them back and forth there
+    */
+    /**
+     * Gives the given function the pos and the size which define this
+     * area. This method shall offer a more convenient way to use the area
+     * classes compared to {@link this#result(BiFunction)}.
+     * <p>This method uses {@link this#result(BiFunction)} to gets it's values
+     * and it doesn't mutate the state by itself.</p>
+     * @param area The area that provides the {@link #result(BiFunction)} method
+     *  on which this method is based on.
+     * @param target Target that gets the pos and the size as four integer
+     *  values.
+     * @param <R> The type of the result.
+     * @return The result.
+     */
+    @SuppressWarnings("PMD.ProhibitPublicStaticMethods")
+    static <R> R result(
+        final Area area,
+        final QuadFunction<Integer, Integer, Integer, Integer, R> target
+    ) {
+        return area.result(
+            (pos, size) -> pos.result(
+                // @checkstyle ParameterName (1 line)
+                (x, y) -> size.result(
+                    (width, height) -> target.apply(x, y, width, height)
+                )
+            )
+        );
+    }
 }
