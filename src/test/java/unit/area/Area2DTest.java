@@ -32,7 +32,7 @@ import unit.size.Size2D;
 
 /**
  * Tests for {@link Area}.
- * @since 0.6.0
+ * @since 0.6
  */
 public class Area2DTest {
     /**

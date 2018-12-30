@@ -22,6 +22,6 @@
 /**
  * Provides the {@link unit.pos.Pos} interface and the classes and
  * decorators around it.
- * @since 0.2.0
+ * @since 0.2
  */
 package unit.pos;

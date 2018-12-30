@@ -21,6 +21,6 @@
 
 /**
  * Functional interfaces and some classes for functional programming.
- * @since 0.7.0
+ * @since 0.7
  */
 package unit.functional;

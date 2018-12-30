@@ -33,7 +33,7 @@ be confused
  * @param <B> The type of the second argument.
  * @param <C> The type of the third argument.
  * @param <D> The type of the fourth argument.
- * @since 0.9.0
+ * @since 0.9
  */
 @FunctionalInterface
 public interface QuadConsumer<A, B, C, D> {

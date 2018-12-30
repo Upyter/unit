@@ -33,7 +33,7 @@ chance that a user might use the class name as a parameter type
 /**
  * Basic concrete implementation of {@link Pos}.
  * <p>This class is immutable and thread-safe.</p>
- * @since 3.4.0
+ * @since 0.2
  */
 public class Pos2D implements Pos {
     /**

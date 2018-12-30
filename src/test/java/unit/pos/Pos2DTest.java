@@ -28,7 +28,7 @@ import org.junit.Test;
 
 /**
  * Tests for {@link Pos}.
- * @since 0.3.0
+ * @since 0.3
  */
 public class Pos2DTest {
     /**

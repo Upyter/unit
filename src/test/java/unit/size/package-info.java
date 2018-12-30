@@ -21,6 +21,6 @@
 
 /**
  * Tests regarding the size components.
- * @since 0.4.0
+ * @since 0.4
  */
 package unit.size;

@@ -36,7 +36,7 @@ sacrificing readability
 
 /**
  * A cartesian two dimensional pos.
- * @since 0.2.0
+ * @since 0.2
  */
 public interface Pos {
     /**

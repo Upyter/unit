@@ -22,6 +22,6 @@
 /**
  * Provides the {@link unit.area.Area} interface and the classes and
  * decorators around it.
- * @since 0.6.0
+ * @since 0.6
  */
 package unit.area;

@@ -34,7 +34,7 @@ alone) because some implementations need both like an overlappable area
 */
 /**
  * Defines a cartesian two dimensional rectangular area of a shape.
- * @since 0.6.0
+ * @since 0.6
  */
 public interface Area {
     /**

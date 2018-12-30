@@ -28,7 +28,7 @@ import org.junit.Test;
 
 /**
  * Tests for {@link Size}.
- * @since 0.5.0
+ * @since 0.5
  */
 public class SizeTest {
     /**

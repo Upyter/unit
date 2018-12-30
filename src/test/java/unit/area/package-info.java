@@ -21,6 +21,6 @@
 
 /**
  * Tests regarding the area component.
- * @since 0.6.0
+ * @since 0.6
  */
 package unit.area;
