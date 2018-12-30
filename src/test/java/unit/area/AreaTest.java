@@ -24,6 +24,7 @@ package unit.area;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
+import unit.functional.QuadConsumer;
 import unit.functional.QuadFunction;
 import unit.pos.Pos2D;
 import unit.size.Size2D;
@@ -56,6 +57,32 @@ public class AreaTest {
                     (x, y, width, height) -> x + y + width + height
                 )
             )
+        );
+    }
+
+    /**
+     * {@link Area#applyOn(Area, QuadConsumer)} distributes the x, y, width and
+     * height values correctly.
+     */
+    @Test
+    public void correctDistributionOnApply() {
+        // @checkstyle LocalFinalVariableName (4 lines)
+        final var resX = 203;
+        final var resY = 132;
+        final var resW = 3231;
+        final var resH = 32;
+        Area.applyOn(
+            new Area2D(
+                new Pos2D(resX, resY),
+                new Size2D(resW, resH)
+            ),
+            // @checkstyle ParameterName (1 line)
+            (x, y, width, height) -> {
+                MatcherAssert.assertThat(x, Matchers.is(resX));
+                MatcherAssert.assertThat(y, Matchers.is(resY));
+                MatcherAssert.assertThat(width, Matchers.is(resW));
+                MatcherAssert.assertThat(height, Matchers.is(resH));
+            }
         );
     }
 }

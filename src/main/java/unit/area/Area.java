@@ -23,6 +23,7 @@ package unit.area;
 
 import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
+import unit.functional.QuadConsumer;
 import unit.functional.QuadFunction;
 import unit.pos.Pos;
 import unit.size.Size;
@@ -94,6 +95,39 @@ public interface Area {
         area.result(
             (pos, size) -> {
                 target.accept(pos, size);
+                return null;
+            }
+        );
+    }
+
+    /*
+    The apply(BiConsumer<Position, Size>) method is not enough, because the
+    concrete graphic libraries are based on single values (x, y), instead of
+    the classes of this library. Without this method, one would've to use
+    two lambdas in multiple places. Additionally I don't want to use this method
+    alone, because my classes depend on Position, Size and the others and I
+    would've to convert them back and forth there
+    */
+    /**
+     * Gives the given consumer the pos and the size which define this
+     * area. This method shall offer a more convenient way to use the area
+     * classes compared to {@link #applyOn(Area, BiConsumer)}.
+     * <p>This method uses {@link #result(BiFunction)} to gets it's values
+     * and it doesn't mutate the state by itself.</p>
+     * @param area The area that provides the {@link #result(BiFunction)} method
+     *  on which this method is based on.
+     * @param target Target that gets the pos and the size as four integer
+     *  values.
+     */
+    static void applyOn(
+        final Area area,
+        final QuadConsumer<Integer, Integer, Integer, Integer> target
+    ) {
+        // @checkstyle ParameterName (2 lines)
+        Area.result(
+            area,
+            (x, y, width, height) -> {
+                target.accept(x, y, width, height);
                 return null;
             }
         );
