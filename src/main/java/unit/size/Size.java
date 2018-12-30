@@ -33,7 +33,7 @@ import java.util.function.ObjIntConsumer;
 /**
  * The two dimensional cartesian based size of a rectangular area.
  *
- * @since 0.4.0
+ * @since 0.4
  */
 public interface Size {
     /**

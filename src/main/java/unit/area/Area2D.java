@@ -40,7 +40,7 @@ import unit.size.Size2D;
  * {@link Pos} and {@link Size}. This class
  * doesn't mutate state by itself. Additionally note that the methods provide
  * the actual objects without any safe-copies.</p>
- * @since 0.6.0
+ * @since 0.6
  */
 public class Area2D implements Area {
     /**

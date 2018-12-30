@@ -32,7 +32,7 @@ chance that a user might use the class name as a parameter type
 /**
  * Basic concrete implementation of {@link Size}.
  * <p>This class is immutable and thread-safe.</p>
- * @since 0.4.0
+ * @since 0.4
  */
 public class Size2D implements Size {
     /**

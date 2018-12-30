@@ -22,6 +22,6 @@
 /**
  * Provides the {@link unit.size.Size} interface and the classes and
  * decorators around it.
- * @since 0.4.0
+ * @since 0.4
  */
 package unit.size;

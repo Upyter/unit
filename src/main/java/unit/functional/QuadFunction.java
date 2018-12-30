@@ -34,7 +34,7 @@ be confused
  * @param <C> The type of the third argument.
  * @param <D> The type of the fourth argument.
  * @param <R> The type of the result of that function.
- * @since 0.7.0
+ * @since 0.7
  */
 @FunctionalInterface
 public interface QuadFunction<A, B, C, D, R> {

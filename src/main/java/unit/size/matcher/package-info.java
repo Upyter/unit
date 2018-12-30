@@ -19,32 +19,8 @@
  * DEALINGS IN THE SOFTWARE.
  */
 
-package unit.functional;
-
-/*
-Personally I wouldn't call this class "Consumer", but in this case I thought
-it may be better to follow the standard libraries way. Otherwise users might
-be confused
-*/
 /**
- * This interface defines a consumer like {@link java.util.function.Consumer}.
- * The difference is that this consumer takes four arguments.
- * @param <A> The type of the first argument.
- * @param <B> The type of the second argument.
- * @param <C> The type of the third argument.
- * @param <D> The type of the fourth argument.
- * @since 0.9
+ * Custom hamcrest matchers for {@link unit.size.Size} and classes around it.
+ * @since 0.13
  */
-@FunctionalInterface
-public interface QuadConsumer<A, B, C, D> {
-    /**
-     * Accepts the given arguments.
-     * @param a The first argument.
-     * @param b The second argument.
-     * @param c The third argument.
-     * @param d The fourth argument.
-     * @checkstyle ParameterNumber (3 lines)
-     * @checkstyle ParameterNameCheck (2 lines)
-     */
-    void accept(A a, B b, C c, D d);
-}
+package unit.size.matcher;

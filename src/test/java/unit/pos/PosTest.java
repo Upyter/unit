@@ -28,9 +28,9 @@ import org.junit.Test;
 
 /**
  * Tests for {@link Pos}.
- * @since 0.3.0
+ * @since 0.3
  */
-public class PosTest {
+public final class PosTest {
     /**
      * {@link Pos#applyOn(Pos, ObjIntConsumer)} gives the correct coordinates.
      */

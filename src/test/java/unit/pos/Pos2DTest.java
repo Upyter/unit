@@ -28,9 +28,9 @@ import org.junit.Test;
 
 /**
  * Tests for {@link Pos}.
- * @since 0.3.0
+ * @since 0.3
  */
-public class Pos2DTest {
+public final class Pos2DTest {
     /**
      * {@link Pos2D#result(BiFunction)} returns the correct result.
      */

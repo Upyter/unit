@@ -25,12 +25,13 @@ import java.util.function.BiFunction;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
+import unit.size.matcher.CorrectSizeResult;
 
 /**
  * Tests for {@link Size2D}.
- * @since 0.4.0
+ * @since 0.4
  */
-public class Size2DTest {
+public final class Size2DTest {
     /**
      * {@link Size#result(BiFunction)} returns the right result.
      */
@@ -64,12 +65,9 @@ public class Size2DTest {
      */
     @Test
     public void defaultConstructorCorrectCoordinates() {
-        new Size2D().result(
-            (width, height) -> {
-                MatcherAssert.assertThat(width, Matchers.equalTo(0));
-                MatcherAssert.assertThat(height, Matchers.equalTo(0));
-                return null;
-            }
+        MatcherAssert.assertThat(
+            new Size2D(),
+            new CorrectSizeResult(0, 0)
         );
     }
 }
