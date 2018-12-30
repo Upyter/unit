@@ -80,15 +80,17 @@ public class AreaTest {
                 pos.result(
                     // @checkstyle ParameterName (1 line)
                     (x, y) -> {
-                        MatcherAssert.assertThat(x, Matchers.is(resX));
-                        MatcherAssert.assertThat(y, Matchers.is(resY));
+                        MatcherAssert.assertThat(x, Matchers.equalTo(resX));
+                        MatcherAssert.assertThat(y, Matchers.equalTo(resY));
                         return null;
                     }
                 );
                 size.result(
                     (width, height) -> {
-                        MatcherAssert.assertThat(width, Matchers.is(resW));
-                        MatcherAssert.assertThat(height, Matchers.is(resH));
+                        MatcherAssert.assertThat(width, Matchers.equalTo(resW));
+                        MatcherAssert.assertThat(
+                            height, Matchers.equalTo(resH)
+                        );
                         return null;
                     }
                 );
@@ -114,10 +116,10 @@ public class AreaTest {
             ),
             // @checkstyle ParameterName (1 line)
             (x, y, width, height) -> {
-                MatcherAssert.assertThat(x, Matchers.is(resX));
-                MatcherAssert.assertThat(y, Matchers.is(resY));
-                MatcherAssert.assertThat(width, Matchers.is(resW));
-                MatcherAssert.assertThat(height, Matchers.is(resH));
+                MatcherAssert.assertThat(x, Matchers.equalTo(resX));
+                MatcherAssert.assertThat(y, Matchers.equalTo(resY));
+                MatcherAssert.assertThat(width, Matchers.equalTo(resW));
+                MatcherAssert.assertThat(height, Matchers.equalTo(resH));
             }
         );
     }

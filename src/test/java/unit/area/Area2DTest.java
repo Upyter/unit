@@ -54,15 +54,17 @@ public class Area2DTest {
                     pos,
                     // @checkstyle ParameterName (1 line)
                     (x, y) -> {
-                        MatcherAssert.assertThat(x, Matchers.is(resX));
-                        MatcherAssert.assertThat(y, Matchers.is(resY));
+                        MatcherAssert.assertThat(x, Matchers.equalTo(resX));
+                        MatcherAssert.assertThat(y, Matchers.equalTo(resY));
                     }
                 );
                 Size.applyOn(
                     size,
                     (width, height) -> {
-                        MatcherAssert.assertThat(width, Matchers.is(resW));
-                        MatcherAssert.assertThat(height, Matchers.is(resH));
+                        MatcherAssert.assertThat(width, Matchers.equalTo(resW));
+                        MatcherAssert.assertThat(height,
+                            Matchers.equalTo(resH)
+                        );
                     }
                 );
                 return null;
