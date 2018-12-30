@@ -133,4 +133,39 @@ public class Area2DTest {
             }
         );
     }
+
+    /**
+     * {@link Area2D#Area2D(int, int, int, int)} )} constructs an area with the
+     * right x, y, width and height.
+     */
+    @Test
+    public void distributedConstruct() {
+        // @checkstyle LocalFinalVariableName (4 lines)
+        final var resX = 4535;
+        final var resY = 12;
+        final var resW = 423;
+        final var resH = 4534;
+        Area.applyOn(
+            new Area2D(resX, resY, resW, resH),
+            (pos, size) -> {
+                Pos.applyOn(
+                    pos,
+                    // @checkstyle ParameterName (1 line)
+                    (x, y) -> {
+                        MatcherAssert.assertThat(x, Matchers.equalTo(resX));
+                        MatcherAssert.assertThat(y, Matchers.equalTo(resY));
+                    }
+                );
+                Size.applyOn(
+                    size,
+                    (width, height) -> {
+                        MatcherAssert.assertThat(width, Matchers.equalTo(resW));
+                        MatcherAssert.assertThat(
+                            height, Matchers.equalTo(resH)
+                        );
+                    }
+                );
+            }
+        );
+    }
 }

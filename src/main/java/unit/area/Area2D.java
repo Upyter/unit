@@ -54,6 +54,22 @@ public class Area2D implements Area {
     private final Size size;
 
     /**
+     * Ctor.
+     * @param x The x coordinate of the area.
+     * @param y The y coordinate of the area.
+     * @param width The width of the area.
+     * @param height The height of the area.
+     * @checkstyle ParameterNumber (3 lines)
+     * @checkstyle ParameterName (2 lines)
+     */
+    public Area2D(final int x, final int y, final int width, final int height) {
+        this(
+            new Pos2D(x, y),
+            new Size2D(width, height)
+        );
+    }
+
+    /**
      * Ctor. Uses x = 0 and y = 0 as its coordinates.
      * @param size The size of the area.
      */
