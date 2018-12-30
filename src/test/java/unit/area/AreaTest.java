@@ -21,6 +21,7 @@
 
 package unit.area;
 
+import java.util.function.BiConsumer;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
@@ -57,6 +58,41 @@ public class AreaTest {
                     (x, y, width, height) -> x + y + width + height
                 )
             )
+        );
+    }
+
+    /**
+     * {@link Area#applyOn(Area, BiConsumer)} gives the right pos and size.
+     */
+    @Test
+    public void correctApply() {
+        // @checkstyle LocalFinalVariableName (4 lines)
+        final var resX = 42;
+        final var resY = 563;
+        final var resW = 34324;
+        final var resH = 233;
+        Area.applyOn(
+            new Area2D(
+                new Pos2D(resX, resY),
+                new Size2D(resW, resH)
+            ),
+            (pos, size) -> {
+                pos.result(
+                    // @checkstyle ParameterName (1 line)
+                    (x, y) -> {
+                        MatcherAssert.assertThat(x, Matchers.is(resX));
+                        MatcherAssert.assertThat(y, Matchers.is(resY));
+                        return null;
+                    }
+                );
+                size.result(
+                    (width, height) -> {
+                        MatcherAssert.assertThat(width, Matchers.is(resW));
+                        MatcherAssert.assertThat(height, Matchers.is(resH));
+                        return null;
+                    }
+                );
+            }
         );
     }
 

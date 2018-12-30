@@ -119,13 +119,14 @@ public interface Area {
      * @param target Target that gets the pos and the size as four integer
      *  values.
      */
+    @SuppressWarnings("PMD.ProhibitPublicStaticMethods")
     static void applyOn(
         final Area area,
         final QuadConsumer<Integer, Integer, Integer, Integer> target
     ) {
-        // @checkstyle ParameterName (2 lines)
         Area.result(
             area,
+            // @checkstyle ParameterName (1 lines)
             (x, y, width, height) -> {
                 target.accept(x, y, width, height);
                 return null;
