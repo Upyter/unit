@@ -34,7 +34,7 @@ import unit.size.Size2D;
  * Tests for {@link Area}.
  * @since 0.6
  */
-public class Area2DTest {
+public final class Area2DTest {
     /**
      * {@link Area2D#result(BiFunction)} returns the correct result.
      */

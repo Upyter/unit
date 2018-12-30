@@ -30,7 +30,7 @@ import org.junit.Test;
  * Tests for {@link Size2D}.
  * @since 0.4
  */
-public class Size2DTest {
+public final class Size2DTest {
     /**
      * {@link Size#result(BiFunction)} returns the right result.
      */

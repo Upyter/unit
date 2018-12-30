@@ -34,7 +34,7 @@ import unit.size.Size2D;
  * Tests for {@link Area}.
  * @since 0.7
  */
-public class AreaTest {
+public final class AreaTest {
     /**
      * {@link Area#result(Area, QuadFunction)} distributes the x, y, width and
      * height values correctly.

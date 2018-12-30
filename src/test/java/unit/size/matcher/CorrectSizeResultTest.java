@@ -32,7 +32,7 @@ import unit.size.Size2D;
  * Tests for {@link CorrectSizeResult}.
  * @since 0.13
  */
-public class CorrectSizeResultTest {
+public final class CorrectSizeResultTest {
     /**
      * Matches on a simple Size2D instance. Size2D is chosen because it is the
      * simplest implementation of the Size interface.
