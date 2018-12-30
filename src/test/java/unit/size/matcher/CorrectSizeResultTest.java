@@ -21,11 +21,13 @@
 
 package unit.size.matcher;
 
+import java.util.function.BiFunction;
 import org.hamcrest.Description;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.hamcrest.StringDescription;
 import org.junit.Test;
+import unit.size.Size;
 import unit.size.Size2D;
 
 /**
@@ -64,6 +66,31 @@ public final class CorrectSizeResultTest {
     }
 
     /**
+     * Fails matching when the expected result isn't returned by the given size
+     * instance when calling the {@link Size#result(BiFunction)}
+     * method.
+     */
+    @Test
+    public void notMatchWrongResult() {
+        final int width = 534;
+        final int height = 32;
+        MatcherAssert.assertThat(
+            new Size() {
+                @Override
+                public <R> R result(
+                    final BiFunction<Integer, Integer, R> target
+                ) {
+                    target.apply(width, height);
+                    return null;
+                }
+            },
+            Matchers.not(
+                new CorrectSizeResult(width, height, width + height + 1)
+            )
+        );
+    }
+
+    /**
      * Fails  matching when the expected height isn't met by the given size
      * instance.
      */
@@ -87,16 +114,18 @@ public final class CorrectSizeResultTest {
     public void describesItself() {
         final var width = 24;
         final var height = 423;
+        final var result = width + height;
         final var description = new StringDescription();
         new CorrectSizeResult(
-            width, height
+            width, height, result
         ).describeTo(description);
         MatcherAssert.assertThat(
             description.toString(),
             Matchers.hasToString(
                 Matchers.allOf(
                     Matchers.containsString(Integer.toString(width)),
-                    Matchers.containsString(Integer.toString(height))
+                    Matchers.containsString(Integer.toString(height)),
+                    Matchers.containsString(Integer.toString(result))
                 )
             )
         );
