@@ -21,6 +21,7 @@
 
 package unit;
 
+import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
 
 /**
@@ -40,4 +41,27 @@ public interface Tuple<A, B> {
      * @return The result of the applied function.
      */
     <R> R result(BiFunction<A, B, R> target);
+
+    // Note that the generic parameters C and D are not the same as A and B
+    // because the following method is static and has its own context regarding
+    // its generics
+    /**
+     * Gives the given consumer the first and second value of this tuple.
+     * @param tuple The tuple that provides the {@link #result(BiFunction)}
+     *  method on which this method is based on.
+     * @param target Target that gets the values.
+     * @param <C> The type of the first value of the tuple.
+     * @param <D> The type of the second value of the tuple.
+     */
+    @SuppressWarnings("PMD.ProhibitPublicStaticMethods")
+    static <C, D> void applyOn(
+        final Tuple<C, D> tuple, final BiConsumer<C, D> target
+    ) {
+        tuple.result(
+            (first, second) -> {
+                target.accept(first, second);
+                return null;
+            }
+        );
+    }
 }
