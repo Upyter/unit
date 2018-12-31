@@ -23,6 +23,7 @@ package unit.area;
 
 import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
+import unit.Tuple;
 import unit.functional.QuadConsumer;
 import unit.functional.QuadFunction;
 import unit.pos.Pos;
@@ -36,18 +37,7 @@ alone) because some implementations need both like an overlappable area
  * Defines a cartesian two dimensional rectangular area of a shape.
  * @since 0.6
  */
-public interface Area {
-    /**
-     * Gives the given function the pos and the size which define this
-     * area and returns the result of that. This can be handy if for example
-     * one wants to calculate something based on these values and needs the
-     * result of it.
-     * @param target The target that gets the pos and the size.
-     * @param <R> The type of the result.
-     * @return The result.
-     */
-    <R> R result(BiFunction<Pos, Size, R> target);
-
+public interface Area extends Tuple<Pos, Size> {
     /*
     The result(BiConsumer<Pos, Size>) method is not enough, because the
     concrete graphic libraries are based on single values (x, y), instead of
