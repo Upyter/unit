@@ -23,6 +23,7 @@ package unit.pos;
 
 import java.util.function.BiFunction;
 import java.util.function.ObjIntConsumer;
+import unit.Tuple;
 
 /*
 This interface is necessary (compared to using x and y each time) because this
@@ -38,17 +39,7 @@ sacrificing readability
  * A cartesian two dimensional pos.
  * @since 0.2
  */
-public interface Pos {
-    /**
-     * Gives the given function the x and y coordinates of this pos and
-     * returns the result of the function. This can be handy if you want to
-     * calculate something with the pos and want to have the result.
-     * @param target The target who gets the coordinates.
-     * @param <R> The type of the result of the applied function.
-     * @return The result of the applied function.
-     */
-    <R> R result(BiFunction<Integer, Integer, R> target);
-
+public interface Pos extends Tuple<Integer, Integer>  {
     /**
      * Gives the given consumer the x and y coordinates of this pos.
      * @param pos The pos that provides the {@link #result(BiFunction)} method

@@ -19,36 +19,25 @@
  * DEALINGS IN THE SOFTWARE.
  */
 
-package unit.size;
-
-/*
-This interface is necessary (compared to using width and height each time)
-because this library depends on the possibility to implement own
-implementations like a scaling size
-*/
+package unit;
 
 import java.util.function.BiFunction;
-import java.util.function.ObjIntConsumer;
-import unit.Tuple;
 
 /**
- * The two dimensional cartesian based size of a rectangular area.
- * @since 0.4
+ * A combination of two values.
+ * @param <A> The type of the first value.
+ * @param <B> The type of the second value.
+ * @since 0.15
  */
-public interface Size extends Tuple<Integer, Integer> {
+public interface Tuple<A, B> {
     /**
-     * Gives the given consumer the x and y coordinates of this pos.
-     * @param size The size that provides the {@link #result(BiFunction)} method
-     *  on which this method is based on.
-     * @param target Target that gets the Coordinates.
+     * Gives the given function the first and second value that define this
+     * tuple and returns the result of this function. This can be handy if for
+     * example one wants to calculate something with these values and wants the
+     * result of this.
+     * @param target The target who gets the values.
+     * @param <R> The type of the result.
+     * @return The result of the applied function.
      */
-    @SuppressWarnings("PMD.ProhibitPublicStaticMethods")
-    static void applyOn(final Size size, final ObjIntConsumer<Integer> target) {
-        size.result(
-            (width, height) -> {
-                target.accept(width, height);
-                return null;
-            }
-        );
-    }
+    <R> R result(BiFunction<A, B, R> target);
 }
