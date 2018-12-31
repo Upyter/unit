@@ -25,6 +25,7 @@ import java.util.function.BiFunction;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
+import unit.Tuple;
 import unit.pos.Pos;
 import unit.pos.Pos2D;
 import unit.size.Size;
@@ -58,7 +59,7 @@ public final class Area2DTest {
                         MatcherAssert.assertThat(y, Matchers.equalTo(resY));
                     }
                 );
-                Size.applyOn(
+                Tuple.applyOn(
                     size,
                     (width, height) -> {
                         MatcherAssert.assertThat(width, Matchers.equalTo(resW));
@@ -91,7 +92,7 @@ public final class Area2DTest {
                         MatcherAssert.assertThat(y, Matchers.equalTo(resY));
                     }
                 );
-                Size.applyOn(
+                Tuple.applyOn(
                     size,
                     (width, height) -> {
                         MatcherAssert.assertThat(width, Matchers.equalTo(0));
@@ -121,7 +122,7 @@ public final class Area2DTest {
                         MatcherAssert.assertThat(y, Matchers.equalTo(0));
                     }
                 );
-                Size.applyOn(
+                Tuple.applyOn(
                     size,
                     (width, height) -> {
                         MatcherAssert.assertThat(width, Matchers.equalTo(resW));
@@ -156,7 +157,7 @@ public final class Area2DTest {
                         MatcherAssert.assertThat(y, Matchers.equalTo(resY));
                     }
                 );
-                Size.applyOn(
+                Tuple.applyOn(
                     size,
                     (width, height) -> {
                         MatcherAssert.assertThat(width, Matchers.equalTo(resW));
