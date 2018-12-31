@@ -51,7 +51,7 @@ public final class Area2DTest {
             new Size2D(resW, resH)
         ).result(
             (pos, size) -> {
-                Pos.applyOn(
+                Tuple.applyOn(
                     pos,
                     // @checkstyle ParameterName (1 line)
                     (x, y) -> {
@@ -84,7 +84,7 @@ public final class Area2DTest {
         Area.applyOn(
             new Area2D(new Pos2D(resX, resY)),
             (pos, size) -> {
-                Pos.applyOn(
+                Tuple.applyOn(
                     pos,
                     // @checkstyle ParameterName (1 line)
                     (x, y) -> {
@@ -114,7 +114,7 @@ public final class Area2DTest {
         Area.applyOn(
             new Area2D(new Size2D(resW, resH)),
             (pos, size) -> {
-                Pos.applyOn(
+                Tuple.applyOn(
                     pos,
                     // @checkstyle ParameterName (1 line)
                     (x, y) -> {
@@ -149,7 +149,7 @@ public final class Area2DTest {
         Area.applyOn(
             new Area2D(resX, resY, resW, resH),
             (pos, size) -> {
-                Pos.applyOn(
+                Tuple.applyOn(
                     pos,
                     // @checkstyle ParameterName (1 line)
                     (x, y) -> {

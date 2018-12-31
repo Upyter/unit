@@ -21,8 +21,6 @@
 
 package unit.pos;
 
-import java.util.function.BiFunction;
-import java.util.function.ObjIntConsumer;
 import unit.Tuple;
 
 /*
@@ -39,21 +37,4 @@ sacrificing readability
  * A cartesian two dimensional pos.
  * @since 0.2
  */
-public interface Pos extends Tuple<Integer, Integer>  {
-    /**
-     * Gives the given consumer the x and y coordinates of this pos.
-     * @param pos The pos that provides the {@link #result(BiFunction)} method
-     *  on which this method is based on.
-     * @param target Target that gets the Coordinates.
-     */
-    @SuppressWarnings("PMD.ProhibitPublicStaticMethods")
-    static void applyOn(final Pos pos, final ObjIntConsumer<Integer> target) {
-        pos.result(
-            // @checkstyle ParameterName (1 line)
-            (x, y) -> {
-                target.accept(x, y);
-                return null;
-            }
-        );
-    }
-}
+public interface Pos extends Tuple<Integer, Integer>  { }
