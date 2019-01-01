@@ -148,7 +148,7 @@ public final class CorrectTupleResultTest {
         final var height = 5341;
         final var result = width + height;
         final var description = new StringDescription();
-        new CorrectTupleResult<>(
+        new CorrectTupleResult(
             width + 1, height + 1, result + 1
         ).matchesSafely(
             new Size2D(width, height),

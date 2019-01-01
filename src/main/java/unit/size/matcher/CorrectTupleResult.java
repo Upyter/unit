@@ -33,21 +33,19 @@ import unit.Tuple;
  * A matcher for {@link Tuple#result(BiFunction)}.
  * <p>The class by itself is immutable, but mutates the incoming description
  * object which is mutable.</p>
- * @param <A> The type of the first tuple value.
- * @param <B> The type of the second tuple value.
  * @since 0.13
  */
-public class CorrectTupleResult<A, B> extends
-    TypeSafeDiagnosingMatcher<Tuple<A, B>> {
+public class CorrectTupleResult extends
+    TypeSafeDiagnosingMatcher<Tuple<?, ?>> {
     /**
      * The expected first value.
      */
-    private final A first;
+    private final Object first;
 
     /**
      * The expected second value.
      */
-    private final B second;
+    private final Object second;
 
     /*
     see matchesSafely comment for the reason of this naming
@@ -65,7 +63,7 @@ public class CorrectTupleResult<A, B> extends
      * @param second The second value to expect from the
      *  {@link Tuple#result(BiFunction)} method.
      */
-    public CorrectTupleResult(final A first, final B second) {
+    public CorrectTupleResult(final Object first, final Object second) {
         this(first, second, new Object());
     }
 
@@ -80,7 +78,7 @@ public class CorrectTupleResult<A, B> extends
      * @checkstyle ParameterName (3 lines)
      */
     public CorrectTupleResult(
-        final A first, final B second, final Object expectedResult
+        final Object first, final Object second, final Object expectedResult
     ) {
         super();
         this.first = first;
@@ -106,7 +104,7 @@ public class CorrectTupleResult<A, B> extends
     //  add a mismatch description
     @Override
     protected final boolean matchesSafely(
-        final Tuple<A, B> tuple, final Description description
+        final Tuple<?, ?> tuple, final Description description
     ) {
         // @checkstyle LocalFinalVariable (1 line)
         final List<Boolean> valuesEqual = new ArrayList<>(0);
