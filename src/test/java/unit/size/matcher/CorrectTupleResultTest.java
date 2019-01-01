@@ -26,7 +26,6 @@ import org.hamcrest.Description;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.hamcrest.StringDescription;
-import org.junit.Ignore;
 import org.junit.Test;
 import unit.Tuple;
 import unit.size.Size;
@@ -141,7 +140,6 @@ public final class CorrectTupleResultTest {
      * {@link CorrectTupleResult#matchesSafely(Tuple, Description)} adds some
      * text to the given description instance.
      */
-    @Ignore
     @Test
     public void describesMismatch() {
         final var width = 432;
@@ -149,7 +147,7 @@ public final class CorrectTupleResultTest {
         final var result = width + height;
         final var description = new StringDescription();
         new CorrectTupleResult(
-            width + 1, height + 1, result + 1
+            width + 1, height + 1, result
         ).matchesSafely(
             new Size2D(width, height),
             description
