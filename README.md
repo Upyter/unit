@@ -1,5 +1,4 @@
 # Unit
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/c2c361cd941d4f498859bbbbd4ec083f)](https://app.codacy.com/app/Upyter/unit?utm_source=github.com&utm_medium=referral&utm_content=Upyter/unit&utm_campaign=Badge_Grade_Settings)
 [![EO principles respected here](http://www.elegantobjects.org/badge.svg)](http://www.elegantobjects.org)
 [![DevOps By Rultor.com](http://www.rultor.com/b/Shryne/goop)](http://www.rultor.com/p/Shryne/goop)  
 
