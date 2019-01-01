@@ -19,22 +19,8 @@
  * DEALINGS IN THE SOFTWARE.
  */
 
-package unit.pos;
-
-import unit.tuple.Tuple;
-
-/*
-This interface is necessary (compared to using x and y each time) because this
-library depends on the possibility to implement own implementations like a
-moving pos
-
-I changed the name from Position to Pos, because that's a class that will be
-used in many places and I think this cut will safe some characters without
-sacrificing readability
-*/
-
 /**
- * A cartesian two dimensional pos.
- * @since 0.2
+ * Basic units regarding the space and components used by them.
+ * @since 0.15
  */
-public interface Pos extends Tuple<Integer, Integer>  { }
+package unit;

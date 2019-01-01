@@ -19,22 +19,27 @@
  * DEALINGS IN THE SOFTWARE.
  */
 
-package unit.pos;
+package unit.tuple;
 
-import unit.tuple.Tuple;
-
-/*
-This interface is necessary (compared to using x and y each time) because this
-library depends on the possibility to implement own implementations like a
-moving pos
-
-I changed the name from Position to Pos, because that's a class that will be
-used in many places and I think this cut will safe some characters without
-sacrificing readability
-*/
+import unit.functional.QuadFunction;
 
 /**
- * A cartesian two dimensional pos.
- * @since 0.2
+ * An ordered combination of four values.
+ * @param <A> The type of the first value.
+ * @param <B> The type of the second value.
+ * @param <C> The type of the second value.
+ * @param <D> The type of the second value.
+ * @since 0.19
  */
-public interface Pos extends Tuple<Integer, Integer>  { }
+public interface Quadruple<A, B, C, D> {
+    /**
+     * Gives the given function the four values that define this
+     * quadruple and returns the result of this function. This can be handy if
+     * for example one wants to calculate something with these values and wants
+     * the result of this.
+     * @param target The target that gets the values.
+     * @param <R> The type of the result.
+     * @return The result.
+     */
+    <R> R result(QuadFunction<A, B, C, D, R> target);
+}

@@ -19,33 +19,8 @@
  * DEALINGS IN THE SOFTWARE.
  */
 
-package unit.size;
-
-import java.util.function.ObjIntConsumer;
-import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
-import org.junit.Test;
-
 /**
- * Tests for {@link Size}.
- * @since 0.5
+ * Tests regarding the unit components.
+ * @since 0.16
  */
-public class SizeTest {
-    /**
-     * {@link Size#applyOn(Size, ObjIntConsumer)} gives the correct width and
-     * height.
-     */
-    @Test
-    public void givesCorrectWidthAndHeight() {
-        final int width = 52;
-        final int height = 43;
-        Size.applyOn(
-            new Size2D(width, height),
-            // @checkstyle ParameterName (1 line)
-            (resWidth, resHeight) -> {
-                MatcherAssert.assertThat(resWidth, Matchers.equalTo(width));
-                MatcherAssert.assertThat(resHeight, Matchers.equalTo(height));
-            }
-        );
-    }
-}
+package unit;

@@ -29,6 +29,7 @@ import unit.pos.Pos;
 import unit.pos.Pos2D;
 import unit.size.Size;
 import unit.size.Size2D;
+import unit.tuple.Tuple;
 
 /**
  * Tests for {@link Area}.
@@ -50,7 +51,7 @@ public final class Area2DTest {
             new Size2D(resW, resH)
         ).result(
             (pos, size) -> {
-                Pos.applyOn(
+                Tuple.applyOn(
                     pos,
                     // @checkstyle ParameterName (1 line)
                     (x, y) -> {
@@ -58,7 +59,7 @@ public final class Area2DTest {
                         MatcherAssert.assertThat(y, Matchers.equalTo(resY));
                     }
                 );
-                Size.applyOn(
+                Tuple.applyOn(
                     size,
                     (width, height) -> {
                         MatcherAssert.assertThat(width, Matchers.equalTo(resW));
@@ -83,7 +84,7 @@ public final class Area2DTest {
         Area.applyOn(
             new Area2D(new Pos2D(resX, resY)),
             (pos, size) -> {
-                Pos.applyOn(
+                Tuple.applyOn(
                     pos,
                     // @checkstyle ParameterName (1 line)
                     (x, y) -> {
@@ -91,7 +92,7 @@ public final class Area2DTest {
                         MatcherAssert.assertThat(y, Matchers.equalTo(resY));
                     }
                 );
-                Size.applyOn(
+                Tuple.applyOn(
                     size,
                     (width, height) -> {
                         MatcherAssert.assertThat(width, Matchers.equalTo(0));
@@ -113,7 +114,7 @@ public final class Area2DTest {
         Area.applyOn(
             new Area2D(new Size2D(resW, resH)),
             (pos, size) -> {
-                Pos.applyOn(
+                Tuple.applyOn(
                     pos,
                     // @checkstyle ParameterName (1 line)
                     (x, y) -> {
@@ -121,7 +122,7 @@ public final class Area2DTest {
                         MatcherAssert.assertThat(y, Matchers.equalTo(0));
                     }
                 );
-                Size.applyOn(
+                Tuple.applyOn(
                     size,
                     (width, height) -> {
                         MatcherAssert.assertThat(width, Matchers.equalTo(resW));
@@ -148,7 +149,7 @@ public final class Area2DTest {
         Area.applyOn(
             new Area2D(resX, resY, resW, resH),
             (pos, size) -> {
-                Pos.applyOn(
+                Tuple.applyOn(
                     pos,
                     // @checkstyle ParameterName (1 line)
                     (x, y) -> {
@@ -156,7 +157,7 @@ public final class Area2DTest {
                         MatcherAssert.assertThat(y, Matchers.equalTo(resY));
                     }
                 );
-                Size.applyOn(
+                Tuple.applyOn(
                     size,
                     (width, height) -> {
                         MatcherAssert.assertThat(width, Matchers.equalTo(resW));

@@ -19,55 +19,43 @@
  * DEALINGS IN THE SOFTWARE.
  */
 
-package unit.size;
+package unit;
 
+import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
-import unit.size.matcher.CorrectTupleResult;
+import unit.tuple.Tuple;
 
 /**
- * Tests for {@link Size2D}.
- * @since 0.4
+ * Tests for {@link Tuple}.
+ * @since 0.16
  */
-public final class Size2DTest {
+public final class TupleTest {
     /**
-     * {@link Size#result(BiFunction)} returns the right result.
+     * {@link Tuple#applyOn(Tuple, BiConsumer)} gives the correct values.
      */
     @Test
-    public void correctResult() {
-        final var width = 3445;
-        final var height = 432;
-        MatcherAssert.assertThat(
-            new Size2D(width, height).result(Integer::sum),
-            Matchers.equalTo(width + height)
-        );
-    }
-
-    /**
-     * {@link Size2D#toString()}} returns the right string.
-     */
-    @Test
-    public void correctToString() {
-        final var width = 313;
-        final var height = 238;
-        MatcherAssert.assertThat(
-            new Size2D(width, height),
-            Matchers.hasToString(
-                String.format("Size(width = %d, height = %d)", width, height)
-            )
-        );
-    }
-
-    /**
-     * {@link Size2D#Size2D()} creates a size with width = 0 and height = 0.
-     */
-    @Test
-    public void defaultConstructorCorrectCoordinates() {
-        MatcherAssert.assertThat(
-            new Size2D(),
-            new CorrectTupleResult(0, 0)
+    public void givesCorrectValues() {
+        final var first = 52;
+        final var second = new Object();
+        Tuple.applyOn(
+            new Tuple<>() {
+                @Override
+                public <R> R result(
+                    final BiFunction<Object, Object, R> target
+                ) {
+                    return target.apply(first, second);
+                }
+            },
+            // @checkstyle ParameterName (1 line)
+            (resFirst, resSecond) -> {
+                MatcherAssert.assertThat(resFirst, Matchers.equalTo(resFirst));
+                MatcherAssert.assertThat(
+                    resSecond, Matchers.equalTo(resSecond)
+                );
+            }
         );
     }
 }

@@ -25,6 +25,7 @@ import java.util.function.BiFunction;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
+import unit.tuple.Tuple;
 
 /**
  * Tests for {@link Pos}.
@@ -69,7 +70,7 @@ public final class Pos2DTest {
      */
     @Test
     public void defaultConstructorCorrectCoordinates() {
-        Pos.applyOn(
+        Tuple.applyOn(
             new Pos2D(),
             // @checkstyle ParameterName (1 line)
             (x, y) -> {

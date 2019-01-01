@@ -27,24 +27,25 @@ import java.util.Objects;
 import java.util.function.BiFunction;
 import org.hamcrest.Description;
 import org.hamcrest.TypeSafeDiagnosingMatcher;
-import unit.size.Size;
+import unit.tuple.Tuple;
 
 /**
- * A matcher for {@link Size#result(BiFunction)}.
+ * A matcher for {@link Tuple#result(BiFunction)}.
  * <p>The class by itself is immutable, but mutates the incoming description
  * object which is mutable.</p>
  * @since 0.13
  */
-public class CorrectSizeResult extends TypeSafeDiagnosingMatcher<Size> {
+public class CorrectTupleResult extends
+    TypeSafeDiagnosingMatcher<Tuple<?, ?>> {
     /**
-     * The expected width.
+     * The expected first value.
      */
-    private final Integer width;
+    private final Object first;
 
     /**
-     * The expected height.
+     * The expected second value.
      */
-    private final Integer height;
+    private final Object second;
 
     /*
     see matchesSafely comment for the reason of this naming
@@ -57,31 +58,31 @@ public class CorrectSizeResult extends TypeSafeDiagnosingMatcher<Size> {
 
     /**
      * Ctor.
-     * @param width The width to expect from the
-     *  {@link Size#result(BiFunction)} method.
-     * @param height The height to expect from the
-     *  {@link Size#result(BiFunction)} method.
+     * @param first The first value to expect from the
+     *  {@link Tuple#result(BiFunction)} method.
+     * @param second The second value to expect from the
+     *  {@link Tuple#result(BiFunction)} method.
      */
-    public CorrectSizeResult(final Integer width, final Integer height) {
-        this(width, height, new Object());
+    public CorrectTupleResult(final Object first, final Object second) {
+        this(first, second, new Object());
     }
 
     /**
      * Ctor.
-     * @param width The width to expect from the
-     *  {@link Size#result(BiFunction)} method.
-     * @param height The height to expect from the
-     *  {@link Size#result(BiFunction)} method.
+     * @param first The first value to expect from the
+     *  {@link Tuple#result(BiFunction)} method.
+     * @param second The second value to expect from the
+     *  {@link Tuple#result(BiFunction)} method.
      * @param expectedResult The result to expect from the
-     *  {@link Size#result(BiFunction)} method.
+     *  {@link Tuple#result(BiFunction)} method.
      * @checkstyle ParameterName (3 lines)
      */
-    public CorrectSizeResult(
-        final Integer width, final Integer height, final Object expectedResult
+    public CorrectTupleResult(
+        final Object first, final Object second, final Object expectedResult
     ) {
         super();
-        this.width = width;
-        this.height = height;
+        this.first = first;
+        this.second = second;
         this.expectedResult = expectedResult;
     }
 
@@ -89,9 +90,9 @@ public class CorrectSizeResult extends TypeSafeDiagnosingMatcher<Size> {
     public final void describeTo(final Description description) {
         description.appendText(
             String.format(
-                "Expected width = %d, height = %d, result = %s",
-                this.width,
-                this.height,
+                " sdasd Expected first = %s, second = %s, result = %s",
+                Objects.toString(this.first),
+                Objects.toString(this.second),
                 Objects.toString(this.expectedResult)
             )
         );
@@ -103,19 +104,23 @@ public class CorrectSizeResult extends TypeSafeDiagnosingMatcher<Size> {
     //  add a mismatch description
     @Override
     protected final boolean matchesSafely(
-        final Size size, final Description description
+        final Tuple<?, ?> tuple, final Description description
     ) {
         // @checkstyle LocalFinalVariable (1 line)
-        final List<Boolean> sizeEqual = new ArrayList<>(0);
-        final var result = size.result(
+        final List<Boolean> valuesEqual = new ArrayList<>(0);
+        final var result = tuple.result(
             // @checkstyle ParameterNameCheck (1 line)
-            (resWidth, resHeight) -> {
+            (resFirst, resSecond) -> {
                 description.appendText(
-                    String.format("width: %d, height: %d", resWidth, resHeight)
+                    String.format(
+                        "first: %s, second: %s",
+                        Objects.toString(resFirst),
+                        Objects.toString(resSecond)
+                    )
                 );
-                sizeEqual.add(
-                    this.width.equals(resWidth)
-                        && this.height.equals(resHeight)
+                valuesEqual.add(
+                    this.first.equals(resFirst)
+                        && this.second.equals(resSecond)
                 );
                 return this.expectedResult;
             }
@@ -123,6 +128,7 @@ public class CorrectSizeResult extends TypeSafeDiagnosingMatcher<Size> {
         description.appendText(
             String.format(", result: %s", Objects.toString(result))
         );
-        return sizeEqual.get(0) && Objects.equals(result, this.expectedResult);
+        return valuesEqual.get(0)
+            && Objects.equals(result, this.expectedResult);
     }
 }
