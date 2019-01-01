@@ -21,7 +21,7 @@
 
 package unit.pos;
 
-import unit.Tuple;
+import unit.tuple.Tuple;
 
 /*
 This interface is necessary (compared to using x and y each time) because this

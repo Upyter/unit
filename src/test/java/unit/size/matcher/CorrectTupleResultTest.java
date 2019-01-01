@@ -27,9 +27,9 @@ import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.hamcrest.StringDescription;
 import org.junit.Test;
-import unit.Tuple;
 import unit.size.Size;
 import unit.size.Size2D;
+import unit.tuple.Tuple;
 
 /**
  * Tests for {@link CorrectTupleResult}.

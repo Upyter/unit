@@ -19,7 +19,7 @@
  * DEALINGS IN THE SOFTWARE.
  */
 
-package unit;
+package unit.tuple;
 
 import java.util.function.BiConsumer;
 import java.util.function.BiFunction;

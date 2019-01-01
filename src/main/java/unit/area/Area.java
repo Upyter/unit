@@ -23,11 +23,11 @@ package unit.area;
 
 import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
-import unit.Tuple;
 import unit.functional.QuadConsumer;
 import unit.functional.QuadFunction;
 import unit.pos.Pos;
 import unit.size.Size;
+import unit.tuple.Tuple;
 
 /*
 This interface is needed (compared to using the pos and the size classes

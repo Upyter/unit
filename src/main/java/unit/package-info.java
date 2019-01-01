@@ -20,7 +20,7 @@
  */
 
 /**
- * Basic units regarding the space.
+ * Basic units regarding the space and components used by them.
  * @since 0.15
  */
 package unit;

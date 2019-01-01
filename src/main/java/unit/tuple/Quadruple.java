@@ -19,43 +19,27 @@
  * DEALINGS IN THE SOFTWARE.
  */
 
-package unit;
+package unit.tuple;
 
-import java.util.function.BiConsumer;
-import java.util.function.BiFunction;
-import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
-import org.junit.Test;
-import unit.tuple.Tuple;
+import unit.functional.QuadFunction;
 
 /**
- * Tests for {@link Tuple}.
- * @since 0.16
+ * An ordered combination of four values.
+ * @param <A> The type of the first value.
+ * @param <B> The type of the second value.
+ * @param <C> The type of the second value.
+ * @param <D> The type of the second value.
+ * @since 0.19
  */
-public final class TupleTest {
+public interface Quadruple<A, B, C, D> {
     /**
-     * {@link Tuple#applyOn(Tuple, BiConsumer)} gives the correct values.
+     * Gives the given function the four values that define this
+     * quadruple and returns the result of this function. This can be handy if
+     * for example one wants to calculate something with these values and wants
+     * the result of this.
+     * @param target The target that gets the values.
+     * @param <R> The type of the result.
+     * @return The result.
      */
-    @Test
-    public void givesCorrectValues() {
-        final var first = 52;
-        final var second = new Object();
-        Tuple.applyOn(
-            new Tuple<>() {
-                @Override
-                public <R> R result(
-                    final BiFunction<Object, Object, R> target
-                ) {
-                    return target.apply(first, second);
-                }
-            },
-            // @checkstyle ParameterName (1 line)
-            (resFirst, resSecond) -> {
-                MatcherAssert.assertThat(resFirst, Matchers.equalTo(resFirst));
-                MatcherAssert.assertThat(
-                    resSecond, Matchers.equalTo(resSecond)
-                );
-            }
-        );
-    }
+    <R> R result(QuadFunction<A, B, C, D, R> target);
 }

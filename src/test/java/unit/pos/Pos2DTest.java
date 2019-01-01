@@ -25,7 +25,7 @@ import java.util.function.BiFunction;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
-import unit.Tuple;
+import unit.tuple.Tuple;
 
 /**
  * Tests for {@link Pos}.

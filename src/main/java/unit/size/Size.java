@@ -27,7 +27,7 @@ because this library depends on the possibility to implement own
 implementations like a scaling size
 */
 
-import unit.Tuple;
+import unit.tuple.Tuple;
 
 /**
  * The two dimensional cartesian based size of a rectangular area.

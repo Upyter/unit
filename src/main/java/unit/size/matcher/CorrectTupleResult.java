@@ -27,7 +27,7 @@ import java.util.Objects;
 import java.util.function.BiFunction;
 import org.hamcrest.Description;
 import org.hamcrest.TypeSafeDiagnosingMatcher;
-import unit.Tuple;
+import unit.tuple.Tuple;
 
 /**
  * A matcher for {@link Tuple#result(BiFunction)}.

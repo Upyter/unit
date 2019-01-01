@@ -25,11 +25,11 @@ import java.util.function.BiFunction;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
-import unit.Tuple;
 import unit.pos.Pos;
 import unit.pos.Pos2D;
 import unit.size.Size;
 import unit.size.Size2D;
+import unit.tuple.Tuple;
 
 /**
  * Tests for {@link Area}.

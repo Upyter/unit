@@ -19,27 +19,8 @@
  * DEALINGS IN THE SOFTWARE.
  */
 
-package unit;
-
-import unit.functional.QuadFunction;
-
 /**
- * An ordered combination of four values.
- * @param <A> The type of the first value.
- * @param <B> The type of the second value.
- * @param <C> The type of the second value.
- * @param <D> The type of the second value.
- * @since 0.19
+ * Tuples with different dimensions.
+ * @since 0.25
  */
-public interface Quadruple<A, B, C, D> {
-    /**
-     * Gives the given function the four values that define this
-     * quadruple and returns the result of this function. This can be handy if
-     * for example one wants to calculate something with these values and wants
-     * the result of this.
-     * @param target The target that gets the values.
-     * @param <R> The type of the result.
-     * @return The result.
-     */
-    <R> R result(QuadFunction<A, B, C, D, R> target);
-}
+package unit.tuple;
