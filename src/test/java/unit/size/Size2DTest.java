@@ -25,7 +25,7 @@ import java.util.function.BiFunction;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
-import unit.size.matcher.CorrectSizeResult;
+import unit.size.matcher.CorrectTupleResult;
 
 /**
  * Tests for {@link Size2D}.
@@ -67,7 +67,7 @@ public final class Size2DTest {
     public void defaultConstructorCorrectCoordinates() {
         MatcherAssert.assertThat(
             new Size2D(),
-            new CorrectSizeResult(0, 0)
+            new CorrectTupleResult(0, 0)
         );
     }
 }

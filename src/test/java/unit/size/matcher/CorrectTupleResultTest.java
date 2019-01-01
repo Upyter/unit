@@ -31,10 +31,10 @@ import unit.size.Size;
 import unit.size.Size2D;
 
 /**
- * Tests for {@link CorrectSizeResult}.
+ * Tests for {@link CorrectTupleResult}.
  * @since 0.13
  */
-public final class CorrectSizeResultTest {
+public final class CorrectTupleResultTest {
     /**
      * Matches on a simple Size2D instance. Size2D is chosen because it is the
      * simplest implementation of the Size interface.
@@ -45,7 +45,7 @@ public final class CorrectSizeResultTest {
         final int height = 123;
         MatcherAssert.assertThat(
             new Size2D(width, height),
-            new CorrectSizeResult(width, height)
+            new CorrectTupleResult(width, height)
         );
     }
 
@@ -60,7 +60,7 @@ public final class CorrectSizeResultTest {
         MatcherAssert.assertThat(
             new Size2D(width + 1, height),
             Matchers.not(
-                new CorrectSizeResult(width, height)
+                new CorrectTupleResult(width, height)
             )
         );
     }
@@ -85,7 +85,7 @@ public final class CorrectSizeResultTest {
                 }
             },
             Matchers.not(
-                new CorrectSizeResult(width, height, width + height + 1)
+                new CorrectTupleResult(width, height, width + height + 1)
             )
         );
     }
@@ -101,13 +101,13 @@ public final class CorrectSizeResultTest {
         MatcherAssert.assertThat(
             new Size2D(width, height + 1),
             Matchers.not(
-                new CorrectSizeResult(width, height)
+                new CorrectTupleResult(width, height)
             )
         );
     }
 
     /**
-     * {@link CorrectSizeResult#describeTo(Description)} adds some text to
+     * {@link CorrectTupleResult#describeTo(Description)} adds some text to
      * the given description instance.
      */
     @Test
@@ -116,7 +116,7 @@ public final class CorrectSizeResultTest {
         final var height = 423;
         final var result = width + height;
         final var description = new StringDescription();
-        new CorrectSizeResult(
+        new CorrectTupleResult(
             width, height, result
         ).describeTo(description);
         MatcherAssert.assertThat(

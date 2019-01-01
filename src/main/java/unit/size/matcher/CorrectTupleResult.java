@@ -35,7 +35,7 @@ import unit.Tuple;
  * object which is mutable.</p>
  * @since 0.13
  */
-public class CorrectSizeResult extends
+public class CorrectTupleResult extends
     TypeSafeDiagnosingMatcher<Tuple<Integer, Integer>> {
     /**
      * The expected first value.
@@ -63,7 +63,7 @@ public class CorrectSizeResult extends
      * @param second The second value to expect from the
      *  {@link Tuple#result(BiFunction)} method.
      */
-    public CorrectSizeResult(final Integer first, final Integer second) {
+    public CorrectTupleResult(final Integer first, final Integer second) {
         this(first, second, new Object());
     }
 
@@ -77,7 +77,7 @@ public class CorrectSizeResult extends
      *  {@link Tuple#result(BiFunction)} method.
      * @checkstyle ParameterName (3 lines)
      */
-    public CorrectSizeResult(
+    public CorrectTupleResult(
         final Integer first, final Integer second, final Object expectedResult
     ) {
         super();
@@ -107,14 +107,14 @@ public class CorrectSizeResult extends
         final Tuple<Integer, Integer> tuple, final Description description
     ) {
         // @checkstyle LocalFinalVariable (1 line)
-        final List<Boolean> sizeEqual = new ArrayList<>(0);
+        final List<Boolean> valuesEqual = new ArrayList<>(0);
         final var result = tuple.result(
             // @checkstyle ParameterNameCheck (1 line)
             (resFirst, resSecond) -> {
                 description.appendText(
                     String.format("first: %d, second: %d", resFirst, resSecond)
                 );
-                sizeEqual.add(
+                valuesEqual.add(
                     this.first.equals(resFirst)
                         && this.second.equals(resSecond)
                 );
@@ -124,6 +124,7 @@ public class CorrectSizeResult extends
         description.appendText(
             String.format(", result: %s", Objects.toString(result))
         );
-        return sizeEqual.get(0) && Objects.equals(result, this.expectedResult);
+        return valuesEqual.get(0)
+            && Objects.equals(result, this.expectedResult);
     }
 }
