@@ -45,7 +45,7 @@ public class CorrectTupleResult<A, B> extends
     private final A first;
 
     /**
-     * The expected height.
+     * The expected second value.
      */
     private final B second;
 
