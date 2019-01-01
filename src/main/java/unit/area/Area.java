@@ -34,7 +34,7 @@ This interface is needed (compared to using the pos and the size classes
 alone) because some implementations need both like an overlappable area
 */
 /**
- * Defines a cartesian two dimensional rectangular area of a shape.
+ * A cartesian two dimensional rectangular area of a shape.
  * @since 0.6
  */
 public interface Area extends Tuple<Pos, Size> {
