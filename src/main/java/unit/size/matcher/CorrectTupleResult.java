@@ -33,19 +33,21 @@ import unit.Tuple;
  * A matcher for {@link Tuple#result(BiFunction)}.
  * <p>The class by itself is immutable, but mutates the incoming description
  * object which is mutable.</p>
+ * @param <A> The type of the first tuple value.
+ * @param <B> The type of the second tuple value.
  * @since 0.13
  */
-public class CorrectTupleResult extends
-    TypeSafeDiagnosingMatcher<Tuple<Integer, Integer>> {
+public class CorrectTupleResult<A, B> extends
+    TypeSafeDiagnosingMatcher<Tuple<A, B>> {
     /**
      * The expected first value.
      */
-    private final Integer first;
+    private final A first;
 
     /**
      * The expected height.
      */
-    private final Integer second;
+    private final B second;
 
     /*
     see matchesSafely comment for the reason of this naming
@@ -63,7 +65,7 @@ public class CorrectTupleResult extends
      * @param second The second value to expect from the
      *  {@link Tuple#result(BiFunction)} method.
      */
-    public CorrectTupleResult(final Integer first, final Integer second) {
+    public CorrectTupleResult(final A first, final B second) {
         this(first, second, new Object());
     }
 
@@ -78,7 +80,7 @@ public class CorrectTupleResult extends
      * @checkstyle ParameterName (3 lines)
      */
     public CorrectTupleResult(
-        final Integer first, final Integer second, final Object expectedResult
+        final A first, final B second, final Object expectedResult
     ) {
         super();
         this.first = first;
@@ -90,9 +92,9 @@ public class CorrectTupleResult extends
     public final void describeTo(final Description description) {
         description.appendText(
             String.format(
-                "Expected width = %d, height = %d, result = %s",
-                this.first,
-                this.second,
+                "Expected width = %s, height = %s, result = %s",
+                Objects.toString(this.first),
+                Objects.toString(this.second),
                 Objects.toString(this.expectedResult)
             )
         );
@@ -104,7 +106,7 @@ public class CorrectTupleResult extends
     //  add a mismatch description
     @Override
     protected final boolean matchesSafely(
-        final Tuple<Integer, Integer> tuple, final Description description
+        final Tuple<A, B> tuple, final Description description
     ) {
         // @checkstyle LocalFinalVariable (1 line)
         final List<Boolean> valuesEqual = new ArrayList<>(0);
@@ -112,7 +114,11 @@ public class CorrectTupleResult extends
             // @checkstyle ParameterNameCheck (1 line)
             (resFirst, resSecond) -> {
                 description.appendText(
-                    String.format("first: %d, second: %d", resFirst, resSecond)
+                    String.format(
+                        "first: %s, second: %s",
+                        Objects.toString(this.first),
+                        Objects.toString(this.second)
+                    )
                 );
                 valuesEqual.add(
                     this.first.equals(resFirst)
