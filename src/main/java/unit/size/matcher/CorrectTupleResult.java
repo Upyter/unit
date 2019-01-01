@@ -92,7 +92,7 @@ public class CorrectTupleResult<A, B> extends
     public final void describeTo(final Description description) {
         description.appendText(
             String.format(
-                "Expected width = %s, height = %s, result = %s",
+                "Expected first = %s, second = %s, result = %s",
                 Objects.toString(this.first),
                 Objects.toString(this.second),
                 Objects.toString(this.expectedResult)

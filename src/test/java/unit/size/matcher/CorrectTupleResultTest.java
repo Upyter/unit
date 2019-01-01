@@ -26,7 +26,9 @@ import org.hamcrest.Description;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.hamcrest.StringDescription;
+import org.junit.Ignore;
 import org.junit.Test;
+import unit.Tuple;
 import unit.size.Size;
 import unit.size.Size2D;
 
@@ -111,6 +113,7 @@ public final class CorrectTupleResultTest {
      * the given description instance.
      */
     @Test
+    @SuppressWarnings("PMD.AvoidDuplicateLiterals")
     public void describesItself() {
         final var width = 24;
         final var height = 423;
@@ -125,7 +128,42 @@ public final class CorrectTupleResultTest {
                 Matchers.allOf(
                     Matchers.containsString(Integer.toString(width)),
                     Matchers.containsString(Integer.toString(height)),
-                    Matchers.containsString(Integer.toString(result))
+                    Matchers.containsString(Integer.toString(result)),
+                    Matchers.containsString("first"),
+                    Matchers.containsString("second"),
+                    Matchers.containsString("result")
+                )
+            )
+        );
+    }
+
+    /**
+     * {@link CorrectTupleResult#matchesSafely(Tuple, Description)} adds some
+     * text to the given description instance.
+     */
+    @Ignore
+    @Test
+    public void describesMismatch() {
+        final var width = 432;
+        final var height = 5341;
+        final var result = width + height;
+        final var description = new StringDescription();
+        new CorrectTupleResult<>(
+            width + 1, height + 1, result + 1
+        ).matchesSafely(
+            new Size2D(width, height),
+            description
+        );
+        MatcherAssert.assertThat(
+            description.toString(),
+            Matchers.hasToString(
+                Matchers.allOf(
+                    Matchers.containsString(Integer.toString(width)),
+                    Matchers.containsString(Integer.toString(height)),
+                    Matchers.containsString(Integer.toString(result)),
+                    Matchers.containsString("first"),
+                    Matchers.containsString("second"),
+                    Matchers.containsString("result")
                 )
             )
         );
