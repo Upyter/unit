@@ -25,10 +25,10 @@ import java.util.function.BiFunction;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
+import unit.pos.IntPos;
 import unit.pos.Pos;
-import unit.pos.Pos2D;
-import unit.size.Size;
 import unit.size.IntSize;
+import unit.size.Size;
 import unit.tuple.Tuple;
 
 /**
@@ -47,7 +47,7 @@ public final class Area2DTest {
         final var resW = 34324;
         final var resH = 233;
         new Area2D(
-            new Pos2D(resX, resY),
+            new IntPos(resX, resY),
             new IntSize(resW, resH)
         ).result(
             (pos, size) -> {
@@ -82,7 +82,7 @@ public final class Area2DTest {
         final var resX = 76;
         final var resY = 52;
         Area.applyOn(
-            new Area2D(new Pos2D(resX, resY)),
+            new Area2D(new IntPos(resX, resY)),
             (pos, size) -> {
                 Tuple.applyOn(
                     pos,

@@ -27,7 +27,7 @@ import org.hamcrest.Matchers;
 import org.junit.Test;
 import unit.functional.QuadConsumer;
 import unit.functional.QuadFunction;
-import unit.pos.Pos2D;
+import unit.pos.IntPos;
 import unit.size.IntSize;
 
 /**
@@ -51,7 +51,7 @@ public final class AreaTest {
             Matchers.equalTo(
                 Area.result(
                     new Area2D(
-                        new Pos2D(resX, resY),
+                        new IntPos(resX, resY),
                         new IntSize(resW, resH)
                     ),
                     // @checkstyle ParameterName (1 line)
@@ -73,7 +73,7 @@ public final class AreaTest {
         final var resH = 233;
         Area.applyOn(
             new Area2D(
-                new Pos2D(resX, resY),
+                new IntPos(resX, resY),
                 new IntSize(resW, resH)
             ),
             (pos, size) -> {
@@ -111,7 +111,7 @@ public final class AreaTest {
         final var resH = 32;
         Area.applyOn(
             new Area2D(
-                new Pos2D(resX, resY),
+                new IntPos(resX, resY),
                 new IntSize(resW, resH)
             ),
             // @checkstyle ParameterName (1 line)
@@ -137,7 +137,7 @@ public final class AreaTest {
         MatcherAssert.assertThat(
             // @checkstyle LocalFinalVariableName (1 line)
             new Area2D(
-                new Pos2D(x, y),
+                new IntPos(x, y),
                 new IntSize(width, height)
             ),
             Matchers.hasToString(

@@ -35,7 +35,7 @@ chance that a user might use the class name as a parameter type
  * <p>This class is immutable and thread-safe.</p>
  * @since 0.2
  */
-public class Pos2D implements Pos {
+public class IntPos implements Pos {
     /**
      * The x coordinate.
      * @checkstyle MemberName (2 lines)
@@ -51,7 +51,7 @@ public class Pos2D implements Pos {
     /**
      * Ctor. Sets x = 0 and y = 0 as its values.
      */
-    public Pos2D() {
+    public IntPos() {
         this(0, 0);
     }
 
@@ -61,7 +61,7 @@ public class Pos2D implements Pos {
      * @param y The y coordinate.
      * @checkstyle ParameterName (2 lines)
      */
-    public Pos2D(final int x, final int y) {
+    public IntPos(final int x, final int y) {
         this.x = x;
         this.y = y;
     }
