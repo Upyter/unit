@@ -32,7 +32,7 @@ import java.util.function.BiFunction;
 import unit.pos.Pos;
 import unit.pos.Pos2D;
 import unit.size.Size;
-import unit.size.Size2D;
+import unit.size.IntSize;
 
 /**
  * Basic concrete implementation of {@link Area}.
@@ -65,7 +65,7 @@ public class Area2D implements Area {
     public Area2D(final int x, final int y, final int width, final int height) {
         this(
             new Pos2D(x, y),
-            new Size2D(width, height)
+            new IntSize(width, height)
         );
     }
 
@@ -82,7 +82,7 @@ public class Area2D implements Area {
      * @param pos The pos of the area.
      */
     public Area2D(final Pos pos) {
-        this(pos, new Size2D());
+        this(pos, new IntSize());
     }
 
     /**

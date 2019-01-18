@@ -28,7 +28,7 @@ import org.junit.Test;
 import unit.functional.QuadConsumer;
 import unit.functional.QuadFunction;
 import unit.pos.Pos2D;
-import unit.size.Size2D;
+import unit.size.IntSize;
 
 /**
  * Tests for {@link Area}.
@@ -52,7 +52,7 @@ public final class AreaTest {
                 Area.result(
                     new Area2D(
                         new Pos2D(resX, resY),
-                        new Size2D(resW, resH)
+                        new IntSize(resW, resH)
                     ),
                     // @checkstyle ParameterName (1 line)
                     (x, y, width, height) -> x + y + width + height
@@ -74,7 +74,7 @@ public final class AreaTest {
         Area.applyOn(
             new Area2D(
                 new Pos2D(resX, resY),
-                new Size2D(resW, resH)
+                new IntSize(resW, resH)
             ),
             (pos, size) -> {
                 pos.result(
@@ -112,7 +112,7 @@ public final class AreaTest {
         Area.applyOn(
             new Area2D(
                 new Pos2D(resX, resY),
-                new Size2D(resW, resH)
+                new IntSize(resW, resH)
             ),
             // @checkstyle ParameterName (1 line)
             (x, y, width, height) -> {
@@ -138,7 +138,7 @@ public final class AreaTest {
             // @checkstyle LocalFinalVariableName (1 line)
             new Area2D(
                 new Pos2D(x, y),
-                new Size2D(width, height)
+                new IntSize(width, height)
             ),
             Matchers.hasToString(
                 String.format(

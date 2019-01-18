@@ -34,7 +34,7 @@ chance that a user might use the class name as a parameter type
  * <p>This class is immutable and thread-safe.</p>
  * @since 0.4
  */
-public class Size2D implements Size {
+public class IntSize implements Size {
     /**
      * The width of the size.
      */
@@ -48,7 +48,7 @@ public class Size2D implements Size {
     /**
      * Ctor. Creates a size with width = 0 and height = 0.
      */
-    public Size2D() {
+    public IntSize() {
         this(0, 0);
     }
 
@@ -57,7 +57,7 @@ public class Size2D implements Size {
      * @param width The width for the size.
      * @param height The height for the size.
      */
-    public Size2D(final int width, final int height) {
+    public IntSize(final int width, final int height) {
         this.width = width;
         this.height = height;
     }

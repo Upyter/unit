@@ -28,7 +28,7 @@ import org.junit.Test;
 import unit.pos.Pos;
 import unit.pos.Pos2D;
 import unit.size.Size;
-import unit.size.Size2D;
+import unit.size.IntSize;
 import unit.tuple.Tuple;
 
 /**
@@ -48,7 +48,7 @@ public final class Area2DTest {
         final var resH = 233;
         new Area2D(
             new Pos2D(resX, resY),
-            new Size2D(resW, resH)
+            new IntSize(resW, resH)
         ).result(
             (pos, size) -> {
                 Tuple.applyOn(
@@ -112,7 +112,7 @@ public final class Area2DTest {
         final var resW = -566;
         final var resH = -54;
         Area.applyOn(
-            new Area2D(new Size2D(resW, resH)),
+            new Area2D(new IntSize(resW, resH)),
             (pos, size) -> {
                 Tuple.applyOn(
                     pos,
