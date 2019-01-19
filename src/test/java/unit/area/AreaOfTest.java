@@ -35,9 +35,9 @@ import unit.tuple.Tuple;
  * Tests for {@link Area}.
  * @since 0.6
  */
-public final class Area2DTest {
+public final class AreaOfTest {
     /**
-     * {@link Area2D#result(BiFunction)} returns the correct result.
+     * {@link AreaOf#result(BiFunction)} returns the correct result.
      */
     @Test
     public void correctResult() {
@@ -46,7 +46,7 @@ public final class Area2DTest {
         final var resY = 563;
         final var resW = 34324;
         final var resH = 233;
-        new Area2D(
+        new AreaOf(
             new IntPos(resX, resY),
             new IntSize(resW, resH)
         ).result(
@@ -74,7 +74,7 @@ public final class Area2DTest {
     }
 
     /**
-     * {@link Area2D#Area2D(Pos)} has a width of 0 and a height of 0.
+     * {@link AreaOf#AreaOf(Pos)} has a width of 0 and a height of 0.
      */
     @Test
     public void constructsZeroSize() {
@@ -82,7 +82,7 @@ public final class Area2DTest {
         final var resX = 76;
         final var resY = 52;
         Area.applyOn(
-            new Area2D(new IntPos(resX, resY)),
+            new AreaOf(new IntPos(resX, resY)),
             (pos, size) -> {
                 Tuple.applyOn(
                     pos,
@@ -104,7 +104,7 @@ public final class Area2DTest {
     }
 
     /**
-     * {@link Area2D#Area2D(Size)} has a pos of x = 0 and y = 0.
+     * {@link AreaOf#AreaOf(Size)} has a pos of x = 0 and y = 0.
      */
     @Test
     public void constructsZeroPos() {
@@ -112,7 +112,7 @@ public final class Area2DTest {
         final var resW = -566;
         final var resH = -54;
         Area.applyOn(
-            new Area2D(new IntSize(resW, resH)),
+            new AreaOf(new IntSize(resW, resH)),
             (pos, size) -> {
                 Tuple.applyOn(
                     pos,
@@ -136,7 +136,7 @@ public final class Area2DTest {
     }
 
     /**
-     * {@link Area2D#Area2D(int, int, int, int)} )} constructs an area with the
+     * {@link AreaOf#AreaOf(int, int, int, int)} )} constructs an area with the
      * right x, y, width and height.
      */
     @Test
@@ -147,7 +147,7 @@ public final class Area2DTest {
         final var resW = 423;
         final var resH = 4534;
         Area.applyOn(
-            new Area2D(resX, resY, resW, resH),
+            new AreaOf(resX, resY, resW, resH),
             (pos, size) -> {
                 Tuple.applyOn(
                     pos,

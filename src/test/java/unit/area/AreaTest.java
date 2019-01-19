@@ -50,7 +50,7 @@ public final class AreaTest {
             resX + resY + resW + resH,
             Matchers.equalTo(
                 Area.result(
-                    new Area2D(
+                    new AreaOf(
                         new IntPos(resX, resY),
                         new IntSize(resW, resH)
                     ),
@@ -72,7 +72,7 @@ public final class AreaTest {
         final var resW = 34324;
         final var resH = 233;
         Area.applyOn(
-            new Area2D(
+            new AreaOf(
                 new IntPos(resX, resY),
                 new IntSize(resW, resH)
             ),
@@ -110,7 +110,7 @@ public final class AreaTest {
         final var resW = 3231;
         final var resH = 32;
         Area.applyOn(
-            new Area2D(
+            new AreaOf(
                 new IntPos(resX, resY),
                 new IntSize(resW, resH)
             ),
@@ -125,7 +125,7 @@ public final class AreaTest {
     }
 
     /**
-     * {@link Area2D#toString()} returns the right string.
+     * {@link AreaOf#toString()} returns the right string.
      */
     @Test
     public void correctToString() {
@@ -136,7 +136,7 @@ public final class AreaTest {
         final var height = 4585;
         MatcherAssert.assertThat(
             // @checkstyle LocalFinalVariableName (1 line)
-            new Area2D(
+            new AreaOf(
                 new IntPos(x, y),
                 new IntSize(width, height)
             ),

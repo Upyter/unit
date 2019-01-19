@@ -42,7 +42,7 @@ import unit.size.Size;
  * the actual objects without any safe-copies.</p>
  * @since 0.6
  */
-public class Area2D implements Area {
+public class AreaOf implements Area {
     /**
      * The pos of this area.
      */
@@ -62,7 +62,7 @@ public class Area2D implements Area {
      * @checkstyle ParameterNumber (3 lines)
      * @checkstyle ParameterName (2 lines)
      */
-    public Area2D(final int x, final int y, final int width, final int height) {
+    public AreaOf(final int x, final int y, final int width, final int height) {
         this(
             new IntPos(x, y),
             new IntSize(width, height)
@@ -73,7 +73,7 @@ public class Area2D implements Area {
      * Ctor. Uses x = 0 and y = 0 as its coordinates.
      * @param size The size of the area.
      */
-    public Area2D(final Size size) {
+    public AreaOf(final Size size) {
         this(new IntPos(0, 0), size);
     }
 
@@ -81,7 +81,7 @@ public class Area2D implements Area {
      * Ctor. Uses width = 0 and height = 0 as its size.
      * @param pos The pos of the area.
      */
-    public Area2D(final Pos pos) {
+    public AreaOf(final Pos pos) {
         this(pos, new IntSize());
     }
 
@@ -90,7 +90,7 @@ public class Area2D implements Area {
      * @param pos The pos of the area.
      * @param size The size of the area.
      */
-    public Area2D(final Pos pos, final Size size) {
+    public AreaOf(final Pos pos, final Size size) {
         this.pos = pos;
         this.size = size;
     }
