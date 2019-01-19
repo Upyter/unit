@@ -81,7 +81,7 @@ public final class AreaOfTest {
         // @checkstyle LocalFinalVariableName (2 lines)
         final var resX = 76;
         final var resY = 52;
-        Area.applyOn(
+        Tuple.applyOn(
             new AreaOf(new IntPos(resX, resY)),
             (pos, size) -> {
                 Tuple.applyOn(
@@ -111,7 +111,7 @@ public final class AreaOfTest {
         // @checkstyle LocalFinalVariableName (2 lines)
         final var resW = -566;
         final var resH = -54;
-        Area.applyOn(
+        Tuple.applyOn(
             new AreaOf(new IntSize(resW, resH)),
             (pos, size) -> {
                 Tuple.applyOn(
@@ -146,7 +146,7 @@ public final class AreaOfTest {
         final var resY = 12;
         final var resW = 423;
         final var resH = 4534;
-        Area.applyOn(
+        Tuple.applyOn(
             new AreaOf(resX, resY, resW, resH),
             (pos, size) -> {
                 Tuple.applyOn(

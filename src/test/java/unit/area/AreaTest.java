@@ -29,6 +29,7 @@ import unit.functional.QuadConsumer;
 import unit.functional.QuadFunction;
 import unit.pos.IntPos;
 import unit.size.IntSize;
+import unit.tuple.Tuple;
 
 /**
  * Tests for {@link Area}.
@@ -71,7 +72,7 @@ public final class AreaTest {
         final var resY = 563;
         final var resW = 34324;
         final var resH = 233;
-        Area.applyOn(
+        Tuple.applyOn(
             new AreaOf(
                 new IntPos(resX, resY),
                 new IntSize(resW, resH)
