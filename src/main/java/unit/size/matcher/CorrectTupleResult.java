@@ -90,7 +90,7 @@ public class CorrectTupleResult extends
     public final void describeTo(final Description description) {
         description.appendText(
             String.format(
-                " sdasd Expected first = %s, second = %s, result = %s",
+                " Expected first = %s, second = %s, result = %s",
                 Objects.toString(this.first),
                 Objects.toString(this.second),
                 Objects.toString(this.expectedResult)
@@ -119,8 +119,7 @@ public class CorrectTupleResult extends
                     )
                 );
                 valuesEqual.add(
-                    this.first.equals(resFirst)
-                        && this.second.equals(resSecond)
+                    this.first.equals(resFirst) && this.second.equals(resSecond)
                 );
                 return this.expectedResult;
             }

@@ -31,6 +31,7 @@ import unit.tuple.Tuple;
 
 /**
  * The two dimensional cartesian based size of a rectangular area.
+ * Implementations of this interface are equal to each other.
  * @since 0.4
  */
 public interface Size extends Tuple<Integer, Integer> { }

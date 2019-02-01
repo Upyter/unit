@@ -29,6 +29,7 @@ import unit.pos.IntPos;
 import unit.pos.Pos;
 import unit.size.IntSize;
 import unit.size.Size;
+import unit.size.matcher.CorrectTupleResult;
 import unit.tuple.Tuple;
 
 /**
@@ -46,30 +47,15 @@ public final class AreaOfTest {
         final var resY = 563;
         final var resW = 34324;
         final var resH = 233;
-        new AreaOf(
-            new IntPos(resX, resY),
-            new IntSize(resW, resH)
-        ).result(
-            (pos, size) -> {
-                Tuple.applyOn(
-                    pos,
-                    // @checkstyle ParameterName (1 line)
-                    (x, y) -> {
-                        MatcherAssert.assertThat(x, Matchers.equalTo(resX));
-                        MatcherAssert.assertThat(y, Matchers.equalTo(resY));
-                    }
-                );
-                Tuple.applyOn(
-                    size,
-                    (width, height) -> {
-                        MatcherAssert.assertThat(width, Matchers.equalTo(resW));
-                        MatcherAssert.assertThat(
-                            height, Matchers.equalTo(resH)
-                        );
-                    }
-                );
-                return null;
-            }
+        MatcherAssert.assertThat(
+            new AreaOf(
+                new IntPos(resX, resY),
+                new IntSize(resW, resH)
+            ),
+            new CorrectTupleResult(
+                new IntPos(resX, resY),
+                new IntSize(resW, resH)
+            )
         );
     }
 
