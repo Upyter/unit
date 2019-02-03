@@ -21,6 +21,7 @@
 
 package unit.pos;
 
+import java.util.Objects;
 import java.util.function.BiFunction;
 
 /*
@@ -35,7 +36,7 @@ chance that a user might use the class name as a parameter type
  * <p>This class is immutable and thread-safe.</p>
  * @since 0.2
  */
-public class Pos2D implements Pos {
+public class PosOf implements Pos {
     /**
      * The x coordinate.
      * @checkstyle MemberName (2 lines)
@@ -51,7 +52,7 @@ public class Pos2D implements Pos {
     /**
      * Ctor. Sets x = 0 and y = 0 as its values.
      */
-    public Pos2D() {
+    public PosOf() {
         this(0, 0);
     }
 
@@ -61,14 +62,35 @@ public class Pos2D implements Pos {
      * @param y The y coordinate.
      * @checkstyle ParameterName (2 lines)
      */
-    public Pos2D(final int x, final int y) {
+    public PosOf(final int x, final int y) {
         this.x = x;
         this.y = y;
     }
 
     @Override
     public final <R> R result(final BiFunction<Integer, Integer, R> target) {
-        return target.apply(this.x, this.y);
+        return Objects.requireNonNull(target).apply(this.x, this.y);
+    }
+
+    @SuppressWarnings("PMD.OnlyOneReturn")
+    @Override
+    public final boolean equals(final Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (!(obj instanceof Pos)) {
+            return false;
+        }
+        return ((Pos) obj).result(
+            // @checkstyle ParameterName (1 lines)
+            (otherX, otherY) -> otherX.equals(this.x)
+                && otherY.equals(this.y)
+        );
+    }
+
+    @Override
+    public final int hashCode() {
+        return Objects.hash(this.x, this.y);
     }
 
     @Override

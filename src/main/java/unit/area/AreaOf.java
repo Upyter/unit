@@ -28,11 +28,12 @@ example). So I took the more annoying name for the implementation to lower the
 chance that a user might use the class name as a parameter type
 */
 
+import java.util.Objects;
 import java.util.function.BiFunction;
 import unit.pos.Pos;
-import unit.pos.Pos2D;
+import unit.pos.PosOf;
 import unit.size.Size;
-import unit.size.Size2D;
+import unit.size.SizeOf;
 
 /**
  * Basic concrete implementation of {@link Area}.
@@ -42,7 +43,7 @@ import unit.size.Size2D;
  * the actual objects without any safe-copies.</p>
  * @since 0.6
  */
-public class Area2D implements Area {
+public class AreaOf implements Area {
     /**
      * The pos of this area.
      */
@@ -54,6 +55,13 @@ public class Area2D implements Area {
     private final Size size;
 
     /**
+     * Ctor. Uses x = 0, y = 0, width = 0 and height = 0 as its values.
+     */
+    public AreaOf() {
+        this(new PosOf(), new SizeOf());
+    }
+
+    /**
      * Ctor.
      * @param x The x coordinate of the area.
      * @param y The y coordinate of the area.
@@ -62,10 +70,10 @@ public class Area2D implements Area {
      * @checkstyle ParameterNumber (3 lines)
      * @checkstyle ParameterName (2 lines)
      */
-    public Area2D(final int x, final int y, final int width, final int height) {
+    public AreaOf(final int x, final int y, final int width, final int height) {
         this(
-            new Pos2D(x, y),
-            new Size2D(width, height)
+            new PosOf(x, y),
+            new SizeOf(width, height)
         );
     }
 
@@ -73,16 +81,16 @@ public class Area2D implements Area {
      * Ctor. Uses x = 0 and y = 0 as its coordinates.
      * @param size The size of the area.
      */
-    public Area2D(final Size size) {
-        this(new Pos2D(0, 0), size);
+    public AreaOf(final Size size) {
+        this(new PosOf(), size);
     }
 
     /**
      * Ctor. Uses width = 0 and height = 0 as its size.
      * @param pos The pos of the area.
      */
-    public Area2D(final Pos pos) {
-        this(pos, new Size2D());
+    public AreaOf(final Pos pos) {
+        this(pos, new SizeOf());
     }
 
     /**
@@ -90,14 +98,14 @@ public class Area2D implements Area {
      * @param pos The pos of the area.
      * @param size The size of the area.
      */
-    public Area2D(final Pos pos, final Size size) {
-        this.pos = pos;
-        this.size = size;
+    public AreaOf(final Pos pos, final Size size) {
+        this.pos = Objects.requireNonNull(pos);
+        this.size = Objects.requireNonNull(size);
     }
 
     @Override
     public final <R> R result(final BiFunction<Pos, Size, R> target) {
-        return target.apply(this.pos, this.size);
+        return Objects.requireNonNull(target).apply(this.pos, this.size);
     }
 
     @Override

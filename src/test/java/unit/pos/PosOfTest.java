@@ -21,7 +21,7 @@
 
 package unit.pos;
 
-import java.util.function.BiFunction;
+import nl.jqno.equalsverifier.EqualsVerifier;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
@@ -31,25 +31,18 @@ import unit.tuple.Tuple;
  * Tests for {@link Pos}.
  * @since 0.3
  */
-public final class Pos2DTest {
+public final class PosOfTest {
     /**
-     * {@link Pos2D#result(BiFunction)} returns the correct result.
+     * {@link PosOf#equals(Object)} and {@link PosOf#hashCode()} must meet
+     * their contract.
      */
     @Test
-    public void correctResult() {
-        // @checkstyle LocalFinalVariableName (2 lines)
-        final var x = 3445;
-        final var y = 432;
-        MatcherAssert.assertThat(
-            x + y,
-            Matchers.equalTo(
-                new Pos2D(x, y).result(Integer::sum)
-            )
-        );
+    public void equalsAndHashCode() {
+        EqualsVerifier.forClass(PosOf.class).verify();
     }
 
     /**
-     * {@link Pos2D#toString()} returns the right string.
+     * {@link PosOf#toString()} returns the right string.
      */
     @Test
     public void correctToString() {
@@ -58,7 +51,7 @@ public final class Pos2DTest {
         final var y = 4538;
         MatcherAssert.assertThat(
             // @checkstyle LocalFinalVariableName (1 line)
-            new Pos2D(x, y),
+            new PosOf(x, y),
             Matchers.hasToString(
                 String.format("Pos(x = %d, y = %d)", x, y)
             )
@@ -66,12 +59,12 @@ public final class Pos2DTest {
     }
 
     /**
-     * {@link Pos2D#Pos2D()} creates a pos with x = 0 and y = 0.
+     * {@link PosOf#PosOf()} creates a pos with x = 0 and y = 0.
      */
     @Test
     public void defaultConstructorCorrectCoordinates() {
         Tuple.applyOn(
-            new Pos2D(),
+            new PosOf(),
             // @checkstyle ParameterName (1 line)
             (x, y) -> {
                 MatcherAssert.assertThat(x, Matchers.equalTo(0));

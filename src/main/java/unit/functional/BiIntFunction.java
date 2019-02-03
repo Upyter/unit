@@ -19,8 +19,20 @@
  * DEALINGS IN THE SOFTWARE.
  */
 
+package unit.functional;
+
 /**
- * Tests for the size matchers.
- * @since 0.13
+ * A {@link java.util.function.BiFunction} that uses the primitive int type as
+ * its values.
+ * @param <R> The type of the result.
+ * @since 0.37
  */
-package unit.size.matcher;
+public interface BiIntFunction<R> {
+    /**
+     * Applies this function to the given arguments.
+     * @param first The first function argument
+     * @param second The second function argument
+     * @return The function result
+     */
+    R apply(int first, int second);
+}

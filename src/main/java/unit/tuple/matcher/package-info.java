@@ -19,19 +19,8 @@
  * DEALINGS IN THE SOFTWARE.
  */
 
-package unit.size;
-
-/*
-This interface is necessary (compared to using width and height each time)
-because this library depends on the possibility to implement own
-implementations like a scaling size
-*/
-
-import unit.tuple.Tuple;
-
 /**
- * The two dimensional cartesian based size of a rectangular area.
- * Implementations of this interface are equal to each other.
- * @since 0.4
+ * Custom hamcrest matchers for {@link unit.size.Size} and classes around it.
+ * @since 0.13
  */
-public interface Size extends Tuple<Integer, Integer> { }
+package unit.tuple.matcher;

@@ -19,19 +19,26 @@
  * DEALINGS IN THE SOFTWARE.
  */
 
-package unit.size;
-
-/*
-This interface is necessary (compared to using width and height each time)
-because this library depends on the possibility to implement own
-implementations like a scaling size
-*/
-
-import unit.tuple.Tuple;
+package unit.functional;
 
 /**
- * The two dimensional cartesian based size of a rectangular area.
- * Implementations of this interface are equal to each other.
- * @since 0.4
+ * A lazily evaluated operation. Example:
+ * <pre>
+ * {@code
+ * final Lazy<Integer> lazy = () -> 15 + 23; // defined - not calculated
+ * // ...
+ * // later in code:
+ * lazy.value(); // That's the point where the calculation happens
+ * }
+ * </pre>
+ * @param <T> The type of the value that will be returned by the operation.
+ * @since 0.36
  */
-public interface Size extends Tuple<Integer, Integer> { }
+@FunctionalInterface
+public interface Lazy<T> {
+    /**
+     * Applies the operation to construct a certain value.
+     * @return The resulting value.
+     */
+    T value();
+}

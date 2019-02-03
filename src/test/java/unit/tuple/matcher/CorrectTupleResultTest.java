@@ -19,7 +19,7 @@
  * DEALINGS IN THE SOFTWARE.
  */
 
-package unit.size.matcher;
+package unit.tuple.matcher;
 
 import java.util.function.BiFunction;
 import org.hamcrest.Description;
@@ -28,7 +28,7 @@ import org.hamcrest.Matchers;
 import org.hamcrest.StringDescription;
 import org.junit.Test;
 import unit.size.Size;
-import unit.size.Size2D;
+import unit.size.SizeOf;
 import unit.tuple.Tuple;
 
 /**
@@ -45,8 +45,8 @@ public final class CorrectTupleResultTest {
         final int width = 142;
         final int height = 123;
         MatcherAssert.assertThat(
-            new Size2D(width, height),
-            new CorrectTupleResult(width, height)
+            new SizeOf(width, height),
+            new CorrectResult(width, height)
         );
     }
 
@@ -59,9 +59,9 @@ public final class CorrectTupleResultTest {
         final int width = 534;
         final int height = 32;
         MatcherAssert.assertThat(
-            new Size2D(width + 1, height),
+            new SizeOf(width + 1, height),
             Matchers.not(
-                new CorrectTupleResult(width, height)
+                new CorrectResult(width, height)
             )
         );
     }
@@ -86,7 +86,7 @@ public final class CorrectTupleResultTest {
                 }
             },
             Matchers.not(
-                new CorrectTupleResult(width, height, width + height + 1)
+                new CorrectResult(width, height, width + height + 1)
             )
         );
     }
@@ -100,9 +100,9 @@ public final class CorrectTupleResultTest {
         final int width = 6732;
         final int height = 125;
         MatcherAssert.assertThat(
-            new Size2D(width, height + 1),
+            new SizeOf(width, height + 1),
             Matchers.not(
-                new CorrectTupleResult(width, height)
+                new CorrectResult(width, height)
             )
         );
     }
@@ -118,7 +118,7 @@ public final class CorrectTupleResultTest {
         final var height = 423;
         final var result = width + height;
         final var description = new StringDescription();
-        new CorrectTupleResult(
+        new CorrectResult(
             width, height, result
         ).describeTo(description);
         MatcherAssert.assertThat(
@@ -146,10 +146,10 @@ public final class CorrectTupleResultTest {
         final var height = 5341;
         final var result = width + height;
         final var description = new StringDescription();
-        new CorrectTupleResult(
+        new CorrectResult(
             width + 1, height + 1, result
         ).matchesSafely(
-            new Size2D(width, height),
+            new SizeOf(width, height),
             description
         );
         MatcherAssert.assertThat(

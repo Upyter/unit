@@ -74,22 +74,6 @@ public interface Area extends Tuple<Pos, Size> {
         );
     }
 
-    /**
-     * Gives the given consumer the pos and the size which define the area.
-     * @param area The area that provides the {@link #result(BiFunction)} method
-     *  on which this method is based on.
-     * @param target Target that gets the pos and the size.
-     */
-    @SuppressWarnings("PMD.ProhibitPublicStaticMethods")
-    static void applyOn(final Area area, final BiConsumer<Pos, Size> target) {
-        area.result(
-            (pos, size) -> {
-                target.accept(pos, size);
-                return null;
-            }
-        );
-    }
-
     /*
     The apply(BiConsumer<Position, Size>) method is not enough, because the
     concrete graphic libraries are based on single values (x, y), instead of
@@ -101,7 +85,7 @@ public interface Area extends Tuple<Pos, Size> {
     /**
      * Gives the given consumer the pos and the size which define this
      * area. This method shall offer a more convenient way to use the area
-     * classes compared to {@link #applyOn(Area, BiConsumer)}.
+     * classes compared to {@link #applyOn(Tuple, BiConsumer)}.
      * <p>This method uses {@link #result(BiFunction)} to gets it's values
      * and it doesn't mutate the state by itself.</p>
      * @param area The area that provides the {@link #result(BiFunction)} method

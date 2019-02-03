@@ -27,8 +27,9 @@ import org.hamcrest.Matchers;
 import org.junit.Test;
 import unit.functional.QuadConsumer;
 import unit.functional.QuadFunction;
-import unit.pos.Pos2D;
-import unit.size.Size2D;
+import unit.pos.PosOf;
+import unit.size.SizeOf;
+import unit.tuple.Tuple;
 
 /**
  * Tests for {@link Area}.
@@ -50,9 +51,9 @@ public final class AreaTest {
             resX + resY + resW + resH,
             Matchers.equalTo(
                 Area.result(
-                    new Area2D(
-                        new Pos2D(resX, resY),
-                        new Size2D(resW, resH)
+                    new AreaOf(
+                        new PosOf(resX, resY),
+                        new SizeOf(resW, resH)
                     ),
                     // @checkstyle ParameterName (1 line)
                     (x, y, width, height) -> x + y + width + height
@@ -71,10 +72,10 @@ public final class AreaTest {
         final var resY = 563;
         final var resW = 34324;
         final var resH = 233;
-        Area.applyOn(
-            new Area2D(
-                new Pos2D(resX, resY),
-                new Size2D(resW, resH)
+        Tuple.applyOn(
+            new AreaOf(
+                new PosOf(resX, resY),
+                new SizeOf(resW, resH)
             ),
             (pos, size) -> {
                 pos.result(
@@ -110,9 +111,9 @@ public final class AreaTest {
         final var resW = 3231;
         final var resH = 32;
         Area.applyOn(
-            new Area2D(
-                new Pos2D(resX, resY),
-                new Size2D(resW, resH)
+            new AreaOf(
+                new PosOf(resX, resY),
+                new SizeOf(resW, resH)
             ),
             // @checkstyle ParameterName (1 line)
             (x, y, width, height) -> {
@@ -125,7 +126,7 @@ public final class AreaTest {
     }
 
     /**
-     * {@link Area2D#toString()} returns the right string.
+     * {@link AreaOf#toString()} returns the right string.
      */
     @Test
     public void correctToString() {
@@ -136,9 +137,9 @@ public final class AreaTest {
         final var height = 4585;
         MatcherAssert.assertThat(
             // @checkstyle LocalFinalVariableName (1 line)
-            new Area2D(
-                new Pos2D(x, y),
-                new Size2D(width, height)
+            new AreaOf(
+                new PosOf(x, y),
+                new SizeOf(width, height)
             ),
             Matchers.hasToString(
                 String.format(

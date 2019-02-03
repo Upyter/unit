@@ -21,6 +21,7 @@
 
 package unit.size;
 
+import java.util.Objects;
 import java.util.function.BiFunction;
 
 /*
@@ -34,7 +35,7 @@ chance that a user might use the class name as a parameter type
  * <p>This class is immutable and thread-safe.</p>
  * @since 0.4
  */
-public class Size2D implements Size {
+public class SizeOf implements Size {
     /**
      * The width of the size.
      */
@@ -48,7 +49,7 @@ public class Size2D implements Size {
     /**
      * Ctor. Creates a size with width = 0 and height = 0.
      */
-    public Size2D() {
+    public SizeOf() {
         this(0, 0);
     }
 
@@ -57,14 +58,35 @@ public class Size2D implements Size {
      * @param width The width for the size.
      * @param height The height for the size.
      */
-    public Size2D(final int width, final int height) {
+    public SizeOf(final int width, final int height) {
         this.width = width;
         this.height = height;
     }
 
     @Override
     public final <R> R result(final BiFunction<Integer, Integer, R> target) {
-        return target.apply(this.width, this.height);
+        return Objects.requireNonNull(target).apply(this.width, this.height);
+    }
+
+    @SuppressWarnings("PMD.OnlyOneReturn")
+    @Override
+    public final boolean equals(final Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (!(obj instanceof Size)) {
+            return false;
+        }
+        return ((Size) obj).result(
+            // @checkstyle ParameterName (1 lines)
+            (otherWidth, otherHeight) -> otherWidth.equals(this.width)
+                && otherHeight.equals(this.height)
+        );
+    }
+
+    @Override
+    public final int hashCode() {
+        return Objects.hash(this.width, this.height);
     }
 
     @Override

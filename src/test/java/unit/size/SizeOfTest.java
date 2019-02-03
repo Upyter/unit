@@ -21,39 +21,35 @@
 
 package unit.size;
 
-import java.util.function.BiFunction;
+import nl.jqno.equalsverifier.EqualsVerifier;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
-import unit.size.matcher.CorrectTupleResult;
+import unit.tuple.matcher.CorrectResult;
 
 /**
- * Tests for {@link Size2D}.
+ * Tests for {@link SizeOf}.
  * @since 0.4
  */
-public final class Size2DTest {
+public final class SizeOfTest {
     /**
-     * {@link Size#result(BiFunction)} returns the right result.
+     * {@link SizeOf#equals(Object)} and {@link SizeOf#hashCode()} must meet
+     * their contract.
      */
     @Test
-    public void correctResult() {
-        final var width = 3445;
-        final var height = 432;
-        MatcherAssert.assertThat(
-            new Size2D(width, height).result(Integer::sum),
-            Matchers.equalTo(width + height)
-        );
+    public void equalsAndHashCode() {
+        EqualsVerifier.forClass(SizeOf.class).verify();
     }
 
     /**
-     * {@link Size2D#toString()}} returns the right string.
+     * {@link SizeOf#toString()}} returns the right string.
      */
     @Test
     public void correctToString() {
         final var width = 313;
         final var height = 238;
         MatcherAssert.assertThat(
-            new Size2D(width, height),
+            new SizeOf(width, height),
             Matchers.hasToString(
                 String.format("Size(width = %d, height = %d)", width, height)
             )
@@ -61,13 +57,13 @@ public final class Size2DTest {
     }
 
     /**
-     * {@link Size2D#Size2D()} creates a size with width = 0 and height = 0.
+     * {@link SizeOf#SizeOf()} creates a size with width = 0 and height = 0.
      */
     @Test
     public void defaultConstructorCorrectCoordinates() {
         MatcherAssert.assertThat(
-            new Size2D(),
-            new CorrectTupleResult(0, 0)
+            new SizeOf(),
+            new CorrectResult(0, 0)
         );
     }
 }

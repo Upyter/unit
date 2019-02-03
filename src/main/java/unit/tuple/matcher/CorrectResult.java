@@ -19,7 +19,7 @@
  * DEALINGS IN THE SOFTWARE.
  */
 
-package unit.size.matcher;
+package unit.tuple.matcher;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +35,7 @@ import unit.tuple.Tuple;
  * object which is mutable.</p>
  * @since 0.13
  */
-public class CorrectTupleResult extends
+public class CorrectResult extends
     TypeSafeDiagnosingMatcher<Tuple<?, ?>> {
     /**
      * The expected first value.
@@ -63,7 +63,7 @@ public class CorrectTupleResult extends
      * @param second The second value to expect from the
      *  {@link Tuple#result(BiFunction)} method.
      */
-    public CorrectTupleResult(final Object first, final Object second) {
+    public CorrectResult(final Object first, final Object second) {
         this(first, second, new Object());
     }
 
@@ -77,20 +77,20 @@ public class CorrectTupleResult extends
      *  {@link Tuple#result(BiFunction)} method.
      * @checkstyle ParameterName (3 lines)
      */
-    public CorrectTupleResult(
+    public CorrectResult(
         final Object first, final Object second, final Object expectedResult
     ) {
         super();
-        this.first = first;
-        this.second = second;
-        this.expectedResult = expectedResult;
+        this.first = Objects.requireNonNull(first);
+        this.second = Objects.requireNonNull(second);
+        this.expectedResult = Objects.requireNonNull(expectedResult);
     }
 
     @Override
     public final void describeTo(final Description description) {
-        description.appendText(
+        Objects.requireNonNull(description).appendText(
             String.format(
-                " sdasd Expected first = %s, second = %s, result = %s",
+                " Expected first = %s, second = %s, result = %s",
                 Objects.toString(this.first),
                 Objects.toString(this.second),
                 Objects.toString(this.expectedResult)
@@ -108,10 +108,10 @@ public class CorrectTupleResult extends
     ) {
         // @checkstyle LocalFinalVariable (1 line)
         final List<Boolean> valuesEqual = new ArrayList<>(0);
-        final var result = tuple.result(
+        final var result =  Objects.requireNonNull(tuple).result(
             // @checkstyle ParameterNameCheck (1 line)
             (resFirst, resSecond) -> {
-                description.appendText(
+                Objects.requireNonNull(description).appendText(
                     String.format(
                         "first: %s, second: %s",
                         Objects.toString(resFirst),
@@ -119,13 +119,12 @@ public class CorrectTupleResult extends
                     )
                 );
                 valuesEqual.add(
-                    this.first.equals(resFirst)
-                        && this.second.equals(resSecond)
+                    this.first.equals(resFirst) && this.second.equals(resSecond)
                 );
                 return this.expectedResult;
             }
         );
-        description.appendText(
+        Objects.requireNonNull(description).appendText(
             String.format(", result: %s", Objects.toString(result))
         );
         return valuesEqual.get(0)
