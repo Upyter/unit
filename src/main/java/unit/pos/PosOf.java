@@ -69,7 +69,7 @@ public class PosOf implements Pos {
 
     @Override
     public final <R> R result(final BiFunction<Integer, Integer, R> target) {
-        return target.apply(this.x, this.y);
+        return Objects.requireNonNull(target).apply(this.x, this.y);
     }
 
     @SuppressWarnings("PMD.OnlyOneReturn")

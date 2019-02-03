@@ -28,6 +28,7 @@ example). So I took the more annoying name for the implementation to lower the
 chance that a user might use the class name as a parameter type
 */
 
+import java.util.Objects;
 import java.util.function.BiFunction;
 import unit.pos.Pos;
 import unit.pos.PosOf;
@@ -91,13 +92,13 @@ public class AreaOf implements Area {
      * @param size The size of the area.
      */
     public AreaOf(final Pos pos, final Size size) {
-        this.pos = pos;
-        this.size = size;
+        this.pos = Objects.requireNonNull(pos);
+        this.size = Objects.requireNonNull(size);
     }
 
     @Override
     public final <R> R result(final BiFunction<Pos, Size, R> target) {
-        return target.apply(this.pos, this.size);
+        return Objects.requireNonNull(target).apply(this.pos, this.size);
     }
 
     @Override

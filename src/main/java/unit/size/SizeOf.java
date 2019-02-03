@@ -65,7 +65,7 @@ public class SizeOf implements Size {
 
     @Override
     public final <R> R result(final BiFunction<Integer, Integer, R> target) {
-        return target.apply(this.width, this.height);
+        return Objects.requireNonNull(target).apply(this.width, this.height);
     }
 
     @SuppressWarnings("PMD.OnlyOneReturn")

@@ -81,14 +81,14 @@ public class CorrectTupleResult extends
         final Object first, final Object second, final Object expectedResult
     ) {
         super();
-        this.first = first;
-        this.second = second;
-        this.expectedResult = expectedResult;
+        this.first = Objects.requireNonNull(first);
+        this.second = Objects.requireNonNull(second);
+        this.expectedResult = Objects.requireNonNull(expectedResult);
     }
 
     @Override
     public final void describeTo(final Description description) {
-        description.appendText(
+        Objects.requireNonNull(description).appendText(
             String.format(
                 " Expected first = %s, second = %s, result = %s",
                 Objects.toString(this.first),
@@ -108,10 +108,10 @@ public class CorrectTupleResult extends
     ) {
         // @checkstyle LocalFinalVariable (1 line)
         final List<Boolean> valuesEqual = new ArrayList<>(0);
-        final var result = tuple.result(
+        final var result =  Objects.requireNonNull(tuple).result(
             // @checkstyle ParameterNameCheck (1 line)
             (resFirst, resSecond) -> {
-                description.appendText(
+                Objects.requireNonNull(description).appendText(
                     String.format(
                         "first: %s, second: %s",
                         Objects.toString(resFirst),
@@ -124,7 +124,7 @@ public class CorrectTupleResult extends
                 return this.expectedResult;
             }
         );
-        description.appendText(
+        Objects.requireNonNull(description).appendText(
             String.format(", result: %s", Objects.toString(result))
         );
         return valuesEqual.get(0)
