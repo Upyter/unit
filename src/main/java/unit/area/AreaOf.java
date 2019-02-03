@@ -55,6 +55,13 @@ public class AreaOf implements Area {
     private final Size size;
 
     /**
+     * Ctor. Uses x = 0, y = 0, width = 0 and height = 0 as its values.
+     */
+    public AreaOf() {
+        this(new PosOf(), new SizeOf());
+    }
+
+    /**
      * Ctor.
      * @param x The x coordinate of the area.
      * @param y The y coordinate of the area.
@@ -75,7 +82,7 @@ public class AreaOf implements Area {
      * @param size The size of the area.
      */
     public AreaOf(final Size size) {
-        this(new PosOf(0, 0), size);
+        this(new PosOf(), size);
     }
 
     /**

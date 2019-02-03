@@ -155,4 +155,18 @@ public final class AreaOfTest {
             }
         );
     }
+
+    /**
+     * {@link AreaOf#AreaOf()} )} constructs an area with x = 0, y = 0,
+     * width = 0 and height = 0.
+     */
+    @Test
+    public void emptyConstruct() {
+        MatcherAssert.assertThat(
+            new AreaOf(),
+            new CorrectResult(
+                new PosOf(), new SizeOf()
+            )
+        );
+    }
 }
