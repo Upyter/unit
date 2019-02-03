@@ -19,7 +19,7 @@
  * DEALINGS IN THE SOFTWARE.
  */
 
-package unit.size.matcher;
+package unit.tuple.matcher;
 
 import java.util.function.BiFunction;
 import org.hamcrest.Description;
@@ -46,7 +46,7 @@ public final class CorrectTupleResultTest {
         final int height = 123;
         MatcherAssert.assertThat(
             new SizeOf(width, height),
-            new CorrectTupleResult(width, height)
+            new CorrectResult(width, height)
         );
     }
 
@@ -61,7 +61,7 @@ public final class CorrectTupleResultTest {
         MatcherAssert.assertThat(
             new SizeOf(width + 1, height),
             Matchers.not(
-                new CorrectTupleResult(width, height)
+                new CorrectResult(width, height)
             )
         );
     }
@@ -86,7 +86,7 @@ public final class CorrectTupleResultTest {
                 }
             },
             Matchers.not(
-                new CorrectTupleResult(width, height, width + height + 1)
+                new CorrectResult(width, height, width + height + 1)
             )
         );
     }
@@ -102,7 +102,7 @@ public final class CorrectTupleResultTest {
         MatcherAssert.assertThat(
             new SizeOf(width, height + 1),
             Matchers.not(
-                new CorrectTupleResult(width, height)
+                new CorrectResult(width, height)
             )
         );
     }
@@ -118,7 +118,7 @@ public final class CorrectTupleResultTest {
         final var height = 423;
         final var result = width + height;
         final var description = new StringDescription();
-        new CorrectTupleResult(
+        new CorrectResult(
             width, height, result
         ).describeTo(description);
         MatcherAssert.assertThat(
@@ -146,7 +146,7 @@ public final class CorrectTupleResultTest {
         final var height = 5341;
         final var result = width + height;
         final var description = new StringDescription();
-        new CorrectTupleResult(
+        new CorrectResult(
             width + 1, height + 1, result
         ).matchesSafely(
             new SizeOf(width, height),

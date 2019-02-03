@@ -25,7 +25,7 @@ import nl.jqno.equalsverifier.EqualsVerifier;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
-import unit.size.matcher.CorrectTupleResult;
+import unit.tuple.matcher.CorrectResult;
 
 /**
  * Tests for {@link SizeOf}.
@@ -63,7 +63,7 @@ public final class SizeOfTest {
     public void defaultConstructorCorrectCoordinates() {
         MatcherAssert.assertThat(
             new SizeOf(),
-            new CorrectTupleResult(0, 0)
+            new CorrectResult(0, 0)
         );
     }
 }

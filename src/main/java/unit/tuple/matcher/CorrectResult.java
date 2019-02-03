@@ -19,7 +19,7 @@
  * DEALINGS IN THE SOFTWARE.
  */
 
-package unit.size.matcher;
+package unit.tuple.matcher;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +35,7 @@ import unit.tuple.Tuple;
  * object which is mutable.</p>
  * @since 0.13
  */
-public class CorrectTupleResult extends
+public class CorrectResult extends
     TypeSafeDiagnosingMatcher<Tuple<?, ?>> {
     /**
      * The expected first value.
@@ -63,7 +63,7 @@ public class CorrectTupleResult extends
      * @param second The second value to expect from the
      *  {@link Tuple#result(BiFunction)} method.
      */
-    public CorrectTupleResult(final Object first, final Object second) {
+    public CorrectResult(final Object first, final Object second) {
         this(first, second, new Object());
     }
 
@@ -77,7 +77,7 @@ public class CorrectTupleResult extends
      *  {@link Tuple#result(BiFunction)} method.
      * @checkstyle ParameterName (3 lines)
      */
-    public CorrectTupleResult(
+    public CorrectResult(
         final Object first, final Object second, final Object expectedResult
     ) {
         super();

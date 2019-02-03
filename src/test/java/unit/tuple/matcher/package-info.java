@@ -20,7 +20,7 @@
  */
 
 /**
- * Custom hamcrest matchers for {@link unit.size.Size} and classes around it.
+ * Tests for the size matchers.
  * @since 0.13
  */
-package unit.size.matcher;
+package unit.tuple.matcher;

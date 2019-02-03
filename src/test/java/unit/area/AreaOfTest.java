@@ -29,8 +29,8 @@ import unit.pos.Pos;
 import unit.pos.PosOf;
 import unit.size.Size;
 import unit.size.SizeOf;
-import unit.size.matcher.CorrectTupleResult;
 import unit.tuple.Tuple;
+import unit.tuple.matcher.CorrectResult;
 
 /**
  * Tests for {@link Area}.
@@ -52,7 +52,7 @@ public final class AreaOfTest {
                 new PosOf(resX, resY),
                 new SizeOf(resW, resH)
             ),
-            new CorrectTupleResult(
+            new CorrectResult(
                 new PosOf(resX, resY),
                 new SizeOf(resW, resH)
             )
