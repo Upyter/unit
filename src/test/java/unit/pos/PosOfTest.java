@@ -25,6 +25,7 @@ import java.util.function.BiFunction;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
+import unit.size.SizeOf;
 import unit.tuple.Tuple;
 
 /**
@@ -32,6 +33,92 @@ import unit.tuple.Tuple;
  * @since 0.3
  */
 public final class PosOfTest {
+    /**
+     * {@link PosOf#equals(Object)} must be true for this.
+     */
+    @Test
+    public void equalToSelf() {
+        // @checkstyle LocalFinalVariableName (2 lines)
+        final int x = 50;
+        final int y = 23;
+        final Pos pos = new PosOf(x, y);
+        MatcherAssert.assertThat(pos, Matchers.equalTo(pos));
+    }
+
+    /**
+     * {@link PosOf#equals(Object)} must be false for PosOf with different
+     * values.
+     */
+    @Test
+    public void notEqualToOther() {
+        // @checkstyle LocalFinalVariableName (4 lines)
+        final int fx = 32;
+        final int fy = 239;
+        final int sx = 238;
+        final int sy = 473;
+        MatcherAssert.assertThat(
+            new PosOf(fx, fy),
+            Matchers.not(
+                Matchers.equalTo(new PosOf(sx, sy))
+            )
+        );
+    }
+
+    /**
+     * {@link PosOf#equals(Object)} must be true for PosOf with equal values.
+     */
+    @Test
+    public void equalToOther() {
+        // @checkstyle LocalFinalVariableName (2 lines)
+        final int x = 543;
+        final int y = 213;
+        MatcherAssert.assertThat(
+            new PosOf(x, y), Matchers.equalTo(new PosOf(x, y))
+        );
+    }
+
+    /**
+     * {@link PosOf#equals(Object)} must be true for a Pos with equal values.
+     */
+    @Test
+    public void equalToPosInterface() {
+        // @checkstyle LocalFinalVariableName (2 lines)
+        final int x = 23;
+        final int y = 64;
+        MatcherAssert.assertThat(
+            new PosOf(x, y),
+            Matchers.equalTo(
+                new Pos() {
+                    @Override
+                    public <R> R result(
+                        final BiFunction<Integer, Integer, R> target
+                    ) {
+                        return target.apply(x, y);
+                    }
+                }
+            )
+        );
+    }
+
+    /**
+     * {@link PosOf#equals(Object)} must be false for a Tuple that doesn't
+     * implement the Pos interface.
+     */
+    @Test
+    public void notEqualToNotPosInterface() {
+        // @checkstyle LocalFinalVariableName (2 lines)
+        final int x = 23;
+        final int y = 64;
+        MatcherAssert.assertThat(
+            new PosOf(x, y),
+            Matchers.not(
+                Matchers.equalTo(
+                    new SizeOf(x, y)
+                )
+            )
+        );
+    }
+
     /**
      * {@link PosOf#result(BiFunction)} returns the correct result.
      */
