@@ -29,10 +29,10 @@ chance that a user might use the class name as a parameter type
 */
 
 import java.util.function.BiFunction;
-import unit.pos.PosOf;
 import unit.pos.Pos;
-import unit.size.SizeOf;
+import unit.pos.PosOf;
 import unit.size.Size;
+import unit.size.SizeOf;
 
 /**
  * Basic concrete implementation of {@link Area}.

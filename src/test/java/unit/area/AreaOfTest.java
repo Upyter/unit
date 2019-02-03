@@ -25,10 +25,10 @@ import java.util.function.BiFunction;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
-import unit.pos.PosOf;
 import unit.pos.Pos;
-import unit.size.SizeOf;
+import unit.pos.PosOf;
 import unit.size.Size;
+import unit.size.SizeOf;
 import unit.size.matcher.CorrectTupleResult;
 import unit.tuple.Tuple;
 

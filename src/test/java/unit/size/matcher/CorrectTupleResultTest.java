@@ -27,8 +27,8 @@ import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.hamcrest.StringDescription;
 import org.junit.Test;
-import unit.size.SizeOf;
 import unit.size.Size;
+import unit.size.SizeOf;
 import unit.tuple.Tuple;
 
 /**
