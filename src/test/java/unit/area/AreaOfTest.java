@@ -27,7 +27,7 @@ import org.hamcrest.Matchers;
 import org.junit.Test;
 import unit.pos.PosOf;
 import unit.pos.Pos;
-import unit.size.IntSize;
+import unit.size.SizeOf;
 import unit.size.Size;
 import unit.size.matcher.CorrectTupleResult;
 import unit.tuple.Tuple;
@@ -50,11 +50,11 @@ public final class AreaOfTest {
         MatcherAssert.assertThat(
             new AreaOf(
                 new PosOf(resX, resY),
-                new IntSize(resW, resH)
+                new SizeOf(resW, resH)
             ),
             new CorrectTupleResult(
                 new PosOf(resX, resY),
-                new IntSize(resW, resH)
+                new SizeOf(resW, resH)
             )
         );
     }
@@ -98,7 +98,7 @@ public final class AreaOfTest {
         final var resW = -566;
         final var resH = -54;
         Tuple.applyOn(
-            new AreaOf(new IntSize(resW, resH)),
+            new AreaOf(new SizeOf(resW, resH)),
             (pos, size) -> {
                 Tuple.applyOn(
                     pos,

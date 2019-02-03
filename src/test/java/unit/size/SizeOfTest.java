@@ -28,10 +28,10 @@ import org.junit.Test;
 import unit.size.matcher.CorrectTupleResult;
 
 /**
- * Tests for {@link IntSize}.
+ * Tests for {@link SizeOf}.
  * @since 0.4
  */
-public final class IntSizeTest {
+public final class SizeOfTest {
     /**
      * {@link Size#result(BiFunction)} returns the right result.
      */
@@ -40,20 +40,20 @@ public final class IntSizeTest {
         final var width = 3445;
         final var height = 432;
         MatcherAssert.assertThat(
-            new IntSize(width, height).result(Integer::sum),
+            new SizeOf(width, height).result(Integer::sum),
             Matchers.equalTo(width + height)
         );
     }
 
     /**
-     * {@link IntSize#toString()}} returns the right string.
+     * {@link SizeOf#toString()}} returns the right string.
      */
     @Test
     public void correctToString() {
         final var width = 313;
         final var height = 238;
         MatcherAssert.assertThat(
-            new IntSize(width, height),
+            new SizeOf(width, height),
             Matchers.hasToString(
                 String.format("Size(width = %d, height = %d)", width, height)
             )
@@ -61,12 +61,12 @@ public final class IntSizeTest {
     }
 
     /**
-     * {@link IntSize#IntSize()} creates a size with width = 0 and height = 0.
+     * {@link SizeOf#SizeOf()} creates a size with width = 0 and height = 0.
      */
     @Test
     public void defaultConstructorCorrectCoordinates() {
         MatcherAssert.assertThat(
-            new IntSize(),
+            new SizeOf(),
             new CorrectTupleResult(0, 0)
         );
     }

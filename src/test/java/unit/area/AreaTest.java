@@ -28,7 +28,7 @@ import org.junit.Test;
 import unit.functional.QuadConsumer;
 import unit.functional.QuadFunction;
 import unit.pos.PosOf;
-import unit.size.IntSize;
+import unit.size.SizeOf;
 import unit.tuple.Tuple;
 
 /**
@@ -53,7 +53,7 @@ public final class AreaTest {
                 Area.result(
                     new AreaOf(
                         new PosOf(resX, resY),
-                        new IntSize(resW, resH)
+                        new SizeOf(resW, resH)
                     ),
                     // @checkstyle ParameterName (1 line)
                     (x, y, width, height) -> x + y + width + height
@@ -75,7 +75,7 @@ public final class AreaTest {
         Tuple.applyOn(
             new AreaOf(
                 new PosOf(resX, resY),
-                new IntSize(resW, resH)
+                new SizeOf(resW, resH)
             ),
             (pos, size) -> {
                 pos.result(
@@ -113,7 +113,7 @@ public final class AreaTest {
         Area.applyOn(
             new AreaOf(
                 new PosOf(resX, resY),
-                new IntSize(resW, resH)
+                new SizeOf(resW, resH)
             ),
             // @checkstyle ParameterName (1 line)
             (x, y, width, height) -> {
@@ -139,7 +139,7 @@ public final class AreaTest {
             // @checkstyle LocalFinalVariableName (1 line)
             new AreaOf(
                 new PosOf(x, y),
-                new IntSize(width, height)
+                new SizeOf(width, height)
             ),
             Matchers.hasToString(
                 String.format(

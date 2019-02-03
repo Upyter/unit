@@ -31,7 +31,7 @@ chance that a user might use the class name as a parameter type
 import java.util.function.BiFunction;
 import unit.pos.PosOf;
 import unit.pos.Pos;
-import unit.size.IntSize;
+import unit.size.SizeOf;
 import unit.size.Size;
 
 /**
@@ -65,7 +65,7 @@ public class AreaOf implements Area {
     public AreaOf(final int x, final int y, final int width, final int height) {
         this(
             new PosOf(x, y),
-            new IntSize(width, height)
+            new SizeOf(width, height)
         );
     }
 
@@ -82,7 +82,7 @@ public class AreaOf implements Area {
      * @param pos The pos of the area.
      */
     public AreaOf(final Pos pos) {
-        this(pos, new IntSize());
+        this(pos, new SizeOf());
     }
 
     /**
