@@ -25,7 +25,7 @@ import java.util.function.BiFunction;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
-import unit.pos.IntPos;
+import unit.pos.PosOf;
 import unit.pos.Pos;
 import unit.size.IntSize;
 import unit.size.Size;
@@ -49,11 +49,11 @@ public final class AreaOfTest {
         final var resH = 233;
         MatcherAssert.assertThat(
             new AreaOf(
-                new IntPos(resX, resY),
+                new PosOf(resX, resY),
                 new IntSize(resW, resH)
             ),
             new CorrectTupleResult(
-                new IntPos(resX, resY),
+                new PosOf(resX, resY),
                 new IntSize(resW, resH)
             )
         );
@@ -68,7 +68,7 @@ public final class AreaOfTest {
         final var resX = 76;
         final var resY = 52;
         Tuple.applyOn(
-            new AreaOf(new IntPos(resX, resY)),
+            new AreaOf(new PosOf(resX, resY)),
             (pos, size) -> {
                 Tuple.applyOn(
                     pos,

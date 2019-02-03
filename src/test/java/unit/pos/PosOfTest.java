@@ -31,9 +31,9 @@ import unit.tuple.Tuple;
  * Tests for {@link Pos}.
  * @since 0.3
  */
-public final class IntPosTest {
+public final class PosOfTest {
     /**
-     * {@link IntPos#result(BiFunction)} returns the correct result.
+     * {@link PosOf#result(BiFunction)} returns the correct result.
      */
     @Test
     public void correctResult() {
@@ -43,13 +43,13 @@ public final class IntPosTest {
         MatcherAssert.assertThat(
             x + y,
             Matchers.equalTo(
-                new IntPos(x, y).result(Integer::sum)
+                new PosOf(x, y).result(Integer::sum)
             )
         );
     }
 
     /**
-     * {@link IntPos#toString()} returns the right string.
+     * {@link PosOf#toString()} returns the right string.
      */
     @Test
     public void correctToString() {
@@ -58,7 +58,7 @@ public final class IntPosTest {
         final var y = 4538;
         MatcherAssert.assertThat(
             // @checkstyle LocalFinalVariableName (1 line)
-            new IntPos(x, y),
+            new PosOf(x, y),
             Matchers.hasToString(
                 String.format("Pos(x = %d, y = %d)", x, y)
             )
@@ -66,12 +66,12 @@ public final class IntPosTest {
     }
 
     /**
-     * {@link IntPos#IntPos()} creates a pos with x = 0 and y = 0.
+     * {@link PosOf#PosOf()} creates a pos with x = 0 and y = 0.
      */
     @Test
     public void defaultConstructorCorrectCoordinates() {
         Tuple.applyOn(
-            new IntPos(),
+            new PosOf(),
             // @checkstyle ParameterName (1 line)
             (x, y) -> {
                 MatcherAssert.assertThat(x, Matchers.equalTo(0));
