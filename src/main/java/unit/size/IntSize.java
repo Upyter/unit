@@ -21,6 +21,7 @@
 
 package unit.size;
 
+import java.util.Objects;
 import java.util.function.BiFunction;
 
 /*
@@ -65,6 +66,27 @@ public class IntSize implements Size {
     @Override
     public final <R> R result(final BiFunction<Integer, Integer, R> target) {
         return target.apply(this.width, this.height);
+    }
+
+    @SuppressWarnings("PMD.OnlyOneReturn")
+    @Override
+    public final boolean equals(final Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (!(obj instanceof Size)) {
+            return false;
+        }
+        return ((Size) obj).result(
+            // @checkstyle ParameterName (1 lines)
+            (otherWidth, otherHeight) -> otherWidth.equals(this.width)
+                && otherHeight.equals(this.height)
+        );
+    }
+
+    @Override
+    public final int hashCode() {
+        return Objects.hash(this.width, this.height);
     }
 
     @Override
