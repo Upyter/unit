@@ -25,6 +25,7 @@ import java.util.function.BiFunction;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
+import unit.pos.PosOf;
 import unit.size.matcher.CorrectTupleResult;
 
 /**
@@ -32,6 +33,90 @@ import unit.size.matcher.CorrectTupleResult;
  * @since 0.4
  */
 public final class SizeOfTest {
+    /**
+     * {@link SizeOf#equals(Object)} must be true for this.
+     */
+    @Test
+    public void equalToSelf() {
+        final int width = 54;
+        final int height = 58;
+        final Size size = new SizeOf(width, height);
+        MatcherAssert.assertThat(size, Matchers.equalTo(size));
+    }
+
+    /**
+     * {@link SizeOf#equals(Object)} must be false for SizeOf with different
+     * values.
+     */
+    @Test
+    public void notEqualToOther() {
+        // @checkstyle LocalFinalVariableName (4 lines)
+        final int width1 = 58;
+        final int height1 = 28;
+        final int width2 = 734;
+        final int height2 = 284;
+        MatcherAssert.assertThat(
+            new SizeOf(width1, height1),
+            Matchers.not(
+                Matchers.equalTo(new SizeOf(width2, height2))
+            )
+        );
+    }
+
+    /**
+     * {@link SizeOf#equals(Object)} must be true for SizeOf with equal values.
+     */
+    @Test
+    public void equalToOther() {
+        final int width = 543;
+        final int height = 213;
+        MatcherAssert.assertThat(
+            new SizeOf(width, height),
+            Matchers.equalTo(new SizeOf(width, height))
+        );
+    }
+
+    /**
+     * {@link SizeOf#equals(Object)} must be true for a Size with equal values.
+     */
+    @Test
+    public void equalToPosInterface() {
+        // @checkstyle LocalFinalVariableName (2 lines)
+        final int width = 58;
+        final int height = 7;
+        MatcherAssert.assertThat(
+            new SizeOf(width, height),
+            Matchers.equalTo(
+                new Size() {
+                    @Override
+                    public <R> R result(
+                        final BiFunction<Integer, Integer, R> target
+                    ) {
+                        return target.apply(width, height);
+                    }
+                }
+            )
+        );
+    }
+
+    /**
+     * {@link SizeOf#equals(Object)} must be false for a Tuple that doesn't
+     * implement the Size interface.
+     */
+    @Test
+    public void notEqualToNotPosInterface() {
+        final int width = 57;
+        final int height = 137;
+        MatcherAssert.assertThat(
+            new SizeOf(width, height),
+            Matchers.not(
+                Matchers.equalTo(
+                    new PosOf(width, height)
+                )
+            )
+        );
+    }
+
     /**
      * {@link Size#result(BiFunction)} returns the right result.
      */
