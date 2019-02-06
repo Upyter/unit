@@ -58,7 +58,16 @@ public class AreaOf implements Area {
      * Ctor. Uses x = 0, y = 0, width = 0 and height = 0 as its values.
      */
     public AreaOf() {
-        this(new PosOf(), new SizeOf());
+        this(0, 0, 0, 0);
+    }
+
+    /**
+     * Ctor. The created area will have a position of x = 0 and y = 0.
+     * @param width The width of the area.
+     * @param height The height of the area.
+     */
+    public AreaOf(final int width, final int height) {
+        this(0, 0, width, height);
     }
 
     /**
