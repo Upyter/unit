@@ -157,4 +157,22 @@ public final class RGBATest {
         final var alpha = -1;
         new RGBA(red, green, blue, alpha);
     }
+
+    /**
+     * {@link RGBA#RGBA(int, int, int)} must create a color with alpha = 255.
+     */
+    @Test
+    public void nonAlphaConstructor() {
+        final var red = 23;
+        final var green = 56;
+        final var blue = 63;
+        final var expected = 255;
+        new RGBA(red, green, blue).result(
+            // @checkstyle ParameterName (1 line)
+            (r, g, b, a) -> {
+                MatcherAssert.assertThat(a, Matchers.equalTo(expected));
+                return Void.TYPE;
+            }
+        );
+    }
 }

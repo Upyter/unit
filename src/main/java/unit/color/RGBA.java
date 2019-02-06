@@ -59,6 +59,18 @@ public class RGBA implements Color {
     private final int alpha;
 
     /**
+     * Ctor. Creates a color instance with alpha = 255 (fully non transparent).
+     * @param red The red value from 0 to 255.
+     * @param green The green value from 0 to 255.
+     * @param blue The blue value from 0 to 255.
+     * @throws IllegalArgumentException When one of the values is not between
+     *  0 and 255.
+     */
+    public RGBA(final int red, final int green, final int blue) {
+        this(red, green, blue, RGBA.MAX_COLOR_VALUE);
+    }
+
+    /**
      * Ctor.
      * @param red The red value from 0 to 255.
      * @param green The green value from 0 to 255.
