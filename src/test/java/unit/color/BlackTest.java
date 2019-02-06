@@ -35,7 +35,7 @@ public final class BlackTest {
      * a = given value.
      */
     @Test
-    public void blackWithAlphaCreation() {
+    public void alphaCreation() {
         final int alpha = 232;
         new Black(alpha).result(
             // @checkstyle ParameterName (1 line)
