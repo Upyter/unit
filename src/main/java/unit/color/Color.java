@@ -26,6 +26,5 @@ import unit.tuple.Quadruple;
 /**
  * Defines a rgba based color.
  * @since 0.40
- * @checkstyle AbbreviationAsWordInName (2 lines)
  */
-public interface RGBA extends Quadruple<Integer, Integer, Integer, Integer> { }
+public interface Color extends Quadruple<Integer, Integer, Integer, Integer> { }
