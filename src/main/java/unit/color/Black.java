@@ -22,7 +22,7 @@
 package unit.color;
 
 /**
- * A rgba based black color (255, 255, 255).
+ * A rgba based black color (0, 0, 0).
  * @since 0.43
  */
 public class Black extends RGBA {
