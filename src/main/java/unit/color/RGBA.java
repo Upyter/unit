@@ -36,7 +36,7 @@ public class RGBA implements Color {
     /**
      * The maximal value that a color value can be.
      */
-    private static final int MAX_COLOR_VALUE = 255;
+    protected static final int MAX_COLOR_VALUE = 255;
 
     /**
      * The red value spanning from 0 to 255.
