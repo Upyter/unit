@@ -157,6 +157,22 @@ public final class AreaOfTest {
     }
 
     /**
+     * {@link AreaOf#AreaOf(int, int)} constructs an area with x = 0, y = 0,
+     * and the given width and size.
+     */
+    @Test
+    public void zeroPosConstructor() {
+        final int width = 313;
+        final int height = 238;
+        MatcherAssert.assertThat(
+            new AreaOf(width, height),
+            new CorrectResult(
+                new PosOf(), new SizeOf(width, height)
+            )
+        );
+    }
+
+    /**
      * {@link AreaOf#AreaOf()} )} constructs an area with x = 0, y = 0,
      * width = 0 and height = 0.
      */

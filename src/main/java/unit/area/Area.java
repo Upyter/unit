@@ -21,7 +21,6 @@
 
 package unit.area;
 
-import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
 import unit.functional.QuadConsumer;
 import unit.functional.QuadFunction;
@@ -84,8 +83,7 @@ public interface Area extends Tuple<Pos, Size> {
     */
     /**
      * Gives the given consumer the pos and the size which define this
-     * area. This method shall offer a more convenient way to use the area
-     * classes compared to {@link #applyOn(Tuple, BiConsumer)}.
+     * area.
      * <p>This method uses {@link #result(BiFunction)} to gets it's values
      * and it doesn't mutate the state by itself.</p>
      * @param area The area that provides the {@link #result(BiFunction)} method

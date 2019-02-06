@@ -27,7 +27,7 @@
 
     <groupId>io.github.upyter</groupId>
     <artifactId>unit</artifactId>
-    <version>0.38</version>
+    <version>0.39</version>
     <packaging>jar</packaging>
     <name>unit</name>
     <description>Basic components for graphic and gui purposes</description>
@@ -100,27 +100,6 @@
 
     <build>
         <plugins>
-            <!-- code analysis tool -->
-            <plugin>
-                <groupId>com.qulice</groupId>
-                <artifactId>qulice-maven-plugin</artifactId>
-                <version>0.18.2</version>
-                <configuration>
-                    <excludes combine.children="append">
-                        <exclude>findbugs:.*</exclude>
-                        <exclude>duplicatefinder:.*</exclude>
-                        <exclude>dependencies:.*</exclude>
-                    </excludes>
-                    <license>file:${basedir}/LICENSE</license>
-                </configuration>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>check</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
 
             <!-- to set the java version to 10-->
             <plugin>
@@ -219,6 +198,28 @@
                                 <outputFormat>XML</outputFormat>
                             </outputFormats>
                         </configuration>
+                    </plugin>
+
+                    <!-- code analysis tool -->
+                    <plugin>
+                        <groupId>com.qulice</groupId>
+                        <artifactId>qulice-maven-plugin</artifactId>
+                        <version>0.18.2</version>
+                        <configuration>
+                            <excludes combine.children="append">
+                                <exclude>findbugs:.*</exclude>
+                                <exclude>duplicatefinder:.*</exclude>
+                                <exclude>dependencies:.*</exclude>
+                            </excludes>
+                            <license>file:${basedir}/LICENSE</license>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>check</goal>
+                                </goals>
+                            </execution>
+                        </executions>
                     </plugin>
                 </plugins>
             </build>
