@@ -27,7 +27,7 @@
 
     <groupId>io.github.upyter</groupId>
     <artifactId>unit</artifactId>
-    <version>0.47</version>
+    <version>0.48</version>
     <packaging>jar</packaging>
     <name>unit</name>
     <description>Basic components for graphic and gui purposes</description>
