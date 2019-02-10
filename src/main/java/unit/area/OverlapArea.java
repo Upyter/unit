@@ -27,4 +27,4 @@ import unit.Overlap;
  * An area that can detect overlaps with a position.
  * @since 0.46
  */
-public interface OverlapArea extends Area, Overlap { }
+public interface OverlapArea extends Overlap, Area { }
