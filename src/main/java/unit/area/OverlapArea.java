@@ -19,25 +19,12 @@
  * DEALINGS IN THE SOFTWARE.
  */
 
-package unit;
+package unit.area;
+
+import unit.Overlap;
 
 /**
- * An overlap between an area and a position.
- * @since 0.45
+ * An area that can detect overlaps with a position.
+ * @since 0.46
  */
-public interface Overlap {
-    /**
-     * Tells whether the given pos is inside itself. Example:
-     * <pre>{@code
-     * new Area(0, 0, 100, 100).contains(0, 0) => true
-     * new Area(0, 0, 100, 100).contains(50, 50) => true
-     * new Area(0, 0, 100, 100).contains(100, 100) => true
-     * new Area(0, 0, 100, 100).contains(101, 101) => false
-     * }</pre>
-     * @param x The x coordinate of the position.
-     * @param y The y coordinate of the position.
-     * @return True if the position is inside, otherwise false.
-     * @checkstyle ParameterName (2 lines)
-     */
-    boolean contains(int x, int y);
-}
+public interface OverlapArea extends Area, Overlap { }
