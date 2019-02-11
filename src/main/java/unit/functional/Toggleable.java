@@ -25,6 +25,7 @@ package unit.functional;
  * Something that can be toggled between two states.
  * @since 0.49
  */
+@FunctionalInterface
 public interface Toggleable {
     /**
      * Changes the state from one to another.

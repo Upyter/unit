@@ -77,7 +77,7 @@ public class OverlapAreaOf implements OverlapArea {
         return Area.result(
             this.area,
             // @checkstyle ParameterName (1 line)
-            (ownX, ownY, width, height) -> ownX <= x && y <= y
+            (ownX, ownY, width, height) -> ownX <= x && ownY <= y
                 && x <= ownX + width && y <= ownY + height
         );
     }
