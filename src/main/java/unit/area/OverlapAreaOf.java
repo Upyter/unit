@@ -74,11 +74,15 @@ public class OverlapAreaOf implements OverlapArea {
     // @checkstyle ParameterName (2 lines)
     @Override
     public final boolean contains(final int x, final int y) {
+        // @checkstyle MethodBodyComments (1 line)
+        //noinspection OverlyComplexBooleanExpression
         return Area.result(
             this.area,
             // @checkstyle ParameterName (1 line)
-            (ownX, ownY, width, height) -> ownX <= x && ownY <= y
-                && x <= ownX + width && y <= ownY + height
+            (ownX, ownY, width, height) -> ownX <= x
+                && ownY <= y
+                && x < ownX + Math.abs(width)
+                && y < ownY + Math.abs(height)
         );
     }
 
