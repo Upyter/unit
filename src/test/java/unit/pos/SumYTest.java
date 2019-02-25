@@ -27,48 +27,26 @@ import org.junit.Test;
 import unit.tuple.matcher.CorrectResult;
 
 /**
- * Tests for {@link Sum}.
- * @since 0.55
+ * Tests for {@link SumY}.
+ * @since 0.56
  */
-public final class SumTest {
+public final class SumYTest {
     /**
-     * {@link Sum#result(BiFunction)} must give the resulting x and y of the
-     * position sum when constructed with {@link Sum#Sum(Pos, Pos)}.
+     * {@link SumY#result(BiFunction)} must give the resulting x and y of the
+     * position sum when constructed with {@link SumY#SumY(Pos, int)}.
      */
     @Test
-    public void sumOfPositions() {
-        // @checkstyle LocalFinalVariableName (4 lines)
-        final int x1 = 512;
-        final int y1 = 42;
-        final int x2 = 434;
-        final int y2 = 542;
+    public void someYtoPos() {
+        // @checkstyle LocalFinalVariableName (3 lines)
+        final int x = 873;
+        final int y1 = 54;
+        final int y2 = 76;
         MatcherAssert.assertThat(
-            new Sum(
-                new PosOf(x1, y1),
-                new PosOf(x2, y2)
-            ),
-            new CorrectResult(x1 + x2, y1 + y2)
-        );
-    }
-
-    /**
-     * {@link Sum#result(BiFunction)} must give the resulting x and y of the
-     * position sum when constructed with {@link Sum#Sum(Pos, int, int)}.
-     */
-    @Test
-    public void sumWithScalars() {
-        // @checkstyle LocalFinalVariableName (4 lines)
-        final int x1 = 543;
-        final int y1 = 536;
-        final int x2 = 342;
-        final int y2 = 756;
-        MatcherAssert.assertThat(
-            new Sum(
-                new PosOf(x1, y1),
-                x2,
+            new SumY(
+                new PosOf(x, y1),
                 y2
             ),
-            new CorrectResult(x1 + x2, y1 + y2)
+            new CorrectResult(x, y1 + y2)
         );
     }
 }
