@@ -29,7 +29,7 @@ import sequence.Elapsable;
  * of time.
  * @since 0.54
  */
-public class Move implements Pos {
+public class Moving implements Pos {
     /**
      * The start position.
      */
@@ -52,7 +52,7 @@ public class Move implements Pos {
      * @param elapsable The elapsable that will define the progression of the
      *  move.
      */
-    public Move(final Pos start, final Pos end, final Elapsable elapsable) {
+    public Moving(final Pos start, final Pos end, final Elapsable elapsable) {
         this.start = start;
         this.end = end;
         this.elapsable = elapsable;
