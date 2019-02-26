@@ -90,4 +90,19 @@ public class OverlapAreaOf implements OverlapArea {
     public final <R> R result(final BiFunction<Pos, Size, R> target) {
         return this.area.result(target);
     }
+
+    @Override
+    public final int hashCode() {
+        return this.area.hashCode();
+    }
+
+    @Override
+    public final boolean equals(final Object obj) {
+        return this.area.equals(obj);
+    }
+
+    @Override
+    public final String toString() {
+        return this.area.toString();
+    }
 }

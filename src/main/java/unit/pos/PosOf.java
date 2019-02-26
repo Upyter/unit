@@ -23,6 +23,7 @@ package unit.pos;
 
 import java.util.Objects;
 import java.util.function.BiFunction;
+import java.util.function.Supplier;
 
 /*
 I am not happy about this naming, but my other idea's regarding the interface
@@ -41,13 +42,13 @@ public class PosOf implements Pos {
      * The x coordinate.
      * @checkstyle MemberName (2 lines)
      */
-    private final int x;
+    private final Supplier<Integer> x;
 
     /**
      * The y coordinate.
      * @checkstyle MemberName (2 lines)
      */
-    private final int y;
+    private final Supplier<Integer> y;
 
     /**
      * Ctor. Sets x = 0 and y = 0 as its values.
@@ -63,13 +64,23 @@ public class PosOf implements Pos {
      * @checkstyle ParameterName (2 lines)
      */
     public PosOf(final int x, final int y) {
-        this.x = x;
-        this.y = y;
+        this(() -> x, () -> y);
+    }
+
+    /**
+     * Ctor.
+     * @param x The x coordinate.
+     * @param y The y coordinate.
+     * @checkstyle ParameterName (2 lines)
+     */
+    public PosOf(final Supplier<Integer> x, Supplier<Integer> y) {
+        this.x = Objects.requireNonNull(x);
+        this.y = Objects.requireNonNull(y);
     }
 
     @Override
     public final <R> R result(final BiFunction<Integer, Integer, R> target) {
-        return Objects.requireNonNull(target).apply(this.x, this.y);
+        return Objects.requireNonNull(target).apply(this.x.get(), this.y.get());
     }
 
     @SuppressWarnings("PMD.OnlyOneReturn")
@@ -83,8 +94,8 @@ public class PosOf implements Pos {
         }
         return ((Pos) obj).result(
             // @checkstyle ParameterName (1 lines)
-            (otherX, otherY) -> otherX.equals(this.x)
-                && otherY.equals(this.y)
+            (otherX, otherY) -> otherX.equals(this.x.get())
+                && otherY.equals(this.y.get())
         );
     }
 
@@ -96,8 +107,8 @@ public class PosOf implements Pos {
     @Override
     public final String toString() {
         return new StringBuilder("Pos")
-            .append("(x = ").append(this.x)
-            .append(", y = ").append(this.y)
+            .append("(x = ").append(this.x.get())
+            .append(", y = ").append(this.y.get())
             .append(')')
             .toString();
     }

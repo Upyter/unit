@@ -38,7 +38,8 @@ public final class PosOfTest {
      */
     @Test
     public void equalsAndHashCode() {
-        EqualsVerifier.forClass(PosOf.class).verify();
+        EqualsVerifier.forClass(PosOf.class)
+            .withNonnullFields("x", "y").verify();
     }
 
     /**
