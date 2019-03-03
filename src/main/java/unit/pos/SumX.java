@@ -21,6 +21,8 @@
 
 package unit.pos;
 
+import java.util.function.Supplier;
+
 /**
  * The sum of a position and an x. Example:
  * <p>SumX(Pos(55, 60), 5)) => Pos(60, 60)</p>
@@ -36,6 +38,16 @@ public class SumX extends Sum {
      * @checkstyle ParameterName (2 lines)
      */
     public SumX(final Pos pos, final int x) {
+        this(pos, () -> x);
+    }
+
+    /**
+     * Ctor.
+     * @param pos The position to add an x to.
+     * @param x The x to add to the position.
+     * @checkstyle ParameterName (2 lines)
+     */
+    public SumX(final Pos pos, final Supplier<Integer> x) {
         super(pos, x, 0);
     }
 }

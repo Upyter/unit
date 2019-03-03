@@ -22,6 +22,7 @@
 package unit.pos;
 
 import java.util.function.BiFunction;
+import java.util.function.Supplier;
 
 /**
  * The sum of a position and something else.
@@ -39,6 +40,44 @@ public class Sum implements Pos {
      * The second position of the sum.
      */
     private final Pos second;
+
+    /**
+     * Ctor.
+     * @param pos The position to sum with.
+     * @param x The x to add to the position.
+     * @param y The y to add to the position.
+     * @checkstyle ParameterName (2 lines)
+     */
+    public Sum(final Pos pos, final int x, final Supplier<Integer> y) {
+        this(pos, new PosOf(x, y));
+    }
+
+    /**
+     * Ctor.
+     * @param pos The position to sum with.
+     * @param x The x to add to the position.
+     * @param y The y to add to the position.
+     * @checkstyle ParameterName (2 lines)
+     */
+    public Sum(final Pos pos, final Supplier<Integer> x, int y) {
+        this(pos, new PosOf(x, y));
+    }
+
+    /**
+     * Ctor.
+     * @param pos The position to sum with.
+     * @param x The x to add to the position.
+     * @param y The y to add to the position.
+     * @checkstyle ParameterName (2 lines)
+     */
+    public Sum(
+        final Pos pos, final Supplier<Integer> x, final Supplier<Integer> y
+    ) {
+        this(
+            pos,
+            new PosOf(x, y)
+        );
+    }
 
     /**
      * Ctor.
