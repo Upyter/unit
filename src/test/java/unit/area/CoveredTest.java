@@ -170,4 +170,29 @@ public final class CoveredTest {
             )
         );
     }
+
+    /**
+     * {@link Covered#result(BiFunction)} must give the correct size when the
+     * given areas have different widths and the second is the greater one..
+     */
+    @Test
+    public void differentWidthDescending() {
+        // @checkstyle LocalFinalVariableName (5 lines)
+        final int x = 0;
+        final int y1 = 0;
+        final int y2 = 100;
+        final int width1 = 100;
+        final int width2 = 200;
+        final int height = 100;
+        MatcherAssert.assertThat(
+            new Covered(
+                new AreaOf(x, y1, width1, height),
+                new AreaOf(x, y2, width2, height)
+            ),
+            new CorrectResult(
+                new PosOf(x, y1),
+                new SizeOf(x + width2, y2 + height)
+            )
+        );
+    }
 }

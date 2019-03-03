@@ -93,7 +93,7 @@ public class Covered implements Area {
                             ),
                             Math.max(
                                 y1 + h1 - Math.min(y1, y2),
-                                y2 + w2 - Math.min(y1, y2)
+                                y2 + h2 - Math.min(y1, y2)
                             )
                         )
                     )
