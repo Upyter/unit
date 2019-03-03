@@ -38,7 +38,8 @@ public final class SizeOfTest {
      */
     @Test
     public void equalsAndHashCode() {
-        EqualsVerifier.forClass(SizeOf.class).verify();
+        EqualsVerifier.forClass(SizeOf.class)
+            .withNonnullFields("width", "height").verify();
     }
 
     /**

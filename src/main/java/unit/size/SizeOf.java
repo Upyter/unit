@@ -23,6 +23,7 @@ package unit.size;
 
 import java.util.Objects;
 import java.util.function.BiFunction;
+import java.util.function.Supplier;
 
 /*
 I am not happy about this naming, but my other idea's regarding the interface
@@ -39,12 +40,12 @@ public class SizeOf implements Size {
     /**
      * The width of the size.
      */
-    private final int width;
+    private final Supplier<Integer> width;
 
     /**
      * The height of the size.
      */
-    private final int height;
+    private final Supplier<Integer> height;
 
     /**
      * Ctor. Creates a size with width = 0 and height = 0.
@@ -59,13 +60,46 @@ public class SizeOf implements Size {
      * @param height The height for the size.
      */
     public SizeOf(final int width, final int height) {
+        this(() -> width, () -> height);
+    }
+
+    /**
+     * Ctor.
+     * @param width The width for the size.
+     * @param height The height for the size.
+     */
+    public SizeOf(final int width, final Supplier<Integer> height) {
+        this(() -> width, height);
+    }
+
+    /**
+     * Ctor.
+     * @param width The width for the size.
+     * @param height The height for the size.
+     */
+    public SizeOf(final Supplier<Integer> width, final int height) {
+        this(width, () -> height);
+    }
+
+
+    /**
+     * Ctor.
+     * @param width The width for the size.
+     * @param height The height for the size.
+     */
+    public SizeOf(
+        final Supplier<Integer> width, final Supplier<Integer> height
+    ) {
         this.width = width;
         this.height = height;
     }
 
+
     @Override
     public final <R> R result(final BiFunction<Integer, Integer, R> target) {
-        return Objects.requireNonNull(target).apply(this.width, this.height);
+        return Objects.requireNonNull(target).apply(
+            this.width.get(), this.height.get()
+        );
     }
 
     @SuppressWarnings("PMD.OnlyOneReturn")
@@ -79,21 +113,21 @@ public class SizeOf implements Size {
         }
         return ((Size) obj).result(
             // @checkstyle ParameterName (1 lines)
-            (otherWidth, otherHeight) -> otherWidth.equals(this.width)
-                && otherHeight.equals(this.height)
+            (otherWidth, otherHeight) -> otherWidth.equals(this.width.get())
+                && otherHeight.equals(this.height.get())
         );
     }
 
     @Override
     public final int hashCode() {
-        return Objects.hash(this.width, this.height);
+        return Objects.hash(this.width.get(), this.height.get());
     }
 
     @Override
     public final String toString() {
         return new StringBuilder("Size")
-            .append("(width = ").append(this.width)
-            .append(", height = ").append(this.height)
+            .append("(width = ").append(this.width.get())
+            .append(", height = ").append(this.height.get())
             .append(')')
             .toString();
     }
