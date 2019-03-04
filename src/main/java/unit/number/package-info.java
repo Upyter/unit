@@ -19,22 +19,8 @@
  * DEALINGS IN THE SOFTWARE.
  */
 
-package sequence;
-
 /**
- * An elapsing unit.
+ * Classes extending the {@link java.lang.Number} class.
  * @since 0.54
  */
-public interface Elapsable {
-    /**
-     * Returns the amount of time that shall elapse as a percentage value. The
-     * value spans from 0.0 to 1.0.
-     * @return The time to elapse.
-     */
-    double elapsedPercent();
-
-    /**
-     * Starts the elapsing.
-     */
-    void start();
-}
+package unit.number;

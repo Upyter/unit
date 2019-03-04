@@ -29,7 +29,7 @@ import org.cactoos.scalar.And;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
-import sequence.FakeClock;
+import unit.sequence.FakeClock;
 
 /**
  * Tests for {@link FakeClock}.
@@ -37,7 +37,7 @@ import sequence.FakeClock;
  */
 public final class FakeClockTest {
     /**
-     * Tests whether the given number will be returned when asked for it.
+     * Tests whether the given unit.number will be returned when asked for it.
      */
     @Test
     public void oneInOneOut() {
@@ -67,7 +67,7 @@ public final class FakeClockTest {
     }
 
     /**
-     * Tests whether the clock stays on the last number after reaching it.
+     * Tests whether the clock stays on the last unit.number after reaching it.
      * @throws Exception Thanks to {@link And}.
      */
     @Test

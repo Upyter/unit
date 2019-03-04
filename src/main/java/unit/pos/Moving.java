@@ -22,7 +22,7 @@
 package unit.pos;
 
 import java.util.function.BiFunction;
-import sequence.Elapsable;
+import unit.sequence.Elapsable;
 
 /**
  * A position that transitions from one point to another other a certain amount

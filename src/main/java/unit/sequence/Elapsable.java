@@ -19,8 +19,22 @@
  * DEALINGS IN THE SOFTWARE.
  */
 
+package unit.sequence;
+
 /**
- * Components that form a sequence - in time or action.
+ * An elapsing unit.
  * @since 0.54
  */
-package sequence;
+public interface Elapsable {
+    /**
+     * Returns the amount of time that shall elapse as a percentage value. The
+     * value spans from 0.0 to 1.0.
+     * @return The time to elapse.
+     */
+    double elapsedPercent();
+
+    /**
+     * Starts the elapsing.
+     */
+    void start();
+}

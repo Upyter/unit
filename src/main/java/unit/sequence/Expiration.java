@@ -19,7 +19,7 @@
  * DEALINGS IN THE SOFTWARE.
  */
 
-package sequence;
+package unit.sequence;
 
 import java.time.Clock;
 

@@ -19,8 +19,40 @@
  * DEALINGS IN THE SOFTWARE.
  */
 
+package unit.number;
+
+import unit.functional.Lazy;
+
 /**
- * Classes extending the {@link java.lang.Number} class.
- * @since 0.54
+ * Represents the delta according to:
+ * https://stackoverflow.com/a/50547044/7563350
+ * <p>It serves as the delta argument for <b>double values</b>.</p>
+ * <p>This class is immutable and thread-safe.</p>
+ * @since 9.2.2
  */
-package number;
+public class Delta implements Lazy<Double> {
+    /**
+     * A value that will multiply the nextAfter value.
+     */
+    private static final double MULTIPLIER = 0x1.0000000000001p-51;
+
+    /**
+     * The value to test. It is needed to calculate the value after it.
+     */
+    private final double test;
+
+    /**
+     * Ctor.
+     * @param test The value to test. It is needed to calculate the value after
+     *  it.
+     */
+    public Delta(final double test) {
+        this.test = test;
+    }
+
+    @Override
+    public final Double value() {
+        return Math.nextAfter(this.test, Double.POSITIVE_INFINITY)
+            * Delta.MULTIPLIER;
+    }
+}

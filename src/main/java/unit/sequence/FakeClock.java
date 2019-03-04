@@ -19,7 +19,7 @@
  * DEALINGS IN THE SOFTWARE.
  */
 
-package sequence;
+package unit.sequence;
 
 import com.google.common.collect.ObjectArrays;
 import java.time.Clock;
@@ -31,8 +31,8 @@ import java.util.List;
 
 /**
  * A clock that will return the given numbers in consecutive calls starting from
- * the first. After the clock has reached the last number, it will stick on this
- * number and return it every time.
+ * the first. After the clock has reached the last unit.number, it will stick on this
+ * unit.number and return it every time.
  * <p>Example:</p>
  * <p>Input: (1, 2, 3, 4, 5) -> millis() => 1, millis() => 2, ...,</p>
  * <p>n5: millis() => 5, millis() => 5</p>

@@ -20,7 +20,7 @@
  */
 
 /**
- * Tests regarding the sequence components.
+ * Tests regarding the unit.sequence components.
  * @since 0.54
  */
 package unit.sequence;
