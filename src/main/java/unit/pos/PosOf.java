@@ -93,7 +93,7 @@ public class PosOf implements Pos {
      * @param y The y coordinate.
      * @checkstyle ParameterName (2 lines)
      */
-    public PosOf(final Supplier<Integer> x, Supplier<Integer> y) {
+    public PosOf(final Supplier<Integer> x, final Supplier<Integer> y) {
         this.x = Objects.requireNonNull(x);
         this.y = Objects.requireNonNull(y);
     }
