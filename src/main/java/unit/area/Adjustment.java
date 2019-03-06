@@ -19,22 +19,15 @@
  * DEALINGS IN THE SOFTWARE.
  */
 
-package unit;
+package unit.area;
+
+import unit.Adjustable;
+import unit.pos.PosAdjustment;
+import unit.size.SizeAdjustment;
 
 /**
- * A unit that takes an adjustment.
- * @param <T> The type of the adjustable that the object can take.
- * @see unit.area.Adjustment
- * @see unit.pos.PosAdjustment
- * @see unit.size.SizeAdjustment
- * @since 0.63
+ * An adjustment of the area of a shape.
+ * @see Adjustable
+ * @since 0.64
  */
-public interface Adjustable<T> {
-    /**
-     * Takes the given adjustment and perhaps uses or registers it. Note that
-     * the object decides whether it really uses the given adjustment in any
-     * way.
-     * @param adjustment The adjustment to take.
-     */
-    void adjustment(T adjustment);
-}
+public interface Adjustment extends PosAdjustment, SizeAdjustment { }
