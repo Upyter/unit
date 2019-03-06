@@ -36,7 +36,7 @@ public class Moving implements Pos {
     private final Pos start;
 
     /**
-     * The end position.
+     * The end position. 
      */
     private final Pos end;
 
