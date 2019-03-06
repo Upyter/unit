@@ -21,12 +21,10 @@
 
 package unit.sequence;
 
-import unit.number.Delta;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
-import unit.sequence.Expiration;
-import unit.sequence.FakeClock;
+import unit.number.Delta;
 
 /**
  * Tests for {@link Expiration}.

@@ -59,7 +59,7 @@ public class Sum implements Pos {
      * @param y The y to add to the position.
      * @checkstyle ParameterName (2 lines)
      */
-    public Sum(final Pos pos, final Supplier<Integer> x, int y) {
+    public Sum(final Pos pos, final Supplier<Integer> x, final int y) {
         this(pos, new PosOf(x, y));
     }
 

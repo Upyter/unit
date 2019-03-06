@@ -81,7 +81,6 @@ public class SizeOf implements Size {
         this(width, () -> height);
     }
 
-
     /**
      * Ctor.
      * @param width The width for the size.
@@ -93,7 +92,6 @@ public class SizeOf implements Size {
         this.width = width;
         this.height = height;
     }
-
 
     @Override
     public final <R> R result(final BiFunction<Integer, Integer, R> target) {

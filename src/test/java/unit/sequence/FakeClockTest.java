@@ -29,7 +29,6 @@ import org.cactoos.scalar.And;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
-import unit.sequence.FakeClock;
 
 /**
  * Tests for {@link FakeClock}.
