@@ -25,10 +25,10 @@ import java.util.function.BiFunction;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
+import unit.pos.FixPos;
 import unit.pos.Pos;
-import unit.pos.PosOf;
+import unit.size.FixSize;
 import unit.size.Size;
-import unit.size.SizeOf;
 import unit.tuple.Tuple;
 import unit.tuple.matcher.CorrectResult;
 
@@ -49,12 +49,12 @@ public final class AreaOfTest {
         final var resH = 233;
         MatcherAssert.assertThat(
             new AreaOf(
-                new PosOf(resX, resY),
-                new SizeOf(resW, resH)
+                new FixPos(resX, resY),
+                new FixSize(resW, resH)
             ),
             new CorrectResult(
-                new PosOf(resX, resY),
-                new SizeOf(resW, resH)
+                new FixPos(resX, resY),
+                new FixSize(resW, resH)
             )
         );
     }
@@ -68,7 +68,7 @@ public final class AreaOfTest {
         final var resX = 76;
         final var resY = 52;
         Tuple.applyOn(
-            new AreaOf(new PosOf(resX, resY)),
+            new AreaOf(new FixPos(resX, resY)),
             (pos, size) -> {
                 Tuple.applyOn(
                     pos,
@@ -98,7 +98,7 @@ public final class AreaOfTest {
         final var resW = -566;
         final var resH = -54;
         Tuple.applyOn(
-            new AreaOf(new SizeOf(resW, resH)),
+            new AreaOf(new FixSize(resW, resH)),
             (pos, size) -> {
                 Tuple.applyOn(
                     pos,
@@ -167,7 +167,7 @@ public final class AreaOfTest {
         MatcherAssert.assertThat(
             new AreaOf(width, height),
             new CorrectResult(
-                new PosOf(), new SizeOf(width, height)
+                new FixPos(), new FixSize(width, height)
             )
         );
     }
@@ -181,7 +181,7 @@ public final class AreaOfTest {
         MatcherAssert.assertThat(
             new AreaOf(),
             new CorrectResult(
-                new PosOf(), new SizeOf()
+                new FixPos(), new FixSize()
             )
         );
     }

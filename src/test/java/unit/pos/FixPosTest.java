@@ -31,19 +31,19 @@ import unit.tuple.Tuple;
  * Tests for {@link Pos}.
  * @since 0.3
  */
-public final class PosOfTest {
+public final class FixPosTest {
     /**
-     * {@link PosOf#equals(Object)} and {@link PosOf#hashCode()} must meet
+     * {@link FixPos#equals(Object)} and {@link FixPos#hashCode()} must meet
      * their contract.
      */
     @Test
     public void equalsAndHashCode() {
-        EqualsVerifier.forClass(PosOf.class)
+        EqualsVerifier.forClass(FixPos.class)
             .withNonnullFields("x", "y").verify();
     }
 
     /**
-     * {@link PosOf#toString()} returns the right string.
+     * {@link FixPos#toString()} returns the right string.
      */
     @Test
     public void correctToString() {
@@ -52,7 +52,7 @@ public final class PosOfTest {
         final var y = 4538;
         MatcherAssert.assertThat(
             // @checkstyle LocalFinalVariableName (1 line)
-            new PosOf(x, y),
+            new FixPos(x, y),
             Matchers.hasToString(
                 String.format("Pos(x = %d, y = %d)", x, y)
             )
@@ -60,12 +60,12 @@ public final class PosOfTest {
     }
 
     /**
-     * {@link PosOf#PosOf()} creates a pos with x = 0 and y = 0.
+     * {@link FixPos#FixPos()} creates a pos with x = 0 and y = 0.
      */
     @Test
     public void defaultConstructorCorrectCoordinates() {
         Tuple.applyOn(
-            new PosOf(),
+            new FixPos(),
             // @checkstyle ParameterName (1 line)
             (x, y) -> {
                 MatcherAssert.assertThat(x, Matchers.equalTo(0));

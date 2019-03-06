@@ -44,8 +44,8 @@ public final class SumTest {
         final int y2 = 542;
         MatcherAssert.assertThat(
             new Sum(
-                new PosOf(x1, y1),
-                new PosOf(x2, y2)
+                new FixPos(x1, y1),
+                new FixPos(x2, y2)
             ),
             new CorrectResult(x1 + x2, y1 + y2)
         );
@@ -64,7 +64,7 @@ public final class SumTest {
         final int y2 = 756;
         MatcherAssert.assertThat(
             new Sum(
-                new PosOf(x1, y1),
+                new FixPos(x1, y1),
                 x2,
                 y2
             ),

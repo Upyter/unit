@@ -27,8 +27,8 @@ import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.hamcrest.StringDescription;
 import org.junit.Test;
+import unit.size.FixSize;
 import unit.size.Size;
-import unit.size.SizeOf;
 import unit.tuple.Tuple;
 
 /**
@@ -45,7 +45,7 @@ public final class CorrectTupleResultTest {
         final int width = 142;
         final int height = 123;
         MatcherAssert.assertThat(
-            new SizeOf(width, height),
+            new FixSize(width, height),
             new CorrectResult(width, height)
         );
     }
@@ -59,7 +59,7 @@ public final class CorrectTupleResultTest {
         final int width = 534;
         final int height = 32;
         MatcherAssert.assertThat(
-            new SizeOf(width + 1, height),
+            new FixSize(width + 1, height),
             Matchers.not(
                 new CorrectResult(width, height)
             )
@@ -100,7 +100,7 @@ public final class CorrectTupleResultTest {
         final int width = 6732;
         final int height = 125;
         MatcherAssert.assertThat(
-            new SizeOf(width, height + 1),
+            new FixSize(width, height + 1),
             Matchers.not(
                 new CorrectResult(width, height)
             )
@@ -149,7 +149,7 @@ public final class CorrectTupleResultTest {
         new CorrectResult(
             width + 1, height + 1, result
         ).matchesSafely(
-            new SizeOf(width, height),
+            new FixSize(width, height),
             description
         );
         MatcherAssert.assertThat(

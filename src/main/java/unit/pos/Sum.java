@@ -49,7 +49,7 @@ public class Sum implements Pos {
      * @checkstyle ParameterName (2 lines)
      */
     public Sum(final Pos pos, final int x, final Supplier<Integer> y) {
-        this(pos, new PosOf(x, y));
+        this(pos, new FixPos(x, y));
     }
 
     /**
@@ -60,7 +60,7 @@ public class Sum implements Pos {
      * @checkstyle ParameterName (2 lines)
      */
     public Sum(final Pos pos, final Supplier<Integer> x, final int y) {
-        this(pos, new PosOf(x, y));
+        this(pos, new FixPos(x, y));
     }
 
     /**
@@ -75,7 +75,7 @@ public class Sum implements Pos {
     ) {
         this(
             pos,
-            new PosOf(x, y)
+            new FixPos(x, y)
         );
     }
 
@@ -89,7 +89,7 @@ public class Sum implements Pos {
     public Sum(final Pos pos, final int x, final int y) {
         this(
             pos,
-            new PosOf(x, y)
+            new FixPos(x, y)
         );
     }
 

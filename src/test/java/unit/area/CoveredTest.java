@@ -25,8 +25,8 @@ import java.util.List;
 import java.util.function.BiFunction;
 import org.hamcrest.MatcherAssert;
 import org.junit.Test;
-import unit.pos.PosOf;
-import unit.size.SizeOf;
+import unit.pos.FixPos;
+import unit.size.FixSize;
 import unit.tuple.matcher.CorrectResult;
 
 /**
@@ -43,8 +43,8 @@ public final class CoveredTest {
         MatcherAssert.assertThat(
             new Covered(),
             new CorrectResult(
-                new PosOf(),
-                new SizeOf()
+                new FixPos(),
+                new FixSize()
             )
         );
     }
@@ -65,8 +65,8 @@ public final class CoveredTest {
                 new AreaOf(x, y, width, height)
             ),
             new CorrectResult(
-                new PosOf(x, y),
-                new SizeOf(width, height)
+                new FixPos(x, y),
+                new FixSize(width, height)
             )
         );
     }
@@ -90,8 +90,8 @@ public final class CoveredTest {
                 )
             ),
             new CorrectResult(
-                new PosOf(x, y),
-                new SizeOf(width * 2, height)
+                new FixPos(x, y),
+                new FixSize(width * 2, height)
             )
         );
     }
@@ -113,8 +113,8 @@ public final class CoveredTest {
                 new AreaOf(x, y, width, height)
             ),
             new CorrectResult(
-                new PosOf(x, y),
-                new SizeOf(width, height * 2)
+                new FixPos(x, y),
+                new FixSize(width, height * 2)
             )
         );
     }
@@ -138,8 +138,8 @@ public final class CoveredTest {
                 new AreaOf(x2, y2, width, height)
             ),
             new CorrectResult(
-                new PosOf(x1, y1),
-                new SizeOf(x2 + width, y2 + height)
+                new FixPos(x1, y1),
+                new FixSize(x2 + width, y2 + height)
             )
         );
     }
@@ -165,8 +165,8 @@ public final class CoveredTest {
                 new AreaOf(x2, y2, width, height)
             ),
             new CorrectResult(
-                new PosOf(x1, y1),
-                new SizeOf(x2 + width, y2 + height)
+                new FixPos(x1, y1),
+                new FixSize(x2 + width, y2 + height)
             )
         );
     }
@@ -190,8 +190,8 @@ public final class CoveredTest {
                 new AreaOf(x, y2, width2, height)
             ),
             new CorrectResult(
-                new PosOf(x, y1),
-                new SizeOf(x + width2, y2 + height)
+                new FixPos(x, y1),
+                new FixSize(x + width2, y2 + height)
             )
         );
     }

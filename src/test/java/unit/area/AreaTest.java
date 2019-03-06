@@ -27,8 +27,8 @@ import org.hamcrest.Matchers;
 import org.junit.Test;
 import unit.functional.QuadConsumer;
 import unit.functional.QuadFunction;
-import unit.pos.PosOf;
-import unit.size.SizeOf;
+import unit.pos.FixPos;
+import unit.size.FixSize;
 import unit.tuple.Tuple;
 
 /**
@@ -52,8 +52,8 @@ public final class AreaTest {
             Matchers.equalTo(
                 Area.result(
                     new AreaOf(
-                        new PosOf(resX, resY),
-                        new SizeOf(resW, resH)
+                        new FixPos(resX, resY),
+                        new FixSize(resW, resH)
                     ),
                     // @checkstyle ParameterName (1 line)
                     (x, y, width, height) -> x + y + width + height
@@ -74,8 +74,8 @@ public final class AreaTest {
         final var resH = 233;
         Tuple.applyOn(
             new AreaOf(
-                new PosOf(resX, resY),
-                new SizeOf(resW, resH)
+                new FixPos(resX, resY),
+                new FixSize(resW, resH)
             ),
             (pos, size) -> {
                 pos.result(
@@ -112,8 +112,8 @@ public final class AreaTest {
         final var resH = 32;
         Area.applyOn(
             new AreaOf(
-                new PosOf(resX, resY),
-                new SizeOf(resW, resH)
+                new FixPos(resX, resY),
+                new FixSize(resW, resH)
             ),
             // @checkstyle ParameterName (1 line)
             (x, y, width, height) -> {
@@ -138,8 +138,8 @@ public final class AreaTest {
         MatcherAssert.assertThat(
             // @checkstyle LocalFinalVariableName (1 line)
             new AreaOf(
-                new PosOf(x, y),
-                new SizeOf(width, height)
+                new FixPos(x, y),
+                new FixSize(width, height)
             ),
             Matchers.hasToString(
                 String.format(

@@ -28,29 +28,29 @@ import org.junit.Test;
 import unit.tuple.matcher.CorrectResult;
 
 /**
- * Tests for {@link SizeOf}.
+ * Tests for {@link FixSize}.
  * @since 0.4
  */
-public final class SizeOfTest {
+public final class FixSizeTest {
     /**
-     * {@link SizeOf#equals(Object)} and {@link SizeOf#hashCode()} must meet
+     * {@link FixSize#equals(Object)} and {@link FixSize#hashCode()} must meet
      * their contract.
      */
     @Test
     public void equalsAndHashCode() {
-        EqualsVerifier.forClass(SizeOf.class)
+        EqualsVerifier.forClass(FixSize.class)
             .withNonnullFields("width", "height").verify();
     }
 
     /**
-     * {@link SizeOf#toString()}} returns the right string.
+     * {@link FixSize#toString()}} returns the right string.
      */
     @Test
     public void correctToString() {
         final var width = 313;
         final var height = 238;
         MatcherAssert.assertThat(
-            new SizeOf(width, height),
+            new FixSize(width, height),
             Matchers.hasToString(
                 String.format("Size(width = %d, height = %d)", width, height)
             )
@@ -58,12 +58,12 @@ public final class SizeOfTest {
     }
 
     /**
-     * {@link SizeOf#SizeOf()} creates a size with width = 0 and height = 0.
+     * {@link FixSize#FixSize()} creates a size with width = 0 and height = 0.
      */
     @Test
     public void defaultConstructorCorrectCoordinates() {
         MatcherAssert.assertThat(
-            new SizeOf(),
+            new FixSize(),
             new CorrectResult(0, 0)
         );
     }

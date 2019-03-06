@@ -30,10 +30,10 @@ chance that a user might use the class name as a parameter type
 
 import java.util.Objects;
 import java.util.function.BiFunction;
+import unit.pos.FixPos;
 import unit.pos.Pos;
-import unit.pos.PosOf;
+import unit.size.FixSize;
 import unit.size.Size;
-import unit.size.SizeOf;
 
 /**
  * Basic concrete implementation of {@link Area}.
@@ -81,8 +81,8 @@ public class AreaOf implements Area {
      */
     public AreaOf(final int x, final int y, final int width, final int height) {
         this(
-            new PosOf(x, y),
-            new SizeOf(width, height)
+            new FixPos(x, y),
+            new FixSize(width, height)
         );
     }
 
@@ -91,7 +91,7 @@ public class AreaOf implements Area {
      * @param size The size of the area.
      */
     public AreaOf(final Size size) {
-        this(new PosOf(), size);
+        this(new FixPos(), size);
     }
 
     /**
@@ -99,7 +99,7 @@ public class AreaOf implements Area {
      * @param pos The pos of the area.
      */
     public AreaOf(final Pos pos) {
-        this(pos, new SizeOf());
+        this(pos, new FixSize());
     }
 
     /**

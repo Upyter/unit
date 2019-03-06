@@ -43,7 +43,7 @@ public final class SumXTest {
         final int x2 = 875;
         MatcherAssert.assertThat(
             new SumX(
-                new PosOf(x1, y),
+                new FixPos(x1, y),
                 x2
             ),
             new CorrectResult(x1 + x2, y)

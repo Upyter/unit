@@ -19,34 +19,12 @@
  * DEALINGS IN THE SOFTWARE.
  */
 
-package unit.pos;
+package unit.size;
 
-import java.util.function.BiFunction;
-import org.hamcrest.MatcherAssert;
-import org.junit.Test;
-import unit.tuple.matcher.CorrectResult;
+import unit.Adjustable;
 
 /**
- * Tests for {@link SumY}.
- * @since 0.56
+ * An adjustable size.
+ * @since 0.65
  */
-public final class SumYTest {
-    /**
-     * {@link SumY#result(BiFunction)} must give the resulting x and y of the
-     * position sum when constructed with {@link SumY#SumY(Pos, int)}.
-     */
-    @Test
-    public void someYtoPos() {
-        // @checkstyle LocalFinalVariableName (3 lines)
-        final int x = 873;
-        final int y1 = 54;
-        final int y2 = 76;
-        MatcherAssert.assertThat(
-            new SumY(
-                new FixPos(x, y1),
-                y2
-            ),
-            new CorrectResult(x, y1 + y2)
-        );
-    }
-}
+public interface AdjustableSize extends Size, Adjustable<SizeAdjustment> { }

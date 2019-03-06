@@ -22,8 +22,8 @@
 package unit.area;
 
 import java.util.function.BiFunction;
+import unit.pos.FixPos;
 import unit.pos.Pos;
-import unit.pos.PosOf;
 import unit.size.Size;
 
 /**
@@ -51,7 +51,7 @@ public class OverlapAreaOf implements OverlapArea {
      * @param size The size of the area.
      */
     public OverlapAreaOf(final Size size) {
-        this(new PosOf(), size);
+        this(new FixPos(), size);
     }
 
     /**

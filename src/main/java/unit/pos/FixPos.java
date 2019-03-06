@@ -19,7 +19,7 @@
  * DEALINGS IN THE SOFTWARE.
  */
 
-package unit.size;
+package unit.pos;
 
 import java.util.Objects;
 import java.util.function.BiFunction;
@@ -31,73 +31,76 @@ name and the basic implementation weren't good either (impl or simple for
 example). So I took the more annoying name for the implementation to lower the
 chance that a user might use the class name as a parameter type
 */
+
 /**
- * Basic concrete implementation of {@link Size}.
+ * Basic concrete implementation of {@link Pos}.
  * <p>This class is immutable and thread-safe.</p>
- * @since 0.4
+ * @since 0.2
  */
-public class SizeOf implements Size {
+public class FixPos implements Pos {
     /**
-     * The width of the size.
+     * The x coordinate.
+     * @checkstyle MemberName (2 lines)
      */
-    private final Supplier<Integer> width;
+    private final Supplier<Integer> x;
 
     /**
-     * The height of the size.
+     * The y coordinate.
+     * @checkstyle MemberName (2 lines)
      */
-    private final Supplier<Integer> height;
+    private final Supplier<Integer> y;
 
     /**
-     * Ctor. Creates a size with width = 0 and height = 0.
+     * Ctor. Sets x = 0 and y = 0 as its values.
      */
-    public SizeOf() {
+    public FixPos() {
         this(0, 0);
     }
 
     /**
      * Ctor.
-     * @param width The width for the size.
-     * @param height The height for the size.
+     * @param x The x coordinate.
+     * @param y The y coordinate.
+     * @checkstyle ParameterName (2 lines)
      */
-    public SizeOf(final int width, final int height) {
-        this(() -> width, () -> height);
+    public FixPos(final int x, final int y) {
+        this(() -> x, () -> y);
     }
 
     /**
      * Ctor.
-     * @param width The width for the size.
-     * @param height The height for the size.
+     * @param x The x coordinate.
+     * @param y The y coordinate.
+     * @checkstyle ParameterName (2 lines)
      */
-    public SizeOf(final int width, final Supplier<Integer> height) {
-        this(() -> width, height);
+    public FixPos(final int x, final Supplier<Integer> y) {
+        this(() -> x, y);
     }
 
     /**
      * Ctor.
-     * @param width The width for the size.
-     * @param height The height for the size.
+     * @param x The x coordinate.
+     * @param y The y coordinate.
+     * @checkstyle ParameterName (2 lines)
      */
-    public SizeOf(final Supplier<Integer> width, final int height) {
-        this(width, () -> height);
+    public FixPos(final Supplier<Integer> x, final int y) {
+        this(x, () -> y);
     }
 
     /**
      * Ctor.
-     * @param width The width for the size.
-     * @param height The height for the size.
+     * @param x The x coordinate.
+     * @param y The y coordinate.
+     * @checkstyle ParameterName (2 lines)
      */
-    public SizeOf(
-        final Supplier<Integer> width, final Supplier<Integer> height
-    ) {
-        this.width = width;
-        this.height = height;
+    public FixPos(final Supplier<Integer> x, final Supplier<Integer> y) {
+        this.x = Objects.requireNonNull(x);
+        this.y = Objects.requireNonNull(y);
     }
 
     @Override
     public final <R> R result(final BiFunction<Integer, Integer, R> target) {
-        return Objects.requireNonNull(target).apply(
-            this.width.get(), this.height.get()
-        );
+        return Objects.requireNonNull(target).apply(this.x.get(), this.y.get());
     }
 
     @SuppressWarnings("PMD.OnlyOneReturn")
@@ -106,26 +109,26 @@ public class SizeOf implements Size {
         if (this == obj) {
             return true;
         }
-        if (!(obj instanceof Size)) {
+        if (!(obj instanceof Pos)) {
             return false;
         }
-        return ((Size) obj).result(
+        return ((Pos) obj).result(
             // @checkstyle ParameterName (1 lines)
-            (otherWidth, otherHeight) -> otherWidth.equals(this.width.get())
-                && otherHeight.equals(this.height.get())
+            (otherX, otherY) -> otherX.equals(this.x.get())
+                && otherY.equals(this.y.get())
         );
     }
 
     @Override
     public final int hashCode() {
-        return Objects.hash(this.width.get(), this.height.get());
+        return Objects.hash(this.x, this.y);
     }
 
     @Override
     public final String toString() {
-        return new StringBuilder("Size")
-            .append("(width = ").append(this.width.get())
-            .append(", height = ").append(this.height.get())
+        return new StringBuilder("Pos")
+            .append("(x = ").append(this.x.get())
+            .append(", y = ").append(this.y.get())
             .append(')')
             .toString();
     }

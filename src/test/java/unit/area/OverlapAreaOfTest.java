@@ -24,10 +24,10 @@ package unit.area;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
+import unit.pos.FixPos;
 import unit.pos.Pos;
-import unit.pos.PosOf;
+import unit.size.FixSize;
 import unit.size.Size;
-import unit.size.SizeOf;
 import unit.tuple.matcher.CorrectResult;
 
 /**
@@ -47,8 +47,8 @@ public final class OverlapAreaOfTest {
         MatcherAssert.assertThat(
             new OverlapAreaOf(width, height),
             new CorrectResult(
-                new PosOf(),
-                new SizeOf(width, height)
+                new FixPos(),
+                new FixSize(width, height)
             )
         );
     }
@@ -62,10 +62,10 @@ public final class OverlapAreaOfTest {
         final int width = 652;
         final int height = 752;
         MatcherAssert.assertThat(
-            new OverlapAreaOf(new SizeOf(width, height)),
+            new OverlapAreaOf(new FixSize(width, height)),
             new CorrectResult(
-                new PosOf(),
-                new SizeOf(width, height)
+                new FixPos(),
+                new FixSize(width, height)
             )
         );
     }
@@ -83,12 +83,12 @@ public final class OverlapAreaOfTest {
         final int height = 264;
         MatcherAssert.assertThat(
             new OverlapAreaOf(
-                new PosOf(x, y),
-                new SizeOf(width, height)
+                new FixPos(x, y),
+                new FixSize(width, height)
             ),
             new CorrectResult(
-                new PosOf(x, y),
-                new SizeOf(width, height)
+                new FixPos(x, y),
+                new FixSize(width, height)
             )
         );
     }
@@ -109,8 +109,8 @@ public final class OverlapAreaOfTest {
                 new AreaOf(x, y, width, height)
             ),
             new CorrectResult(
-                new PosOf(x, y),
-                new SizeOf(width, height)
+                new FixPos(x, y),
+                new FixSize(width, height)
             )
         );
     }
