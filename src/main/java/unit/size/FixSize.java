@@ -32,11 +32,12 @@ example). So I took the more annoying name for the implementation to lower the
 chance that a user might use the class name as a parameter type
 */
 /**
- * Basic concrete implementation of {@link Size}.
- * <p>This class is immutable and thread-safe.</p>
+ * A size that doesn't adjust itself.
+ * <p>Whether this class is immutable or thread-safe depends on the given
+ * arguments in the constructor.</p>
  * @since 0.4
  */
-public class FixSize implements Size {
+public class FixSize implements AdjustableSize {
     /**
      * The width of the size.
      */
@@ -128,5 +129,10 @@ public class FixSize implements Size {
             .append(", height = ").append(this.height.get())
             .append(')')
             .toString();
+    }
+
+    @Override
+    public void adjustment(final SizeAdjustment adjustment) {
+        // fix size ignores adjustments
     }
 }
