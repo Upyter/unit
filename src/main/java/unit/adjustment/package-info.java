@@ -19,12 +19,8 @@
  * DEALINGS IN THE SOFTWARE.
  */
 
-package unit.size;
-
-import unit.adjustment.Adjustable;
-
 /**
- * An adjustable size.
- * @since 0.65
+ * Adjustments for the units.
+ * @since 0.67
  */
-public interface AdjustableSize extends Size, Adjustable<SizeAdjustment> { }
+package unit.adjustment;

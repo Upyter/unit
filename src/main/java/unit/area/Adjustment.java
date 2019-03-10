@@ -21,7 +21,7 @@
 
 package unit.area;
 
-import unit.Adjustable;
+import unit.adjustment.Adjustable;
 import unit.pos.PosAdjustment;
 import unit.size.SizeAdjustment;
 

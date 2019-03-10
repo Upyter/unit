@@ -21,7 +21,7 @@
 
 package unit.size;
 
-import unit.Adjustable;
+import unit.adjustment.Adjustable;
 
 /**
  * An adjustment of the pos of an area.
