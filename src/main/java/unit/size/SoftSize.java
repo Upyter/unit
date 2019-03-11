@@ -119,9 +119,11 @@ public class SoftSize implements AdjustableSize {
         );
     }
 
-    // @checkstyle HiddenField (2 lines)
+    // @checkstyle HiddenField (3 lines)
     @Override
-    public final void adjustment(final SizeAdjustment adjustment) {
+    public final void adjustment(
+        final TupleAdjustment<Integer, Integer> adjustment
+    ) {
         this.adjustment = adjustment;
     }
 }

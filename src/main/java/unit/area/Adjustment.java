@@ -22,8 +22,7 @@
 package unit.area;
 
 import unit.adjustment.Adjustable;
-import unit.pos.PosAdjustment;
-import unit.size.SizeAdjustment;
+import unit.tuple.TupleAdjustment;
 
 /**
  * An adjustment of the area of a shape.
@@ -35,11 +34,11 @@ public interface Adjustment {
      * Returns the pos adjustment.
      * @return The pos adjustment.
      */
-    PosAdjustment posAdjustment();
+    TupleAdjustment<Integer, Integer> posAdjustment();
 
     /**
      * Returns the size adjustment.
      * @return The size adjustment.
      */
-    SizeAdjustment sizeAdjustment();
+    TupleAdjustment<Integer, Integer> sizeAdjustment();
 }

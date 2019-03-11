@@ -22,9 +22,11 @@
 package unit.size;
 
 import unit.adjustment.Adjustable;
+import unit.tuple.TupleAdjustment;
 
 /**
  * An adjustable size.
  * @since 0.65
  */
-public interface AdjustableSize extends Size, Adjustable<SizeAdjustment> { }
+public interface AdjustableSize extends
+    Size, Adjustable<TupleAdjustment<Integer, Integer>> { }

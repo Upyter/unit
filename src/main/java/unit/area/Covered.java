@@ -106,7 +106,7 @@ public class Covered implements Area {
     }
 
     @Override
-    public void adjustment(final Adjustment adjustment) {
+    public final void adjustment(final Adjustment adjustment) {
         this.areas.forEach(area -> area.adjustment(adjustment));
     }
 }
