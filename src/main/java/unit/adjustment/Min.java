@@ -40,6 +40,11 @@ public class Min implements TupleAdjustment<Integer, Integer> {
      */
     private final int second;
 
+    /**
+     * Ctor.
+     * @param first The border of the first value.
+     * @param second The border of the second value.
+     */
     public Min(final int first, final int second) {
         this.first = first;
         this.second = second;

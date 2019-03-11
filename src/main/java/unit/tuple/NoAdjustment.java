@@ -24,6 +24,8 @@ package unit.tuple;
 /**
  * No adjustment. This class is meant as an alternative to null for adjustments.
  * <p>This class is immutable and thread-safe.</p>
+ * @param <A> The type of the first value of the tuple.
+ * @param <B> The type of the second value of the tuple.
  * @since 0.66
  */
 public class NoAdjustment<A, B> implements TupleAdjustment<A, B> {

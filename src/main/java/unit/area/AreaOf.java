@@ -32,6 +32,7 @@ import java.util.Objects;
 import java.util.function.BiFunction;
 import unit.pos.FixPos;
 import unit.pos.Pos;
+import unit.size.AdjustableSize;
 import unit.size.FixSize;
 import unit.size.Size;
 
@@ -52,7 +53,7 @@ public class AreaOf implements Area {
     /**
      * The size of this area.
      */
-    private final Size size;
+    private final AdjustableSize size;
 
     /**
      * Ctor. Uses x = 0, y = 0, width = 0 and height = 0 as its values.
@@ -90,7 +91,7 @@ public class AreaOf implements Area {
      * Ctor. Uses x = 0 and y = 0 as its coordinates.
      * @param size The size of the area.
      */
-    public AreaOf(final Size size) {
+    public AreaOf(final AdjustableSize size) {
         this(new FixPos(), size);
     }
 
@@ -107,7 +108,7 @@ public class AreaOf implements Area {
      * @param pos The pos of the area.
      * @param size The size of the area.
      */
-    public AreaOf(final Pos pos, final Size size) {
+    public AreaOf(final Pos pos, final AdjustableSize size) {
         this.pos = Objects.requireNonNull(pos);
         this.size = Objects.requireNonNull(size);
     }
@@ -115,6 +116,11 @@ public class AreaOf implements Area {
     @Override
     public final <R> R result(final BiFunction<Pos, Size, R> target) {
         return Objects.requireNonNull(target).apply(this.pos, this.size);
+    }
+
+    @Override
+    public final void adjustment(final Adjustment adjustment) {
+        this.size.adjustment(adjustment.sizeAdjustment());
     }
 
     @Override

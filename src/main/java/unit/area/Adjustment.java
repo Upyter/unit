@@ -24,12 +24,22 @@ package unit.area;
 import unit.adjustment.Adjustable;
 import unit.pos.PosAdjustment;
 import unit.size.SizeAdjustment;
-import unit.tuple.TupleAdjustment;
 
 /**
  * An adjustment of the area of a shape.
  * @see Adjustable
  * @since 0.64
  */
-public interface Adjustment extends
-    TupleAdjustment<PosAdjustment, SizeAdjustment> { }
+public interface Adjustment {
+    /**
+     * Returns the pos adjustment.
+     * @return The pos adjustment.
+     */
+    PosAdjustment posAdjustment();
+
+    /**
+     * Returns the size adjustment.
+     * @return The size adjustment.
+     */
+    SizeAdjustment sizeAdjustment();
+}
