@@ -104,4 +104,9 @@ public class Covered implements Area {
             return new AreaOf().result(target);
         }
     }
+
+    @Override
+    public void adjustment(final Adjustment adjustment) {
+        this.areas.forEach(area -> area.adjustment(adjustment));
+    }
 }
