@@ -19,7 +19,7 @@
  * DEALINGS IN THE SOFTWARE.
  */
 
-package unit.size;
+package unit.pos;
 
 import java.util.function.BiFunction;
 import java.util.function.Supplier;
@@ -27,87 +27,89 @@ import unit.tuple.NoAdjustment;
 import unit.tuple.TupleAdjustment;
 
 /**
- * A size that reacts to the given adjustments.
+ * A pos that reacts to the given adjustments.
  * <p>This class is mutable and not thread-safe because of the adjustment
  * saving.</p>
- * @since 0.66
+ * @since 0.71
  */
-public class SoftSize implements AdjustableSize {
+public class SoftPos implements AdjustablePos {
     /**
-     * The size to adjust.
+     * The pos to adjust.
      */
-    private final Size size;
+    private final Pos pos;
 
     /**
-     * The adjustment boundaries for the size.
+     * The adjustment boundaries for the pos.
      */
     @SuppressWarnings("PMD.AvoidFieldNameMatchingMethodName")
     private final TupleAdjustment<Integer, Integer> border;
 
     /**
-     * The adjustment for the size.
+     * The adjustment for the pos.
      */
     @SuppressWarnings("PMD.AvoidFieldNameMatchingMethodName")
     private TupleAdjustment<Integer, Integer> adjustment;
 
     /**
-     * Ctor. Uses 0 as the width and the height.
+     * Ctor. Sets x = 0 and y = 0 as its values.
      */
-    public SoftSize() {
+    public SoftPos() {
         this(0, 0);
     }
 
     /**
      * Ctor.
-     * @param width The width of the size.
-     * @param height The height of the size.
+     * @param x The x coordinate.
+     * @param y The y coordinate.
+     * @checkstyle ParameterName (2 lines)
      */
-    public SoftSize(final int width, final Supplier<Integer> height) {
-        this(() -> width, height);
+    public SoftPos(final int x, final int y) {
+        this(() -> x, () -> y);
     }
 
     /**
      * Ctor.
-     * @param width The width of the size.
-     * @param height The height of the size.
+     * @param x The x coordinate.
+     * @param y The y coordinate.
+     * @checkstyle ParameterName (2 lines)
      */
-    public SoftSize(final Supplier<Integer> width, final int height) {
-        this(width, () -> height);
+    public SoftPos(final int x, final Supplier<Integer> y) {
+        this(() -> x, y);
     }
 
     /**
      * Ctor.
-     * @param width The width of the size.
-     * @param height The height of the size.
+     * @param x The x coordinate.
+     * @param y The y coordinate.
+     * @checkstyle ParameterName (2 lines)
      */
-    public SoftSize(final int width, final int height) {
-        this(() -> width, () -> height);
+    public SoftPos(final Supplier<Integer> x, final int y) {
+        this(x, () -> y);
     }
 
     /**
      * Ctor.
-     * @param width The width of the size.
-     * @param height The height of the size.
+     * @param x The x coordinate.
+     * @param y The y coordinate.
+     * @checkstyle ParameterName (2 lines)
      */
-    public SoftSize(
-        final Supplier<Integer> width, final Supplier<Integer> height
-    ) {
-        this(new FixSize(width, height));
+    public SoftPos(final Supplier<Integer> x, final Supplier<Integer> y) {
+        this(new FixPos(x, y));
     }
 
     /**
      * Ctor.
-     * @param size The size to adjust.
+     * @param pos The pos to adjust.
      */
-    public SoftSize(final Size size) {
-        this.size = size;
+    public SoftPos(final Pos pos) {
+        this.pos = pos;
         this.border = new NoAdjustment<>();
         this.adjustment = new NoAdjustment<>();
     }
 
     @Override
     public final <R> R result(final BiFunction<Integer, Integer, R> target) {
-        return this.size.result(
+        return this.pos.result(
             (width, height) -> target.apply(
                 this.border.adjustedFirst(
                     this.adjustment.adjustedFirst(width)
@@ -125,5 +127,21 @@ public class SoftSize implements AdjustableSize {
         final TupleAdjustment<Integer, Integer> adjustment
     ) {
         this.adjustment = adjustment;
+    }
+
+    @SuppressWarnings("PMD.OnlyOneReturn")
+    @Override
+    public final boolean equals(final Object obj) {
+        return this.pos.equals(obj);
+    }
+
+    @Override
+    public final int hashCode() {
+        return this.pos.hashCode();
+    }
+
+    @Override
+    public final String toString() {
+        return this.pos.toString();
     }
 }
