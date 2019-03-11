@@ -24,6 +24,7 @@ package unit.size;
 import java.util.Objects;
 import java.util.function.BiFunction;
 import java.util.function.Supplier;
+import unit.tuple.TupleAdjustment;
 
 /*
 I am not happy about this naming, but my other idea's regarding the interface
@@ -132,7 +133,9 @@ public class FixSize implements AdjustableSize {
     }
 
     @Override
-    public void adjustment(final SizeAdjustment adjustment) {
+    public final void adjustment(
+        final TupleAdjustment<Integer, Integer> adjustment
+    ) {
         // fix size ignores adjustments
     }
 }
