@@ -24,6 +24,7 @@ package unit.pos;
 import java.util.Objects;
 import java.util.function.BiFunction;
 import java.util.function.Supplier;
+import unit.tuple.TupleAdjustment;
 
 /*
 I am not happy about this naming, but my other idea's regarding the interface
@@ -37,7 +38,7 @@ chance that a user might use the class name as a parameter type
  * <p>This class is immutable and thread-safe.</p>
  * @since 0.2
  */
-public class FixPos implements Pos {
+public class FixPos implements AdjustablePos {
     /**
      * The x coordinate.
      * @checkstyle MemberName (2 lines)
@@ -101,6 +102,13 @@ public class FixPos implements Pos {
     @Override
     public final <R> R result(final BiFunction<Integer, Integer, R> target) {
         return Objects.requireNonNull(target).apply(this.x.get(), this.y.get());
+    }
+
+    @Override
+    public final void adjustment(
+        final TupleAdjustment<Integer, Integer> adjustment
+    ) {
+        // fix pos ignores adjustments
     }
 
     @SuppressWarnings("PMD.OnlyOneReturn")

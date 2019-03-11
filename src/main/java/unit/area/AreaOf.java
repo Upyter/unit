@@ -30,6 +30,7 @@ chance that a user might use the class name as a parameter type
 
 import java.util.Objects;
 import java.util.function.BiFunction;
+import unit.pos.AdjustablePos;
 import unit.pos.FixPos;
 import unit.pos.Pos;
 import unit.size.AdjustableSize;
@@ -48,7 +49,7 @@ public class AreaOf implements Area {
     /**
      * The pos of this area.
      */
-    private final Pos pos;
+    private final AdjustablePos pos;
 
     /**
      * The size of this area.
@@ -99,7 +100,7 @@ public class AreaOf implements Area {
      * Ctor. Uses width = 0 and height = 0 as its size.
      * @param pos The pos of the area.
      */
-    public AreaOf(final Pos pos) {
+    public AreaOf(final AdjustablePos pos) {
         this(pos, new FixSize());
     }
 
@@ -108,7 +109,7 @@ public class AreaOf implements Area {
      * @param pos The pos of the area.
      * @param size The size of the area.
      */
-    public AreaOf(final Pos pos, final AdjustableSize size) {
+    public AreaOf(final AdjustablePos pos, final AdjustableSize size) {
         this.pos = Objects.requireNonNull(pos);
         this.size = Objects.requireNonNull(size);
     }
@@ -120,6 +121,7 @@ public class AreaOf implements Area {
 
     @Override
     public final void adjustment(final Adjustment adjustment) {
+        this.pos.adjustment(adjustment.posAdjustment());
         this.size.adjustment(adjustment.sizeAdjustment());
     }
 
