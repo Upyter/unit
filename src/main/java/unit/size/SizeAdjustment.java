@@ -22,25 +22,11 @@
 package unit.size;
 
 import unit.adjustment.Adjustable;
+import unit.tuple.TupleAdjustment;
 
 /**
- * An adjustment of the pos of an area.
+ * An adjustment of the size.
  * @see Adjustable
  * @since 0.64
  */
-public interface SizeAdjustment {
-    /**
-     * Takes the current width, adjusts it and returns the new, adjusted width.
-     * @param current The current width.
-     * @return The new, adjusted width.
-     */
-    int adjustedWidth(int current);
-
-    /**
-     * Takes the current height, adjusts it and returns the new, adjusted
-     * height.
-     * @param current The current height.
-     * @return The new, adjusted height.
-     */
-    int adjustedHeight(int current);
-}
+public interface SizeAdjustment extends TupleAdjustment<Integer, Integer> { }

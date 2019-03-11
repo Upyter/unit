@@ -23,6 +23,8 @@ package unit.size;
 
 import java.util.function.BiFunction;
 import java.util.function.Supplier;
+import unit.tuple.NoAdjustment;
+import unit.tuple.TupleAdjustment;
 
 /**
  * A size that reacts to the given adjustments.
@@ -40,7 +42,13 @@ public class SoftSize implements AdjustableSize {
      * The adjustment for the size.
      */
     @SuppressWarnings("PMD.AvoidFieldNameMatchingMethodName")
-    private SizeAdjustment adjustment;
+    private final TupleAdjustment<Integer, Integer> border;
+
+    /**
+     * The adjustment for the size.
+     */
+    @SuppressWarnings("PMD.AvoidFieldNameMatchingMethodName")
+    private TupleAdjustment<Integer, Integer> adjustment;
 
     /**
      * Ctor. Uses 0 as the width and the height.
@@ -93,15 +101,20 @@ public class SoftSize implements AdjustableSize {
      */
     public SoftSize(final Size size) {
         this.size = size;
-        this.adjustment = new NoAdjustment();
+        this.border = new NoAdjustment<>();
+        this.adjustment = new NoAdjustment<>();
     }
 
     @Override
     public final <R> R result(final BiFunction<Integer, Integer, R> target) {
         return this.size.result(
             (width, height) -> target.apply(
-                this.adjustment.adjustedWidth(width),
-                this.adjustment.adjustedHeight(height)
+                this.border.adjustedFirst(
+                    this.adjustment.adjustedFirst(width)
+                ),
+                this.border.adjustedSecond(
+                    this.adjustment.adjustedSecond(height)
+                )
             )
         );
     }

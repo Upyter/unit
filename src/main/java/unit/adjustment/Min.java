@@ -19,17 +19,39 @@
  * DEALINGS IN THE SOFTWARE.
  */
 
-package unit.area;
+package unit.adjustment;
 
-import unit.adjustment.Adjustable;
-import unit.pos.PosAdjustment;
-import unit.size.SizeAdjustment;
 import unit.tuple.TupleAdjustment;
 
 /**
- * An adjustment of the area of a shape.
- * @see Adjustable
- * @since 0.64
+ * An adjustment that will keep the values from getting below the given
+ * boundaries.
+ * <p>This class is immutable and thread-safe.</p>
+ * @since 0.68
  */
-public interface Adjustment extends
-    TupleAdjustment<PosAdjustment, SizeAdjustment> { }
+public class Min implements TupleAdjustment<Integer, Integer> {
+    /**
+     * The border of the first value.
+     */
+    private final int first;
+
+    /**
+     * The border of the second value.
+     */
+    private final int second;
+
+    public Min(final int first, final int second) {
+        this.first = first;
+        this.second = second;
+    }
+
+    @Override
+    public final Integer adjustedFirst(final Integer current) {
+        return Math.min(this.first, current);
+    }
+
+    @Override
+    public final Integer adjustedSecond(final Integer current) {
+        return Math.min(this.second, current);
+    }
+}

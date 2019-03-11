@@ -19,22 +19,21 @@
  * DEALINGS IN THE SOFTWARE.
  */
 
-package unit.size;
+package unit.tuple;
 
 /**
- * No size adjustment. This class is meant as an alternative to null for
- * SizeAdjustments.
+ * No adjustment. This class is meant as an alternative to null for adjustments.
  * <p>This class is immutable and thread-safe.</p>
  * @since 0.66
  */
-public class NoAdjustment implements SizeAdjustment {
+public class NoAdjustment<A, B> implements TupleAdjustment<A, B> {
     @Override
-    public final int adjustedWidth(final int current) {
+    public final A adjustedFirst(final A current) {
         return current;
     }
 
     @Override
-    public final int adjustedHeight(final int current) {
+    public final B adjustedSecond(final B current) {
         return current;
     }
 }

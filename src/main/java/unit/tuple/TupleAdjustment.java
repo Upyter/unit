@@ -19,17 +19,28 @@
  * DEALINGS IN THE SOFTWARE.
  */
 
-package unit.area;
-
-import unit.adjustment.Adjustable;
-import unit.pos.PosAdjustment;
-import unit.size.SizeAdjustment;
-import unit.tuple.TupleAdjustment;
+package unit.tuple;
 
 /**
- * An adjustment of the area of a shape.
- * @see Adjustable
- * @since 0.64
+ * An adjustment to tuples.
+ * @param <A> The type of the first tuple value.
+ * @param <B> The type of the second tuple value.
+ * @since 0.68
  */
-public interface Adjustment extends
-    TupleAdjustment<PosAdjustment, SizeAdjustment> { }
+public interface TupleAdjustment<A, B> {
+    /**
+     * Takes the current first value, adjusts it and returns the new, adjusted
+     * value.
+     * @param current The current first value.
+     * @return The new, adjusted value.
+     */
+    A adjustedFirst(A current);
+
+    /**
+     * Takes the current second value, adjusts it and returns the new, adjusted
+     * value.
+     * @param current The current second value.
+     * @return The new, adjusted value.
+     */
+    B adjustedSecond(B current);
+}
