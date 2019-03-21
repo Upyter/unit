@@ -27,6 +27,7 @@ because this library depends on the possibility to implement own
 implementations like a scaling size
 */
 
+import java.util.function.BiFunction;
 import unit.tuple.Tuple;
 
 /**
@@ -34,4 +35,6 @@ import unit.tuple.Tuple;
  * Implementations of this interface are equal to each other.
  * @since 0.4
  */
-public interface Size extends Tuple<Integer, Integer> { }
+public interface Size extends Tuple<Integer, Integer> {
+    <R> R cleanResult(BiFunction<Integer, Integer, R> target);
+}

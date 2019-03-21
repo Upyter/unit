@@ -102,6 +102,11 @@ public class FixSize implements AdjustableSize {
         );
     }
 
+    @Override
+    public final <R> R cleanResult(final BiFunction<Integer, Integer, R> target) {
+        return this.result(target);
+    }
+
     @SuppressWarnings("PMD.OnlyOneReturn")
     @Override
     public final boolean equals(final Object obj) {

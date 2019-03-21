@@ -119,6 +119,16 @@ public class SoftSize implements AdjustableSize {
         );
     }
 
+    @Override
+    public final <R> R cleanResult(final BiFunction<Integer, Integer, R> target) {
+        return this.size.result(
+            (width, height) -> target.apply(
+                this.border.adjustedFirst(width),
+                this.border.adjustedSecond(height)
+            )
+        );
+    }
+
     // @checkstyle HiddenField (3 lines)
     @Override
     public final void adjustment(

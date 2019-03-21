@@ -84,6 +84,11 @@ public final class CorrectTupleResultTest {
                     target.apply(width, height);
                     return null;
                 }
+
+                @Override
+                public <R> R cleanResult(final BiFunction<Integer, Integer, R> target) {
+                    throw new UnsupportedOperationException("#cleanResult()");
+                }
             },
             Matchers.not(
                 new CorrectResult(width, height, width + height + 1)
