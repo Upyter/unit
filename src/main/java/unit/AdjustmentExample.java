@@ -24,7 +24,9 @@ package unit;
 import java.awt.Color;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.util.ArrayList;
 import java.util.Hashtable;
+import java.util.List;
 import java.util.function.Supplier;
 import javax.swing.AbstractButton;
 import javax.swing.BorderFactory;
@@ -175,6 +177,7 @@ public class AdjustmentExample {
         private final Supplier<Integer> y;
         private final Supplier<Integer> w;
         private final Supplier<Integer> h;
+        private final List<Updateable> updateables = new ArrayList<>();
 
         public Bounds(int x, int y, int w, int h) {
             this(() -> x, () -> y, () -> w, () -> h);
@@ -206,5 +209,29 @@ public class AdjustmentExample {
         public int h() {
             return this.h.get();
         }
+
+        public void register(Updateable updateable) {
+            this.updateables.add(updateable);
+        }
+    }
+
+    public class WAddition implements Supplier<Integer> {
+        private Integer value;
+
+        public WAddition(Bounds first, Bounds second) {
+            first.register(
+                () -> value = first.w() + second.w()
+            );
+        }
+
+        @Override
+        public Integer get() {
+            throw new UnsupportedOperationException("#get()");
+        }
+    }
+
+    @FunctionalInterface
+    private interface Updateable {
+        void update();
     }
 }
