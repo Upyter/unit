@@ -19,50 +19,36 @@
  * DEALINGS IN THE SOFTWARE.
  */
 
-package unit.adjustment.supplier;
+package unit.area.supplier;
 
-import java.util.Collection;
-import java.util.List;
+import java.util.Objects;
 import java.util.function.Supplier;
 import unit.area.Area;
 
 /**
- * The sum of the heights of a collection of areas. It will be 0 if the given
- * collection is empty.
+ * The height of an area.
  * <p>This class is immutable and thread-safe.</p>
- * @since 0.77
+ * @since 0.78
  */
-public class HeightSum implements Supplier<Integer> {
+public class Height implements Supplier<Integer> {
     /**
-     * The areas to sum the height from.
+     * The area to use the height from.
      */
-    private final Collection<Area> areas;
+    private final Area area;
 
     /**
      * Ctor.
-     * @param areas The areas to sum the height from.
+     * @param area The area to use the height from.
      */
-    public HeightSum(final Area... areas) {
-        this(List.of(areas));
-    }
-
-    /**
-     * Ctor.
-     * @param areas The areas to sum the height from.
-     */
-    public HeightSum(final Collection<Area> areas) {
-        this.areas = areas;
+    public Height(final Area area) {
+        this.area = Objects.requireNonNull(area);
     }
 
     @Override
     public final Integer get() {
-        int result = 0;
-        for (Area area : this.areas) {
-            result += Area.result(
-                area,
-                (x, y, width, height) -> height
-            );
-        }
-        return result;
+        return Area.result(
+            this.area,
+            (x, y, width, height) -> height
+        );
     }
 }
