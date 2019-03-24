@@ -19,28 +19,8 @@
  * DEALINGS IN THE SOFTWARE.
  */
 
-package unit.tuple;
-
 /**
- * An adjustment to tuples.
- * @param <A> The type of the first tuple value.
- * @param <B> The type of the second tuple value.
- * @since 0.68
+ * Adjustments for tuples.
+ * @since 0.80
  */
-public interface TupleAdjustment<A, B> {
-    /**
-     * Takes the current first value, adjusts it and returns the new, adjusted
-     * value.
-     * @param current The current first value.
-     * @return The new, adjusted value.
-     */
-    A adjustedFirst(A current);
-
-    /**
-     * Takes the current second value, adjusts it and returns the new, adjusted
-     * value.
-     * @param current The current second value.
-     * @return The new, adjusted value.
-     */
-    B adjustedSecond(B current);
-}
+package unit.tuple.adjustment;

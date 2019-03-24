@@ -22,7 +22,7 @@
 package unit.area;
 
 import unit.adjustment.Adjustable;
-import unit.tuple.TupleAdjustment;
+import unit.tuple.adjustment.TupleAdjustment;
 
 /**
  * An adjustment of the area of a shape.

@@ -22,7 +22,7 @@
 package unit.size;
 
 import unit.adjustment.Adjustable;
-import unit.tuple.TupleAdjustment;
+import unit.tuple.adjustment.TupleAdjustment;
 
 /**
  * An adjustable size.

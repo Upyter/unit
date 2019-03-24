@@ -22,8 +22,8 @@
 package unit.area;
 
 import java.util.function.IntUnaryOperator;
-import unit.tuple.NoAdjustment;
-import unit.tuple.TupleAdjustment;
+import unit.tuple.adjustment.NoAdjustment;
+import unit.tuple.adjustment.TupleAdjustment;
 
 /**
  * An adjustment to the y coordinate of an area. Keeps everything else as it

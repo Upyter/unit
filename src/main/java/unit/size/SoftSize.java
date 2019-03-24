@@ -23,8 +23,8 @@ package unit.size;
 
 import java.util.function.BiFunction;
 import java.util.function.Supplier;
-import unit.tuple.NoAdjustment;
-import unit.tuple.TupleAdjustment;
+import unit.tuple.adjustment.NoAdjustment;
+import unit.tuple.adjustment.TupleAdjustment;
 
 /**
  * A size that reacts to the given adjustments.

@@ -21,7 +21,7 @@
 
 package unit.area;
 
-import unit.tuple.TupleAdjustment;
+import unit.tuple.adjustment.TupleAdjustment;
 
 /**
  * No adjustment. This class is meant as an alternative to null for adjustments.
@@ -38,7 +38,7 @@ public class NoAdjustment implements Adjustment {
      * Ctor.
      */
     public NoAdjustment() {
-        this.adjustment = new unit.tuple.NoAdjustment<>();
+        this.adjustment = new unit.tuple.adjustment.NoAdjustment<>();
     }
 
     @Override

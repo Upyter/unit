@@ -24,7 +24,7 @@ package unit.size;
 import java.util.Objects;
 import java.util.function.BiFunction;
 import java.util.function.Supplier;
-import unit.tuple.TupleAdjustment;
+import unit.tuple.adjustment.TupleAdjustment;
 
 /*
 I am not happy about this naming, but my other idea's regarding the interface

@@ -19,15 +19,23 @@
  * DEALINGS IN THE SOFTWARE.
  */
 
-package unit.pos;
-
-import unit.adjustment.Adjustable;
-import unit.tuple.adjustment.TupleAdjustment;
+package unit.tuple.adjustment;
 
 /**
- * An adjustable pos.
- * @since 0.71
+ * No adjustment. This class is meant as an alternative to null for adjustments.
+ * <p>This class is immutable and thread-safe.</p>
+ * @param <A> The type of the first value of the tuple.
+ * @param <B> The type of the second value of the tuple.
+ * @since 0.66
  */
-public interface AdjustablePos extends
-    Pos, Adjustable<TupleAdjustment<Integer, Integer>> {
+public class NoAdjustment<A, B> implements TupleAdjustment<A, B> {
+    @Override
+    public final A adjustedFirst(final A current) {
+        return current;
+    }
+
+    @Override
+    public final B adjustedSecond(final B current) {
+        return current;
+    }
 }

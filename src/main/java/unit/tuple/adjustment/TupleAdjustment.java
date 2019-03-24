@@ -19,23 +19,28 @@
  * DEALINGS IN THE SOFTWARE.
  */
 
-package unit.tuple;
+package unit.tuple.adjustment;
 
 /**
- * No adjustment. This class is meant as an alternative to null for adjustments.
- * <p>This class is immutable and thread-safe.</p>
- * @param <A> The type of the first value of the tuple.
- * @param <B> The type of the second value of the tuple.
- * @since 0.66
+ * An adjustment to tuples.
+ * @param <A> The type of the first tuple value.
+ * @param <B> The type of the second tuple value.
+ * @since 0.68
  */
-public class NoAdjustment<A, B> implements TupleAdjustment<A, B> {
-    @Override
-    public final A adjustedFirst(final A current) {
-        return current;
-    }
+public interface TupleAdjustment<A, B> {
+    /**
+     * Takes the current first value, adjusts it and returns the new, adjusted
+     * value.
+     * @param current The current first value.
+     * @return The new, adjusted value.
+     */
+    A adjustedFirst(A current);
 
-    @Override
-    public final B adjustedSecond(final B current) {
-        return current;
-    }
+    /**
+     * Takes the current second value, adjusts it and returns the new, adjusted
+     * value.
+     * @param current The current second value.
+     * @return The new, adjusted value.
+     */
+    B adjustedSecond(B current);
 }

@@ -21,7 +21,7 @@
 
 package unit.adjustment;
 
-import unit.tuple.TupleAdjustment;
+import unit.tuple.adjustment.TupleAdjustment;
 
 /**
  * An adjustment that will keep the values from getting below the given
