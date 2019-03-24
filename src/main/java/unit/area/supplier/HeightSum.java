@@ -58,9 +58,10 @@ public class HeightSum implements Supplier<Integer> {
     public final Integer get() {
         int result = 0;
         for (Area area : this.areas) {
-            result += Area.result(
-                area,
-                (x, y, width, height) -> height
+            result += area.result(
+                (pos, size) -> size.cleanResult(
+                    (width, height) -> height
+                )
             );
         }
         return result;
