@@ -26,22 +26,22 @@ import java.util.function.Supplier;
 import unit.area.Area;
 
 /**
- * The height of an area.
+ * The width of an area.
  * <p>This class is immutable and thread-safe.</p>
  * @see Height
- * @since 0.78
+ * @since 0.85
  */
-public class Height implements Supplier<Integer> {
+public class Width implements Supplier<Integer> {
     /**
-     * The area to use the height from.
+     * The area to use the width from.
      */
     private final Area area;
 
     /**
      * Ctor.
-     * @param area The area to use the height from.
+     * @param area The area to use the width from.
      */
-    public Height(final Area area) {
+    public Width(final Area area) {
         this.area = Objects.requireNonNull(area);
     }
 
@@ -49,7 +49,7 @@ public class Height implements Supplier<Integer> {
     public final Integer get() {
         return Area.result(
             this.area,
-            (x, y, width, height) -> height
+            (x, y, width, height) -> width
         );
     }
 }
