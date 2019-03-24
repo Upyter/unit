@@ -23,8 +23,8 @@ package unit.area;
 
 import java.util.function.BiFunction;
 import unit.pos.AdjustablePos;
-import unit.pos.FixPos;
 import unit.pos.Pos;
+import unit.pos.SoftPos;
 import unit.size.AdjustableSize;
 import unit.size.Size;
 
@@ -49,11 +49,11 @@ public class OverlapAreaOf implements OverlapArea {
     }
 
     /**
-     * Ctor. Uses (0|0) as its position.
+     * Ctor. Uses (0|0) as its position. The position is soft.
      * @param size The size of the area.
      */
     public OverlapAreaOf(final AdjustableSize size) {
-        this(new FixPos(), size);
+        this(new SoftPos(), size);
     }
 
     /**
