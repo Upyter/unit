@@ -21,9 +21,11 @@
 
 package unit.area;
 
+import java.util.function.Function;
 import java.util.function.IntUnaryOperator;
 import unit.tuple.adjustment.NoAdjustment;
 import unit.tuple.adjustment.TupleAdjustment;
+import unit.tuple.adjustment.Short;
 
 /**
  * An adjustment to the y coordinate of an area. Keeps everything else as it
@@ -47,17 +49,7 @@ public class YAdjustment implements Adjustment {
      * @param adjustment The adjustment of the y coordinate.
      */
     public YAdjustment(final IntUnaryOperator adjustment) {
-        this.pos = new TupleAdjustment<>() {
-            @Override
-            public Integer adjustedFirst(final Integer current) {
-                return current;
-            }
-
-            @Override
-            public Integer adjustedSecond(final Integer current) {
-                return adjustment.applyAsInt(current);
-            }
-        };
+        this.pos = new Short<>(Function.identity(), adjustment::applyAsInt);
         this.size = new NoAdjustment<>();
     }
 
