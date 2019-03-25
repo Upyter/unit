@@ -30,7 +30,7 @@ import unit.functional.Lazy;
 
 /**
  * The sum of the heights of a collection of areas (or the height of one area)
- * according to {@link unit.size.Size#cleanResult(BiFunction)}.It will be 0 if
+ * according to {@link unit.size.Size#cleanResult(BiFunction)}. It will be 0 if
  * the given collection is empty.
  * <p>This class is mutable because it caches the result.</p>
  * @see Height
