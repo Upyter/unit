@@ -25,23 +25,21 @@ import java.util.List;
 import java.util.function.BiFunction;
 import java.util.function.Supplier;
 import unit.area.Area;
-import unit.functional.Cached;
-import unit.functional.Lazy;
 
 /**
  * The sum of the heights of a collection of areas (or the height of one area)
  * according to {@link unit.size.Size#result(BiFunction)}. It will be 0 if
  * the given collection is empty.
- * <p>This class is mutable because it caches the result.</p>
+ * <p>This class is immutable and thread-safe.</p>
  * @see CleanHeight
  * @see Width
  * @since 0.89
  */
 public class Height implements Supplier<Integer> {
     /**
-     * The height of the area(s).
+     * The areas to get the height from.
      */
-    private final Lazy<Integer> height;
+    private final Iterable<Area> areas;
 
     /**
      * Ctor.
@@ -56,22 +54,18 @@ public class Height implements Supplier<Integer> {
      * @param areas The areas to sum the height from.
      */
     public Height(final Iterable<Area> areas) {
-        this.height = new Cached<>(
-            () -> {
-                int result = 0;
-                for (final Area area : areas) {
-                    result += Area.result(
-                        area,
-                        (x, y, width, height) -> height
-                    );
-                }
-                return result;
-            }
-        );
+        this.areas = areas;
     }
 
     @Override
     public final Integer get() {
-        return this.height.value();
+        int result = 0;
+        for (final Area area : this.areas) {
+            result += Area.result(
+                area,
+                (x, y, width, height) -> height
+            );
+        }
+        return result;
     }
 }
