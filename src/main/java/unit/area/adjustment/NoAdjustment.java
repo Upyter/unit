@@ -31,6 +31,12 @@ import unit.tuple.adjustment.TupleAdjustment;
  */
 public class NoAdjustment implements Adjustment {
     /**
+     * Since this class is immutable and likely to be used often, this is a
+     * saved instance.
+     */
+    private static final Adjustment instance = new NoAdjustment();
+
+    /**
      * The adjustment of the size and pos.
      */
     private final TupleAdjustment<Integer, Integer> adjustment;
@@ -40,6 +46,14 @@ public class NoAdjustment implements Adjustment {
      */
     public NoAdjustment() {
         this.adjustment = new unit.tuple.adjustment.NoAdjustment<>();
+    }
+
+    /**
+     * Returns a cached instance of this class.
+     * @return A NoAdjustment instance.
+     */
+    public static Adjustment cached() {
+        return NoAdjustment.instance;
     }
 
     @Override
