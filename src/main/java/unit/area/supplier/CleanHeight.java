@@ -21,37 +21,58 @@
 
 package unit.area.supplier;
 
-import java.util.Objects;
+import java.util.List;
 import java.util.function.BiFunction;
 import java.util.function.Supplier;
 import unit.area.Area;
+import unit.functional.Cached;
+import unit.functional.Lazy;
 
 /**
- * The width of an area according to {@link unit.size.Size#result(BiFunction)}.
- * <p>This class is immutable and thread-safe.</p>
+ * The sum of the heights of a collection of areas (or the height of one area)
+ * according to {@link unit.size.Size#cleanResult(BiFunction)}.It will be 0 if
+ * the given collection is empty.
+ * <p>This class is mutable because it caches the result.</p>
  * @see Height
- * @see CleanHeight
- * @since 0.85
+ * @see Width
+ * @since 0.77
  */
-public class Width implements Supplier<Integer> {
+public class CleanHeight implements Supplier<Integer> {
     /**
-     * The area to use the width from.
+     * The height of the area(s).
      */
-    private final Area area;
+    private final Lazy<Integer> height;
 
     /**
      * Ctor.
-     * @param area The area to use the width from.
+     * @param areas The areas to sum the height from.
      */
-    public Width(final Area area) {
-        this.area = Objects.requireNonNull(area);
+    public CleanHeight(final Area... areas) {
+        this(List.of(areas));
+    }
+
+    /**
+     * Ctor.
+     * @param areas The areas to sum the height from.
+     */
+    public CleanHeight(final Iterable<Area> areas) {
+        this.height = new Cached<>(
+            () -> {
+                int result = 0;
+                for (final Area area : areas) {
+                    result += area.result(
+                        (pos, size) -> size.cleanResult(
+                            (width, height) -> height
+                        )
+                    );
+                }
+                return result;
+            }
+        );
     }
 
     @Override
     public final Integer get() {
-        return Area.result(
-            this.area,
-            (x, y, width, height) -> width
-        );
+        return this.height.value();
     }
 }
