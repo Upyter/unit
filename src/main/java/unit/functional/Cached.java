@@ -34,7 +34,7 @@ public class Cached<T> implements Lazy<T> {
     /**
      * By using this, the value will be constructed.
      */
-    private final Supplier<T> init;
+    private Supplier<T> init;
 
     /**
      * The cached value. After one call of {@link #value()}, it will be set
@@ -56,6 +56,7 @@ public class Cached<T> implements Lazy<T> {
     public final T value() {
         if (this.cache == null) {
             this.cache = this.init.get();
+            this.init = null;
         }
         return this.cache;
     }
