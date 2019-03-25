@@ -27,6 +27,7 @@ import unit.tuple.adjustment.TupleAdjustment;
 /**
  * No adjustment. This class is meant as an alternative to null for adjustments.
  * <p>This class is immutable and thread-safe.</p>
+ * @see unit.tuple.adjustment.NoAdjustment
  * @since 0.72
  */
 public class NoAdjustment implements Adjustment {

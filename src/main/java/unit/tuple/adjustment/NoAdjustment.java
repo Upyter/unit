@@ -26,9 +26,25 @@ package unit.tuple.adjustment;
  * <p>This class is immutable and thread-safe.</p>
  * @param <A> The type of the first value of the tuple.
  * @param <B> The type of the second value of the tuple.
+ * @see unit.area.adjustment.NoAdjustment
  * @since 0.66
  */
 public class NoAdjustment<A, B> implements TupleAdjustment<A, B> {
+    /**
+     * Since this class is immutable and likely to be used often, this is a
+     * saved instance.
+     */
+    private static final TupleAdjustment<?, ?> instance = new NoAdjustment<>();
+
+    /**
+     * Returns a cached instance of this class.
+     * @return A NoAdjustment instance.
+     */
+    @SuppressWarnings("rawtypes")
+    public static TupleAdjustment cached() {
+        return NoAdjustment.instance;
+    }
+
     @Override
     public final A adjustedFirst(final A current) {
         return current;
