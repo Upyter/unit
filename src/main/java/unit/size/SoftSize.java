@@ -136,4 +136,9 @@ public class SoftSize implements AdjustableSize {
     ) {
         this.adjustment = adjustment;
     }
+
+    @Override
+    public final boolean isFix() {
+        return false;
+    }
 }

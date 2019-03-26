@@ -143,4 +143,9 @@ public class FixSize implements AdjustableSize {
     ) {
         // fix size ignores adjustments
     }
+
+    @Override
+    public final boolean isFix() {
+        return true;
+    }
 }

@@ -37,4 +37,6 @@ import unit.tuple.Tuple;
  */
 public interface Size extends Tuple<Integer, Integer> {
     <R> R cleanResult(BiFunction<Integer, Integer, R> target);
+
+    boolean isFix();
 }

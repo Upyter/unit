@@ -26,6 +26,10 @@ import java.util.function.BiFunction;
 import java.util.function.Supplier;
 import unit.area.Area;
 
+/*
+This class doesn't cache because area can change its height and this class
+wouldn't notice it. I had such case in joop.Column
+ */
 /**
  * The sum of the heights of a collection of areas (or the height of one area)
  * according to {@link unit.size.Size#result(BiFunction)}. It will be 0 if
