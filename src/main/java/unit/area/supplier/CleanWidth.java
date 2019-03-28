@@ -29,41 +29,41 @@ import unit.functional.Cached;
 import unit.functional.Lazy;
 
 /**
- * The sum of the heights of a collection of areas (or the height of one area)
+ * The sum of the widths of a collection of areas (or the width of one area)
  * according to {@link unit.size.Size#cleanResult(BiFunction)}. It will be 0 if
  * the given collection is empty.
  * <p>This class is mutable because it caches the result.</p>
  * @see Height
  * @see Width
- * @see CleanWidth
- * @since 0.77
+ * @see CleanHeight
+ * @since 0.92
  */
-public class CleanHeight implements Supplier<Integer> {
+public class CleanWidth implements Supplier<Integer> {
     /**
-     * The height of the area(s).
+     * The width of the area(s).
      */
-    private final Lazy<Integer> height;
+    private final Lazy<Integer> width;
 
     /**
      * Ctor.
-     * @param areas The areas to sum the height from.
+     * @param areas The areas to sum the width from.
      */
-    public CleanHeight(final Area... areas) {
+    public CleanWidth(final Area... areas) {
         this(List.of(areas));
     }
 
     /**
      * Ctor.
-     * @param areas The areas to sum the height from.
+     * @param areas The areas to sum the width from.
      */
-    public CleanHeight(final Iterable<Area> areas) {
-        this.height = new Cached<>(
+    public CleanWidth(final Iterable<Area> areas) {
+        this.width = new Cached<>(
             () -> {
                 int result = 0;
                 for (final Area area : areas) {
                     result += area.result(
                         (pos, size) -> size.cleanResult(
-                            (width, height) -> height
+                            (width, height) -> width
                         )
                     );
                 }
@@ -74,6 +74,6 @@ public class CleanHeight implements Supplier<Integer> {
 
     @Override
     public final Integer get() {
-        return this.height.value();
+        return this.width.value();
     }
 }
