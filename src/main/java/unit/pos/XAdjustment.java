@@ -26,20 +26,20 @@ import java.util.function.IntUnaryOperator;
 import unit.tuple.adjustment.Short;
 
 /**
- * The adjustment of the y coordinate as a tuple adjustment. This adjustment
- * keeps the x coordinate as it was.
- * {@link unit.area.adjustment.YAdjustment} serves the same purpose but results
+ * The adjustment of the x coordinate as a tuple adjustment. This adjustment
+ * keeps the y coordinate as it was.
+ * {@link unit.area.adjustment.XAdjustment} serves the same purpose but results
  * in a adjustment for areas.
  * <p>This class is immutable and thread-safe.</p>
- * @see XAdjustment
- * @since 0.84
+ * @see YAdjustment
+ * @since 0.94
  */
-public class YAdjustment extends Short<Integer, Integer> {
+public class XAdjustment extends Short<Integer, Integer> {
     /**
      * Ctor.
-     * @param adjustment The adjustment of the y coordinate.
+     * @param adjustment The adjustment of the x coordinate.
      */
-    public YAdjustment(final IntUnaryOperator adjustment) {
-        super(Function.identity(), adjustment::applyAsInt);
+    public XAdjustment(final IntUnaryOperator adjustment) {
+        super(adjustment::applyAsInt, Function.identity());
     }
 }

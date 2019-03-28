@@ -30,6 +30,7 @@ import unit.tuple.adjustment.TupleAdjustment;
  * An adjustment to the y coordinate of an area. Keeps everything else as it
  * was.
  * <p>This class is immutable and thread-safe.</p>
+ * @see XAdjustment
  * @since 0.70
  */
 public class YAdjustment implements Adjustment {

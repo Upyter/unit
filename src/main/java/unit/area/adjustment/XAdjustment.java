@@ -19,27 +19,46 @@
  * DEALINGS IN THE SOFTWARE.
  */
 
-package unit.pos;
+package unit.area.adjustment;
 
-import java.util.function.Function;
 import java.util.function.IntUnaryOperator;
-import unit.tuple.adjustment.Short;
+import unit.area.Adjustment;
+import unit.tuple.adjustment.NoAdjustment;
+import unit.tuple.adjustment.TupleAdjustment;
 
 /**
- * The adjustment of the y coordinate as a tuple adjustment. This adjustment
- * keeps the x coordinate as it was.
- * {@link unit.area.adjustment.YAdjustment} serves the same purpose but results
- * in a adjustment for areas.
+ * An adjustment to the x coordinate of an area. Keeps everything else as it
+ * was.
  * <p>This class is immutable and thread-safe.</p>
- * @see XAdjustment
- * @since 0.84
+ * @since 0.94
  */
-public class YAdjustment extends Short<Integer, Integer> {
+public class XAdjustment implements Adjustment {
+    /**
+     * The adjustment of the position.
+     */
+    private final TupleAdjustment<Integer, Integer> pos;
+
+    /**
+     * The adjustment of the size.
+     */
+    private final TupleAdjustment<Integer, Integer> size;
+
     /**
      * Ctor.
-     * @param adjustment The adjustment of the y coordinate.
+     * @param adjustment The adjustment of the x coordinate.
      */
-    public YAdjustment(final IntUnaryOperator adjustment) {
-        super(Function.identity(), adjustment::applyAsInt);
+    public XAdjustment(final IntUnaryOperator adjustment) {
+        this.pos = new unit.pos.XAdjustment(adjustment);
+        this.size = new NoAdjustment<>();
+    }
+
+    @Override
+    public final TupleAdjustment<Integer, Integer> posAdjustment() {
+        return this.pos;
+    }
+
+    @Override
+    public final TupleAdjustment<Integer, Integer> sizeAdjustment() {
+        return this.size;
     }
 }
