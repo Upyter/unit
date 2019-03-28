@@ -28,45 +28,45 @@ import unit.functional.Cached;
 import unit.functional.Lazy;
 
 /**
- * The height of an area (or a collection of areas) that is fixed and therefore
+ * The width of an area (or a collection of areas) that is fixed and therefore
  * is unavailable for adjustment. Many layouts share their size with their
  * content. This can only be done for sizes that actually take the adjustment
  * into account. The rest must be subtracted before the sharing, because the
  * sum of the fixed sizes is unavailable for sharing.
- * <b>The unavailable height cannot be below 0.</b>
+ * <b>The unavailable width cannot be below 0.</b>
  * <p>This class is mutable and not thread-safe, because it caches its result
  * </p>
- * @see UnavailableWidth
- * @since 0.87
+ * @see UnavailableHeight
+ * @since 0.93
  */
-public class UnavailableHeight implements Supplier<Integer> {
+public class UnavailableWidth implements Supplier<Integer> {
     /**
-     * The unavailable height.
+     * The unavailable width.
      */
-    private final Lazy<Integer> height;
+    private final Lazy<Integer> width;
 
     /**
      * Ctor.
-     * @param areas The areas to get the height from.
+     * @param areas The areas to get the width from.
      */
-    public UnavailableHeight(final Area... areas) {
+    public UnavailableWidth(final Area... areas) {
         this(List.of(areas));
     }
 
     /**
      * Ctor.
-     * @param areas The areas to get the height from.
+     * @param areas The areas to get the width from.
      */
-    public UnavailableHeight(final Iterable<Area> areas) {
-        this.height = new Cached<>(
+    public UnavailableWidth(final Iterable<Area> areas) {
+        this.width = new Cached<>(
             () -> {
                 int result = 0;
                 for (final Area area : areas) {
                     if (area.result(
-                        (pos, size) -> size.cleanResult((w, h) -> h == 0))
+                        (pos, size) -> size.cleanResult((w, h) -> w == 0))
                     ) {
                         result += area.result(
-                            (pos, size) -> size.result((w, h) -> h)
+                            (pos, size) -> size.result((w, h) -> w)
                         );
                     }
                 }
@@ -77,6 +77,6 @@ public class UnavailableHeight implements Supplier<Integer> {
 
     @Override
     public final Integer get() {
-        return this.height.value();
+        return this.width.value();
     }
 }
