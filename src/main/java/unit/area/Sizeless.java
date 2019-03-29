@@ -61,8 +61,8 @@ public class Sizeless implements Area {
 
     @Override
     public final <R> R result(final BiFunction<Pos, Size, R> target) {
-        return area.result(
-            (pos, size) -> target.apply(pos, this.size)
+        return this.area.result(
+            (pos, ignored) -> target.apply(pos, this.size)
         );
     }
 }

@@ -35,7 +35,7 @@ public class NoAdjustment implements Adjustment {
      * Since this class is immutable and likely to be used often, this is a
      * saved instance.
      */
-    private static final Adjustment instance = new NoAdjustment();
+    private static final Adjustment INSTANCE = new NoAdjustment();
 
     /**
      * The adjustment of the size and pos.
@@ -53,8 +53,9 @@ public class NoAdjustment implements Adjustment {
      * Returns a cached instance of this class.
      * @return A NoAdjustment instance.
      */
+    @SuppressWarnings("PMD.ProhibitPublicStaticMethods")
     public static Adjustment cached() {
-        return NoAdjustment.instance;
+        return NoAdjustment.INSTANCE;
     }
 
     @Override

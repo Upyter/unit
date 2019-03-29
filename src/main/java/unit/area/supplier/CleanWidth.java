@@ -22,7 +22,6 @@
 package unit.area.supplier;
 
 import java.util.List;
-import java.util.function.BiFunction;
 import java.util.function.Supplier;
 import unit.area.Area;
 import unit.functional.Cached;
@@ -42,7 +41,7 @@ public class CleanWidth implements Supplier<Integer> {
     /**
      * The width of the area(s).
      */
-    private final Lazy<Integer> width;
+    private final Lazy<Integer> sum;
 
     /**
      * Ctor.
@@ -57,7 +56,7 @@ public class CleanWidth implements Supplier<Integer> {
      * @param areas The areas to sum the width from.
      */
     public CleanWidth(final Iterable<Area> areas) {
-        this.width = new Cached<>(
+        this.sum = new Cached<>(
             () -> {
                 int result = 0;
                 for (final Area area : areas) {
@@ -74,6 +73,6 @@ public class CleanWidth implements Supplier<Integer> {
 
     @Override
     public final Integer get() {
-        return this.width.value();
+        return this.sum.value();
     }
 }

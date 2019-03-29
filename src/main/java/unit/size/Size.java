@@ -36,7 +36,20 @@ import unit.tuple.Tuple;
  * @since 0.4
  */
 public interface Size extends Tuple<Integer, Integer> {
-    <R> R cleanResult(BiFunction<Integer, Integer, R> target);
+    /**
+     * Returns the result without taking the outer adjustment into account.
+     * The outer adjustment is set by using
+     * {@link AdjustableSize#adjustment(Object)}.
+     * @param operation The operation to be applied with the values of the size.
+     * @param <R> The type of the result of the operation.
+     * @return The result of the operation.
+     */
+    <R> R cleanResult(BiFunction<Integer, Integer, R> operation);
 
+    /**
+     * Returns true if the size is fix (doesn't use adjustments from
+     * {@link AdjustableSize#adjustment(Object)} or otherwise false.
+     * @return True if the size is fix and otherwise false.
+     */
     boolean isFix();
 }

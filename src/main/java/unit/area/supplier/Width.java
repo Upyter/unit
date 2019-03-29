@@ -22,7 +22,6 @@
 package unit.area.supplier;
 
 import java.util.Objects;
-import java.util.function.BiFunction;
 import java.util.function.Supplier;
 import unit.area.Area;
 
@@ -51,6 +50,7 @@ public class Width implements Supplier<Integer> {
     public final Integer get() {
         return Area.result(
             this.area,
+            // @checkstyle ParameterName (1 line)
             (x, y, width, height) -> width
         );
     }

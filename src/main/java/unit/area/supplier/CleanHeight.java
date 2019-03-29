@@ -22,7 +22,6 @@
 package unit.area.supplier;
 
 import java.util.List;
-import java.util.function.BiFunction;
 import java.util.function.Supplier;
 import unit.area.Area;
 import unit.functional.Cached;
@@ -42,7 +41,7 @@ public class CleanHeight implements Supplier<Integer> {
     /**
      * The height of the area(s).
      */
-    private final Lazy<Integer> height;
+    private final Lazy<Integer> sum;
 
     /**
      * Ctor.
@@ -57,7 +56,7 @@ public class CleanHeight implements Supplier<Integer> {
      * @param areas The areas to sum the height from.
      */
     public CleanHeight(final Iterable<Area> areas) {
-        this.height = new Cached<>(
+        this.sum = new Cached<>(
             () -> {
                 int result = 0;
                 for (final Area area : areas) {
@@ -74,6 +73,6 @@ public class CleanHeight implements Supplier<Integer> {
 
     @Override
     public final Integer get() {
-        return this.height.value();
+        return this.sum.value();
     }
 }

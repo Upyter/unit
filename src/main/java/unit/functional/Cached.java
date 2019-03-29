@@ -52,6 +52,7 @@ public class Cached<T> implements Lazy<T> {
         this.cache = null;
     }
 
+    @SuppressWarnings("PMD.NullAssignment")
     @Override
     public final T value() {
         if (this.cache == null) {

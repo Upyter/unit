@@ -50,6 +50,8 @@ public class Short implements Adjustment {
      * @param y The adjustment of the y coordinate.
      * @param width The adjustment of the width.
      * @param height The adjustment of the height.
+     * @checkstyle ParameterName (5 lines)
+     * @checkstyle ParameterNumberCheck (3 lines)
      */
     public Short(
         final Function<Integer, Integer> x,

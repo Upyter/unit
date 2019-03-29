@@ -22,7 +22,6 @@
 package unit.area.supplier;
 
 import java.util.List;
-import java.util.function.BiFunction;
 import java.util.function.Supplier;
 import unit.area.Area;
 
@@ -67,6 +66,7 @@ public class Height implements Supplier<Integer> {
         for (final Area area : this.areas) {
             result += Area.result(
                 area,
+                // @checkstyle ParameterName (1 line)
                 (x, y, width, height) -> height
             );
         }

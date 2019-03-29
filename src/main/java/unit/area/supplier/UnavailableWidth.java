@@ -43,7 +43,7 @@ public class UnavailableWidth implements Supplier<Integer> {
     /**
      * The unavailable width.
      */
-    private final Lazy<Integer> width;
+    private final Lazy<Integer> sum;
 
     /**
      * Ctor.
@@ -58,15 +58,13 @@ public class UnavailableWidth implements Supplier<Integer> {
      * @param areas The areas to get the width from.
      */
     public UnavailableWidth(final Iterable<Area> areas) {
-        this.width = new Cached<>(
+        this.sum = new Cached<>(
             () -> {
                 int result = 0;
                 for (final Area area : areas) {
-                    if (area.result(
-                        (pos, size) -> size.cleanResult((w, h) -> w == 0))
-                    ) {
+                    if (area.result((pos, size) -> size.isFix())) {
                         result += area.result(
-                            (pos, size) -> size.result((w, h) -> w)
+                            (pos, size) -> size.result((width, height) -> width)
                         );
                     }
                 }
@@ -77,6 +75,6 @@ public class UnavailableWidth implements Supplier<Integer> {
 
     @Override
     public final Integer get() {
-        return this.width.value();
+        return this.sum.value();
     }
 }

@@ -32,7 +32,7 @@ import unit.size.Size;
 import unit.tuple.Tuple;
 
 /**
- * Tests for {@link CorrectTupleResult}.
+ * Tests for {@link CorrectResult}.
  * @since 0.13
  */
 public final class CorrectTupleResultTest {
@@ -76,6 +76,7 @@ public final class CorrectTupleResultTest {
         final int width = 534;
         final int height = 32;
         MatcherAssert.assertThat(
+            // @checkstyle AnonInnerLength (1 line)
             new Size() {
                 @Override
                 public <R> R result(
@@ -86,18 +87,18 @@ public final class CorrectTupleResultTest {
                 }
 
                 @Override
-                public <R> R cleanResult(final BiFunction<Integer, Integer, R> target) {
+                public <R> R cleanResult(
+                    final BiFunction<Integer, Integer, R> target
+                ) {
                     throw new UnsupportedOperationException("#cleanResult()");
                 }
 
                 @Override
                 public boolean isFix() {
-                    throw new UnsupportedOperationException("#isFix()");
+                    return true;
                 }
             },
-            Matchers.not(
-                new CorrectResult(width, height, width + height + 1)
-            )
+            Matchers.not(new CorrectResult(width, height, width + height + 1))
         );
     }
 
@@ -118,7 +119,7 @@ public final class CorrectTupleResultTest {
     }
 
     /**
-     * {@link CorrectTupleResult#describeTo(Description)} adds some text to
+     * {@link CorrectResult#describeTo(Description)} adds some text to
      * the given description instance.
      */
     @Test
@@ -147,7 +148,7 @@ public final class CorrectTupleResultTest {
     }
 
     /**
-     * {@link CorrectTupleResult#matchesSafely(Tuple, Description)} adds some
+     * {@link CorrectResult#matchesSafely(Tuple, Description)} adds some
      * text to the given description instance.
      */
     @Test

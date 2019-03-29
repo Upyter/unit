@@ -43,7 +43,7 @@ public class UnavailableHeight implements Supplier<Integer> {
     /**
      * The unavailable height.
      */
-    private final Lazy<Integer> height;
+    private final Lazy<Integer> sum;
 
     /**
      * Ctor.
@@ -58,15 +58,15 @@ public class UnavailableHeight implements Supplier<Integer> {
      * @param areas The areas to get the height from.
      */
     public UnavailableHeight(final Iterable<Area> areas) {
-        this.height = new Cached<>(
+        this.sum = new Cached<>(
             () -> {
                 int result = 0;
                 for (final Area area : areas) {
-                    if (area.result(
-                        (pos, size) -> size.cleanResult((w, h) -> h == 0))
-                    ) {
+                    if (area.result((pos, size) -> size.isFix())) {
                         result += area.result(
-                            (pos, size) -> size.result((w, h) -> h)
+                            (pos, size) -> size.result(
+                                (width, height) -> height
+                            )
                         );
                     }
                 }
@@ -77,6 +77,6 @@ public class UnavailableHeight implements Supplier<Integer> {
 
     @Override
     public final Integer get() {
-        return this.height.value();
+        return this.sum.value();
     }
 }

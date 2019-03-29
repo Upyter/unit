@@ -34,15 +34,15 @@ public class NoAdjustment<A, B> implements TupleAdjustment<A, B> {
      * Since this class is immutable and likely to be used often, this is a
      * saved instance.
      */
-    private static final TupleAdjustment<?, ?> instance = new NoAdjustment<>();
+    private static final TupleAdjustment<?, ?> INSTANCE = new NoAdjustment<>();
 
     /**
      * Returns a cached instance of this class.
      * @return A NoAdjustment instance.
      */
-    @SuppressWarnings("rawtypes")
+    @SuppressWarnings({"rawtypes", "PMD.ProhibitPublicStaticMethods"})
     public static TupleAdjustment cached() {
-        return NoAdjustment.instance;
+        return NoAdjustment.INSTANCE;
     }
 
     @Override
