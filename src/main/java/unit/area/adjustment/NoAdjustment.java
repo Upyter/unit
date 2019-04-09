@@ -46,7 +46,7 @@ public class NoAdjustment implements Adjustment {
      * Ctor.
      */
     public NoAdjustment() {
-        this.adjustment = new unit.tuple.adjustment.NoAdjustment<>();
+        this.adjustment = unit.tuple.adjustment.NoAdjustment.cached();
     }
 
     /**

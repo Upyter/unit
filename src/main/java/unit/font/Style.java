@@ -19,46 +19,15 @@
  * DEALINGS IN THE SOFTWARE.
  */
 
-package unit.area.adjustment;
-
-import java.util.function.IntUnaryOperator;
-import unit.area.Adjustment;
-import unit.tuple.adjustment.NoAdjustment;
-import unit.tuple.adjustment.TupleAdjustment;
+package unit.font;
 
 /**
- * An adjustment to the x coordinate of an area. Keeps everything else as it
- * was.
- * <p>This class is immutable and thread-safe.</p>
- * @since 0.94
+ * The style of a font.
+ * @since 0.95
  */
-public class XAdjustment implements Adjustment {
-    /**
-     * The adjustment of the position.
-     */
-    private final TupleAdjustment<Integer, Integer> pos;
-
-    /**
-     * The adjustment of the size.
-     */
-    private final TupleAdjustment<Integer, Integer> size;
-
-    /**
-     * Ctor.
-     * @param adjustment The adjustment of the x coordinate.
-     */
-    public XAdjustment(final IntUnaryOperator adjustment) {
-        this.pos = new unit.pos.XAdjustment(adjustment);
-        this.size = NoAdjustment.cached();
-    }
-
-    @Override
-    public final TupleAdjustment<Integer, Integer> posAdjustment() {
-        return this.pos;
-    }
-
-    @Override
-    public final TupleAdjustment<Integer, Integer> sizeAdjustment() {
-        return this.size;
-    }
+public enum Style {
+    PLAIN,
+    BOLD,
+    ITALIC,
+    BOLD_ITALIC
 }

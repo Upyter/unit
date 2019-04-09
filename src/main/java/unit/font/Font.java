@@ -19,47 +19,28 @@
  * DEALINGS IN THE SOFTWARE.
  */
 
-package unit.area.adjustment;
-
-import java.util.function.IntUnaryOperator;
-import unit.area.Adjustment;
-import unit.tuple.adjustment.NoAdjustment;
-import unit.tuple.adjustment.TupleAdjustment;
+package unit.font;
 
 /**
- * An adjustment to the y coordinate of an area. Keeps everything else as it
- * was.
- * <p>This class is immutable and thread-safe.</p>
- * @see XAdjustment
- * @since 0.70
+ * A font.
+ * @since 0.95
  */
-public class YAdjustment implements Adjustment {
+public interface Font {
     /**
-     * The adjustment of the position.
+     * The name of the font.
+     * @return The name of the font.
      */
-    private final TupleAdjustment<Integer, Integer> pos;
-
-    /**
-     * The adjustment of the size.
-     */
-    private final TupleAdjustment<Integer, Integer> size;
+    String name();
 
     /**
-     * Ctor.
-     * @param adjustment The adjustment of the y coordinate.
+     * The {@link Style} of the font.
+     * @return The style of the font.
      */
-    public YAdjustment(final IntUnaryOperator adjustment) {
-        this.pos = new unit.pos.YAdjustment(adjustment);
-        this.size = NoAdjustment.cached();
-    }
+    Style style();
 
-    @Override
-    public final TupleAdjustment<Integer, Integer> posAdjustment() {
-        return this.pos;
-    }
-
-    @Override
-    public final TupleAdjustment<Integer, Integer> sizeAdjustment() {
-        return this.size;
-    }
+    /**
+     * The size of the font.
+     * @return The size of the font (0+).
+     */
+    int size();
 }

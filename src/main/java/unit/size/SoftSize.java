@@ -101,8 +101,8 @@ public class SoftSize implements AdjustableSize {
      */
     public SoftSize(final Size size) {
         this.size = size;
-        this.border = new NoAdjustment<>();
-        this.adjustment = new NoAdjustment<>();
+        this.border = NoAdjustment.cached();
+        this.adjustment = NoAdjustment.cached();
     }
 
     @Override

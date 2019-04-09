@@ -103,8 +103,8 @@ public class SoftPos implements AdjustablePos {
      */
     public SoftPos(final Pos pos) {
         this.pos = pos;
-        this.border = new NoAdjustment<>();
-        this.adjustment = new NoAdjustment<>();
+        this.border = NoAdjustment.cached();
+        this.adjustment = NoAdjustment.cached();
     }
 
     @Override
