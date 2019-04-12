@@ -19,20 +19,16 @@
  * DEALINGS IN THE SOFTWARE.
  */
 
-package unit.scalar;
+package unit.scalar.adjustment;
 
 /**
- * An adjustment of a float based scalar.
- * @see unit.area.Adjustment
- * @see unit.pos.Pos
- * @see unit.size.Size
- * @since 0.98
+ * An adjustment that takes the value and returns it without change.
+ * <p>This class is immutable and thread-safe.</p>
+ * @since 0.100
  */
-public interface Adjustment {
-    /**
-     * Returns an adjusted version of the given value.
-     * @param current The current value.
-     * @return The adjusted value.
-     */
-    float adjusted(float current);
+public class Identity implements Adjustment {
+    @Override
+    public final float adjusted(final float current) {
+        return current;
+    }
 }

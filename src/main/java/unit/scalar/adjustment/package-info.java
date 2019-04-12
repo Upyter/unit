@@ -19,16 +19,8 @@
  * DEALINGS IN THE SOFTWARE.
  */
 
-package unit.scalar;
-
 /**
- * An adjustment that takes the value and returns it without change.
- * <p>This class is immutable and thread-safe.</p>
- * @since 0.100
+ * Adjustments of scalars.
+ * @since 0.101
  */
-public class Identity implements Adjustment {
-    @Override
-    public final float adjusted(final float current) {
-        return current;
-    }
-}
+package unit.scalar.adjustment;

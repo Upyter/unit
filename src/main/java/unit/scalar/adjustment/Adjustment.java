@@ -19,29 +19,20 @@
  * DEALINGS IN THE SOFTWARE.
  */
 
-package unit.scalar;
-
-import unit.scalar.adjustment.Adjustment;
+package unit.scalar.adjustment;
 
 /**
- * A one-dimensional float based value.
- * @see FixScalar
- * @see SoftScalar
+ * An adjustment of a float based scalar.
+ * @see unit.area.Adjustment
  * @see unit.pos.Pos
  * @see unit.size.Size
  * @since 0.98
  */
-public interface Scalar {
+public interface Adjustment {
     /**
-     * Returns the value of the scalar.
-     * @return The value of the scalar.
+     * Returns an adjusted version of the given value.
+     * @param current The current value.
+     * @return The adjusted value.
      */
-    float value();
-
-    /**
-     * (Perhaps) registers the given adjustment and uses it for its value. This
-     * method overwrites the previously given adjustments.
-     * @param adjustment The adjustment to register.
-     */
-    void adjustment(Adjustment adjustment);
+    float adjusted(float current);
 }

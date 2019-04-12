@@ -19,44 +19,8 @@
  * DEALINGS IN THE SOFTWARE.
  */
 
-package unit.adjustment;
-
-import unit.tuple.adjustment.TupleAdjustment;
-
 /**
- * An adjustment that will keep the values from getting below the given
- * boundaries.
- * <p>This class is immutable and thread-safe.</p>
- * @since 0.68
+ * Tests for the scalar adjustments.
+ * @since 0.101
  */
-public class Min implements TupleAdjustment<Integer, Integer> {
-    /**
-     * The border of the first value.
-     */
-    private final int first;
-
-    /**
-     * The border of the second value.
-     */
-    private final int second;
-
-    /**
-     * Ctor.
-     * @param first The border of the first value.
-     * @param second The border of the second value.
-     */
-    public Min(final int first, final int second) {
-        this.first = first;
-        this.second = second;
-    }
-
-    @Override
-    public final Integer adjustedFirst(final Integer current) {
-        return Math.min(this.first, current);
-    }
-
-    @Override
-    public final Integer adjustedSecond(final Integer current) {
-        return Math.min(this.second, current);
-    }
-}
+package unit.scalar.adjustment;

@@ -23,6 +23,8 @@ package unit.scalar;
 
 import java.util.Objects;
 import unit.functional.FloatSupplier;
+import unit.scalar.adjustment.Adjustment;
+import unit.scalar.adjustment.Identity;
 
 /**
  * A one-dimensional soft value. It uses the given adjustment.

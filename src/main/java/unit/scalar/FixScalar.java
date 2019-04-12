@@ -23,6 +23,7 @@ package unit.scalar;
 
 import java.util.Objects;
 import unit.functional.FloatSupplier;
+import unit.scalar.adjustment.Adjustment;
 
 /**
  * A one-dimensional fixed value. It ignores adjustments.

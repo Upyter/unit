@@ -26,6 +26,7 @@ import org.hamcrest.Matchers;
 import org.junit.Test;
 import unit.functional.FloatSupplier;
 import unit.number.Delta;
+import unit.scalar.adjustment.Adjustment;
 
 /**
  * Tests for {@link FixScalar}.

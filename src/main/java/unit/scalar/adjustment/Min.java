@@ -19,29 +19,30 @@
  * DEALINGS IN THE SOFTWARE.
  */
 
-package unit.scalar;
-
-import unit.scalar.adjustment.Adjustment;
+package unit.scalar.adjustment;
 
 /**
- * A one-dimensional float based value.
- * @see FixScalar
- * @see SoftScalar
- * @see unit.pos.Pos
- * @see unit.size.Size
- * @since 0.98
+ * An adjustment that will keep the values from getting below the given
+ * boundaries.
+ * <p>This class is immutable and thread-safe.</p>
+ * @since 0.68
  */
-public interface Scalar {
+public class Min implements Adjustment {
     /**
-     * Returns the value of the scalar.
-     * @return The value of the scalar.
+     * The border of the value.
      */
-    float value();
+    private final float first;
 
     /**
-     * (Perhaps) registers the given adjustment and uses it for its value. This
-     * method overwrites the previously given adjustments.
-     * @param adjustment The adjustment to register.
+     * Ctor.
+     * @param first The border of the value.
      */
-    void adjustment(Adjustment adjustment);
+    public Min(final float first) {
+        this.first = first;
+    }
+
+    @Override
+    public final float adjusted(final float current) {
+        return Math.max(this.first, current);
+    }
 }
