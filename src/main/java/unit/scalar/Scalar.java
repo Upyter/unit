@@ -21,8 +21,6 @@
 
 package unit.scalar;
 
-import unit.functional.FloatSupplier;
-
 /**
  * A one-dimensional float based value.
  * @see FixScalar
@@ -31,7 +29,13 @@ import unit.functional.FloatSupplier;
  * @see unit.size.Size
  * @since 0.98
  */
-public interface Scalar extends FloatSupplier {
+public interface Scalar {
+    /**
+     * Returns the value of the scalar.
+     * @return The value of the scalar.
+     */
+    float value();
+
     /**
      * (Perhaps) registers the given adjustment and uses it for its value. This
      * method overwrites the previously given adjustments.

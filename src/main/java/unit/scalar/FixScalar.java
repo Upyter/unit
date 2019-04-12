@@ -62,7 +62,7 @@ public class FixScalar implements Scalar {
     }
 
     @Override
-    public final float getAsFloat() {
+    public final float value() {
         return this.supplier.getAsFloat();
     }
 
@@ -71,5 +71,30 @@ public class FixScalar implements Scalar {
         // a fixed scalar ignores adjustments
     }
 
+    @Override
+    public final boolean equals(final Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (!(obj instanceof Scalar)) {
+            return false;
+        }
+        final Scalar other = (Scalar) obj;
+        return Float.compare(this.value(), other.value()) == 0;
+    }
 
+    @Override
+    public final int hashCode() {
+        return Objects.hashCode(this.supplier.getAsFloat());
+    }
+
+    @Override
+    public final String toString() {
+        return String.join(
+            "",
+            "FixScalar(",
+            Float.toString(this.supplier.getAsFloat()),
+            ")"
+        );
+    }
 }
