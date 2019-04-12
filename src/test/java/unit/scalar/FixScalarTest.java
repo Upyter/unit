@@ -113,4 +113,23 @@ public final class FixScalarTest {
             Matchers.closeTo(0.0, new Delta(0.0).value())
         );
     }
+
+    /**
+     * {@link FixScalar#getAsFloat()} must return the given value even if
+     * the adjustment from {@link FixScalar#adjustment(Adjustment)} would
+     * result in something else.
+     */
+    @Test
+    public void adjustmentsDontDoAnything() {
+        final float value = 76.34F;
+        final float other = Float.MAX_VALUE;
+        final var scalar = new FixScalar(value);
+        scalar.adjustment(ignore -> other);
+        MatcherAssert.assertThat(
+            (double) scalar.getAsFloat(),
+            Matchers.closeTo(
+                (double) value,
+                new Delta((double) value).value())
+        );
+    }
 }

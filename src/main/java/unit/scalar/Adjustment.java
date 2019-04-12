@@ -21,55 +21,18 @@
 
 package unit.scalar;
 
-import java.util.Objects;
-import unit.functional.FloatSupplier;
-
 /**
- * A one-dimensional fixed value. It ignores adjustments.
- * <p>Whether this class is immutable or thread-safe depends on the constructor
- * arguments.</p>
+ * An adjustment of a float based scalar.
+ * @see unit.area.Adjustment
  * @see unit.pos.Pos
  * @see unit.size.Size
- * @since 0.97
+ * @since 0.98
  */
-public class FixScalar implements Scalar {
+public interface Adjustment {
     /**
-     * The supplier that gives this scalar its value.
+     * Returns an adjusted version of the given value.
+     * @param current The current value.
+     * @return The adjusted value.
      */
-    private final FloatSupplier supplier;
-
-    /**
-     * Uses 0.0F as its value.
-     */
-    public FixScalar() {
-        this(0.0F);
-    }
-
-    /**
-     * Ctor.
-     * @param value The value that this scalar will have.
-     */
-    public FixScalar(final float value) {
-        this(() -> value);
-    }
-
-    /**
-     * Ctor.
-     * @param supplier The supplier that gives this scalar its value.
-     */
-    public FixScalar(final FloatSupplier supplier) {
-        this.supplier = Objects.requireNonNull(supplier);
-    }
-
-    @Override
-    public final float getAsFloat() {
-        return this.supplier.getAsFloat();
-    }
-
-    @Override
-    public final void adjustment(final Adjustment adjustment) {
-        // a fixed scalar ignores adjustments
-    }
-
-
+    float adjusted(float current);
 }
