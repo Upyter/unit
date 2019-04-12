@@ -21,7 +21,7 @@
 
 package unit.pos;
 
-import java.util.function.BiFunction;
+import java.util.Objects;
 import java.util.function.Supplier;
 import unit.tuple.adjustment.NoAdjustment;
 import unit.tuple.adjustment.TupleAdjustment;
@@ -102,22 +102,22 @@ public class SoftPos implements AdjustablePos {
      * @param pos The pos to adjust.
      */
     public SoftPos(final Pos pos) {
-        this.pos = pos;
+        this.pos = Objects.requireNonNull(pos);
         this.border = NoAdjustment.cached();
         this.adjustment = NoAdjustment.cached();
     }
 
     @Override
-    public final <R> R result(final BiFunction<Integer, Integer, R> target) {
-        return this.pos.result(
-            (width, height) -> target.apply(
-                this.border.adjustedFirst(
-                    this.adjustment.adjustedFirst(width)
-                ),
-                this.border.adjustedSecond(
-                    this.adjustment.adjustedSecond(height)
-                )
-            )
+    public final int x() {
+        return this.border.adjustedFirst(
+            this.adjustment.adjustedFirst(this.pos.x())
+        );
+    }
+
+    @Override
+    public final int y() {
+        return this.border.adjustedSecond(
+            this.adjustment.adjustedSecond(this.pos.y())
         );
     }
 
@@ -126,7 +126,7 @@ public class SoftPos implements AdjustablePos {
     public final void adjustment(
         final TupleAdjustment<Integer, Integer> adjustment
     ) {
-        this.adjustment = adjustment;
+        this.adjustment = Objects.requireNonNull(adjustment);
     }
 
     @SuppressWarnings("PMD.OnlyOneReturn")

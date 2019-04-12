@@ -21,33 +21,30 @@
 
 package unit.pos;
 
-import org.hamcrest.MatcherAssert;
-import org.junit.Test;
-import unit.tuple.matcher.CorrectResult;
+import java.util.function.BiFunction;
+import unit.tuple.Tuple;
 
 /**
- * Tests for {@link SumY}.
- * @since 0.56
+ * An adapter for a {@link Pos} to use it as a tuple.
+ * <p>Whether this class is mutable depends on the constructor arguments.</p>
+ * @since 0.96
  */
-public final class SumYTest {
+public class AsTuple implements Tuple<Integer, Integer> {
     /**
-     * {@link Sum#x()} and {@link Sum#y()} must give the resulting x and y of
-     * the position sum when constructed with {@link SumY#SumY(Pos, int)}.
+     * The pos to be used as a tuple.
      */
-    @Test
-    public void someYtoPos() {
-        // @checkstyle LocalFinalVariableName (3 lines)
-        final int x = 873;
-        final int y1 = 54;
-        final int y2 = 76;
-        MatcherAssert.assertThat(
-            new AsTuple(
-                    new SumY(
-                    new FixPos(x, y1),
-                    y2
-                )
-            ),
-            new CorrectResult(x, y1 + y2)
-        );
+    private final Pos pos;
+
+    /**
+     * Ctor.
+     * @param pos The pos to be used as a tuple.
+     */
+    public AsTuple(final Pos pos) {
+        this.pos = pos;
+    }
+
+    @Override
+    public final <R> R result(final BiFunction<Integer, Integer, R> target) {
+        return target.apply(this.pos.x(), this.pos.y());
     }
 }

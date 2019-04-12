@@ -78,14 +78,8 @@ public final class AreaTest {
                 new FixSize(resW, resH)
             ),
             (pos, size) -> {
-                pos.result(
-                    // @checkstyle ParameterName (1 line)
-                    (x, y) -> {
-                        MatcherAssert.assertThat(x, Matchers.equalTo(resX));
-                        MatcherAssert.assertThat(y, Matchers.equalTo(resY));
-                        return null;
-                    }
-                );
+                MatcherAssert.assertThat(pos.x(), Matchers.equalTo(resX));
+                MatcherAssert.assertThat(pos.y(), Matchers.equalTo(resY));
                 size.result(
                     (width, height) -> {
                         MatcherAssert.assertThat(width, Matchers.equalTo(resW));

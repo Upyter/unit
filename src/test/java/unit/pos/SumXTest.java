@@ -21,7 +21,6 @@
 
 package unit.pos;
 
-import java.util.function.BiFunction;
 import org.hamcrest.MatcherAssert;
 import org.junit.Test;
 import unit.tuple.matcher.CorrectResult;
@@ -32,8 +31,8 @@ import unit.tuple.matcher.CorrectResult;
  */
 public final class SumXTest {
     /**
-     * {@link SumX#result(BiFunction)} must give the resulting x and y of the
-     * position sum when constructed with {@link SumX#SumX(Pos, int)}.
+     * {@link Sum#x()} and {@link Sum#y()} must give the resulting x and y of
+     * the position sum when constructed with {@link SumX#SumX(Pos, int)}.
      */
     @Test
     public void someYtoPos() {
@@ -42,9 +41,11 @@ public final class SumXTest {
         final int y = 5864;
         final int x2 = 875;
         MatcherAssert.assertThat(
-            new SumX(
-                new FixPos(x1, y),
-                x2
+            new AsTuple(
+                new SumX(
+                    new FixPos(x1, y),
+                    x2
+                )
             ),
             new CorrectResult(x1 + x2, y)
         );

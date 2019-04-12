@@ -21,7 +21,6 @@
 
 package unit.pos;
 
-import java.util.function.BiFunction;
 import org.hamcrest.MatcherAssert;
 import org.junit.Test;
 import unit.tuple.matcher.CorrectResult;
@@ -32,8 +31,8 @@ import unit.tuple.matcher.CorrectResult;
  */
 public final class SumTest {
     /**
-     * {@link Sum#result(BiFunction)} must give the resulting x and y of the
-     * position sum when constructed with {@link Sum#Sum(Pos, Pos)}.
+     * {@link Sum#x()} and {@link Sum#y()} must give the resulting x and y of
+     * the position sum when constructed with {@link Sum#Sum(Pos, Pos)}.
      */
     @Test
     public void sumOfPositions() {
@@ -43,17 +42,19 @@ public final class SumTest {
         final int x2 = 434;
         final int y2 = 542;
         MatcherAssert.assertThat(
-            new Sum(
-                new FixPos(x1, y1),
-                new FixPos(x2, y2)
+            new AsTuple(
+                new Sum(
+                    new FixPos(x1, y1),
+                    new FixPos(x2, y2)
+                )
             ),
             new CorrectResult(x1 + x2, y1 + y2)
         );
     }
 
     /**
-     * {@link Sum#result(BiFunction)} must give the resulting x and y of the
-     * position sum when constructed with {@link Sum#Sum(Pos, int, int)}.
+     * {@link Sum#x()} and {@link Sum#y()} must give the resulting x and y of
+     * the position sum when constructed with {@link Sum#Sum(Pos, int, int)}.
      */
     @Test
     public void sumWithScalars() {
@@ -63,10 +64,12 @@ public final class SumTest {
         final int x2 = 342;
         final int y2 = 756;
         MatcherAssert.assertThat(
-            new Sum(
-                new FixPos(x1, y1),
-                x2,
-                y2
+            new AsTuple(
+                new Sum(
+                    new FixPos(x1, y1),
+                    x2,
+                    y2
+                )
             ),
             new CorrectResult(x1 + x2, y1 + y2)
         );

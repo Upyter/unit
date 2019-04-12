@@ -25,6 +25,7 @@ import java.util.function.BiFunction;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
+import unit.pos.AsTuple;
 import unit.pos.FixPos;
 import unit.pos.Pos;
 import unit.size.FixSize;
@@ -71,7 +72,7 @@ public final class AreaOfTest {
             new AreaOf(new FixPos(resX, resY)),
             (pos, size) -> {
                 Tuple.applyOn(
-                    pos,
+                    new AsTuple(pos),
                     // @checkstyle ParameterName (1 line)
                     (x, y) -> {
                         MatcherAssert.assertThat(x, Matchers.equalTo(resX));
@@ -101,7 +102,7 @@ public final class AreaOfTest {
             new AreaOf(new FixSize(resW, resH)),
             (pos, size) -> {
                 Tuple.applyOn(
-                    pos,
+                    new AsTuple(pos),
                     // @checkstyle ParameterName (1 line)
                     (x, y) -> {
                         MatcherAssert.assertThat(x, Matchers.equalTo(0));
@@ -136,7 +137,7 @@ public final class AreaOfTest {
             new AreaOf(resX, resY, resW, resH),
             (pos, size) -> {
                 Tuple.applyOn(
-                    pos,
+                    new AsTuple(pos),
                     // @checkstyle ParameterName (1 line)
                     (x, y) -> {
                         MatcherAssert.assertThat(x, Matchers.equalTo(resX));

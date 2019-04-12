@@ -21,8 +21,6 @@
 
 package unit.pos;
 
-import unit.tuple.Tuple;
-
 /*
 This interface is necessary (compared to using x and y each time) because this
 library depends on the possibility to implement own implementations like a
@@ -37,4 +35,16 @@ sacrificing readability
  * A cartesian two dimensional pos.
  * @since 0.2
  */
-public interface Pos extends Tuple<Integer, Integer>  { }
+public interface Pos {
+    /**
+     * The x coordinate of the position.
+     * @return The x coordinate.
+     */
+    int x();
+
+    /**
+     * The y coordinate of the position.
+     * @return The y coordinate.
+     */
+    int y();
+}

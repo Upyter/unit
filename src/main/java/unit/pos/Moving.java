@@ -21,7 +21,7 @@
 
 package unit.pos;
 
-import java.util.function.BiFunction;
+import java.util.Objects;
 import unit.sequence.Elapsable;
 
 /**
@@ -53,21 +53,22 @@ public class Moving implements Pos {
      *  move.
      */
     public Moving(final Pos start, final Pos end, final Elapsable elapsable) {
-        this.start = start;
-        this.end = end;
-        this.elapsable = elapsable;
+        this.start = Objects.requireNonNull(start);
+        this.end = Objects.requireNonNull(end);
+        this.elapsable = Objects.requireNonNull(elapsable);
     }
 
     @Override
-    public final <R> R result(final BiFunction<Integer, Integer, R> target) {
-        return this.start.result(
-            // @checkstyle ParameterName (2 lines)
-            (fx, fy) -> this.end.result(
-                (sx, sy) -> target.apply(
-                    (int) (fx + (sx - fx) * this.elapsable.elapsedPercent()),
-                    (int) (fy + (sy - fy) * this.elapsable.elapsedPercent())
-                )
-            )
-        );
+    public final int x() {
+        return (int) (this.start.x() + (this.end.x() - this.start.x())
+            * this.elapsable.elapsedPercent());
     }
+
+    @Override
+    public final int y() {
+        return (int) (this.start.y() + (this.end.y() - this.start.y())
+            * this.elapsable.elapsedPercent());
+    }
+
+    // TODO: Implement equals, hashCode and toString
 }

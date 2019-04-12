@@ -25,7 +25,6 @@ import nl.jqno.equalsverifier.EqualsVerifier;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
-import unit.tuple.Tuple;
 
 /**
  * Tests for {@link Pos}.
@@ -64,13 +63,9 @@ public final class FixPosTest {
      */
     @Test
     public void defaultConstructorCorrectCoordinates() {
-        Tuple.applyOn(
-            new FixPos(),
-            // @checkstyle ParameterName (1 line)
-            (x, y) -> {
-                MatcherAssert.assertThat(x, Matchers.equalTo(0));
-                MatcherAssert.assertThat(y, Matchers.equalTo(0));
-            }
-        );
+        final var pos = new FixPos();
+        // @checkstyle ParameterName (1 line)
+        MatcherAssert.assertThat(pos.x(), Matchers.is(0));
+        MatcherAssert.assertThat(pos.y(), Matchers.is(0));
     }
 }

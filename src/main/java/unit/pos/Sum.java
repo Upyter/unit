@@ -21,7 +21,7 @@
 
 package unit.pos;
 
-import java.util.function.BiFunction;
+import java.util.Objects;
 import java.util.function.Supplier;
 
 /**
@@ -99,17 +99,17 @@ public class Sum implements Pos {
      * @param second The second position of the sum.
      */
     public Sum(final Pos first, final Pos second) {
-        this.first = first;
-        this.second = second;
+        this.first = Objects.requireNonNull(first);
+        this.second = Objects.requireNonNull(second);
     }
 
     @Override
-    public final <R> R result(final BiFunction<Integer, Integer, R> target) {
-        return this.first.result(
-            // @checkstyle ParameterName (2 lines)
-            (x1, y1) -> this.second.result(
-                (x2, y2) -> target.apply(x1 + x2, y1 + y2)
-            )
-        );
+    public final int x() {
+        return this.first.x() + this.second.x();
+    }
+
+    @Override
+    public final int y() {
+        return this.first.y() + this.second.y();
     }
 }

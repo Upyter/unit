@@ -22,7 +22,6 @@
 package unit.pos;
 
 import java.util.Objects;
-import java.util.function.BiFunction;
 import java.util.function.Supplier;
 import unit.tuple.adjustment.TupleAdjustment;
 
@@ -100,8 +99,13 @@ public class FixPos implements AdjustablePos {
     }
 
     @Override
-    public final <R> R result(final BiFunction<Integer, Integer, R> target) {
-        return Objects.requireNonNull(target).apply(this.x.get(), this.y.get());
+    public final int x() {
+        return this.x.get();
+    }
+
+    @Override
+    public final int y() {
+        return this.y.get();
     }
 
     @Override
@@ -120,23 +124,20 @@ public class FixPos implements AdjustablePos {
         if (!(obj instanceof Pos)) {
             return false;
         }
-        return ((Pos) obj).result(
-            // @checkstyle ParameterName (1 lines)
-            (otherX, otherY) -> otherX.equals(this.x.get())
-                && otherY.equals(this.y.get())
-        );
+        final Pos other = (Pos) obj;
+        return this.x() == other.x() && this.y() == other.y();
     }
 
     @Override
     public final int hashCode() {
-        return Objects.hash(this.x, this.y);
+        return Objects.hash(this.x(), this.y());
     }
 
     @Override
     public final String toString() {
         return new StringBuilder("Pos")
-            .append("(x = ").append(this.x.get())
-            .append(", y = ").append(this.y.get())
+            .append("(x = ").append(this.x())
+            .append(", y = ").append(this.y())
             .append(')')
             .toString();
     }
