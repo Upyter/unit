@@ -25,24 +25,29 @@ import java.util.Objects;
 import unit.functional.FloatSupplier;
 
 /**
- * A one-dimensional fixed value. It ignores adjustments.
- * <p>Whether this class is immutable or thread-safe depends on the constructor
- * arguments.</p>
- * @see SoftScalar
+ * A one-dimensional soft value. It uses the given adjustment.
+ * <p>This class is mutable and not thread-safe because of
+ * {@link #adjustment(Adjustment)}.<\p>
+ * @see FixScalar
  * @see unit.pos.Pos
  * @see unit.size.Size
- * @since 0.97
+ * @since 0.100
  */
-public class FixScalar implements Scalar {
+public class SoftScalar implements Scalar {
     /**
      * The supplier that gives this scalar its value.
      */
     private final FloatSupplier supplier;
 
     /**
+     * The adjustment of the value.
+     */
+    private Adjustment adjustment;
+
+    /**
      * Uses 0.0F as its value.
      */
-    public FixScalar() {
+    public SoftScalar() {
         this(0.0F);
     }
 
@@ -50,7 +55,7 @@ public class FixScalar implements Scalar {
      * Ctor.
      * @param value The value that this scalar will have.
      */
-    public FixScalar(final float value) {
+    public SoftScalar(final float value) {
         this(() -> value);
     }
 
@@ -58,18 +63,19 @@ public class FixScalar implements Scalar {
      * Ctor.
      * @param supplier The supplier that gives this scalar its value.
      */
-    public FixScalar(final FloatSupplier supplier) {
+    public SoftScalar(final FloatSupplier supplier) {
         this.supplier = Objects.requireNonNull(supplier);
+        this.adjustment = new Identity();
     }
 
     @Override
     public final float value() {
-        return this.supplier.getAsFloat();
+        return this.adjustment.adjusted(this.supplier.getAsFloat());
     }
 
     @Override
     public final void adjustment(final Adjustment adjustment) {
-        // a fixed scalar ignores adjustments
+        this.adjustment = Objects.requireNonNull(adjustment);
     }
 
     @Override
@@ -93,8 +99,10 @@ public class FixScalar implements Scalar {
     public final String toString() {
         return String.join(
             "",
-            "FixScalar(",
+            "SoftScalar(",
             Float.toString(this.supplier.getAsFloat()),
+            ", adjusted: ",
+            Float.toString(this.value()),
             ")"
         );
     }
