@@ -63,7 +63,7 @@ public final class FixSizeTest {
     @Test
     public void defaultConstructorCorrectCoordinates() {
         MatcherAssert.assertThat(
-            new FixSize(),
+            new AsTuple(new FixSize()),
             new CorrectResult(0, 0)
         );
     }

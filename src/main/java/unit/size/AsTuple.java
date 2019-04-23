@@ -21,46 +21,30 @@
 
 package unit.size;
 
-/*
-This interface is necessary (compared to using width and height each time)
-because this library depends on the possibility to implement own
-implementations like a scaling size
-*/
+import java.util.function.BiFunction;
+import unit.tuple.Tuple;
 
 /**
- * The two dimensional cartesian based size of a rectangular area.
- * Implementations of this interface are equal to each other.
- * @since 0.4
+ * An adapter for a {@link Size} to use it as a tuple.
+ * <p>Whether this class is mutable depends on the constructor arguments.</p>
+ * @since 0.103
  */
-public interface Size {
+public class AsTuple implements Tuple<Integer, Integer> {
     /**
-     * Returns the width.
-     * @return The width.
+     * The size to be used as a tuple.
      */
-    double w();
+    private final Size size;
 
     /**
-     * Returns the height.
-     * @return The height.
+     * Ctor.
+     * @param size The size to be used as a tuple.
      */
-    double h();
+    public AsTuple(final Size size) {
+        this.size = size;
+    }
 
-    /**
-     * Returns the unadjusted height.
-     * @return The unadjusted height.
-     */
-    double cleanW();
-
-    /**
-     * Returns the unadjusted height.
-     * @return The unadjusted height.
-     */
-    double cleanH();
-
-    /**
-     * Returns true if the size is fix (doesn't use adjustments from
-     * {@link AdjustableSize#adjustment(Object)} or otherwise false.
-     * @return True if the size is fix and otherwise false.
-     */
-    boolean isFix();
+    @Override
+    public final <R> R result(final BiFunction<Integer, Integer, R> target) {
+        return target.apply((int) this.size.w(), (int) this.size.h());
+    }
 }

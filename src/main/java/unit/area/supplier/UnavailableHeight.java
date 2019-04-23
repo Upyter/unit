@@ -63,11 +63,7 @@ public class UnavailableHeight implements Supplier<Integer> {
                 int result = 0;
                 for (final Area area : areas) {
                     if (area.result((pos, size) -> size.isFix())) {
-                        result += area.result(
-                            (pos, size) -> size.result(
-                                (width, height) -> height
-                            )
-                        );
+                        result += area.result((pos, size) -> size.h());
                     }
                 }
                 return Math.max(0, result);

@@ -61,9 +61,7 @@ public class CleanHeight implements Supplier<Integer> {
                 int result = 0;
                 for (final Area area : areas) {
                     result += area.result(
-                        (pos, size) -> size.cleanResult(
-                            (width, height) -> height
-                        )
+                        (pos, size) -> size.cleanH()
                     );
                 }
                 return result;

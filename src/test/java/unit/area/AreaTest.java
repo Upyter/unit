@@ -80,15 +80,8 @@ public final class AreaTest {
             (pos, size) -> {
                 MatcherAssert.assertThat(pos.x(), Matchers.equalTo(resX));
                 MatcherAssert.assertThat(pos.y(), Matchers.equalTo(resY));
-                size.result(
-                    (width, height) -> {
-                        MatcherAssert.assertThat(width, Matchers.equalTo(resW));
-                        MatcherAssert.assertThat(
-                            height, Matchers.equalTo(resH)
-                        );
-                        return null;
-                    }
-                );
+                MatcherAssert.assertThat(size.w(), Matchers.equalTo(resW));
+                MatcherAssert.assertThat(size.h(), Matchers.equalTo(resH));
             }
         );
     }

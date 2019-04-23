@@ -64,7 +64,7 @@ public class UnavailableWidth implements Supplier<Integer> {
                 for (final Area area : areas) {
                     if (area.result((pos, size) -> size.isFix())) {
                         result += area.result(
-                            (pos, size) -> size.result((width, height) -> width)
+                            (pos, size) -> size.w()
                         );
                     }
                 }

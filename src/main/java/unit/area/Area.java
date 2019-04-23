@@ -65,10 +65,8 @@ public interface Area extends Tuple<Pos, Size>, Adjustable<Adjustment> {
         final QuadFunction<Integer, Integer, Integer, Integer, R> target
     ) {
         return area.result(
-            (pos, size) -> size.result(
-                (width, height) -> target.apply(
-                    (int) pos.x(), (int) pos.y(), width, height
-                )
+            (pos, size) -> target.apply(
+                (int) pos.x(), (int) pos.y(), (int) size.w(), (int) size.h()
             )
         );
     }

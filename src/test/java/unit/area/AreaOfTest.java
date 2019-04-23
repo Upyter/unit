@@ -79,13 +79,8 @@ public final class AreaOfTest {
                         MatcherAssert.assertThat(y, Matchers.equalTo(resY));
                     }
                 );
-                Tuple.applyOn(
-                    size,
-                    (width, height) -> {
-                        MatcherAssert.assertThat(width, Matchers.equalTo(0));
-                        MatcherAssert.assertThat(height, Matchers.equalTo(0));
-                    }
-                );
+                MatcherAssert.assertThat(size.w(), Matchers.equalTo(0));
+                MatcherAssert.assertThat(size.h(), Matchers.equalTo(0));
             }
         );
     }
@@ -109,15 +104,8 @@ public final class AreaOfTest {
                         MatcherAssert.assertThat(y, Matchers.equalTo(0));
                     }
                 );
-                Tuple.applyOn(
-                    size,
-                    (width, height) -> {
-                        MatcherAssert.assertThat(width, Matchers.equalTo(resW));
-                        MatcherAssert.assertThat(
-                            height, Matchers.equalTo(resH)
-                        );
-                    }
-                );
+                MatcherAssert.assertThat(size.w(), Matchers.equalTo(resW));
+                MatcherAssert.assertThat(size.h(), Matchers.equalTo(resH));
             }
         );
     }
@@ -144,15 +132,8 @@ public final class AreaOfTest {
                         MatcherAssert.assertThat(y, Matchers.equalTo(resY));
                     }
                 );
-                Tuple.applyOn(
-                    size,
-                    (width, height) -> {
-                        MatcherAssert.assertThat(width, Matchers.equalTo(resW));
-                        MatcherAssert.assertThat(
-                            height, Matchers.equalTo(resH)
-                        );
-                    }
-                );
+                MatcherAssert.assertThat(size.w(), Matchers.equalTo(resW));
+                MatcherAssert.assertThat(size.h(), Matchers.equalTo(resH));
             }
         );
     }

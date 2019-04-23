@@ -22,8 +22,8 @@
 package unit.size;
 
 import java.util.Objects;
-import java.util.function.BiFunction;
-import java.util.function.Supplier;
+import java.util.function.DoubleSupplier;
+import java.util.function.IntSupplier;
 import unit.tuple.adjustment.TupleAdjustment;
 
 /*
@@ -42,12 +42,12 @@ public class FixSize implements AdjustableSize {
     /**
      * The width of the size.
      */
-    private final Supplier<Integer> width;
+    private final DoubleSupplier width;
 
     /**
      * The height of the size.
      */
-    private final Supplier<Integer> height;
+    private final DoubleSupplier height;
 
     /**
      * Ctor. Creates a size with width = 0 and height = 0.
@@ -70,7 +70,7 @@ public class FixSize implements AdjustableSize {
      * @param width The width for the size.
      * @param height The height for the size.
      */
-    public FixSize(final int width, final Supplier<Integer> height) {
+    public FixSize(final int width, final IntSupplier height) {
         this(() -> width, height);
     }
 
@@ -79,7 +79,7 @@ public class FixSize implements AdjustableSize {
      * @param width The width for the size.
      * @param height The height for the size.
      */
-    public FixSize(final Supplier<Integer> width, final int height) {
+    public FixSize(final IntSupplier width, final int height) {
         this(width, () -> height);
     }
 
@@ -89,24 +89,44 @@ public class FixSize implements AdjustableSize {
      * @param height The height for the size.
      */
     public FixSize(
-        final Supplier<Integer> width, final Supplier<Integer> height
+        final IntSupplier width, final IntSupplier height
+    ) {
+        this(
+            () -> (double) width.getAsInt(),
+            () -> (double) height.getAsInt()
+        );
+    }
+
+    /**
+     * Ctor.
+     * @param width The width for the size.
+     * @param height The height for the size.
+     */
+    public FixSize(
+        final DoubleSupplier width, final DoubleSupplier height
     ) {
         this.width = width;
         this.height = height;
     }
 
     @Override
-    public final <R> R result(final BiFunction<Integer, Integer, R> target) {
-        return Objects.requireNonNull(target).apply(
-            this.width.get(), this.height.get()
-        );
+    public final double w() {
+        return this.cleanW();
     }
 
     @Override
-    public final <R> R cleanResult(
-        final BiFunction<Integer, Integer, R> target
-    ) {
-        return target.apply(0, 0);
+    public final double h() {
+        return this.cleanH();
+    }
+
+    @Override
+    public final double cleanW() {
+        return this.width.getAsDouble();
+    }
+
+    @Override
+    public final double cleanH() {
+        return this.height.getAsDouble();
     }
 
     @SuppressWarnings("PMD.OnlyOneReturn")
@@ -118,23 +138,21 @@ public class FixSize implements AdjustableSize {
         if (!(obj instanceof Size)) {
             return false;
         }
-        return ((Size) obj).result(
-            // @checkstyle ParameterName (1 lines)
-            (otherWidth, otherHeight) -> otherWidth.equals(this.width.get())
-                && otherHeight.equals(this.height.get())
-        );
+        final Size other = (Size) obj;
+        return Double.compare(this.w(), other.w()) == 0
+            && Double.compare(this.h(), other.h()) == 0;
     }
 
     @Override
     public final int hashCode() {
-        return Objects.hash(this.width.get(), this.height.get());
+        return Objects.hash(this.w(), this.h());
     }
 
     @Override
     public final String toString() {
         return new StringBuilder("Size")
-            .append("(width = ").append(this.width.get())
-            .append(", height = ").append(this.height.get())
+            .append("(width = ").append(this.width.getAsDouble())
+            .append(", height = ").append(this.height.getAsDouble())
             .append(')')
             .toString();
     }

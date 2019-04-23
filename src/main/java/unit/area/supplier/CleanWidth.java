@@ -61,9 +61,7 @@ public class CleanWidth implements Supplier<Integer> {
                 int result = 0;
                 for (final Area area : areas) {
                     result += area.result(
-                        (pos, size) -> size.cleanResult(
-                            (width, height) -> width
-                        )
+                        (pos, size) -> size.cleanW()
                     );
                 }
                 return result;

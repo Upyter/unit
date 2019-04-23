@@ -21,8 +21,7 @@
 
 package unit.size;
 
-import java.util.function.BiFunction;
-import java.util.function.Supplier;
+import java.util.function.IntSupplier;
 import unit.tuple.adjustment.NoAdjustment;
 import unit.tuple.adjustment.TupleAdjustment;
 
@@ -62,7 +61,7 @@ public class SoftSize implements AdjustableSize {
      * @param width The width of the size.
      * @param height The height of the size.
      */
-    public SoftSize(final int width, final Supplier<Integer> height) {
+    public SoftSize(final int width, final IntSupplier height) {
         this(() -> width, height);
     }
 
@@ -71,7 +70,7 @@ public class SoftSize implements AdjustableSize {
      * @param width The width of the size.
      * @param height The height of the size.
      */
-    public SoftSize(final Supplier<Integer> width, final int height) {
+    public SoftSize(final IntSupplier width, final int height) {
         this(width, () -> height);
     }
 
@@ -90,7 +89,7 @@ public class SoftSize implements AdjustableSize {
      * @param height The height of the size.
      */
     public SoftSize(
-        final Supplier<Integer> width, final Supplier<Integer> height
+        final IntSupplier width, final IntSupplier height
     ) {
         this(new FixSize(width, height));
     }
@@ -106,29 +105,27 @@ public class SoftSize implements AdjustableSize {
     }
 
     @Override
-    public final <R> R result(final BiFunction<Integer, Integer, R> target) {
-        return this.size.result(
-            (width, height) -> target.apply(
-                this.border.adjustedFirst(
-                    this.adjustment.adjustedFirst(width)
-                ),
-                this.border.adjustedSecond(
-                    this.adjustment.adjustedSecond(height)
-                )
-            )
+    public final double w() {
+        return this.border.adjustedFirst(
+            this.adjustment.adjustedFirst((int) this.size.w())
         );
     }
 
     @Override
-    public final <R> R cleanResult(
-        final BiFunction<Integer, Integer, R> target
-    ) {
-        return this.size.result(
-            (width, height) -> target.apply(
-                this.border.adjustedFirst(width),
-                this.border.adjustedSecond(height)
-            )
+    public final double h() {
+        return this.border.adjustedFirst(
+            this.adjustment.adjustedFirst((int) this.size.w())
         );
+    }
+
+    @Override
+    public final double cleanW() {
+        return this.border.adjustedFirst((int) this.size.w());
+    }
+
+    @Override
+    public final double cleanH() {
+        return this.border.adjustedFirst((int) this.size.h());
     }
 
     // @checkstyle HiddenField (3 lines)
