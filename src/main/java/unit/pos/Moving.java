@@ -59,14 +59,14 @@ public class Moving implements Pos {
     }
 
     @Override
-    public final int x() {
-        return (int) (this.start.x() + (this.end.x() - this.start.x())
+    public final double x() {
+        return (this.start.x() + (this.end.x() - this.start.x())
             * this.elapsable.elapsedPercent());
     }
 
     @Override
-    public final int y() {
-        return (int) (this.start.y() + (this.end.y() - this.start.y())
+    public final double y() {
+        return (this.start.y() + (this.end.y() - this.start.y())
             * this.elapsable.elapsedPercent());
     }
 

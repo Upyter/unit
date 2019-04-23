@@ -22,7 +22,8 @@
 package unit.pos;
 
 import java.util.Objects;
-import java.util.function.Supplier;
+import java.util.function.DoubleSupplier;
+import java.util.function.IntSupplier;
 import unit.tuple.adjustment.TupleAdjustment;
 
 /*
@@ -42,13 +43,13 @@ public class FixPos implements AdjustablePos {
      * The x coordinate.
      * @checkstyle MemberName (2 lines)
      */
-    private final Supplier<Integer> x;
+    private final DoubleSupplier x;
 
     /**
      * The y coordinate.
      * @checkstyle MemberName (2 lines)
      */
-    private final Supplier<Integer> y;
+    private final DoubleSupplier y;
 
     /**
      * Ctor. Sets x = 0 and y = 0 as its values.
@@ -73,7 +74,7 @@ public class FixPos implements AdjustablePos {
      * @param y The y coordinate.
      * @checkstyle ParameterName (2 lines)
      */
-    public FixPos(final int x, final Supplier<Integer> y) {
+    public FixPos(final int x, final IntSupplier y) {
         this(() -> x, y);
     }
 
@@ -83,7 +84,7 @@ public class FixPos implements AdjustablePos {
      * @param y The y coordinate.
      * @checkstyle ParameterName (2 lines)
      */
-    public FixPos(final Supplier<Integer> x, final int y) {
+    public FixPos(final IntSupplier x, final int y) {
         this(x, () -> y);
     }
 
@@ -93,19 +94,32 @@ public class FixPos implements AdjustablePos {
      * @param y The y coordinate.
      * @checkstyle ParameterName (2 lines)
      */
-    public FixPos(final Supplier<Integer> x, final Supplier<Integer> y) {
+    public FixPos(final IntSupplier x, final IntSupplier y) {
+        this(
+            () -> (double) x.getAsInt(),
+            () -> (double) y.getAsInt()
+        );
+    }
+
+    /**
+     * Ctor.
+     * @param x The x coordinate.
+     * @param y The y coordinate.
+     * @checkstyle ParameterName (2 lines)
+     */
+    public FixPos(final DoubleSupplier x, final DoubleSupplier y) {
         this.x = Objects.requireNonNull(x);
         this.y = Objects.requireNonNull(y);
     }
 
     @Override
-    public final int x() {
-        return this.x.get();
+    public final double x() {
+        return this.x.getAsDouble();
     }
 
     @Override
-    public final int y() {
-        return this.y.get();
+    public final double y() {
+        return this.y.getAsDouble();
     }
 
     @Override
@@ -125,7 +139,8 @@ public class FixPos implements AdjustablePos {
             return false;
         }
         final Pos other = (Pos) obj;
-        return this.x() == other.x() && this.y() == other.y();
+        return Double.compare(this.x(), other.x()) == 0
+            && Double.compare(this.y(), other.y()) == 0;
     }
 
     @Override

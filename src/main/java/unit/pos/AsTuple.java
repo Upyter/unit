@@ -45,6 +45,6 @@ public class AsTuple implements Tuple<Integer, Integer> {
 
     @Override
     public final <R> R result(final BiFunction<Integer, Integer, R> target) {
-        return target.apply(this.pos.x(), this.pos.y());
+        return target.apply((int) this.pos.x(), (int) this.pos.y());
     }
 }

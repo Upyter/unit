@@ -29,7 +29,7 @@ import unit.scalar.adjustment.Identity;
 /**
  * A one-dimensional soft value. It uses the given adjustment.
  * <p>This class is mutable and not thread-safe because of
- * {@link #adjustment(Adjustment)}.<\p>
+ * {@link #adjustment(Adjustment)}.</p>
  * @see FixScalar
  * @see unit.pos.Pos
  * @see unit.size.Size
@@ -40,6 +40,11 @@ public class SoftScalar implements Scalar {
      * The supplier that gives this scalar its value.
      */
     private final FloatSupplier supplier;
+
+    /**
+     * An additional adjustment to keep the scalar in a certain boundary.
+     */
+    private final Adjustment border;
 
     /**
      * The adjustment of the value.
@@ -66,13 +71,28 @@ public class SoftScalar implements Scalar {
      * @param supplier The supplier that gives this scalar its value.
      */
     public SoftScalar(final FloatSupplier supplier) {
+        this(supplier, new Identity());
+    }
+
+    /**
+     * Ctor.
+     * @param supplier The supplier that gives this scalar its value.
+     * @param border An additional adjustment to keep the scalar in a certain
+     *  boundary.
+     */
+    public SoftScalar(final FloatSupplier supplier, final Adjustment border) {
         this.supplier = Objects.requireNonNull(supplier);
+        this.border = border;
         this.adjustment = new Identity();
     }
 
     @Override
     public final float value() {
-        return this.adjustment.adjusted(this.supplier.getAsFloat());
+        return this.border.adjusted(
+            this.adjustment.adjusted(
+                this.supplier.getAsFloat()
+            )
+        );
     }
 
     @Override

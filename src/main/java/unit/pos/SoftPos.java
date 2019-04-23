@@ -22,7 +22,7 @@
 package unit.pos;
 
 import java.util.Objects;
-import java.util.function.Supplier;
+import java.util.function.IntSupplier;
 import unit.tuple.adjustment.NoAdjustment;
 import unit.tuple.adjustment.TupleAdjustment;
 
@@ -73,7 +73,7 @@ public class SoftPos implements AdjustablePos {
      * @param y The y coordinate.
      * @checkstyle ParameterName (2 lines)
      */
-    public SoftPos(final int x, final Supplier<Integer> y) {
+    public SoftPos(final int x, final IntSupplier y) {
         this(() -> x, y);
     }
 
@@ -83,7 +83,7 @@ public class SoftPos implements AdjustablePos {
      * @param y The y coordinate.
      * @checkstyle ParameterName (2 lines)
      */
-    public SoftPos(final Supplier<Integer> x, final int y) {
+    public SoftPos(final IntSupplier x, final int y) {
         this(x, () -> y);
     }
 
@@ -93,7 +93,7 @@ public class SoftPos implements AdjustablePos {
      * @param y The y coordinate.
      * @checkstyle ParameterName (2 lines)
      */
-    public SoftPos(final Supplier<Integer> x, final Supplier<Integer> y) {
+    public SoftPos(final IntSupplier x, final IntSupplier y) {
         this(new FixPos(x, y));
     }
 
@@ -108,16 +108,16 @@ public class SoftPos implements AdjustablePos {
     }
 
     @Override
-    public final int x() {
+    public final double x() {
         return this.border.adjustedFirst(
-            this.adjustment.adjustedFirst(this.pos.x())
+            this.adjustment.adjustedFirst((int) this.pos.x())
         );
     }
 
     @Override
-    public final int y() {
+    public final double y() {
         return this.border.adjustedSecond(
-            this.adjustment.adjustedSecond(this.pos.y())
+            this.adjustment.adjustedSecond((int) this.pos.y())
         );
     }
 

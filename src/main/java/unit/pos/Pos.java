@@ -40,11 +40,11 @@ public interface Pos {
      * The x coordinate of the position.
      * @return The x coordinate.
      */
-    int x();
+    double x();
 
     /**
      * The y coordinate of the position.
      * @return The y coordinate.
      */
-    int y();
+    double y();
 }

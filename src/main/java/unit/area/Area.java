@@ -66,7 +66,9 @@ public interface Area extends Tuple<Pos, Size>, Adjustable<Adjustment> {
     ) {
         return area.result(
             (pos, size) -> size.result(
-                (width, height) -> target.apply(pos.x(), pos.y(), width, height)
+                (width, height) -> target.apply(
+                    (int) pos.x(), (int) pos.y(), width, height
+                )
             )
         );
     }

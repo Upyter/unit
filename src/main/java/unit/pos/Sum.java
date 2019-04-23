@@ -22,7 +22,7 @@
 package unit.pos;
 
 import java.util.Objects;
-import java.util.function.Supplier;
+import java.util.function.IntSupplier;
 
 /**
  * The sum of a position and something else.
@@ -48,7 +48,7 @@ public class Sum implements Pos {
      * @param y The y to add to the position.
      * @checkstyle ParameterName (2 lines)
      */
-    public Sum(final Pos pos, final int x, final Supplier<Integer> y) {
+    public Sum(final Pos pos, final int x, final IntSupplier y) {
         this(pos, new FixPos(x, y));
     }
 
@@ -59,7 +59,7 @@ public class Sum implements Pos {
      * @param y The y to add to the position.
      * @checkstyle ParameterName (2 lines)
      */
-    public Sum(final Pos pos, final Supplier<Integer> x, final int y) {
+    public Sum(final Pos pos, final IntSupplier x, final int y) {
         this(pos, new FixPos(x, y));
     }
 
@@ -71,7 +71,7 @@ public class Sum implements Pos {
      * @checkstyle ParameterName (3 lines)
      */
     public Sum(
-        final Pos pos, final Supplier<Integer> x, final Supplier<Integer> y
+        final Pos pos, final IntSupplier x, final IntSupplier y
     ) {
         this(
             pos,
@@ -104,12 +104,12 @@ public class Sum implements Pos {
     }
 
     @Override
-    public final int x() {
+    public final double x() {
         return this.first.x() + this.second.x();
     }
 
     @Override
-    public final int y() {
+    public final double y() {
         return this.first.y() + this.second.y();
     }
 }

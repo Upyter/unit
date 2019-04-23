@@ -21,7 +21,7 @@
 
 package unit.pos;
 
-import java.util.function.Supplier;
+import java.util.function.IntSupplier;
 
 /**
  * The sum of a position and an x. Example:
@@ -47,7 +47,7 @@ public class SumX extends Sum {
      * @param x The x to add to the position.
      * @checkstyle ParameterName (2 lines)
      */
-    public SumX(final Pos pos, final Supplier<Integer> x) {
+    public SumX(final Pos pos, final IntSupplier x) {
         super(pos, x, 0);
     }
 }

@@ -21,7 +21,7 @@
 
 package unit.pos;
 
-import java.util.function.Supplier;
+import java.util.function.IntSupplier;
 
 /**
  * The sum of a position and an y. Example:
@@ -47,7 +47,7 @@ public class SumY extends Sum {
      * @param y The y to add to the position.
      * @checkstyle ParameterName (2 lines)
      */
-    public SumY(final Pos pos, final Supplier<Integer> y) {
+    public SumY(final Pos pos, final IntSupplier y) {
         super(pos, 0, y);
     }
 }
