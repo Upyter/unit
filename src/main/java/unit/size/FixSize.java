@@ -152,12 +152,12 @@ public class FixSize implements AdjustableSize {
 
     @Override
     public final double w() {
-        return this.cleanW().cleanValue();
+        return this.width.value();
     }
 
     @Override
     public final double h() {
-        return this.cleanH().cleanValue();
+        return this.height.value();
     }
 
     @Override
