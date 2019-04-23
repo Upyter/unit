@@ -70,7 +70,7 @@ public class FixScalar implements Scalar {
 
     @Override
     public final double cleanValue() {
-        return this.supplier.getAsDouble();
+        return 0.0;
     }
 
     @Override
