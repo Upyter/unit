@@ -22,7 +22,7 @@
 package unit.area.supplier;
 
 import java.util.Objects;
-import java.util.function.Supplier;
+import java.util.function.IntSupplier;
 import unit.area.Area;
 
 /**
@@ -32,7 +32,7 @@ import unit.area.Area;
  * @see CleanHeight
  * @since 0.85
  */
-public class Width implements Supplier<Integer> {
+public class Width implements IntSupplier {
     /**
      * The area to use the width from.
      */
@@ -47,11 +47,7 @@ public class Width implements Supplier<Integer> {
     }
 
     @Override
-    public final Integer get() {
-        return Area.result(
-            this.area,
-            // @checkstyle ParameterName (1 line)
-            (x, y, width, height) -> width
-        );
+    public final int getAsInt() {
+        return (int) this.area.w();
     }
 }

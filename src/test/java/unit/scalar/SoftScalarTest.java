@@ -21,6 +21,7 @@
 
 package unit.scalar;
 
+import java.util.function.DoubleSupplier;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
@@ -39,14 +40,14 @@ public final class SoftScalarTest {
      */
     @Test
     public void fixedSupplierValue() {
-        final float value = 45.75F;
+        final var value = 45.75;
         MatcherAssert.assertThat(
-            (double) new SoftScalar(
+            new SoftScalar(
                 () -> value
             ).value(),
             Matchers.closeTo(
-                (double) value,
-                new Delta((double) value).value())
+                value,
+                new Delta(value).value())
         );
     }
 
@@ -57,14 +58,14 @@ public final class SoftScalarTest {
      */
     @Test
     public void reactsToChangingSupplier() {
-        final float first = 423.64F;
-        final float second = 6.3F;
-        final FloatSupplier supplier = new FloatSupplier() {
+        final var first = 423.64;
+        final var second = 6.3;
+        final var supplier = new DoubleSupplier() {
             private boolean called = false;
 
             @Override
-            public float getAsFloat() {
-                final float result;
+            public double getAsDouble() {
+                final double result;
                 if (this.called) {
                     result = second;
                 } else {
@@ -75,13 +76,13 @@ public final class SoftScalarTest {
             }
         };
         MatcherAssert.assertThat(
-            (double) new SoftScalar(supplier).value(),
+            new SoftScalar(supplier).value(),
             Matchers.closeTo(
                 (double) first,
                 new Delta((double) first).value())
         );
         MatcherAssert.assertThat(
-            (double) new SoftScalar(supplier).value(),
+            new SoftScalar(supplier).value(),
             Matchers.closeTo(
                 (double) second,
                 new Delta((double) second).value())
@@ -94,9 +95,9 @@ public final class SoftScalarTest {
      */
     @Test
     public void floatConstructor() {
-        final float value = 68.45F;
+        final var value = 68.45;
         MatcherAssert.assertThat(
-            (double) new SoftScalar(value).value(),
+            new SoftScalar(value).value(),
             Matchers.closeTo(
                 (double) value,
                 new Delta((double) value).value())
@@ -121,15 +122,15 @@ public final class SoftScalarTest {
      */
     @Test
     public void adjustmentIsUsed() {
-        final float value = 6.34F;
-        final float other = Float.MAX_VALUE;
+        final var value = 6.34;
+        final var other = Double.MAX_VALUE;
         final var scalar = new SoftScalar(value);
         scalar.adjustment(ignore -> other);
         MatcherAssert.assertThat(
-            (double) scalar.value(),
+            scalar.value(),
             Matchers.closeTo(
-                (double) other,
-                new Delta((double) other).value())
+                other,
+                new Delta(other).value())
         );
     }
 
@@ -141,17 +142,17 @@ public final class SoftScalarTest {
      */
     @Test
     public void adjustmentOverwrites() {
-        final float value = 6.34F;
-        final float other = Float.MAX_VALUE;
-        final float last = Float.MIN_VALUE;
+        final var value = 6.34;
+        final var other = Double.MAX_VALUE;
+        final var last = Double.MIN_VALUE;
         final var scalar = new SoftScalar(value);
         scalar.adjustment(ignore -> other);
         scalar.adjustment(ignore -> last);
         MatcherAssert.assertThat(
-            (double) scalar.value(),
+            scalar.value(),
             Matchers.closeTo(
-                (double) last,
-                new Delta((double) last).value())
+                last,
+                new Delta(last).value())
         );
     }
 
@@ -161,8 +162,8 @@ public final class SoftScalarTest {
      */
     @Test
     public void correctToString() {
-        final float value = 241.12F;
-        final float adjusted = 573.4F;
+        final var value = 241.12;
+        final var adjusted = 573.4;
         final var scalar = new SoftScalar(value);
         scalar.adjustment(current -> adjusted);
         MatcherAssert.assertThat(

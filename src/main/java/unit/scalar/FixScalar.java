@@ -22,7 +22,7 @@
 package unit.scalar;
 
 import java.util.Objects;
-import unit.functional.FloatSupplier;
+import java.util.function.DoubleSupplier;
 import unit.scalar.adjustment.Adjustment;
 
 /**
@@ -38,20 +38,20 @@ public class FixScalar implements Scalar {
     /**
      * The supplier that gives this scalar its value.
      */
-    private final FloatSupplier supplier;
+    private final DoubleSupplier supplier;
 
     /**
-     * Uses 0.0F as its value.
+     * Uses 0.0 as its value.
      */
     public FixScalar() {
-        this(0.0F);
+        this(0.0);
     }
 
     /**
      * Ctor.
      * @param value The value that this scalar will have.
      */
-    public FixScalar(final float value) {
+    public FixScalar(final double value) {
         this(() -> value);
     }
 
@@ -59,13 +59,23 @@ public class FixScalar implements Scalar {
      * Ctor.
      * @param supplier The supplier that gives this scalar its value.
      */
-    public FixScalar(final FloatSupplier supplier) {
+    public FixScalar(final DoubleSupplier supplier) {
         this.supplier = Objects.requireNonNull(supplier);
     }
 
     @Override
-    public final float value() {
-        return this.supplier.getAsFloat();
+    public final double value() {
+        return this.cleanValue();
+    }
+
+    @Override
+    public final double cleanValue() {
+        return this.supplier.getAsDouble();
+    }
+
+    @Override
+    public final boolean isFix() {
+        return true;
     }
 
     @Override
@@ -82,12 +92,12 @@ public class FixScalar implements Scalar {
             return false;
         }
         final Scalar other = (Scalar) obj;
-        return Float.compare(this.value(), other.value()) == 0;
+        return Double.compare(this.value(), other.value()) == 0;
     }
 
     @Override
     public final int hashCode() {
-        return Objects.hashCode(this.supplier.getAsFloat());
+        return Objects.hashCode(this.supplier.getAsDouble());
     }
 
     @Override
@@ -95,7 +105,7 @@ public class FixScalar implements Scalar {
         return String.join(
             "",
             "FixScalar(",
-            Float.toString(this.supplier.getAsFloat()),
+            Double.toString(this.supplier.getAsDouble()),
             ")"
         );
     }

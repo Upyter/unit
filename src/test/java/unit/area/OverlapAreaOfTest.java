@@ -45,7 +45,7 @@ public final class OverlapAreaOfTest {
         final int width = 452;
         final int height = 264;
         MatcherAssert.assertThat(
-            new OverlapAreaOf(width, height),
+            new AsTuple(new OverlapAreaOf(width, height)),
             new CorrectResult(
                 new FixPos(),
                 new FixSize(width, height)
@@ -62,7 +62,7 @@ public final class OverlapAreaOfTest {
         final int width = 652;
         final int height = 752;
         MatcherAssert.assertThat(
-            new OverlapAreaOf(new FixSize(width, height)),
+            new AsTuple(new OverlapAreaOf(new FixSize(width, height))),
             new CorrectResult(
                 new FixPos(),
                 new FixSize(width, height)
@@ -82,9 +82,11 @@ public final class OverlapAreaOfTest {
         final int width = 452;
         final int height = 264;
         MatcherAssert.assertThat(
-            new OverlapAreaOf(
-                new FixPos(x, y),
-                new FixSize(width, height)
+            new AsTuple(
+                    new OverlapAreaOf(
+                    new FixPos(x, y),
+                    new FixSize(width, height)
+                )
             ),
             new CorrectResult(
                 new FixPos(x, y),
@@ -105,8 +107,10 @@ public final class OverlapAreaOfTest {
         final int width = 52;
         final int height = 4;
         MatcherAssert.assertThat(
-            new OverlapAreaOf(
-                new AreaOf(x, y, width, height)
+            new AsTuple(
+                new OverlapAreaOf(
+                    new AreaOf(x, y, width, height)
+                )
             ),
             new CorrectResult(
                 new FixPos(x, y),

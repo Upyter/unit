@@ -27,6 +27,8 @@ because this library depends on the possibility to implement own
 implementations like a scaling size
 */
 
+import unit.scalar.CleanValue;
+
 /**
  * The two dimensional cartesian based size of a rectangular area.
  * Implementations of this interface are equal to each other.
@@ -49,18 +51,11 @@ public interface Size {
      * Returns the unadjusted height.
      * @return The unadjusted height.
      */
-    double cleanW();
+    CleanValue cleanW();
 
     /**
      * Returns the unadjusted height.
      * @return The unadjusted height.
      */
-    double cleanH();
-
-    /**
-     * Returns true if the size is fix (doesn't use adjustments from
-     * {@link AdjustableSize#adjustment(Object)} or otherwise false.
-     * @return True if the size is fix and otherwise false.
-     */
-    boolean isFix();
+    CleanValue cleanH();
 }

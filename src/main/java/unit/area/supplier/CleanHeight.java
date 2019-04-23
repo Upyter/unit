@@ -22,7 +22,7 @@
 package unit.area.supplier;
 
 import java.util.List;
-import java.util.function.Supplier;
+import java.util.function.IntSupplier;
 import unit.area.Area;
 import unit.functional.Cached;
 import unit.functional.Lazy;
@@ -37,7 +37,7 @@ import unit.functional.Lazy;
  * @see CleanWidth
  * @since 0.77
  */
-public class CleanHeight implements Supplier<Integer> {
+public class CleanHeight implements IntSupplier {
     /**
      * The height of the area(s).
      */
@@ -60,9 +60,7 @@ public class CleanHeight implements Supplier<Integer> {
             () -> {
                 int result = 0;
                 for (final Area area : areas) {
-                    result += area.result(
-                        (pos, size) -> size.cleanH()
-                    );
+                    result += area.cleanH().cleanValue();
                 }
                 return result;
             }
@@ -70,7 +68,7 @@ public class CleanHeight implements Supplier<Integer> {
     }
 
     @Override
-    public final Integer get() {
+    public final int getAsInt() {
         return this.sum.value();
     }
 }

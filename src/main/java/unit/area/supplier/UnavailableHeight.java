@@ -22,7 +22,7 @@
 package unit.area.supplier;
 
 import java.util.List;
-import java.util.function.Supplier;
+import java.util.function.IntSupplier;
 import unit.area.Area;
 import unit.functional.Cached;
 import unit.functional.Lazy;
@@ -39,7 +39,7 @@ import unit.functional.Lazy;
  * @see UnavailableWidth
  * @since 0.87
  */
-public class UnavailableHeight implements Supplier<Integer> {
+public class UnavailableHeight implements IntSupplier {
     /**
      * The unavailable height.
      */
@@ -62,8 +62,8 @@ public class UnavailableHeight implements Supplier<Integer> {
             () -> {
                 int result = 0;
                 for (final Area area : areas) {
-                    if (area.result((pos, size) -> size.isFix())) {
-                        result += area.result((pos, size) -> size.h());
+                    if (area.cleanH().isFix()) {
+                        result += area.h();
                     }
                 }
                 return Math.max(0, result);
@@ -72,7 +72,7 @@ public class UnavailableHeight implements Supplier<Integer> {
     }
 
     @Override
-    public final Integer get() {
+    public final int getAsInt() {
         return this.sum.value();
     }
 }

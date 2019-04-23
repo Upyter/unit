@@ -25,12 +25,10 @@ import java.util.function.BiFunction;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
-import unit.pos.AsTuple;
 import unit.pos.FixPos;
 import unit.pos.Pos;
 import unit.size.FixSize;
 import unit.size.Size;
-import unit.tuple.Tuple;
 import unit.tuple.matcher.CorrectResult;
 
 /**
@@ -49,9 +47,11 @@ public final class AreaOfTest {
         final var resW = 34324;
         final var resH = 233;
         MatcherAssert.assertThat(
-            new AreaOf(
-                new FixPos(resX, resY),
-                new FixSize(resW, resH)
+            new unit.area.AsTuple(
+                new AreaOf(
+                    new FixPos(resX, resY),
+                    new FixSize(resW, resH)
+                )
             ),
             new CorrectResult(
                 new FixPos(resX, resY),
@@ -66,23 +66,13 @@ public final class AreaOfTest {
     @Test
     public void constructsZeroSize() {
         // @checkstyle LocalFinalVariableName (2 lines)
-        final var resX = 76;
-        final var resY = 52;
-        Tuple.applyOn(
-            new AreaOf(new FixPos(resX, resY)),
-            (pos, size) -> {
-                Tuple.applyOn(
-                    new AsTuple(pos),
-                    // @checkstyle ParameterName (1 line)
-                    (x, y) -> {
-                        MatcherAssert.assertThat(x, Matchers.equalTo(resX));
-                        MatcherAssert.assertThat(y, Matchers.equalTo(resY));
-                    }
-                );
-                MatcherAssert.assertThat(size.w(), Matchers.equalTo(0));
-                MatcherAssert.assertThat(size.h(), Matchers.equalTo(0));
-            }
-        );
+        final var x = 76.0;
+        final var y = 52.0;
+        final var area = new AreaOf(new FixPos(x, y));
+        MatcherAssert.assertThat(area.x(), Matchers.equalTo(x));
+        MatcherAssert.assertThat(area.y(), Matchers.equalTo(y));
+        MatcherAssert.assertThat(area.w(), Matchers.equalTo(0.0));
+        MatcherAssert.assertThat(area.h(), Matchers.equalTo(0.0));
     }
 
     /**
@@ -91,23 +81,13 @@ public final class AreaOfTest {
     @Test
     public void constructsZeroPos() {
         // @checkstyle LocalFinalVariableName (2 lines)
-        final var resW = -566;
-        final var resH = -54;
-        Tuple.applyOn(
-            new AreaOf(new FixSize(resW, resH)),
-            (pos, size) -> {
-                Tuple.applyOn(
-                    new AsTuple(pos),
-                    // @checkstyle ParameterName (1 line)
-                    (x, y) -> {
-                        MatcherAssert.assertThat(x, Matchers.equalTo(0));
-                        MatcherAssert.assertThat(y, Matchers.equalTo(0));
-                    }
-                );
-                MatcherAssert.assertThat(size.w(), Matchers.equalTo(resW));
-                MatcherAssert.assertThat(size.h(), Matchers.equalTo(resH));
-            }
-        );
+        final var w = -566.0;
+        final var h = -54.0;
+        final var area = new AreaOf(new FixSize(w, h));
+        MatcherAssert.assertThat(area.x(), Matchers.equalTo(0.0));
+        MatcherAssert.assertThat(area.y(), Matchers.equalTo(0.0));
+        MatcherAssert.assertThat(area.w(), Matchers.equalTo(w));
+        MatcherAssert.assertThat(area.h(), Matchers.equalTo(h));
     }
 
     /**
@@ -117,25 +97,15 @@ public final class AreaOfTest {
     @Test
     public void distributedConstruct() {
         // @checkstyle LocalFinalVariableName (4 lines)
-        final var resX = 4535;
-        final var resY = 12;
-        final var resW = 423;
-        final var resH = 4534;
-        Tuple.applyOn(
-            new AreaOf(resX, resY, resW, resH),
-            (pos, size) -> {
-                Tuple.applyOn(
-                    new AsTuple(pos),
-                    // @checkstyle ParameterName (1 line)
-                    (x, y) -> {
-                        MatcherAssert.assertThat(x, Matchers.equalTo(resX));
-                        MatcherAssert.assertThat(y, Matchers.equalTo(resY));
-                    }
-                );
-                MatcherAssert.assertThat(size.w(), Matchers.equalTo(resW));
-                MatcherAssert.assertThat(size.h(), Matchers.equalTo(resH));
-            }
-        );
+        final var x = 4535.0;
+        final var y = 12.0;
+        final var w = 423.0;
+        final var h = 4534.0;
+        final var area = new AreaOf(x, y, w, h);
+        MatcherAssert.assertThat(area.x(), Matchers.equalTo(x));
+        MatcherAssert.assertThat(area.y(), Matchers.equalTo(y));
+        MatcherAssert.assertThat(area.w(), Matchers.equalTo(w));
+        MatcherAssert.assertThat(area.h(), Matchers.equalTo(h));
     }
 
     /**
@@ -147,7 +117,7 @@ public final class AreaOfTest {
         final int width = 313;
         final int height = 238;
         MatcherAssert.assertThat(
-            new AreaOf(width, height),
+            new AsTuple(new AreaOf(width, height)),
             new CorrectResult(
                 new FixPos(), new FixSize(width, height)
             )
@@ -161,7 +131,7 @@ public final class AreaOfTest {
     @Test
     public void emptyConstruct() {
         MatcherAssert.assertThat(
-            new AreaOf(),
+            new AsTuple(new AreaOf()),
             new CorrectResult(
                 new FixPos(), new FixSize()
             )

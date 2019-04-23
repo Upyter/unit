@@ -31,12 +31,12 @@ import unit.scalar.adjustment.Adjustment;
  * @see unit.size.Size
  * @since 0.98
  */
-public interface Scalar {
+public interface Scalar extends CleanValue {
     /**
      * Returns the value of the scalar.
      * @return The value of the scalar.
      */
-    float value();
+    double value();
 
     /**
      * (Perhaps) registers the given adjustment and uses it for its value. This

@@ -21,8 +21,11 @@
 
 package unit.size;
 
+import java.util.function.DoubleSupplier;
 import java.util.function.IntSupplier;
-import unit.tuple.adjustment.NoAdjustment;
+import unit.scalar.CleanValue;
+import unit.scalar.Scalar;
+import unit.scalar.SoftScalar;
 import unit.tuple.adjustment.TupleAdjustment;
 
 /**
@@ -33,21 +36,14 @@ import unit.tuple.adjustment.TupleAdjustment;
  */
 public class SoftSize implements AdjustableSize {
     /**
-     * The size to adjust.
+     * The width of the size.
      */
-    private final Size size;
+    private final Scalar width;
 
     /**
-     * The adjustment boundaries for the size.
+     * The height of the size.
      */
-    @SuppressWarnings("PMD.AvoidFieldNameMatchingMethodName")
-    private final TupleAdjustment<Integer, Integer> border;
-
-    /**
-     * The adjustment for the size.
-     */
-    @SuppressWarnings("PMD.AvoidFieldNameMatchingMethodName")
-    private TupleAdjustment<Integer, Integer> adjustment;
+    private final Scalar height;
 
     /**
      * Ctor. Uses 0 as the width and the height.
@@ -91,41 +87,54 @@ public class SoftSize implements AdjustableSize {
     public SoftSize(
         final IntSupplier width, final IntSupplier height
     ) {
-        this(new FixSize(width, height));
+        this(
+            () -> (double) width.getAsInt(),
+            () -> (double) height.getAsInt()
+        );
     }
 
     /**
      * Ctor.
-     * @param size The size to adjust.
+     * @param width The width of the size.
+     * @param height The height of the size.
      */
-    public SoftSize(final Size size) {
-        this.size = size;
-        this.border = NoAdjustment.cached();
-        this.adjustment = NoAdjustment.cached();
+    public SoftSize(
+        final DoubleSupplier width, final DoubleSupplier height
+    ) {
+        this(
+            new SoftScalar(width),
+            new SoftScalar(height)
+        );
+    }
+
+    /**
+     * Ctor.
+     * @param width The width of the size.
+     * @param height The height of the size.
+     */
+    public SoftSize(final Scalar width, final Scalar height) {
+        this.width = width;
+        this.height = height;
     }
 
     @Override
     public final double w() {
-        return this.border.adjustedFirst(
-            this.adjustment.adjustedFirst((int) this.size.w())
-        );
+        return this.width.value();
     }
 
     @Override
     public final double h() {
-        return this.border.adjustedFirst(
-            this.adjustment.adjustedFirst((int) this.size.w())
-        );
+        return this.height.value();
     }
 
     @Override
-    public final double cleanW() {
-        return this.border.adjustedFirst((int) this.size.w());
+    public final CleanValue cleanW() {
+        return this.width;
     }
 
     @Override
-    public final double cleanH() {
-        return this.border.adjustedFirst((int) this.size.h());
+    public final CleanValue cleanH() {
+        return this.height;
     }
 
     // @checkstyle HiddenField (3 lines)
@@ -133,11 +142,11 @@ public class SoftSize implements AdjustableSize {
     public final void adjustment(
         final TupleAdjustment<Integer, Integer> adjustment
     ) {
-        this.adjustment = adjustment;
-    }
-
-    @Override
-    public final boolean isFix() {
-        return false;
+        this.width.adjustment(
+            current -> adjustment.adjustedFirst((int) current)
+        );
+        this.height.adjustment(
+            current -> adjustment.adjustedSecond((int) current)
+        );
     }
 }

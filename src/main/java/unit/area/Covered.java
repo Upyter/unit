@@ -24,8 +24,8 @@ package unit.area;
 import java.util.Collection;
 import java.util.List;
 import java.util.function.BiFunction;
-import unit.pos.Pos;
-import unit.size.Size;
+import unit.functional.Lazy;
+import unit.scalar.CleanValue;
 
 /**
  * The covered area of a group of areas. Example:
@@ -47,13 +47,14 @@ import unit.size.Size;
  * every time {@link #result(BiFunction)} is called.</b></p>
  * <p>Whether this class is immutable or thread-safe, depends on the given
  * areas.</p>
+ * // TODO: Remove the calculation from the constructor
  * @since 0.58
  */
 public class Covered implements Area {
     /**
-     * The areas of the coverage.
+     * The coverage area.
      */
-    private final Collection<Area> areas;
+    private final Lazy<Area> area;
 
     /**
      * Ctor.
@@ -68,45 +69,64 @@ public class Covered implements Area {
      * @param areas The areas of the coverage.
      */
     public Covered(final Collection<Area> areas) {
-        this.areas = areas;
+        this.area = () -> {
+            final var iterator = areas.iterator();
+            if (iterator.hasNext()) {
+                Area area = iterator.next();
+                while (iterator.hasNext()) {
+                    final var next = iterator.next();
+                    area = new AreaOf(
+                        Math.min(next.x(), area.x()),
+                        Math.min(next.y(), area.y()),
+                        Math.max(
+                            next.x() + next.w() - Math.min(next.x(), area.x()),
+                            area.x() + area.w() - Math.min(next.x(), area.x())
+                        ),
+                        Math.max(
+                            next.y() + next.h() - Math.min(next.y(), area.y()),
+                            area.y() + area.h() - Math.min(next.y(), area.y())
+                        )
+                    );
+                }
+                return area;
+            } else {
+                return new AreaOf();
+            }
+        };
     }
 
-    // @checkstyle ReturnCount (3 lines)
     @Override
-    @SuppressWarnings("PMD.OnlyOneReturn")
-    public final <R> R result(final BiFunction<Pos, Size, R> target) {
-        final var iterator = this.areas.iterator();
-        if (iterator.hasNext()) {
-            Area area = iterator.next();
-            while (iterator.hasNext()) {
-                area = Area.result(
-                    area,
-                    // @checkstyle ParameterName (3 lines)
-                    (x1, y1, w1, h1) -> Area.result(
-                        iterator.next(),
-                        (x2, y2, w2, h2) -> new AreaOf(
-                            Math.min(x1, x2),
-                            Math.min(y1, y2),
-                            Math.max(
-                                x1 + w1 - Math.min(x1, x2),
-                                x2 + w2 - Math.min(x1, x2)
-                            ),
-                            Math.max(
-                                y1 + h1 - Math.min(y1, y2),
-                                y2 + h2 - Math.min(y1, y2)
-                            )
-                        )
-                    )
-                );
-            }
-            return area.result(target);
-        } else {
-            return new AreaOf().result(target);
-        }
+    public final double x() {
+        return this.area.value().x();
+    }
+
+    @Override
+    public final double y() {
+        return this.area.value().y();
+    }
+
+    @Override
+    public final double w() {
+        return this.area.value().w();
+    }
+
+    @Override
+    public final double h() {
+        return this.area.value().h();
+    }
+
+    @Override
+    public final CleanValue cleanW() {
+        return this.area.value().cleanW();
+    }
+
+    @Override
+    public final CleanValue cleanH() {
+        return this.area.value().cleanH();
     }
 
     @Override
     public final void adjustment(final Adjustment adjustment) {
-        this.areas.forEach(area -> area.adjustment(adjustment));
+        throw new UnsupportedOperationException("Not implemented!");
     }
 }

@@ -21,11 +21,9 @@
 
 package unit.size;
 
-import nl.jqno.equalsverifier.EqualsVerifier;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
-import unit.tuple.matcher.CorrectResult;
 
 /**
  * Tests for {@link FixSize}.
@@ -33,26 +31,20 @@ import unit.tuple.matcher.CorrectResult;
  */
 public final class FixSizeTest {
     /**
-     * {@link FixSize#equals(Object)} and {@link FixSize#hashCode()} must meet
-     * their contract.
-     */
-    @Test
-    public void equalsAndHashCode() {
-        EqualsVerifier.forClass(FixSize.class)
-            .withNonnullFields("width", "height").verify();
-    }
-
-    /**
      * {@link FixSize#toString()}} returns the right string.
      */
     @Test
     public void correctToString() {
-        final var width = 313;
-        final var height = 238;
+        final var width = 313.0;
+        final var height = 238.0;
         MatcherAssert.assertThat(
             new FixSize(width, height),
             Matchers.hasToString(
-                String.format("Size(width = %d, height = %d)", width, height)
+                String.format(
+                    "Size(width = %s, height = %s)",
+                    Double.toString(width),
+                    Double.toString(height)
+                )
             )
         );
     }
@@ -62,9 +54,8 @@ public final class FixSizeTest {
      */
     @Test
     public void defaultConstructorCorrectCoordinates() {
-        MatcherAssert.assertThat(
-            new AsTuple(new FixSize()),
-            new CorrectResult(0, 0)
-        );
+        final var size = new FixSize();
+        MatcherAssert.assertThat(size.w(), Matchers.is(0.0));
+        MatcherAssert.assertThat(size.h(), Matchers.is(0.0));
     }
 }

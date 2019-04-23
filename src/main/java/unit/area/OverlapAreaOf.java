@@ -21,12 +21,10 @@
 
 package unit.area;
 
-import java.util.function.BiFunction;
 import unit.pos.AdjustablePos;
-import unit.pos.Pos;
 import unit.pos.SoftPos;
+import unit.scalar.CleanValue;
 import unit.size.AdjustableSize;
-import unit.size.Size;
 
 /**
  * An area that knows when a point overlaps with itself.
@@ -76,21 +74,40 @@ public class OverlapAreaOf implements OverlapArea {
     // @checkstyle ParameterName (2 lines)
     @Override
     public final boolean contains(final int x, final int y) {
-        // @checkstyle MethodBodyComments (1 line)
-        //noinspection OverlyComplexBooleanExpression
-        return Area.result(
-            this.area,
-            // @checkstyle ParameterName (1 line)
-            (ownX, ownY, width, height) -> ownX <= x
-                && ownY <= y
-                && x < ownX + Math.abs(width)
-                && y < ownY + Math.abs(height)
-        );
+        return this.x() <= x
+            && this.y() <= y
+            && x < this.x() + Math.abs(this.w())
+            && y < this.y() + Math.abs(this.h());
     }
 
     @Override
-    public final <R> R result(final BiFunction<Pos, Size, R> target) {
-        return this.area.result(target);
+    public final double x() {
+        return this.area.x();
+    }
+
+    @Override
+    public final double y() {
+        return this.area.y();
+    }
+
+    @Override
+    public final double w() {
+        return this.area.w();
+    }
+
+    @Override
+    public final double h() {
+        return this.area.h();
+    }
+
+    @Override
+    public final CleanValue cleanW() {
+        return this.area.cleanW();
+    }
+
+    @Override
+    public final CleanValue cleanH() {
+        return this.area.cleanH();
     }
 
     @Override

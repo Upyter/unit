@@ -22,7 +22,7 @@
 package unit.scalar;
 
 import java.util.Objects;
-import unit.functional.FloatSupplier;
+import java.util.function.DoubleSupplier;
 import unit.scalar.adjustment.Adjustment;
 import unit.scalar.adjustment.Identity;
 
@@ -39,7 +39,7 @@ public class SoftScalar implements Scalar {
     /**
      * The supplier that gives this scalar its value.
      */
-    private final FloatSupplier supplier;
+    private final DoubleSupplier supplier;
 
     /**
      * An additional adjustment to keep the scalar in a certain boundary.
@@ -52,17 +52,17 @@ public class SoftScalar implements Scalar {
     private Adjustment adjustment;
 
     /**
-     * Uses 0.0F as its value.
+     * Uses 0.0 as its value.
      */
     public SoftScalar() {
-        this(0.0F);
+        this(0.0);
     }
 
     /**
      * Ctor.
      * @param value The value that this scalar will have.
      */
-    public SoftScalar(final float value) {
+    public SoftScalar(final double value) {
         this(() -> value);
     }
 
@@ -70,7 +70,7 @@ public class SoftScalar implements Scalar {
      * Ctor.
      * @param supplier The supplier that gives this scalar its value.
      */
-    public SoftScalar(final FloatSupplier supplier) {
+    public SoftScalar(final DoubleSupplier supplier) {
         this(supplier, new Identity());
     }
 
@@ -80,19 +80,29 @@ public class SoftScalar implements Scalar {
      * @param border An additional adjustment to keep the scalar in a certain
      *  boundary.
      */
-    public SoftScalar(final FloatSupplier supplier, final Adjustment border) {
+    public SoftScalar(final DoubleSupplier supplier, final Adjustment border) {
         this.supplier = Objects.requireNonNull(supplier);
-        this.border = border;
+        this.border = Objects.requireNonNull(border);
         this.adjustment = new Identity();
     }
 
     @Override
-    public final float value() {
+    public final double value() {
         return this.border.adjusted(
             this.adjustment.adjusted(
-                this.supplier.getAsFloat()
+                this.cleanValue()
             )
         );
+    }
+
+    @Override
+    public final double cleanValue() {
+        return this.supplier.getAsDouble();
+    }
+
+    @Override
+    public final boolean isFix() {
+        return false;
     }
 
     @Override
@@ -109,12 +119,12 @@ public class SoftScalar implements Scalar {
             return false;
         }
         final Scalar other = (Scalar) obj;
-        return Float.compare(this.value(), other.value()) == 0;
+        return Double.compare(this.value(), other.value()) == 0;
     }
 
     @Override
     public final int hashCode() {
-        return Objects.hashCode(this.supplier.getAsFloat());
+        return Objects.hashCode(this.supplier.getAsDouble());
     }
 
     @Override
@@ -122,9 +132,9 @@ public class SoftScalar implements Scalar {
         return String.join(
             "",
             "SoftScalar(",
-            Float.toString(this.supplier.getAsFloat()),
+            Double.toString(this.supplier.getAsDouble()),
             ", adjusted: ",
-            Float.toString(this.value()),
+            Double.toString(this.value()),
             ")"
         );
     }

@@ -21,7 +21,6 @@
 
 package unit.pos;
 
-import nl.jqno.equalsverifier.EqualsVerifier;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
@@ -32,28 +31,22 @@ import org.junit.Test;
  */
 public final class FixPosTest {
     /**
-     * {@link FixPos#equals(Object)} and {@link FixPos#hashCode()} must meet
-     * their contract.
-     */
-    @Test
-    public void equalsAndHashCode() {
-        EqualsVerifier.forClass(FixPos.class)
-            .withNonnullFields("x", "y").verify();
-    }
-
-    /**
      * {@link FixPos#toString()} returns the right string.
      */
     @Test
     public void correctToString() {
         // @checkstyle LocalFinalVariableName (2 lines)
-        final var x = 31453;
-        final var y = 4538;
+        final var x = 31453.0;
+        final var y = 4538.0;
         MatcherAssert.assertThat(
             // @checkstyle LocalFinalVariableName (1 line)
             new FixPos(x, y),
             Matchers.hasToString(
-                String.format("Pos(x = %d, y = %d)", x, y)
+                String.format(
+                    "Pos(x = %s, y = %s)",
+                    Double.toString(x),
+                    Double.toString(y)
+                )
             )
         );
     }
@@ -65,7 +58,7 @@ public final class FixPosTest {
     public void defaultConstructorCorrectCoordinates() {
         final var pos = new FixPos();
         // @checkstyle ParameterName (1 line)
-        MatcherAssert.assertThat(pos.x(), Matchers.is(0));
-        MatcherAssert.assertThat(pos.y(), Matchers.is(0));
+        MatcherAssert.assertThat(pos.x(), Matchers.is(0.0));
+        MatcherAssert.assertThat(pos.y(), Matchers.is(0.0));
     }
 }

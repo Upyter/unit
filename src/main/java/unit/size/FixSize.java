@@ -24,6 +24,9 @@ package unit.size;
 import java.util.Objects;
 import java.util.function.DoubleSupplier;
 import java.util.function.IntSupplier;
+import unit.scalar.CleanValue;
+import unit.scalar.FixScalar;
+import unit.scalar.Scalar;
 import unit.tuple.adjustment.TupleAdjustment;
 
 /*
@@ -42,12 +45,12 @@ public class FixSize implements AdjustableSize {
     /**
      * The width of the size.
      */
-    private final DoubleSupplier width;
+    private final Scalar width;
 
     /**
      * The height of the size.
      */
-    private final DoubleSupplier height;
+    private final Scalar height;
 
     /**
      * Ctor. Creates a size with width = 0 and height = 0.
@@ -102,8 +105,28 @@ public class FixSize implements AdjustableSize {
      * @param width The width for the size.
      * @param height The height for the size.
      */
+    public FixSize(final double width, final double height) {
+        this(() -> width, () -> height);
+    }
+
+    /**
+     * Ctor.
+     * @param width The width for the size.
+     * @param height The height for the size.
+     */
     public FixSize(
         final DoubleSupplier width, final DoubleSupplier height
+    ) {
+        this(new FixScalar(width), new FixScalar(height));
+    }
+
+    /**
+     * Ctor.
+     * @param width The width for the size.
+     * @param height The height for the size.
+     */
+    public FixSize(
+        final Scalar width, final Scalar height
     ) {
         this.width = width;
         this.height = height;
@@ -111,22 +134,22 @@ public class FixSize implements AdjustableSize {
 
     @Override
     public final double w() {
-        return this.cleanW();
+        return this.cleanW().cleanValue();
     }
 
     @Override
     public final double h() {
-        return this.cleanH();
+        return this.cleanH().cleanValue();
     }
 
     @Override
-    public final double cleanW() {
-        return this.width.getAsDouble();
+    public final CleanValue cleanW() {
+        return this.width;
     }
 
     @Override
-    public final double cleanH() {
-        return this.height.getAsDouble();
+    public final CleanValue cleanH() {
+        return this.height;
     }
 
     @SuppressWarnings("PMD.OnlyOneReturn")
@@ -151,8 +174,8 @@ public class FixSize implements AdjustableSize {
     @Override
     public final String toString() {
         return new StringBuilder("Size")
-            .append("(width = ").append(this.width.getAsDouble())
-            .append(", height = ").append(this.height.getAsDouble())
+            .append("(width = ").append(this.w())
+            .append(", height = ").append(this.h())
             .append(')')
             .toString();
     }
@@ -162,10 +185,5 @@ public class FixSize implements AdjustableSize {
         final TupleAdjustment<Integer, Integer> adjustment
     ) {
         // fix size ignores adjustments
-    }
-
-    @Override
-    public final boolean isFix() {
-        return true;
     }
 }

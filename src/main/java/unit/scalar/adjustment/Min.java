@@ -31,18 +31,18 @@ public class Min implements Adjustment {
     /**
      * The border of the value.
      */
-    private final float border;
+    private final double border;
 
     /**
      * Ctor.
      * @param border The border of the value.
      */
-    public Min(final float border) {
+    public Min(final double border) {
         this.border = border;
     }
 
     @Override
-    public final float adjusted(final float current) {
+    public final double adjusted(final double current) {
         return Math.max(this.border, current);
     }
 }

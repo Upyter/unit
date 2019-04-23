@@ -28,7 +28,7 @@ package unit.scalar.adjustment;
  */
 public class Identity implements Adjustment {
     @Override
-    public final float adjusted(final float current) {
+    public final double adjusted(final double current) {
         return current;
     }
 }

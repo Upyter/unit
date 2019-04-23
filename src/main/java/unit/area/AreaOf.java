@@ -29,10 +29,10 @@ chance that a user might use the class name as a parameter type
 */
 
 import java.util.Objects;
-import java.util.function.BiFunction;
 import unit.pos.AdjustablePos;
 import unit.pos.FixPos;
 import unit.pos.Pos;
+import unit.scalar.CleanValue;
 import unit.size.AdjustableSize;
 import unit.size.FixSize;
 import unit.size.Size;
@@ -82,6 +82,21 @@ public class AreaOf implements Area {
      * @checkstyle ParameterName (2 lines)
      */
     public AreaOf(final int x, final int y, final int width, final int height) {
+        this((double) x, (double) y, (double) width, (double) height);
+    }
+
+    /**
+     * Ctor.
+     * @param x The x coordinate of the area.
+     * @param y The y coordinate of the area.
+     * @param width The width of the area.
+     * @param height The height of the area.
+     * @checkstyle ParameterNumber (3 lines)
+     * @checkstyle ParameterName (2 lines)
+     */
+    public AreaOf(
+        final double x, final double y, final double width, final double height
+    ) {
         this(
             new FixPos(x, y),
             new FixSize(width, height)
@@ -115,8 +130,33 @@ public class AreaOf implements Area {
     }
 
     @Override
-    public final <R> R result(final BiFunction<Pos, Size, R> target) {
-        return Objects.requireNonNull(target).apply(this.pos, this.size);
+    public final double x() {
+        return this.pos.x();
+    }
+
+    @Override
+    public final double y() {
+        return this.pos.y();
+    }
+
+    @Override
+    public final double w() {
+        return this.size.w();
+    }
+
+    @Override
+    public final double h() {
+        return this.size.h();
+    }
+
+    @Override
+    public final CleanValue cleanW() {
+        return this.size.cleanW();
+    }
+
+    @Override
+    public final CleanValue cleanH() {
+        return this.size.cleanH();
     }
 
     @Override
@@ -127,16 +167,12 @@ public class AreaOf implements Area {
 
     @Override
     public final String toString() {
-        return Area.result(
-            this,
-            // @checkstyle ParameterName (1 line)
-            (x, y, width, height) -> new StringBuilder("Area")
-                .append("(x = ").append(x)
-                .append(", y = ").append(y)
-                .append(", width = ").append(width)
-                .append(", height = ").append(height)
-                .append(')')
-            .toString()
-        );
+        return new StringBuilder("Area")
+            .append("(x = ").append(this.x())
+            .append(", y = ").append(this.y())
+            .append(", width = ").append(this.w())
+            .append(", height = ").append(this.h())
+            .append(')')
+        .toString();
     }
 }

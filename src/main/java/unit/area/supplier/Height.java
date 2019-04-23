@@ -22,7 +22,7 @@
 package unit.area.supplier;
 
 import java.util.List;
-import java.util.function.Supplier;
+import java.util.function.IntSupplier;
 import unit.area.Area;
 
 /*
@@ -38,7 +38,7 @@ wouldn't notice it. I had such case in joop.Column
  * @see Width
  * @since 0.89
  */
-public class Height implements Supplier<Integer> {
+public class Height implements IntSupplier {
     /**
      * The areas to get the height from.
      */
@@ -61,14 +61,10 @@ public class Height implements Supplier<Integer> {
     }
 
     @Override
-    public final Integer get() {
+    public final int getAsInt() {
         int result = 0;
         for (final Area area : this.areas) {
-            result += Area.result(
-                area,
-                // @checkstyle ParameterName (1 line)
-                (x, y, width, height) -> height
-            );
+            result += area.h();
         }
         return result;
     }

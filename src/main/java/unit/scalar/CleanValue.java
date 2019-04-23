@@ -19,20 +19,23 @@
  * DEALINGS IN THE SOFTWARE.
  */
 
-package unit.scalar.adjustment;
+package unit.scalar;
 
 /**
- * An adjustment of a float based scalar.
- * @see unit.area.Adjustment
- * @see unit.pos.Pos
- * @see unit.size.Size
- * @since 0.98
+ * An unadjusted value.
+ * @see Scalar
+ * @since 0.104
  */
-public interface Adjustment {
+public interface CleanValue {
     /**
-     * Returns an adjusted version of the given value.
-     * @param current The current value.
-     * @return The adjusted value.
+     * Returns the unadjusted value.
+     * @return The unadjusted value.
      */
-    double adjusted(double current);
+    double cleanValue();
+
+    /**
+     * Returns whether this value comes from a scalar that accepts adjustments.
+     * @return True if its fix and false if not.
+     */
+    boolean isFix();
 }

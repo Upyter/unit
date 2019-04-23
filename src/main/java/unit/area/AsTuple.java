@@ -19,20 +19,40 @@
  * DEALINGS IN THE SOFTWARE.
  */
 
-package unit.scalar.adjustment;
+package unit.area;
+
+import java.util.function.BiFunction;
+import unit.pos.FixPos;
+import unit.pos.Pos;
+import unit.size.FixSize;
+import unit.size.Size;
+import unit.tuple.Tuple;
 
 /**
- * An adjustment of a float based scalar.
- * @see unit.area.Adjustment
- * @see unit.pos.Pos
- * @see unit.size.Size
- * @since 0.98
+ * An adapter for a {@link Area} to use it as a tuple.
+ * <p>Whether this class is mutable depends on the constructor arguments.</p>
+ * @since 0.104
  */
-public interface Adjustment {
+public class AsTuple implements Tuple<Pos, Size> {
     /**
-     * Returns an adjusted version of the given value.
-     * @param current The current value.
-     * @return The adjusted value.
+     * The pos to be used as a tuple.
      */
-    double adjusted(double current);
+    private final Area area;
+
+    /**
+     * Ctor.
+     * @param area The area to be used as a tuple.
+     */
+    public AsTuple(final Area area) {
+        this.area = area;
+    }
+
+    @Override
+    public final <R> R result(final BiFunction<Pos, Size, R> target) {
+        return target.apply(
+            new FixPos(this.area.x(), this.area.y()),
+            new FixSize(this.area.w(), this.area.h())
+        );
+    }
 }
+

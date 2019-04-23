@@ -21,6 +21,7 @@
 
 package unit.scalar;
 
+import java.util.function.DoubleSupplier;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
@@ -59,11 +60,11 @@ public final class FixScalarTest {
     public void reactsToChangingSupplier() {
         final float first = 438.23F;
         final float second = 6.3F;
-        final FloatSupplier supplier = new FloatSupplier() {
+        final var supplier = new DoubleSupplier() {
             private boolean called = false;
 
             @Override
-            public float getAsFloat() {
+            public double getAsDouble() {
                 final float result;
                 if (this.called) {
                     result = second;
@@ -75,13 +76,13 @@ public final class FixScalarTest {
             }
         };
         MatcherAssert.assertThat(
-            (double) new FixScalar(supplier).value(),
+            new FixScalar(supplier).value(),
             Matchers.closeTo(
                 (double) first,
                 new Delta((double) first).value())
         );
         MatcherAssert.assertThat(
-            (double) new FixScalar(supplier).value(),
+            new FixScalar(supplier).value(),
             Matchers.closeTo(
                 (double) second,
                 new Delta((double) second).value())
@@ -94,12 +95,12 @@ public final class FixScalarTest {
      */
     @Test
     public void floatConstructor() {
-        final float value = 632.45F;
+        final double value = 632.45;
         MatcherAssert.assertThat(
-            (double) new FixScalar(value).value(),
+            new FixScalar(value).value(),
             Matchers.closeTo(
-                (double) value,
-                new Delta((double) value).value())
+                value,
+                new Delta(value).value())
         );
     }
 
@@ -122,15 +123,15 @@ public final class FixScalarTest {
      */
     @Test
     public void adjustmentsDontDoAnything() {
-        final float value = 76.34F;
-        final float other = Float.MAX_VALUE;
+        final double value = 76.34;
+        final double other = Double.MAX_VALUE;
         final var scalar = new FixScalar(value);
         scalar.adjustment(ignore -> other);
         MatcherAssert.assertThat(
-            (double) scalar.value(),
+            scalar.value(),
             Matchers.closeTo(
-                (double) value,
-                new Delta((double) value).value())
+                value,
+                new Delta(value).value())
         );
     }
 
@@ -140,7 +141,7 @@ public final class FixScalarTest {
      */
     @Test
     public void correctToString() {
-        final float value = 534.12F;
+        final double value = 534.12;
         MatcherAssert.assertThat(
             new FixScalar(value).toString(),
             Matchers.hasToString(

@@ -21,10 +21,8 @@
 
 package unit.area;
 
-import java.util.function.BiFunction;
-import unit.pos.Pos;
-import unit.size.FixSize;
-import unit.size.Size;
+import unit.scalar.CleanValue;
+import unit.scalar.FixScalar;
 
 /**
  * An area constructed from another area without using the size of it. The
@@ -41,28 +39,45 @@ public class Sizeless implements Area {
     private final Area area;
 
     /**
-     * The size to use (width = 0, height = 0).
-     */
-    private final Size size;
-
-    /**
      * Ctor.
      * @param area The area to use the position from.
      */
     public Sizeless(final Area area) {
         this.area = area;
-        this.size = new FixSize();
+    }
+
+    @Override
+    public final double x() {
+        return this.area.x();
+    }
+
+    @Override
+    public final double y() {
+        return this.area.y();
+    }
+
+    @Override
+    public final double w() {
+        return 0.0;
+    }
+
+    @Override
+    public final double h() {
+        return 0.0;
+    }
+
+    @Override
+    public final CleanValue cleanW() {
+        return new FixScalar();
+    }
+
+    @Override
+    public final CleanValue cleanH() {
+        return new FixScalar();
     }
 
     @Override
     public final void adjustment(final Adjustment adjustment) {
         // the area is fix
-    }
-
-    @Override
-    public final <R> R result(final BiFunction<Pos, Size, R> target) {
-        return this.area.result(
-            (pos, ignored) -> target.apply(pos, this.size)
-        );
     }
 }

@@ -41,7 +41,7 @@ public final class CoveredTest {
     @Test
     public void noArea() {
         MatcherAssert.assertThat(
-            new Covered(),
+            new AsTuple(new Covered()),
             new CorrectResult(
                 new FixPos(),
                 new FixSize()
@@ -61,8 +61,10 @@ public final class CoveredTest {
         final int width = 3873;
         final int height = 37;
         MatcherAssert.assertThat(
-            new Covered(
-                new AreaOf(x, y, width, height)
+            new AsTuple(
+                new Covered(
+                    new AreaOf(x, y, width, height)
+                )
             ),
             new CorrectResult(
                 new FixPos(x, y),
@@ -83,10 +85,12 @@ public final class CoveredTest {
         final int width = 500;
         final int height = 700;
         MatcherAssert.assertThat(
-            new Covered(
-                List.of(
-                    new AreaOf(x, y, width, height),
-                    new AreaOf(x + width, y, width, height)
+            new AsTuple(
+                new Covered(
+                    List.of(
+                        new AreaOf(x, y, width, height),
+                        new AreaOf(x + width, y, width, height)
+                    )
                 )
             ),
             new CorrectResult(
@@ -108,9 +112,11 @@ public final class CoveredTest {
         final int width = 532;
         final int height = 435;
         MatcherAssert.assertThat(
-            new Covered(
-                new AreaOf(x, y + height, width, height),
-                new AreaOf(x, y, width, height)
+            new AsTuple(
+                new Covered(
+                    new AreaOf(x, y + height, width, height),
+                    new AreaOf(x, y, width, height)
+                )
             ),
             new CorrectResult(
                 new FixPos(x, y),
@@ -133,9 +139,11 @@ public final class CoveredTest {
         final int width = 100;
         final int height = 100;
         MatcherAssert.assertThat(
-            new Covered(
-                new AreaOf(x1, y1, width, height),
-                new AreaOf(x2, y2, width, height)
+            new AsTuple(
+                new Covered(
+                    new AreaOf(x1, y1, width, height),
+                    new AreaOf(x2, y2, width, height)
+                )
             ),
             new CorrectResult(
                 new FixPos(x1, y1),
@@ -159,10 +167,12 @@ public final class CoveredTest {
         final int width = 100;
         final int height = 100;
         MatcherAssert.assertThat(
-            new Covered(
-                new AreaOf(x1, y1, width, height),
-                new AreaOf(x1, y1, width / 2, height / 2),
-                new AreaOf(x2, y2, width, height)
+            new AsTuple(
+                new Covered(
+                    new AreaOf(x1, y1, width, height),
+                    new AreaOf(x1, y1, width / 2, height / 2),
+                    new AreaOf(x2, y2, width, height)
+                )
             ),
             new CorrectResult(
                 new FixPos(x1, y1),
@@ -185,9 +195,11 @@ public final class CoveredTest {
         final int width2 = 200;
         final int height = 100;
         MatcherAssert.assertThat(
-            new Covered(
-                new AreaOf(x, y1, width1, height),
-                new AreaOf(x, y2, width2, height)
+            new AsTuple(
+                new Covered(
+                    new AreaOf(x, y1, width1, height),
+                    new AreaOf(x, y2, width2, height)
+                )
             ),
             new CorrectResult(
                 new FixPos(x, y1),
