@@ -65,7 +65,7 @@ public class FixScalar implements Scalar {
 
     @Override
     public final double value() {
-        return this.cleanValue();
+        return this.supplier.getAsDouble();
     }
 
     @Override
