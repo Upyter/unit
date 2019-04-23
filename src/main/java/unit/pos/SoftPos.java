@@ -97,6 +97,15 @@ public class SoftPos implements AdjustablePos {
      * @param x The x coordinate.
      * @param y The y coordinate.
      */
+    public SoftPos(final double x, final double y) {
+        this(() -> x, () -> y);
+    }
+
+    /**
+     * Ctor.
+     * @param x The x coordinate.
+     * @param y The y coordinate.
+     */
     public SoftPos(final DoubleSupplier x, final double y) {
         this(x, () -> y);
     }
