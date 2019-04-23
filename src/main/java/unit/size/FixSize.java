@@ -114,6 +114,24 @@ public class FixSize implements AdjustableSize {
      * @param width The width for the size.
      * @param height The height for the size.
      */
+    public FixSize(final DoubleSupplier width, final double height) {
+        this(width, () -> height);
+    }
+
+    /**
+     * Ctor.
+     * @param width The width for the size.
+     * @param height The height for the size.
+     */
+    public FixSize(final double width, final DoubleSupplier height) {
+        this(() -> width, height);
+    }
+
+    /**
+     * Ctor.
+     * @param width The width for the size.
+     * @param height The height for the size.
+     */
     public FixSize(
         final DoubleSupplier width, final DoubleSupplier height
     ) {

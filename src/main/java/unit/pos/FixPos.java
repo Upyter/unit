@@ -117,6 +117,26 @@ public class FixPos implements AdjustablePos {
      * @param y The y coordinate.
      * @checkstyle ParameterName (2 lines)
      */
+    public FixPos(final DoubleSupplier x, final double y) {
+        this(x, () -> y);
+    }
+
+    /**
+     * Ctor.
+     * @param x The x coordinate.
+     * @param y The y coordinate.
+     * @checkstyle ParameterName (2 lines)
+     */
+    public FixPos(final double x, final DoubleSupplier y) {
+        this(() -> x, y);
+    }
+
+    /**
+     * Ctor.
+     * @param x The x coordinate.
+     * @param y The y coordinate.
+     * @checkstyle ParameterName (2 lines)
+     */
     public FixPos(final DoubleSupplier x, final DoubleSupplier y) {
         this.x = Objects.requireNonNull(x);
         this.y = Objects.requireNonNull(y);

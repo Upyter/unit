@@ -98,6 +98,33 @@ public class SoftSize implements AdjustableSize {
      * @param width The width of the size.
      * @param height The height of the size.
      */
+    public SoftSize(final double width, final double height) {
+        this(() -> width, () -> height);
+    }
+
+    /**
+     * Ctor.
+     * @param width The width of the size.
+     * @param height The height of the size.
+     */
+    public SoftSize(final DoubleSupplier width, final double height) {
+        this(width, () -> height);
+    }
+
+    /**
+     * Ctor.
+     * @param width The width of the size.
+     * @param height The height of the size.
+     */
+    public SoftSize(final double width, final DoubleSupplier height) {
+        this(() -> width, height);
+    }
+
+    /**
+     * Ctor.
+     * @param width The width of the size.
+     * @param height The height of the size.
+     */
     public SoftSize(
         final DoubleSupplier width, final DoubleSupplier height
     ) {

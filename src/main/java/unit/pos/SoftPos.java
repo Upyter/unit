@@ -22,8 +22,10 @@
 package unit.pos;
 
 import java.util.Objects;
+import java.util.function.DoubleSupplier;
 import java.util.function.IntSupplier;
-import unit.tuple.adjustment.NoAdjustment;
+import unit.scalar.Scalar;
+import unit.scalar.SoftScalar;
 import unit.tuple.adjustment.TupleAdjustment;
 
 /**
@@ -34,21 +36,14 @@ import unit.tuple.adjustment.TupleAdjustment;
  */
 public class SoftPos implements AdjustablePos {
     /**
-     * The pos to adjust.
+     * The x coordinate of the position.
      */
-    private final Pos pos;
+    private final Scalar x;
 
     /**
-     * The adjustment boundaries for the pos.
+     * The y coordinate of the position.
      */
-    @SuppressWarnings("PMD.AvoidFieldNameMatchingMethodName")
-    private final TupleAdjustment<Integer, Integer> border;
-
-    /**
-     * The adjustment for the pos.
-     */
-    @SuppressWarnings("PMD.AvoidFieldNameMatchingMethodName")
-    private TupleAdjustment<Integer, Integer> adjustment;
+    private final Scalar y;
 
     /**
      * Ctor. Sets x = 0 and y = 0 as its values.
@@ -94,31 +89,54 @@ public class SoftPos implements AdjustablePos {
      * @checkstyle ParameterName (2 lines)
      */
     public SoftPos(final IntSupplier x, final IntSupplier y) {
-        this(new FixPos(x, y));
+        this(() -> (double) x.getAsInt(), () -> (double) y.getAsInt());
     }
 
     /**
      * Ctor.
-     * @param pos The pos to adjust.
+     * @param x The x coordinate.
+     * @param y The y coordinate.
      */
-    public SoftPos(final Pos pos) {
-        this.pos = Objects.requireNonNull(pos);
-        this.border = NoAdjustment.cached();
-        this.adjustment = NoAdjustment.cached();
+    public SoftPos(final DoubleSupplier x, final double y) {
+        this(x, () -> y);
+    }
+
+    /**
+     * Ctor.
+     * @param x The x coordinate.
+     * @param y The y coordinate.
+     */
+    public SoftPos(final double x, final DoubleSupplier y) {
+        this(() -> x, y);
+    }
+
+    /**
+     * Ctor.
+     * @param x The x coordinate.
+     * @param y The y coordinate.
+     */
+    public SoftPos(final DoubleSupplier x, final DoubleSupplier y) {
+        this(new SoftScalar(x), new SoftScalar(y));
+    }
+
+    /**
+     * Ctor.
+     * @param x The x coordinate.
+     * @param y The y coordinate.
+     */
+    public SoftPos(final Scalar x, final Scalar y) {
+        this.x = Objects.requireNonNull(x);
+        this.y = Objects.requireNonNull(y);
     }
 
     @Override
     public final double x() {
-        return this.border.adjustedFirst(
-            this.adjustment.adjustedFirst((int) this.pos.x())
-        );
+        return this.x.value();
     }
 
     @Override
     public final double y() {
-        return this.border.adjustedSecond(
-            this.adjustment.adjustedSecond((int) this.pos.y())
-        );
+        return this.y.value();
     }
 
     // @checkstyle HiddenField (3 lines)
@@ -126,22 +144,35 @@ public class SoftPos implements AdjustablePos {
     public final void adjustment(
         final TupleAdjustment<Integer, Integer> adjustment
     ) {
-        this.adjustment = Objects.requireNonNull(adjustment);
+        this.x.adjustment(current -> adjustment.adjustedFirst((int) current));
+        this.y.adjustment(current -> adjustment.adjustedSecond((int) current));
     }
 
     @SuppressWarnings("PMD.OnlyOneReturn")
     @Override
     public final boolean equals(final Object obj) {
-        return this.pos.equals(obj);
+        if (this == obj) {
+            return true;
+        }
+        if (!(obj instanceof Pos)) {
+            return false;
+        }
+        final Pos other = (Pos) obj;
+        return Double.compare(this.x(), other.x()) == 0
+            && Double.compare(this.y(), other.y()) == 0;
     }
 
     @Override
     public final int hashCode() {
-        return this.pos.hashCode();
+        return Objects.hash(this.x(), this.y());
     }
 
     @Override
     public final String toString() {
-        return this.pos.toString();
+        return new StringBuilder("Pos")
+            .append("(x = ").append(this.x())
+            .append(", y = ").append(this.y())
+            .append(')')
+            .toString();
     }
 }
