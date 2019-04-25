@@ -36,36 +36,42 @@ public interface Area extends Adjustable<Adjustment> {
     /**
      * Returns the x coordinate of the area.
      * @return The x coordinate of the area.
+     * @checkstyle MethodName (2 lines)
      */
     double x();
 
     /**
      * Returns the y coordinate of the area.
      * @return The y coordinate of the area.
+     * @checkstyle MethodName (2 lines)
      */
     double y();
 
     /**
      * Returns the width of the area.
      * @return The width of the area.
+     * @checkstyle MethodName (2 lines)
      */
     double w();
 
     /**
      * Returns the height of the area.
      * @return The height of the area.
+     * @checkstyle MethodName (2 lines)
      */
     double h();
 
     /**
      * Returns the unadjusted width of the area.
      * @return The unadjusted height of the area.
+     * @checkstyle MethodName (2 lines)
      */
     CleanValue cleanW();
 
     /**
      * Returns the unadjusted height of the area.
      * @return The unadjusted height of the area.
+     * @checkstyle MethodName (2 lines)
      */
     CleanValue cleanH();
 }
