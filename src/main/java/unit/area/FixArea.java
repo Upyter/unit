@@ -36,28 +36,37 @@ import unit.scalar.Scalar;
 public class FixArea implements Area {
     /**
      * The supplier that contains the path to the x coordinate.
+     * @checkstyle MemberName (3 lines)
      */
+    @SuppressWarnings("PMD.AvoidFieldNameMatchingMethodName")
     private final DoubleSupplier x;
 
     /**
      * The supplier that contains the path to the y coordinate.
+     * @checkstyle MemberName (3 lines)
      */
+    @SuppressWarnings("PMD.AvoidFieldNameMatchingMethodName")
     private final DoubleSupplier y;
 
     /**
      * The scalar for the width. It is necessary for {@link #cleanW()}.
+     * @checkstyle MemberName (3 lines)
      */
+    @SuppressWarnings("PMD.AvoidFieldNameMatchingMethodName")
     private final Scalar w;
 
     /**
      * The scalar for the height. It is necessary for {@link #cleanH()}.
+     * @checkstyle MemberName (3 lines)
      */
+    @SuppressWarnings("PMD.AvoidFieldNameMatchingMethodName")
     private final Scalar h;
 
     /**
      * Uses x = 0.0 and y = 0.0 as its position.
      * @param w The width.
      * @param h The height.
+     * @checkstyle ParameterName (2 lines)
      */
     public FixArea(final double w, final double h) {
         this(0.0, 0.0, w, h);
@@ -67,6 +76,8 @@ public class FixArea implements Area {
      * Uses x = 0.0 and y = 0.0 as its position.
      * @param w The supplier with the width.
      * @param h The height.
+     * @checkstyle ParameterNumber (3 lines)
+     * @checkstyle ParameterName (2 lines)
      */
     public FixArea(final DoubleSupplier w, final double h) {
         this(0.0, 0.0, w, h);
@@ -76,6 +87,8 @@ public class FixArea implements Area {
      * Uses x = 0.0 and y = 0.0 as its position.
      * @param w The width.
      * @param h The supplier.
+     * @checkstyle ParameterNumber (3 lines)
+     * @checkstyle ParameterName (2 lines)
      */
     public FixArea(final double w, final DoubleSupplier h) {
         this(0.0, 0.0, w, h);
@@ -85,6 +98,8 @@ public class FixArea implements Area {
      * Uses x = 0.0 and y = 0.0 as its position.
      * @param w The supplier with the width.
      * @param h The supplier with the height.
+     * @checkstyle ParameterNumber (3 lines)
+     * @checkstyle ParameterName (2 lines)
      */
     public FixArea(final DoubleSupplier w, final DoubleSupplier h) {
         this(0.0, 0.0, w, h);
@@ -96,6 +111,8 @@ public class FixArea implements Area {
      * @param y The y coordinate.
      * @param w The width.
      * @param h The height.
+     * @checkstyle ParameterNumber (4 lines)
+     * @checkstyle ParameterName (3 lines)
      */
     public FixArea(
         final double x, final double y, final double w, final double h
@@ -109,6 +126,8 @@ public class FixArea implements Area {
      * @param y The supplier with the y coordinate.
      * @param w The supplier with the width.
      * @param h The supplier with the height.
+     * @checkstyle ParameterNumber (4 lines)
+     * @checkstyle ParameterName (6 lines)
      */
     public FixArea(
         final double x,
@@ -125,6 +144,8 @@ public class FixArea implements Area {
      * @param y The y coordinate.
      * @param w The supplier with the width.
      * @param h The supplier with the height.
+     * @checkstyle ParameterNumber (4 lines)
+     * @checkstyle ParameterName (6 lines)
      */
     public FixArea(
         final double x,
@@ -141,6 +162,8 @@ public class FixArea implements Area {
      * @param y The supplier with the y coordinate.
      * @param w The width.
      * @param h The supplier with the height.
+     * @checkstyle ParameterNumber (4 lines)
+     * @checkstyle ParameterName (6 lines)
      */
     public FixArea(
         final double x,
@@ -157,6 +180,8 @@ public class FixArea implements Area {
      * @param y The supplier with the y coordinate.
      * @param w The supplier with the width.
      * @param h The height.
+     * @checkstyle ParameterNumber (4 lines)
+     * @checkstyle ParameterName (6 lines)
      */
     public FixArea(
         final double x,
@@ -173,6 +198,8 @@ public class FixArea implements Area {
      * @param y The y coordinate.
      * @param w The width.
      * @param h The supplier with the height.
+     * @checkstyle ParameterNumber (4 lines)
+     * @checkstyle ParameterName (6 lines)
      */
     public FixArea(
         final double x,
@@ -189,6 +216,8 @@ public class FixArea implements Area {
      * @param y The y coordinate.
      * @param w The supplier with the width.
      * @param h The height.
+     * @checkstyle ParameterNumber (4 lines)
+     * @checkstyle ParameterName (6 lines)
      */
     public FixArea(
         final double x,
@@ -205,6 +234,8 @@ public class FixArea implements Area {
      * @param y The supplier with the y coordinate.
      * @param w The width.
      * @param h The height.
+     * @checkstyle ParameterNumber (4 lines)
+     * @checkstyle ParameterName (6 lines)
      */
     public FixArea(
         final double x,
@@ -221,6 +252,8 @@ public class FixArea implements Area {
      * @param y The y coordinate.
      * @param w The width.
      * @param h The height.
+     * @checkstyle ParameterNumber (4 lines)
+     * @checkstyle ParameterName (6 lines)
      */
     public FixArea(
         final DoubleSupplier x,
@@ -237,6 +270,8 @@ public class FixArea implements Area {
      * @param y The y coordinate.
      * @param w The width.
      * @param h The supplier with the height.
+     * @checkstyle ParameterNumber (4 lines)
+     * @checkstyle ParameterName (6 lines)
      */
     public FixArea(
         final DoubleSupplier x,
@@ -253,6 +288,8 @@ public class FixArea implements Area {
      * @param y The y coordinate.
      * @param w The supplier with the width.
      * @param h The height.
+     * @checkstyle ParameterNumber (4 lines)
+     * @checkstyle ParameterName (6 lines)
      */
     public FixArea(
         final DoubleSupplier x,
@@ -269,6 +306,8 @@ public class FixArea implements Area {
      * @param y The y coordinate.
      * @param w The width.
      * @param h The height.
+     * @checkstyle ParameterNumber (4 lines)
+     * @checkstyle ParameterName (6 lines)
      */
     public FixArea(
         final DoubleSupplier x,
@@ -285,6 +324,8 @@ public class FixArea implements Area {
      * @param y The supplier with the y coordinate.
      * @param w The width.
      * @param h The supplier with the height.
+     * @checkstyle ParameterNumber (4 lines)
+     * @checkstyle ParameterName (6 lines)
      */
     public FixArea(
         final DoubleSupplier x,
@@ -301,6 +342,8 @@ public class FixArea implements Area {
      * @param y The supplier with the y coordinate.
      * @param w The width.
      * @param h The height.
+     * @checkstyle ParameterNumber (4 lines)
+     * @checkstyle ParameterName (6 lines)
      */
     public FixArea(
         final DoubleSupplier x,
@@ -317,6 +360,8 @@ public class FixArea implements Area {
      * @param y The supplier with the y coordinate.
      * @param w The supplier with the width.
      * @param h The height.
+     * @checkstyle ParameterNumber (4 lines)
+     * @checkstyle ParameterName (6 lines)
      */
     public FixArea(
         final DoubleSupplier x,
@@ -333,6 +378,8 @@ public class FixArea implements Area {
      * @param y The supplier with the y coordinate.
      * @param w The supplier with the width.
      * @param h The supplier with the height.
+     * @checkstyle ParameterNumber (4 lines)
+     * @checkstyle ParameterName (6 lines)
      */
     public FixArea(
         final DoubleSupplier x,
@@ -346,21 +393,25 @@ public class FixArea implements Area {
         this.h = new FixScalar(h);
     }
 
+    @SuppressWarnings("PMD.ShortMethodName")
     @Override
     public final double x() {
         return this.x.getAsDouble();
     }
 
+    @SuppressWarnings("PMD.ShortMethodName")
     @Override
     public final double y() {
         return this.y.getAsDouble();
     }
 
+    @SuppressWarnings("PMD.ShortMethodName")
     @Override
     public final double w() {
         return this.w.value();
     }
 
+    @SuppressWarnings("PMD.ShortMethodName")
     @Override
     public final double h() {
         return this.h.value();
