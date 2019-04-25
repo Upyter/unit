@@ -37,14 +37,14 @@ import unit.tuple.adjustment.TupleAdjustment;
 public class SoftPos implements AdjustablePos {
     /**
      * The x coordinate of the position.
-     * @checkstyle MemberName (2 lines)
+     * @checkstyle MemberName (3 lines)
      */
     @SuppressWarnings("PMD.AvoidFieldNameMatchingMethodName")
     private final Scalar x;
 
     /**
      * The y coordinate of the position.
-     * @checkstyle MemberName (2 lines)
+     * @checkstyle MemberName (3 lines)
      */
     @SuppressWarnings("PMD.AvoidFieldNameMatchingMethodName")
     private final Scalar y;

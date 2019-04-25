@@ -48,8 +48,9 @@ public class SoftScalar implements Scalar {
 
     /**
      * The adjustment of the value.
-     * @checkstyle HiddenField (2 lines)
+     * @checkstyle HiddenField (3 lines)
      */
+    @SuppressWarnings("PMD.AvoidFieldNameMatchingMethodName")
     private Adjustment adjustment;
 
     /**
@@ -106,11 +107,13 @@ public class SoftScalar implements Scalar {
         return false;
     }
 
+    // @checkstyle HiddenField (2 lines)
     @Override
     public final void adjustment(final Adjustment adjustment) {
         this.adjustment = Objects.requireNonNull(adjustment);
     }
 
+    @SuppressWarnings("PMD.OnlyOneReturn")
     @Override
     public final boolean equals(final Object obj) {
         if (this == obj) {

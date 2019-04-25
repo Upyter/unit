@@ -38,15 +38,17 @@ public interface Size {
     /**
      * Returns the width.
      * @return The width.
-     * @checkstyle MethodName (2 lines)
+     * @checkstyle MethodName (3 lines)
      */
+    @SuppressWarnings("PMD.ShortMethodName")
     double w();
 
     /**
      * Returns the height.
      * @return The height.
-     * @checkstyle MethodName (2 lines)
+     * @checkstyle MethodName (3 lines)
      */
+    @SuppressWarnings("PMD.ShortMethodName")
     double h();
 
     /**

@@ -25,7 +25,6 @@ import java.util.function.DoubleSupplier;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
-import unit.functional.FloatSupplier;
 import unit.number.Delta;
 import unit.scalar.adjustment.Adjustment;
 
@@ -36,7 +35,7 @@ import unit.scalar.adjustment.Adjustment;
 public final class SoftScalarTest {
     /**
      * {@link SoftScalar#value()} must return the value of the supplier when
-     * constructed with {@link SoftScalar#SoftScalar(FloatSupplier)}.
+     * constructed with {@link SoftScalar#SoftScalar(DoubleSupplier)}.
      */
     @Test
     public void fixedSupplierValue() {
@@ -47,21 +46,22 @@ public final class SoftScalarTest {
             ).value(),
             Matchers.closeTo(
                 value,
-                new Delta(value).value())
+                new Delta(value).value()
+            )
         );
     }
 
     /**
      * {@link SoftScalar#value()} must return the value of the supplier even
      * if its changing when constructed with
-     * {@link SoftScalar#SoftScalar(FloatSupplier)}.
+     * {@link SoftScalar#SoftScalar(DoubleSupplier)}.
      */
     @Test
     public void reactsToChangingSupplier() {
         final var first = 423.64;
         final var second = 6.3;
         final var supplier = new DoubleSupplier() {
-            private boolean called = false;
+            private boolean called;
 
             @Override
             public double getAsDouble() {
@@ -78,20 +78,21 @@ public final class SoftScalarTest {
         MatcherAssert.assertThat(
             new SoftScalar(supplier).value(),
             Matchers.closeTo(
-                (double) first,
-                new Delta((double) first).value())
+                first,
+                new Delta(first).value()
+            )
         );
         MatcherAssert.assertThat(
             new SoftScalar(supplier).value(),
             Matchers.closeTo(
-                (double) second,
-                new Delta((double) second).value())
+                second,
+                new Delta(second).value())
         );
     }
 
     /**
      * {@link SoftScalar#value()} must return the given value when
-     * constructed with {@link SoftScalar#SoftScalar(float)}.
+     * constructed with {@link SoftScalar#SoftScalar(double)}.
      */
     @Test
     public void floatConstructor() {
@@ -99,8 +100,9 @@ public final class SoftScalarTest {
         MatcherAssert.assertThat(
             new SoftScalar(value).value(),
             Matchers.closeTo(
-                (double) value,
-                new Delta((double) value).value())
+                value,
+                new Delta(value).value()
+            )
         );
     }
 
@@ -111,7 +113,7 @@ public final class SoftScalarTest {
     @Test
     public void defaultConstructor() {
         MatcherAssert.assertThat(
-            (double) new SoftScalar().value(),
+            new SoftScalar().value(),
             Matchers.closeTo(0.0, new Delta(0.0).value())
         );
     }
@@ -130,7 +132,8 @@ public final class SoftScalarTest {
             scalar.value(),
             Matchers.closeTo(
                 other,
-                new Delta(other).value())
+                new Delta(other).value()
+            )
         );
     }
 
@@ -152,7 +155,8 @@ public final class SoftScalarTest {
             scalar.value(),
             Matchers.closeTo(
                 last,
-                new Delta(last).value())
+                new Delta(last).value()
+            )
         );
     }
 

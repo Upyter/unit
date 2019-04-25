@@ -80,21 +80,25 @@ public class OverlapAreaOf implements OverlapArea {
             && y < this.y() + Math.abs(this.h());
     }
 
+    @SuppressWarnings("PMD.ShortMethodName")
     @Override
     public final double x() {
         return this.area.x();
     }
 
+    @SuppressWarnings("PMD.ShortMethodName")
     @Override
     public final double y() {
         return this.area.y();
     }
 
+    @SuppressWarnings("PMD.ShortMethodName")
     @Override
     public final double w() {
         return this.area.w();
     }
 
+    @SuppressWarnings("PMD.ShortMethodName")
     @Override
     public final double h() {
         return this.area.h();

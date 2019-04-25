@@ -150,11 +150,13 @@ public class FixSize implements AdjustableSize {
         this.height = height;
     }
 
+    @SuppressWarnings("PMD.ShortMethodName")
     @Override
     public final double w() {
         return this.width.value();
     }
 
+    @SuppressWarnings("PMD.ShortMethodName")
     @Override
     public final double h() {
         return this.height.value();

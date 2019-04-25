@@ -25,7 +25,6 @@ import java.util.function.DoubleSupplier;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
-import unit.functional.FloatSupplier;
 import unit.number.Delta;
 import unit.scalar.adjustment.Adjustment;
 
@@ -36,36 +35,37 @@ import unit.scalar.adjustment.Adjustment;
 public final class FixScalarTest {
     /**
      * {@link FixScalar#value()} must return the value of the supplier when
-     * constructed with {@link FixScalar#FixScalar(FloatSupplier)}.
+     * constructed with {@link FixScalar#FixScalar(DoubleSupplier)}.
      */
     @Test
     public void fixedSupplierValue() {
-        final float value = 455.453F;
+        final var value = 455.453;
         MatcherAssert.assertThat(
-            (double) new FixScalar(
+            new FixScalar(
                 () -> value
             ).value(),
             Matchers.closeTo(
-                (double) value,
-                new Delta((double) value).value())
+                value,
+                new Delta(value).value()
+            )
         );
     }
 
     /**
      * {@link FixScalar#value()} must return the value of the supplier even
      * if its changing when constructed with
-     * {@link FixScalar#FixScalar(FloatSupplier)}.
+     * {@link FixScalar#FixScalar(DoubleSupplier)}.
      */
     @Test
     public void reactsToChangingSupplier() {
-        final float first = 438.23F;
-        final float second = 6.3F;
+        final var first = 438.23;
+        final var second = 6.3;
         final var supplier = new DoubleSupplier() {
-            private boolean called = false;
+            private boolean called;
 
             @Override
             public double getAsDouble() {
-                final float result;
+                final double result;
                 if (this.called) {
                     result = second;
                 } else {
@@ -78,20 +78,21 @@ public final class FixScalarTest {
         MatcherAssert.assertThat(
             new FixScalar(supplier).value(),
             Matchers.closeTo(
-                (double) first,
-                new Delta((double) first).value())
+                first,
+                new Delta(first).value())
         );
         MatcherAssert.assertThat(
             new FixScalar(supplier).value(),
             Matchers.closeTo(
-                (double) second,
-                new Delta((double) second).value())
+                second,
+                new Delta(second).value()
+            )
         );
     }
 
     /**
      * {@link FixScalar#value()} must return the given value when
-     * constructed with {@link FixScalar#FixScalar(float)}.
+     * constructed with {@link FixScalar#FixScalar(double)}.
      */
     @Test
     public void floatConstructor() {
@@ -100,7 +101,8 @@ public final class FixScalarTest {
             new FixScalar(value).value(),
             Matchers.closeTo(
                 value,
-                new Delta(value).value())
+                new Delta(value).value()
+            )
         );
     }
 
@@ -111,8 +113,9 @@ public final class FixScalarTest {
     @Test
     public void defaultConstructor() {
         MatcherAssert.assertThat(
-            (double) new FixScalar().value(),
-            Matchers.closeTo(0.0, new Delta(0.0).value())
+            new FixScalar().value(),
+            Matchers.closeTo(0.0, new Delta(0.0).value()
+            )
         );
     }
 
@@ -131,7 +134,8 @@ public final class FixScalarTest {
             scalar.value(),
             Matchers.closeTo(
                 value,
-                new Delta(value).value())
+                new Delta(value).value()
+            )
         );
     }
 

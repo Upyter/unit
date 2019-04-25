@@ -41,14 +41,14 @@ chance that a user might use the class name as a parameter type
 public class FixPos implements AdjustablePos {
     /**
      * The x coordinate.
-     * @checkstyle MemberName (2 lines)
+     * @checkstyle MemberName (3 lines)
      */
     @SuppressWarnings("PMD.AvoidFieldNameMatchingMethodName")
     private final DoubleSupplier x;
 
     /**
      * The y coordinate.
-     * @checkstyle MemberName (2 lines)
+     * @checkstyle MemberName (3 lines)
      */
     @SuppressWarnings("PMD.AvoidFieldNameMatchingMethodName")
     private final DoubleSupplier y;
