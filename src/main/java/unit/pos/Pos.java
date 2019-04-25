@@ -41,6 +41,7 @@ public interface Pos {
      * @return The x coordinate.
      * @checkstyle MethodName (2 lines)
      */
+    @SuppressWarnings("PMD.ShortMethodName")
     double x();
 
     /**
@@ -48,5 +49,6 @@ public interface Pos {
      * @return The y coordinate.
      * @checkstyle MethodName (2 lines)
      */
+    @SuppressWarnings("PMD.ShortMethodName")
     double y();
 }

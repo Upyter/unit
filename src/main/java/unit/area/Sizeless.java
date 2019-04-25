@@ -46,21 +46,25 @@ public class Sizeless implements Area {
         this.area = area;
     }
 
+    @SuppressWarnings("PMD.ShortMethodName")
     @Override
     public final double x() {
         return this.area.x();
     }
 
+    @SuppressWarnings("PMD.ShortMethodName")
     @Override
     public final double y() {
         return this.area.y();
     }
 
+    @SuppressWarnings("PMD.ShortMethodName")
     @Override
     public final double w() {
         return 0.0;
     }
 
+    @SuppressWarnings("PMD.ShortMethodName")
     @Override
     public final double h() {
         return 0.0;

@@ -39,7 +39,7 @@ public interface Scalar extends CleanValue {
     double value();
 
     /**
-     * (Perhaps) registers the given adjustment and uses it for its value. This
+     * Registers the given adjustment and uses it for its value (perhaps). This
      * method overwrites the previously given adjustments.
      * @param adjustment The adjustment to register.
      */

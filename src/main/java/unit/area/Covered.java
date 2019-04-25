@@ -23,7 +23,6 @@ package unit.area;
 
 import java.util.Collection;
 import java.util.List;
-import java.util.function.BiFunction;
 import unit.functional.Lazy;
 import unit.scalar.CleanValue;
 
@@ -103,21 +102,25 @@ public class Covered implements Area {
         };
     }
 
+    @SuppressWarnings("PMD.ShortMethodName")
     @Override
     public final double x() {
         return this.area.value().x();
     }
 
+    @SuppressWarnings("PMD.ShortMethodName")
     @Override
     public final double y() {
         return this.area.value().y();
     }
 
+    @SuppressWarnings("PMD.ShortMethodName")
     @Override
     public final double w() {
         return this.area.value().w();
     }
 
+    @SuppressWarnings("PMD.ShortMethodName")
     @Override
     public final double h() {
         return this.area.value().h();

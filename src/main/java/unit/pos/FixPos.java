@@ -43,12 +43,14 @@ public class FixPos implements AdjustablePos {
      * The x coordinate.
      * @checkstyle MemberName (2 lines)
      */
+    @SuppressWarnings("PMD.AvoidFieldNameMatchingMethodName")
     private final DoubleSupplier x;
 
     /**
      * The y coordinate.
      * @checkstyle MemberName (2 lines)
      */
+    @SuppressWarnings("PMD.AvoidFieldNameMatchingMethodName")
     private final DoubleSupplier y;
 
     /**
@@ -142,11 +144,13 @@ public class FixPos implements AdjustablePos {
         this.y = Objects.requireNonNull(y);
     }
 
+    @SuppressWarnings("PMD.ShortMethodName")
     @Override
     public final double x() {
         return this.x.getAsDouble();
     }
 
+    @SuppressWarnings("PMD.ShortMethodName")
     @Override
     public final double y() {
         return this.y.getAsDouble();

@@ -129,21 +129,25 @@ public class AreaOf implements Area {
         this.size = Objects.requireNonNull(size);
     }
 
+    @SuppressWarnings("PMD.ShortMethodName")
     @Override
     public final double x() {
         return this.pos.x();
     }
 
+    @SuppressWarnings("PMD.ShortMethodName")
     @Override
     public final double y() {
         return this.pos.y();
     }
 
+    @SuppressWarnings("PMD.ShortMethodName")
     @Override
     public final double w() {
         return this.size.w();
     }
 
+    @SuppressWarnings("PMD.ShortMethodName")
     @Override
     public final double h() {
         return this.size.h();

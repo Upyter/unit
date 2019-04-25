@@ -58,12 +58,14 @@ public class Moving implements Pos {
         this.elapsable = Objects.requireNonNull(elapsable);
     }
 
+    @SuppressWarnings("PMD.ShortMethodName")
     @Override
     public final double x() {
         return this.start.x() + (this.end.x() - this.start.x())
             * this.elapsable.elapsedPercent();
     }
 
+    @SuppressWarnings("PMD.ShortMethodName")
     @Override
     public final double y() {
         return this.start.y() + (this.end.y() - this.start.y())

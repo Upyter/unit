@@ -37,12 +37,16 @@ import unit.tuple.adjustment.TupleAdjustment;
 public class SoftPos implements AdjustablePos {
     /**
      * The x coordinate of the position.
+     * @checkstyle MemberName (2 lines)
      */
+    @SuppressWarnings("PMD.AvoidFieldNameMatchingMethodName")
     private final Scalar x;
 
     /**
      * The y coordinate of the position.
+     * @checkstyle MemberName (2 lines)
      */
+    @SuppressWarnings("PMD.AvoidFieldNameMatchingMethodName")
     private final Scalar y;
 
     /**
@@ -144,11 +148,13 @@ public class SoftPos implements AdjustablePos {
         this.y = Objects.requireNonNull(y);
     }
 
+    @SuppressWarnings("PMD.ShortMethodName")
     @Override
     public final double x() {
         return this.x.value();
     }
 
+    @SuppressWarnings("PMD.ShortMethodName")
     @Override
     public final double y() {
         return this.y.value();

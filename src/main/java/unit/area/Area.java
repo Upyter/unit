@@ -38,6 +38,7 @@ public interface Area extends Adjustable<Adjustment> {
      * @return The x coordinate of the area.
      * @checkstyle MethodName (2 lines)
      */
+    @SuppressWarnings("PMD.ShortMethodName")
     double x();
 
     /**
@@ -45,6 +46,7 @@ public interface Area extends Adjustable<Adjustment> {
      * @return The y coordinate of the area.
      * @checkstyle MethodName (2 lines)
      */
+    @SuppressWarnings("PMD.ShortMethodName")
     double y();
 
     /**
@@ -52,6 +54,7 @@ public interface Area extends Adjustable<Adjustment> {
      * @return The width of the area.
      * @checkstyle MethodName (2 lines)
      */
+    @SuppressWarnings("PMD.ShortMethodName")
     double w();
 
     /**
@@ -59,6 +62,7 @@ public interface Area extends Adjustable<Adjustment> {
      * @return The height of the area.
      * @checkstyle MethodName (2 lines)
      */
+    @SuppressWarnings("PMD.ShortMethodName")
     double h();
 
     /**

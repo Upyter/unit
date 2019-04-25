@@ -103,11 +103,13 @@ public class Sum implements Pos {
         this.second = Objects.requireNonNull(second);
     }
 
+    @SuppressWarnings("PMD.ShortMethodName")
     @Override
     public final double x() {
         return this.first.x() + this.second.x();
     }
 
+    @SuppressWarnings("PMD.ShortMethodName")
     @Override
     public final double y() {
         return this.first.y() + this.second.y();

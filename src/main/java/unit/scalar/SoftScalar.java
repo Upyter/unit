@@ -48,6 +48,7 @@ public class SoftScalar implements Scalar {
 
     /**
      * The adjustment of the value.
+     * @checkstyle HiddenField (2 lines)
      */
     private Adjustment adjustment;
 

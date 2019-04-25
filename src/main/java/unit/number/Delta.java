@@ -55,16 +55,4 @@ public class Delta implements Lazy<Double> {
         return Math.nextAfter(this.test, Double.POSITIVE_INFINITY)
             * Delta.MULTIPLIER;
     }
-
-    /**
-     * Represents the delta according to:
-     * https://stackoverflow.com/a/50547044/7563350
-     * <p>It serves as the delta argument for <b>double values</b>.</p>
-     * @param from The value to construct the delta value from
-     * @return The delta value
-     */
-    public static double delta(final double from) {
-        return Math.nextAfter(from, Double.POSITIVE_INFINITY)
-            * Delta.MULTIPLIER;
-    }
 }
