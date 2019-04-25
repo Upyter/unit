@@ -39,12 +39,14 @@ public interface Pos {
     /**
      * The x coordinate of the position.
      * @return The x coordinate.
+     * @checkstyle MethodName (2 lines)
      */
     double x();
 
     /**
      * The y coordinate of the position.
      * @return The y coordinate.
+     * @checkstyle MethodName (2 lines)
      */
     double y();
 }

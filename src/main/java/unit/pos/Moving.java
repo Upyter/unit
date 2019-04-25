@@ -60,15 +60,13 @@ public class Moving implements Pos {
 
     @Override
     public final double x() {
-        return (this.start.x() + (this.end.x() - this.start.x())
-            * this.elapsable.elapsedPercent());
+        return this.start.x() + (this.end.x() - this.start.x())
+            * this.elapsable.elapsedPercent();
     }
 
     @Override
     public final double y() {
-        return (this.start.y() + (this.end.y() - this.start.y())
-            * this.elapsable.elapsedPercent());
+        return this.start.y() + (this.end.y() - this.start.y())
+            * this.elapsable.elapsedPercent();
     }
-
-    // TODO: Implement equals, hashCode and toString
 }

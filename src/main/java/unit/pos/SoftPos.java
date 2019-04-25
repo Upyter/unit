@@ -57,6 +57,7 @@ public class SoftPos implements AdjustablePos {
      * @param x The x coordinate.
      * @param y The y coordinate.
      * @checkstyle ParameterName (2 lines)
+     * @checkstyle ParameterName (2 lines)
      */
     public SoftPos(final int x, final int y) {
         this(() -> x, () -> y);
@@ -65,7 +66,7 @@ public class SoftPos implements AdjustablePos {
     /**
      * Ctor.
      * @param x The x coordinate.
-     * @param y The y coordinate.
+     * @param y The supplier for the y coordinate.
      * @checkstyle ParameterName (2 lines)
      */
     public SoftPos(final int x, final IntSupplier y) {
@@ -74,7 +75,7 @@ public class SoftPos implements AdjustablePos {
 
     /**
      * Ctor.
-     * @param x The x coordinate.
+     * @param x The supplier for the x coordinate.
      * @param y The y coordinate.
      * @checkstyle ParameterName (2 lines)
      */
@@ -84,8 +85,8 @@ public class SoftPos implements AdjustablePos {
 
     /**
      * Ctor.
-     * @param x The x coordinate.
-     * @param y The y coordinate.
+     * @param x The supplier for the x coordinate.
+     * @param y The supplier for the y coordinate.
      * @checkstyle ParameterName (2 lines)
      */
     public SoftPos(final IntSupplier x, final IntSupplier y) {
@@ -96,6 +97,7 @@ public class SoftPos implements AdjustablePos {
      * Ctor.
      * @param x The x coordinate.
      * @param y The y coordinate.
+     * @checkstyle ParameterName (2 lines)
      */
     public SoftPos(final double x, final double y) {
         this(() -> x, () -> y);
@@ -103,8 +105,9 @@ public class SoftPos implements AdjustablePos {
 
     /**
      * Ctor.
-     * @param x The x coordinate.
+     * @param x The supplier for the x coordinate.
      * @param y The y coordinate.
+     * @checkstyle ParameterName (2 lines)
      */
     public SoftPos(final DoubleSupplier x, final double y) {
         this(x, () -> y);
@@ -113,7 +116,8 @@ public class SoftPos implements AdjustablePos {
     /**
      * Ctor.
      * @param x The x coordinate.
-     * @param y The y coordinate.
+     * @param y The supplier for the y coordinate.
+     * @checkstyle ParameterName (2 lines)
      */
     public SoftPos(final double x, final DoubleSupplier y) {
         this(() -> x, y);
@@ -121,8 +125,9 @@ public class SoftPos implements AdjustablePos {
 
     /**
      * Ctor.
-     * @param x The x coordinate.
-     * @param y The y coordinate.
+     * @param x The supplier for the x coordinate.
+     * @param y The supplier for the y coordinate.
+     * @checkstyle ParameterName (2 lines)
      */
     public SoftPos(final DoubleSupplier x, final DoubleSupplier y) {
         this(new SoftScalar(x), new SoftScalar(y));
@@ -132,6 +137,7 @@ public class SoftPos implements AdjustablePos {
      * Ctor.
      * @param x The x coordinate.
      * @param y The y coordinate.
+     * @checkstyle ParameterName (2 lines)
      */
     public SoftPos(final Scalar x, final Scalar y) {
         this.x = Objects.requireNonNull(x);

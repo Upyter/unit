@@ -47,7 +47,6 @@ import unit.scalar.CleanValue;
  * every time {@link #result(BiFunction)} is called.</b></p>
  * <p>Whether this class is immutable or thread-safe, depends on the given
  * areas.</p>
- * // TODO: Remove the calculation from the constructor
  * @since 0.58
  */
 public class Covered implements Area {
@@ -71,27 +70,36 @@ public class Covered implements Area {
     public Covered(final Collection<Area> areas) {
         this.area = () -> {
             final var iterator = areas.iterator();
+            Area result;
             if (iterator.hasNext()) {
-                Area area = iterator.next();
-                while (iterator.hasNext()) {
+                result = iterator.next();
+                if (iterator.hasNext()) {
                     final var next = iterator.next();
-                    area = new AreaOf(
-                        Math.min(next.x(), area.x()),
-                        Math.min(next.y(), area.y()),
+                    result = new AreaOf(
+                        Math.min(next.x(), result.x()),
+                        Math.min(next.y(), result.y()),
                         Math.max(
-                            next.x() + next.w() - Math.min(next.x(), area.x()),
-                            area.x() + area.w() - Math.min(next.x(), area.x())
+                            next.x() + next.w() - Math.min(
+                                next.x(), result.x()
+                            ),
+                            result.x() + result.w() - Math.min(
+                                next.x(), result.x()
+                            )
                         ),
                         Math.max(
-                            next.y() + next.h() - Math.min(next.y(), area.y()),
-                            area.y() + area.h() - Math.min(next.y(), area.y())
+                            next.y() + next.h() - Math.min(
+                                next.y(), result.y()
+                            ),
+                            result.y() + result.h() - Math.min(
+                                next.y(), result.y()
+                            )
                         )
                     );
                 }
-                return area;
             } else {
-                return new AreaOf();
+                result = new AreaOf();
             }
+            return result;
         };
     }
 

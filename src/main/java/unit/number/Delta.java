@@ -63,7 +63,7 @@ public class Delta implements Lazy<Double> {
      * @param from The value to construct the delta value from
      * @return The delta value
      */
-    public static double delta(double from) {
+    public static double delta(final double from) {
         return Math.nextAfter(from, Double.POSITIVE_INFINITY)
             * Delta.MULTIPLIER;
     }

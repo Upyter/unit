@@ -92,7 +92,7 @@ public class AreaOf implements Area {
      * @param width The width of the area.
      * @param height The height of the area.
      * @checkstyle ParameterNumber (3 lines)
-     * @checkstyle ParameterName (2 lines)
+     * @checkstyle ParameterName (3 lines)
      */
     public AreaOf(
         final double x, final double y, final double width, final double height
