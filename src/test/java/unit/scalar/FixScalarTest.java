@@ -77,16 +77,11 @@ public final class FixScalarTest {
         };
         MatcherAssert.assertThat(
             new FixScalar(supplier).value(),
-            Matchers.closeTo(
-                first,
-                new Delta(first).value())
+            Matchers.closeTo(first, new Delta(first).value())
         );
         MatcherAssert.assertThat(
             new FixScalar(supplier).value(),
-            Matchers.closeTo(
-                second,
-                new Delta(second).value()
-            )
+            Matchers.closeTo(second, new Delta(second).value())
         );
     }
 
@@ -99,10 +94,7 @@ public final class FixScalarTest {
         final double value = 632.45;
         MatcherAssert.assertThat(
             new FixScalar(value).value(),
-            Matchers.closeTo(
-                value,
-                new Delta(value).value()
-            )
+            Matchers.closeTo(value, new Delta(value).value())
         );
     }
 
@@ -114,8 +106,7 @@ public final class FixScalarTest {
     public void defaultConstructor() {
         MatcherAssert.assertThat(
             new FixScalar().value(),
-            Matchers.closeTo(0.0, new Delta(0.0).value()
-            )
+            Matchers.closeTo(0.0, new Delta(0.0).value())
         );
     }
 
@@ -132,16 +123,13 @@ public final class FixScalarTest {
         scalar.adjustment(ignore -> other);
         MatcherAssert.assertThat(
             scalar.value(),
-            Matchers.closeTo(
-                value,
-                new Delta(value).value()
-            )
+            Matchers.closeTo(value, new Delta(value).value())
         );
     }
 
     /**
      * {@link FixScalar#toString()} must return a string that looks like this:
-     * <p>FixScalar(...value...)</p>
+     * <p>FixScalar(...value...)</p>.
      */
     @Test
     public void correctToString() {

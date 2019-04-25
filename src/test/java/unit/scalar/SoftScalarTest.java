@@ -86,7 +86,8 @@ public final class SoftScalarTest {
             new SoftScalar(supplier).value(),
             Matchers.closeTo(
                 second,
-                new Delta(second).value())
+                new Delta(second).value()
+            )
         );
     }
 
@@ -162,7 +163,7 @@ public final class SoftScalarTest {
 
     /**
      * {@link FixScalar#toString()} must return a string that looks like this:
-     * <p>FixScalar(...value..., adjustment: ...adjusted value...)</p>
+     * <p>FixScalar(...value..., adjustment: ...adjusted value...)</p>.
      */
     @Test
     public void correctToString() {

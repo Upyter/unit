@@ -83,7 +83,7 @@ public final class OverlapAreaOfTest {
         final int height = 264;
         MatcherAssert.assertThat(
             new AsTuple(
-                    new OverlapAreaOf(
+                new OverlapAreaOf(
                     new FixPos(x, y),
                     new FixSize(width, height)
                 )

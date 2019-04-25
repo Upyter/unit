@@ -31,6 +31,7 @@ import unit.size.AdjustableSize;
  * <p>This class is immutable and thread-safe.</p>
  * @since 0.47
  */
+@SuppressWarnings("PMD.TooManyMethods")
 public class OverlapAreaOf implements OverlapArea {
     /**
      * The area to delegate the calls to.

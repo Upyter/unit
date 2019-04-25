@@ -42,10 +42,7 @@ public final class SumYTest {
         final int y2 = 76;
         MatcherAssert.assertThat(
             new AsTuple(
-                    new SumY(
-                    new FixPos(x, y1),
-                    y2
-                )
+                new SumY(new FixPos(x, y1), y2)
             ),
             new CorrectResult(x, y1 + y2)
         );

@@ -83,6 +83,7 @@ public class FixScalar implements Scalar {
         // a fixed scalar ignores adjustments
     }
 
+    @SuppressWarnings("PMD.OnlyOneReturn")
     @Override
     public final boolean equals(final Object obj) {
         if (this == obj) {
