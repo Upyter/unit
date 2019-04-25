@@ -67,20 +67,22 @@ public class Covered implements Area {
      */
     public Covered(final Iterable<Area> areas) {
         this.area = () -> {
+            // @checkstyle LocalVariableName (4 lines)
             var x = 0.0;
             var y = 0.0;
             var w = 0.0;
             var h = 0.0;
             final var iterator = areas.iterator();
             if (iterator.hasNext()) {
-                Area start = iterator.next();
+                final Area start = iterator.next();
                 x = start.x();
                 y = start.y();
                 w = start.w();
                 h = start.h();
                 while (iterator.hasNext()) {
                     final var next = iterator.next();
-                    // TEMPORAL COUPLING. w and h must be calculated before x and y!
+                    // TEMPORAL COUPLING. w and h must be calculated before x
+                    // and y!
                     w = Math.max(
                         next.x() + next.w() - Math.min(next.x(), x),
                         x + w - Math.min(next.x(), x)
