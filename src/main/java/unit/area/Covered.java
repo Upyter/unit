@@ -21,7 +21,6 @@
 
 package unit.area;
 
-import java.util.Collection;
 import java.util.List;
 import unit.functional.Lazy;
 import unit.scalar.CleanValue;
@@ -66,39 +65,35 @@ public class Covered implements Area {
      * Ctor.
      * @param areas The areas of the coverage.
      */
-    public Covered(final Collection<Area> areas) {
+    public Covered(final Iterable<Area> areas) {
         this.area = () -> {
+            var x = 0.0;
+            var y = 0.0;
+            var w = 0.0;
+            var h = 0.0;
             final var iterator = areas.iterator();
-            Area result;
             if (iterator.hasNext()) {
-                result = iterator.next();
-                if (iterator.hasNext()) {
+                Area start = iterator.next();
+                x = start.x();
+                y = start.y();
+                w = start.w();
+                h = start.h();
+                while (iterator.hasNext()) {
                     final var next = iterator.next();
-                    result = new AreaOf(
-                        Math.min(next.x(), result.x()),
-                        Math.min(next.y(), result.y()),
-                        Math.max(
-                            next.x() + next.w() - Math.min(
-                                next.x(), result.x()
-                            ),
-                            result.x() + result.w() - Math.min(
-                                next.x(), result.x()
-                            )
-                        ),
-                        Math.max(
-                            next.y() + next.h() - Math.min(
-                                next.y(), result.y()
-                            ),
-                            result.y() + result.h() - Math.min(
-                                next.y(), result.y()
-                            )
-                        )
+                    // TEMPORAL COUPLING. w and h must be calculated before x and y!
+                    w = Math.max(
+                        next.x() + next.w() - Math.min(next.x(), x),
+                        x + w - Math.min(next.x(), x)
                     );
+                    h = Math.max(
+                        next.y() + next.h() - Math.min(next.y(), y),
+                        y + h - Math.min(next.y(), y)
+                    );
+                    x = Math.min(next.x(), x);
+                    y = Math.min(next.y(), y);
                 }
-            } else {
-                result = new AreaOf();
             }
-            return result;
+            return new AreaOf(x, y, w, h);
         };
     }
 

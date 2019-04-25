@@ -160,17 +160,17 @@ public final class CoveredTest {
     @Test
     public void withIntersection() {
         // @checkstyle LocalFinalVariableName (4 lines)
-        final int x1 = 0;
-        final int y1 = 0;
-        final int x2 = 500;
-        final int y2 = 500;
-        final int width = 100;
-        final int height = 100;
+        final var x1 = 0.0;
+        final var y1 = 0.0;
+        final var x2 = 500.0;
+        final var y2 = 500.0;
+        final var width = 100.0;
+        final var height = 100.0;
         MatcherAssert.assertThat(
             new AsTuple(
                 new Covered(
                     new AreaOf(x1, y1, width, height),
-                    new AreaOf(x1, y1, width / 2, height / 2),
+                    new AreaOf(x1, y1, width / 2.0, height / 2.0),
                     new AreaOf(x2, y2, width, height)
                 )
             ),
