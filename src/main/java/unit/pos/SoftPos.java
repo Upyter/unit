@@ -24,9 +24,9 @@ package unit.pos;
 import java.util.Objects;
 import java.util.function.DoubleSupplier;
 import java.util.function.IntSupplier;
+import unit.scalar.CleanValue;
 import unit.scalar.Scalar;
 import unit.scalar.SoftScalar;
-import unit.tuple.adjustment.TupleAdjustment;
 
 /**
  * A pos that reacts to the given adjustments.
@@ -34,7 +34,7 @@ import unit.tuple.adjustment.TupleAdjustment;
  * saving.</p>
  * @since 0.71
  */
-public class SoftPos implements AdjustablePos {
+public class SoftPos implements Pos {
     /**
      * The x coordinate of the position.
      * @checkstyle MemberName (3 lines)
@@ -160,17 +160,20 @@ public class SoftPos implements AdjustablePos {
         return this.y.value();
     }
 
-    // @checkstyle HiddenField (3 lines)
     @Override
-    public final void adjustment(
-        final TupleAdjustment<Integer, Integer> adjustment
-    ) {
-        this.x.adjustment(current -> adjustment.adjustedFirst(
-            (int) current.cleanValue())
-        );
-        this.y.adjustment(current -> adjustment.adjustedSecond(
-            (int) current.cleanValue())
-        );
+    public final CleanValue cleanX() {
+        return this.x;
+    }
+
+    @Override
+    public final CleanValue cleanY() {
+        return this.y;
+    }
+
+    @Override
+    public final void adjustment(final Adjustment adjustment) {
+        this.x.adjustment(current -> adjustment.adjustedX(current, this.y));
+        this.y.adjustment(current -> adjustment.adjustedY(this.x, current));
     }
 
     @SuppressWarnings("PMD.OnlyOneReturn")

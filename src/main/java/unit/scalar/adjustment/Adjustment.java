@@ -24,7 +24,7 @@ package unit.scalar.adjustment;
 import unit.scalar.CleanValue;
 
 /**
- * An adjustment of a float based scalar.
+ * An adjustment of a double based scalar.
  * @see unit.area.Adjustment
  * @see unit.pos.Pos
  * @see unit.size.Size

@@ -21,12 +21,30 @@
 
 package unit.size;
 
-import unit.adjustment.Adjustable;
-import unit.tuple.adjustment.TupleAdjustment;
+import unit.scalar.CleanValue;
 
 /**
- * An adjustable size.
- * @since 0.65
+ * An adjustment of the size.
+ * @see SoftSize
+ * @see FixSize
+ * @since 0.115
  */
-public interface AdjustableSize extends
-    Size, Adjustable<TupleAdjustment<Integer, Integer>> { }
+public interface Adjustment {
+    /**
+     * Returns the adjusted version of the width.
+     * @param w The current width.
+     * @param h The current height.
+     * @return The adjusted width.
+     * @checkstyle ParameterName (2 lines)
+     */
+    double adjustedW(CleanValue w, CleanValue h);
+
+    /**
+     * Returns the adjusted version of the height.
+     * @param w The current width.
+     * @param h The current height.
+     * @return The adjusted height.
+     * @checkstyle ParameterName (2 lines)
+     */
+    double adjustedH(CleanValue w, CleanValue h);
+}

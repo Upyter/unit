@@ -21,11 +21,7 @@
 
 package unit.sequence;
 
-import java.util.List;
-import org.cactoos.func.ProcOf;
-import org.cactoos.list.Mapped;
-import org.cactoos.list.StickyList;
-import org.cactoos.scalar.And;
+import io.vavr.collection.List;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
@@ -53,13 +49,11 @@ public final class FakeClockTest {
     @Test
     public void multipleNumbersInAndOut() {
         final var expected = List.of(5L, 232L, 4324L, 42L, 423L);
-        final var clock = new FakeClock(expected);
+        final var clock = new FakeClock(expected.asJava());
         MatcherAssert.assertThat(
-            new StickyList<>(
-                new Mapped<>(
-                    it -> clock.millis(),
-                    expected
-                )
+            List.tabulate(
+                expected.size(),
+                num -> clock.millis()
             ),
             Matchers.equalTo(expected)
         );
@@ -67,17 +61,16 @@ public final class FakeClockTest {
 
     /**
      * Tests whether the clock stays on the last unit.number after reaching it.
-     * @throws Exception Thanks to {@link And}.
      */
+    @SuppressWarnings("PMD.UnusedLocalVariable")
     @Test
-    public void staysOnLastNumber() throws Exception {
+    public void staysOnLastNumber() {
         final var last = 312L;
         final var expected = List.of(12L, 432L, 23L, 55L, last);
-        final var clock = new FakeClock(expected);
-        new And(
-            new ProcOf<>(ignored -> clock.millis()),
-            expected
-        ).value();
+        final var clock = new FakeClock(expected.asJava());
+        for (final var ignored : expected) {
+            clock.millis();
+        }
         MatcherAssert.assertThat(last, Matchers.equalTo(clock.millis()));
         MatcherAssert.assertThat(last, Matchers.equalTo(clock.millis()));
     }

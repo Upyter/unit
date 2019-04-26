@@ -22,9 +22,11 @@
 package unit.area;
 
 import java.util.Objects;
-import unit.pos.AdjustablePos;
+import unit.pos.Pos;
+import unit.pos.PosAdjustment;
 import unit.scalar.CleanValue;
-import unit.size.AdjustableSize;
+import unit.size.Size;
+import unit.size.SizeAdjustment;
 
 /**
  * An area that can be composed with fix and soft positions, sizes and scalars.
@@ -39,19 +41,19 @@ public class MixArea implements Area {
     /**
      * The pos of this area.
      */
-    private final AdjustablePos pos;
+    private final Pos pos;
 
     /**
      * The size of this area.
      */
-    private final AdjustableSize size;
+    private final Size size;
 
     /**
      * Ctor.
      * @param pos The pos of the area.
      * @param size The size of the area.
      */
-    public MixArea(final AdjustablePos pos, final AdjustableSize size) {
+    public MixArea(final Pos pos, final Size size) {
         this.pos = Objects.requireNonNull(pos);
         this.size = Objects.requireNonNull(size);
     }
@@ -81,6 +83,16 @@ public class MixArea implements Area {
     }
 
     @Override
+    public final CleanValue cleanX() {
+        return this.pos.cleanX();
+    }
+
+    @Override
+    public final CleanValue cleanY() {
+        return this.pos.cleanY();
+    }
+
+    @Override
     public final CleanValue cleanW() {
         return this.size.cleanW();
     }
@@ -92,8 +104,30 @@ public class MixArea implements Area {
 
     @Override
     public final void adjustment(final Adjustment adjustment) {
-        this.pos.adjustment(adjustment.posAdjustment());
-        this.size.adjustment(adjustment.sizeAdjustment());
+        this.pos.adjustment(
+            new PosAdjustment(
+                // @checkstyle ParameterName (1 line)
+                (x, y) -> adjustment.adjustedX(
+                    x, y, this.cleanW(), this.cleanH()
+                ),
+                // @checkstyle ParameterName (1 line)
+                (x, y) -> adjustment.adjustedY(
+                    x, y, this.cleanW(), this.cleanH()
+                )
+            )
+        );
+        this.size.adjustment(
+            new SizeAdjustment(
+                // @checkstyle ParameterName (1 line)
+                (w, h) -> adjustment.adjustedW(
+                    this.cleanX(), this.cleanY(), w, h
+                ),
+                // @checkstyle ParameterName (1 line)
+                (w, h) -> adjustment.adjustedH(
+                    this.cleanX(), this.cleanY(), w, h
+                )
+            )
+        );
     }
 
     @Override

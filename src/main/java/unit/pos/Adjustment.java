@@ -21,13 +21,30 @@
 
 package unit.pos;
 
-import unit.adjustment.Adjustable;
-import unit.tuple.adjustment.TupleAdjustment;
+import unit.scalar.CleanValue;
 
 /**
- * An adjustable pos.
- * @since 0.71
+ * An adjustment of the position.
+ * @see SoftPos
+ * @see FixPos
+ * @since 0.115
  */
-public interface AdjustablePos extends
-    Pos, Adjustable<TupleAdjustment<Integer, Integer>> {
+public interface Adjustment {
+    /**
+     * Returns the adjusted version of the x coordinate.
+     * @param x The current x coordinate.
+     * @param y The current y coordinate.
+     * @return The adjusted x coordinate.
+     * @checkstyle ParameterName (2 lines)
+     */
+    double adjustedX(CleanValue x, CleanValue y);
+
+    /**
+     * Returns the adjusted version of the y coordinate.
+     * @param x The current x coordinate.
+     * @param y The current y coordinate.
+     * @return The adjusted y coordinate.
+     * @checkstyle ParameterName (2 lines)
+     */
+    double adjustedY(CleanValue x, CleanValue y);
 }

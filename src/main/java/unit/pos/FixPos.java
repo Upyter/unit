@@ -24,34 +24,29 @@ package unit.pos;
 import java.util.Objects;
 import java.util.function.DoubleSupplier;
 import java.util.function.IntSupplier;
-import unit.tuple.adjustment.TupleAdjustment;
-
-/*
-I am not happy about this naming, but my other idea's regarding the interface
-name and the basic implementation weren't good either (impl or simple for
-example). So I took the more annoying name for the implementation to lower the
-chance that a user might use the class name as a parameter type
-*/
+import unit.scalar.CleanValue;
+import unit.scalar.FixScalar;
+import unit.scalar.Scalar;
 
 /**
  * Basic concrete implementation of {@link Pos}.
  * <p>This class is immutable and thread-safe.</p>
  * @since 0.2
  */
-public class FixPos implements AdjustablePos {
+public class FixPos implements Pos {
     /**
      * The x coordinate.
      * @checkstyle MemberName (3 lines)
      */
     @SuppressWarnings("PMD.AvoidFieldNameMatchingMethodName")
-    private final DoubleSupplier x;
+    private final Scalar x;
 
     /**
      * The y coordinate.
      * @checkstyle MemberName (3 lines)
      */
     @SuppressWarnings("PMD.AvoidFieldNameMatchingMethodName")
-    private final DoubleSupplier y;
+    private final Scalar y;
 
     /**
      * Ctor. Sets x = 0 and y = 0 as its values.
@@ -140,26 +135,34 @@ public class FixPos implements AdjustablePos {
      * @checkstyle ParameterName (2 lines)
      */
     public FixPos(final DoubleSupplier x, final DoubleSupplier y) {
-        this.x = Objects.requireNonNull(x);
-        this.y = Objects.requireNonNull(y);
+        this.x = new FixScalar(x);
+        this.y = new FixScalar(y);
     }
 
     @SuppressWarnings("PMD.ShortMethodName")
     @Override
     public final double x() {
-        return this.x.getAsDouble();
+        return this.x.value();
     }
 
     @SuppressWarnings("PMD.ShortMethodName")
     @Override
     public final double y() {
-        return this.y.getAsDouble();
+        return this.y.value();
     }
 
     @Override
-    public final void adjustment(
-        final TupleAdjustment<Integer, Integer> adjustment
-    ) {
+    public final CleanValue cleanX() {
+        return this.x;
+    }
+
+    @Override
+    public final CleanValue cleanY() {
+        return this.y;
+    }
+
+    @Override
+    public final void adjustment(final Adjustment adjustment) {
         // fix pos ignores adjustments
     }
 

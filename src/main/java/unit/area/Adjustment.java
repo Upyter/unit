@@ -21,24 +21,58 @@
 
 package unit.area;
 
-import unit.adjustment.Adjustable;
-import unit.tuple.adjustment.TupleAdjustment;
+import unit.scalar.CleanValue;
 
 /**
  * An adjustment of the area of a shape.
- * @see Adjustable
  * @since 0.64
  */
 public interface Adjustment {
     /**
-     * Returns the pos adjustment.
-     * @return The pos adjustment.
+     * Returns the adjusted version of the x coordinate.
+     * @param x The current x coordinate.
+     * @param y The current y coordinate.
+     * @param w The current width.
+     * @param h The current height.
+     * @return The adjusted x coordinate.
+     * @checkstyle ParameterName (3 lines)
+     * @checkstyle ParameterNumber (2 lines)
      */
-    TupleAdjustment<Integer, Integer> posAdjustment();
+    double adjustedX(CleanValue x, CleanValue y, CleanValue w, CleanValue h);
 
     /**
-     * Returns the size adjustment.
-     * @return The size adjustment.
+     * Returns the adjusted version of the y coordinate.
+     * @param x The current x coordinate.
+     * @param y The current y coordinate.
+     * @param w The current width.
+     * @param h The current height.
+     * @return The adjusted y coordinate.
+     * @checkstyle ParameterName (3 lines)
+     * @checkstyle ParameterNumber (2 lines)
      */
-    TupleAdjustment<Integer, Integer> sizeAdjustment();
+    double adjustedY(CleanValue x, CleanValue y, CleanValue w, CleanValue h);
+
+    /**
+     * Returns the adjusted version of the width.
+     * @param x The current x coordinate.
+     * @param y The current y coordinate.
+     * @param w The current width.
+     * @param h The current height.
+     * @return The adjusted width.
+     * @checkstyle ParameterName (3 lines)
+     * @checkstyle ParameterNumber (2 lines)
+     */
+    double adjustedW(CleanValue x, CleanValue y, CleanValue w, CleanValue h);
+
+    /**
+     * Returns the adjusted version of the height.
+     * @param x The current x coordinate.
+     * @param y The current y coordinate.
+     * @param w The current width.
+     * @param h The current height.
+     * @return The adjusted height.
+     * @checkstyle ParameterName (3 lines)
+     * @checkstyle ParameterNumber (2 lines)
+     */
+    double adjustedH(CleanValue x, CleanValue y, CleanValue w, CleanValue h);
 }

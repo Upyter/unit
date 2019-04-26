@@ -22,6 +22,7 @@
 package unit.pos;
 
 import java.util.Objects;
+import unit.scalar.CleanValue;
 import unit.sequence.Elapsable;
 
 /**
@@ -70,5 +71,20 @@ public class Moving implements Pos {
     public final double y() {
         return this.start.y() + (this.end.y() - this.start.y())
             * this.elapsable.elapsedPercent();
+    }
+
+    @Override
+    public final CleanValue cleanX() {
+        throw new UnsupportedOperationException("#cleanX()");
+    }
+
+    @Override
+    public final CleanValue cleanY() {
+        throw new UnsupportedOperationException("#cleanY()");
+    }
+
+    @Override
+    public final void adjustment(final Adjustment adjustment) {
+        throw new UnsupportedOperationException("#adjustment()");
     }
 }

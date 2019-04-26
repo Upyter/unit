@@ -24,56 +24,64 @@ package unit.area;
 import unit.adjustment.Adjustable;
 import unit.scalar.CleanValue;
 
-/*
-This interface is needed (compared to using the pos and the size classes
-alone) because some implementations need both like an overlappable area
-*/
 /**
  * A cartesian two dimensional rectangular area of a shape.
  * @since 0.6
  */
 public interface Area extends Adjustable<Adjustment> {
     /**
-     * Returns the x coordinate of the area.
-     * @return The x coordinate of the area.
+     * Returns the x coordinate.
+     * @return The x coordinate.
      * @checkstyle MethodName (3 lines)
      */
     @SuppressWarnings("PMD.ShortMethodName")
     double x();
 
     /**
-     * Returns the y coordinate of the area.
-     * @return The y coordinate of the area.
+     * Returns the y coordinate.
+     * @return The y coordinate.
      * @checkstyle MethodName (3 lines)
      */
     @SuppressWarnings("PMD.ShortMethodName")
     double y();
 
     /**
-     * Returns the width of the area.
-     * @return The width of the area.
+     * Returns the width.
+     * @return The width.
      * @checkstyle MethodName (3 lines)
      */
     @SuppressWarnings("PMD.ShortMethodName")
     double w();
 
     /**
-     * Returns the height of the area.
-     * @return The height of the area.
+     * Returns the height.
+     * @return The height.
      * @checkstyle MethodName (3 lines)
      */
     @SuppressWarnings("PMD.ShortMethodName")
     double h();
 
     /**
-     * Returns the unadjusted width of the area.
-     * @return The unadjusted height of the area.
+     * Returns the unadjusted x coordinate.
+     * @return The unadjusted x coordinate.
+     */
+    CleanValue cleanX();
+
+    /**
+     * Returns the unadjusted y coordinate.
+     * @return The unadjusted y coordinate.
+     */
+    CleanValue cleanY();
+
+    /**
+     * Returns the unadjusted width.
+     * @return The unadjusted height.
      */
     CleanValue cleanW();
 
     /**
-     * Returns the unadjusted height of the area.
-     * @return The unadjusted height of the area.
+     * Returns the unadjusted height.
+     * @return The unadjusted height.
      */
     CleanValue cleanH();
 }

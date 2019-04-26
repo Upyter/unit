@@ -19,47 +19,52 @@
  * DEALINGS IN THE SOFTWARE.
  */
 
-package unit.area.adjustment;
+package unit.size;
 
-import java.util.function.IntUnaryOperator;
-import unit.area.Adjustment;
-import unit.tuple.adjustment.NoAdjustment;
-import unit.tuple.adjustment.TupleAdjustment;
+import java.util.function.ToDoubleBiFunction;
+import unit.scalar.CleanValue;
 
 /**
- * An adjustment to the y coordinate of an area. Keeps everything else as it
- * was.
+ * A shortcut to create size based adjustments.
  * <p>This class is immutable and thread-safe.</p>
- * @see XAdjustment
- * @since 0.70
+ * @since 0.115
  */
-public class YAdjustment implements Adjustment {
+public class SizeAdjustment implements Adjustment {
     /**
-     * The adjustment of the position.
+     * The adjustment of the width.
+     * @checkstyle MemberName (2 lines)
      */
-    private final TupleAdjustment<Integer, Integer> pos;
+    private final ToDoubleBiFunction<CleanValue, CleanValue> wAdjustment;
 
     /**
-     * The adjustment of the size.
+     * The adjustment of the height.
+     * @checkstyle MemberName (2 lines)
      */
-    private final TupleAdjustment<Integer, Integer> size;
+    private final ToDoubleBiFunction<CleanValue, CleanValue> hAdjustment;
 
     /**
      * Ctor.
-     * @param adjustment The adjustment of the y coordinate.
+     * @param wAdjustment The adjustment of the width.
+     * @param hAdjustment The adjustment of the height.
+     * @checkstyle ParameterName (4 lines)
      */
-    public YAdjustment(final IntUnaryOperator adjustment) {
-        this.pos = new unit.pos.YAdjustment(adjustment);
-        this.size = NoAdjustment.cached();
+    public SizeAdjustment(
+        final ToDoubleBiFunction<CleanValue, CleanValue> wAdjustment,
+        final ToDoubleBiFunction<CleanValue, CleanValue> hAdjustment
+    ) {
+        this.wAdjustment = wAdjustment;
+        this.hAdjustment = hAdjustment;
     }
 
+    // @checkstyle ParameterName (2 lines)
     @Override
-    public final TupleAdjustment<Integer, Integer> posAdjustment() {
-        return this.pos;
+    public final double adjustedW(final CleanValue w, final CleanValue h) {
+        return this.wAdjustment.applyAsDouble(w, h);
     }
 
+    // @checkstyle ParameterName (2 lines)
     @Override
-    public final TupleAdjustment<Integer, Integer> sizeAdjustment() {
-        return this.size;
+    public final double adjustedH(final CleanValue w, final CleanValue h) {
+        return this.hAdjustment.applyAsDouble(w, h);
     }
 }

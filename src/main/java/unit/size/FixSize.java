@@ -27,21 +27,14 @@ import java.util.function.IntSupplier;
 import unit.scalar.CleanValue;
 import unit.scalar.FixScalar;
 import unit.scalar.Scalar;
-import unit.tuple.adjustment.TupleAdjustment;
 
-/*
-I am not happy about this naming, but my other idea's regarding the interface
-name and the basic implementation weren't good either (impl or simple for
-example). So I took the more annoying name for the implementation to lower the
-chance that a user might use the class name as a parameter type
-*/
 /**
  * A size that doesn't adjust itself.
  * <p>Whether this class is immutable or thread-safe depends on the given
  * arguments in the constructor.</p>
  * @since 0.4
  */
-public class FixSize implements AdjustableSize {
+public class FixSize implements Size {
     /**
      * The width of the size.
      */
@@ -53,7 +46,7 @@ public class FixSize implements AdjustableSize {
     private final Scalar height;
 
     /**
-     * Ctor. Creates a size with width = 0 and height = 0.
+     * Creates a size with width = 0 and height = 0.
      */
     public FixSize() {
         this(0, 0);
@@ -135,19 +128,8 @@ public class FixSize implements AdjustableSize {
     public FixSize(
         final DoubleSupplier width, final DoubleSupplier height
     ) {
-        this(new FixScalar(width), new FixScalar(height));
-    }
-
-    /**
-     * Ctor.
-     * @param width The width for the size.
-     * @param height The height for the size.
-     */
-    public FixSize(
-        final Scalar width, final Scalar height
-    ) {
-        this.width = width;
-        this.height = height;
+        this.width = new FixScalar(width);
+        this.height = new FixScalar(height);
     }
 
     @SuppressWarnings("PMD.ShortMethodName")
@@ -201,9 +183,7 @@ public class FixSize implements AdjustableSize {
     }
 
     @Override
-    public final void adjustment(
-        final TupleAdjustment<Integer, Integer> adjustment
-    ) {
+    public final void adjustment(final Adjustment adjustment) {
         // fix size ignores adjustments
     }
 }

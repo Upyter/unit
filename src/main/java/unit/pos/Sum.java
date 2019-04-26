@@ -23,6 +23,7 @@ package unit.pos;
 
 import java.util.Objects;
 import java.util.function.IntSupplier;
+import unit.scalar.CleanValue;
 
 /**
  * The sum of a position and something else.
@@ -113,5 +114,20 @@ public class Sum implements Pos {
     @Override
     public final double y() {
         return this.first.y() + this.second.y();
+    }
+
+    @Override
+    public final CleanValue cleanX() {
+        throw new UnsupportedOperationException("#cleanX()");
+    }
+
+    @Override
+    public final CleanValue cleanY() {
+        throw new UnsupportedOperationException("#cleanY()");
+    }
+
+    @Override
+    public final void adjustment(final Adjustment adjustment) {
+        throw new UnsupportedOperationException("#adjustment()");
     }
 }

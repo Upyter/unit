@@ -31,6 +31,8 @@ used in many places and I think this cut will safe some characters without
 sacrificing readability
 */
 
+import unit.scalar.CleanValue;
+
 /**
  * A cartesian two dimensional pos.
  * @since 0.2
@@ -51,4 +53,23 @@ public interface Pos {
      */
     @SuppressWarnings("PMD.ShortMethodName")
     double y();
+
+    /**
+     * Returns the unadjusted x coordinate.
+     * @return The unadjusted x coordinate.
+     */
+    CleanValue cleanX();
+
+    /**
+     * Returns the unadjusted y coordinate.
+     * @return The unadjusted y coordinate.
+     */
+    CleanValue cleanY();
+
+    /**
+     * Registers the given adjustment and uses it for its values (perhaps). This
+     * method overwrites the previously given adjustments.
+     * @param adjustment The adjustment to register.
+     */
+    void adjustment(Adjustment adjustment);
 }

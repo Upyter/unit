@@ -122,6 +122,16 @@ public class Covered implements Area {
     }
 
     @Override
+    public final CleanValue cleanX() {
+        return this.area.value().cleanX();
+    }
+
+    @Override
+    public final CleanValue cleanY() {
+        return this.area.value().cleanY();
+    }
+
+    @Override
     public final CleanValue cleanW() {
         return this.area.value().cleanW();
     }

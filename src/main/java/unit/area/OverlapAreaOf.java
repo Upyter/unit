@@ -21,10 +21,10 @@
 
 package unit.area;
 
-import unit.pos.AdjustablePos;
+import unit.pos.Pos;
 import unit.pos.SoftPos;
 import unit.scalar.CleanValue;
-import unit.size.AdjustableSize;
+import unit.size.Size;
 
 /**
  * An area that knows when a point overlaps with itself.
@@ -51,7 +51,7 @@ public class OverlapAreaOf implements OverlapArea {
      * Ctor. Uses (0|0) as its position. The position is soft.
      * @param size The size of the area.
      */
-    public OverlapAreaOf(final AdjustableSize size) {
+    public OverlapAreaOf(final Size size) {
         this(new SoftPos(), size);
     }
 
@@ -60,7 +60,7 @@ public class OverlapAreaOf implements OverlapArea {
      * @param pos The position of the area.
      * @param size The size of the area.
      */
-    public OverlapAreaOf(final AdjustablePos pos, final AdjustableSize size) {
+    public OverlapAreaOf(final Pos pos, final Size size) {
         this(new MixArea(pos, size));
     }
 
@@ -103,6 +103,16 @@ public class OverlapAreaOf implements OverlapArea {
     @Override
     public final double h() {
         return this.area.h();
+    }
+
+    @Override
+    public final CleanValue cleanX() {
+        return this.area.cleanX();
+    }
+
+    @Override
+    public final CleanValue cleanY() {
+        return this.area.cleanY();
     }
 
     @Override

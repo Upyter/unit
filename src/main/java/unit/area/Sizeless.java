@@ -71,6 +71,16 @@ public class Sizeless implements Area {
     }
 
     @Override
+    public final CleanValue cleanX() {
+        return this.area.cleanX();
+    }
+
+    @Override
+    public final CleanValue cleanY() {
+        return this.area.cleanY();
+    }
+
+    @Override
     public final CleanValue cleanW() {
         return new FixScalar();
     }

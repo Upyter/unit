@@ -62,4 +62,11 @@ public interface Size {
      * @return The unadjusted height.
      */
     CleanValue cleanH();
+
+    /**
+     * Registers the given adjustment and uses it for its values (perhaps). This
+     * method overwrites the previously given adjustments.
+     * @param adjustment The adjustment to register.
+     */
+    void adjustment(Adjustment adjustment);
 }

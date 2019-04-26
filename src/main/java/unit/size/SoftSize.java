@@ -26,7 +26,6 @@ import java.util.function.IntSupplier;
 import unit.scalar.CleanValue;
 import unit.scalar.Scalar;
 import unit.scalar.SoftScalar;
-import unit.tuple.adjustment.TupleAdjustment;
 
 /**
  * A size that reacts to the given adjustments.
@@ -34,19 +33,23 @@ import unit.tuple.adjustment.TupleAdjustment;
  * saving.</p>
  * @since 0.66
  */
-public class SoftSize implements AdjustableSize {
+public class SoftSize implements Size {
     /**
-     * The width of the size.
+     * The width.
+     * @checkstyle MemberName (3 lines)
      */
-    private final Scalar width;
+    @SuppressWarnings("PMD.AvoidFieldNameMatchingMethodName")
+    private final Scalar w;
 
     /**
-     * The height of the size.
+     * The height.
+     * @checkstyle MemberName (3 lines)
      */
-    private final Scalar height;
+    @SuppressWarnings("PMD.AvoidFieldNameMatchingMethodName")
+    private final Scalar h;
 
     /**
-     * Ctor. Uses 0 as the width and the height.
+     * Uses 0 as the width and the height.
      */
     public SoftSize() {
         this(0, 0);
@@ -54,128 +57,126 @@ public class SoftSize implements AdjustableSize {
 
     /**
      * Ctor.
-     * @param width The width of the size.
-     * @param height The height of the size.
+     * @param w The width.
+     * @param h The height.
+     * @checkstyle ParameterName (2 lines)
      */
-    public SoftSize(final int width, final IntSupplier height) {
-        this(() -> width, height);
+    public SoftSize(final int w, final IntSupplier h) {
+        this(() -> w, h);
     }
 
     /**
      * Ctor.
-     * @param width The width of the size.
-     * @param height The height of the size.
+     * @param w The width.
+     * @param h The height.
+     * @checkstyle ParameterName (2 lines)
      */
-    public SoftSize(final IntSupplier width, final int height) {
-        this(width, () -> height);
+    public SoftSize(final IntSupplier w, final int h) {
+        this(w, () -> h);
     }
 
     /**
      * Ctor.
-     * @param width The width of the size.
-     * @param height The height of the size.
+     * @param w The width.
+     * @param h The height.
+     * @checkstyle ParameterName (2 lines)
      */
-    public SoftSize(final int width, final int height) {
-        this(() -> width, () -> height);
+    public SoftSize(final int w, final int h) {
+        this(() -> w, () -> h);
     }
 
     /**
      * Ctor.
-     * @param width The width of the size.
-     * @param height The height of the size.
+     * @param w The width.
+     * @param h The height.
+     * @checkstyle ParameterName (2 lines)
      */
-    public SoftSize(
-        final IntSupplier width, final IntSupplier height
-    ) {
+    public SoftSize(final IntSupplier w, final IntSupplier h) {
         this(
-            () -> (double) width.getAsInt(),
-            () -> (double) height.getAsInt()
+            () -> (double) w.getAsInt(),
+            () -> (double) h.getAsInt()
         );
     }
 
     /**
      * Ctor.
-     * @param width The width of the size.
-     * @param height The height of the size.
+     * @param w The width.
+     * @param h The height.
+     * @checkstyle ParameterName (2 lines)
      */
-    public SoftSize(final double width, final double height) {
-        this(() -> width, () -> height);
+    public SoftSize(final double w, final double h) {
+        this(() -> w, () -> h);
     }
 
     /**
      * Ctor.
-     * @param width The width of the size.
-     * @param height The height of the size.
+     * @param w The width.
+     * @param h The height.
+     * @checkstyle ParameterName (2 lines)
      */
-    public SoftSize(final DoubleSupplier width, final double height) {
-        this(width, () -> height);
+    public SoftSize(final DoubleSupplier w, final double h) {
+        this(w, () -> h);
     }
 
     /**
      * Ctor.
-     * @param width The width of the size.
-     * @param height The height of the size.
+     * @param w The width.
+     * @param h The height.
+     * @checkstyle ParameterName (2 lines)
      */
-    public SoftSize(final double width, final DoubleSupplier height) {
-        this(() -> width, height);
+    public SoftSize(final double w, final DoubleSupplier h) {
+        this(() -> w, h);
     }
 
     /**
      * Ctor.
-     * @param width The width of the size.
-     * @param height The height of the size.
+     * @param w The width.
+     * @param h The height.
+     * @checkstyle ParameterName (2 lines)
      */
-    public SoftSize(
-        final DoubleSupplier width, final DoubleSupplier height
-    ) {
+    public SoftSize(final DoubleSupplier w, final DoubleSupplier h) {
         this(
-            new SoftScalar(width),
-            new SoftScalar(height)
+            new SoftScalar(w),
+            new SoftScalar(h)
         );
     }
 
     /**
      * Ctor.
-     * @param width The width of the size.
-     * @param height The height of the size.
+     * @param w The width.
+     * @param h The height.
+     * @checkstyle ParameterName (2 lines)
      */
-    public SoftSize(final Scalar width, final Scalar height) {
-        this.width = width;
-        this.height = height;
+    public SoftSize(final Scalar w, final Scalar h) {
+        this.w = w;
+        this.h = h;
     }
 
     @SuppressWarnings("PMD.ShortMethodName")
     @Override
     public final double w() {
-        return this.width.value();
+        return this.w.value();
     }
 
     @SuppressWarnings("PMD.ShortMethodName")
     @Override
     public final double h() {
-        return this.height.value();
+        return this.h.value();
     }
 
     @Override
     public final CleanValue cleanW() {
-        return this.width;
+        return this.w;
     }
 
     @Override
     public final CleanValue cleanH() {
-        return this.height;
+        return this.h;
     }
 
-    // @checkstyle HiddenField (3 lines)
     @Override
-    public final void adjustment(
-        final TupleAdjustment<Integer, Integer> adjustment
-    ) {
-        this.width.adjustment(
-            current -> adjustment.adjustedFirst((int) current.cleanValue())
-        );
-        this.height.adjustment(
-            current -> adjustment.adjustedSecond((int) current.cleanValue())
-        );
+    public final void adjustment(final Adjustment adjustment) {
+        this.w.adjustment(current -> adjustment.adjustedW(current, this.h));
+        this.h.adjustment(current -> adjustment.adjustedH(this.w, current));
     }
 }
