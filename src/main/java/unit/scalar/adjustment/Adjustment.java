@@ -31,7 +31,8 @@ package unit.scalar.adjustment;
 public interface Adjustment {
     /**
      * Returns an adjusted version of the given value.
-     * @param current The current value.
+     * @param current The value and the information about whether the value
+     *  comes from a fixed scalar.
      * @return The adjusted value.
      */
     double adjusted(double current);
