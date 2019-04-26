@@ -68,7 +68,7 @@ public final class MixAreaTest {
         // @checkstyle LocalFinalVariableName (2 lines)
         final var x = 76.0;
         final var y = 52.0;
-        final var area = new MixArea(new FixPos(x, y));
+        final var area = new FixArea(new FixPos(x, y));
         MatcherAssert.assertThat(area.x(), Matchers.equalTo(x));
         MatcherAssert.assertThat(area.y(), Matchers.equalTo(y));
         MatcherAssert.assertThat(area.w(), Matchers.equalTo(0.0));
@@ -83,7 +83,7 @@ public final class MixAreaTest {
         // @checkstyle LocalFinalVariableName (2 lines)
         final var w = -566.0;
         final var h = -54.0;
-        final var area = new MixArea(new FixSize(w, h));
+        final var area = new FixArea(new FixSize(w, h));
         MatcherAssert.assertThat(area.x(), Matchers.equalTo(0.0));
         MatcherAssert.assertThat(area.y(), Matchers.equalTo(0.0));
         MatcherAssert.assertThat(area.w(), Matchers.equalTo(w));
@@ -101,7 +101,7 @@ public final class MixAreaTest {
         final var y = 12.0;
         final var w = 423.0;
         final var h = 4534.0;
-        final var area = new MixArea(x, y, w, h);
+        final var area = new FixArea(x, y, w, h);
         MatcherAssert.assertThat(area.x(), Matchers.equalTo(x));
         MatcherAssert.assertThat(area.y(), Matchers.equalTo(y));
         MatcherAssert.assertThat(area.w(), Matchers.equalTo(w));
@@ -117,7 +117,7 @@ public final class MixAreaTest {
         final int width = 313;
         final int height = 238;
         MatcherAssert.assertThat(
-            new AsTuple(new MixArea(width, height)),
+            new AsTuple(new FixArea(width, height)),
             new CorrectResult(
                 new FixPos(), new FixSize(width, height)
             )

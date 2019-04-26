@@ -93,7 +93,7 @@ public class Covered implements Area {
                     y = Math.min(next.y(), y);
                 }
             }
-            return new MixArea(x, y, w, h);
+            return new FixArea(x, y, w, h);
         };
     }
 

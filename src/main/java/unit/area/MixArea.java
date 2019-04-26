@@ -23,10 +23,8 @@ package unit.area;
 
 import java.util.Objects;
 import unit.pos.AdjustablePos;
-import unit.pos.SoftPos;
 import unit.scalar.CleanValue;
 import unit.size.AdjustableSize;
-import unit.size.SoftSize;
 
 /**
  * An area that can be composed with fix and soft positions, sizes and scalars.
@@ -47,63 +45,6 @@ public class MixArea implements Area {
      * The size of this area.
      */
     private final AdjustableSize size;
-
-    /**
-     * The created area will have a soft position of x = 0 and y = 0.
-     * @param w The width.
-     * @param h The height.
-     * @checkstyle ParameterName (2 lines)
-     */
-    public MixArea(final int w, final int h) {
-        this(0, 0, w, h);
-    }
-
-    /**
-     * Ctor.
-     * @param x The x coordinate.
-     * @param y The y coordinate.
-     * @param w The width.
-     * @param h The height.
-     * @checkstyle ParameterNumber (3 lines)
-     * @checkstyle ParameterName (2 lines)
-     */
-    public MixArea(final int x, final int y, final int w, final int h) {
-        this((double) x, (double) y, (double) w, (double) h);
-    }
-
-    /**
-     * Ctor.
-     * @param x The x coordinate.
-     * @param y The y coordinate.
-     * @param w The width.
-     * @param h The height.
-     * @checkstyle ParameterNumber (3 lines)
-     * @checkstyle ParameterName (3 lines)
-     */
-    public MixArea(
-        final double x, final double y, final double w, final double h
-    ) {
-        this(
-            new SoftPos(x, y),
-            new SoftSize(w, h)
-        );
-    }
-
-    /**
-     * Uses x = 0 and y = 0 as its coordinates. The position is soft.
-     * @param size The size of the area.
-     */
-    public MixArea(final AdjustableSize size) {
-        this(new SoftPos(), size);
-    }
-
-    /**
-     * Uses width = 0 and height = 0 as its size. The size is soft.
-     * @param pos The pos of the area.
-     */
-    public MixArea(final AdjustablePos pos) {
-        this(pos, new SoftSize());
-    }
 
     /**
      * Ctor.

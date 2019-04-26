@@ -23,44 +23,37 @@ package unit.area;
 
 import java.util.Objects;
 import java.util.function.DoubleSupplier;
+import unit.pos.AdjustablePos;
+import unit.pos.SoftPos;
 import unit.scalar.CleanValue;
-import unit.scalar.Scalar;
-import unit.scalar.SoftScalar;
+import unit.size.AdjustableSize;
+import unit.size.SoftSize;
 
 /**
- * An area that uses all adjustments.
+ * An area that uses all adjustments for its position and/or size. Every
+ * constructor that initializes a value by itself, will use a soft value for
+ * it.
  * <p>Whether this class is immutable or thread-safe depends on the given
  * constructor arguments.</p>
  * @since 0.110
  */
 public class SoftArea implements Area {
     /**
-     * The x coordinate.
-     * @checkstyle MemberName (3 lines)
+     * The position.
      */
-    @SuppressWarnings("PMD.AvoidFieldNameMatchingMethodName")
-    private final Scalar x;
+    private final AdjustablePos pos;
 
     /**
-     * The y coordinate.
-     * @checkstyle MemberName (3 lines)
+     * The size.
      */
-    @SuppressWarnings("PMD.AvoidFieldNameMatchingMethodName")
-    private final Scalar y;
+    private final AdjustableSize size;
 
     /**
-     * The width.
-     * @checkstyle MemberName (3 lines)
+     * Uses x = 0.0 and y = 0.0 as its position and its size.
      */
-    @SuppressWarnings("PMD.AvoidFieldNameMatchingMethodName")
-    private final Scalar w;
-
-    /**
-     * The height.
-     * @checkstyle MemberName (3 lines)
-     */
-    @SuppressWarnings("PMD.AvoidFieldNameMatchingMethodName")
-    private final Scalar h;
+    public SoftArea() {
+        this(0.0, 0.0, 0.0, 0.0);
+    }
 
     /**
      * Uses x = 0.0 and y = 0.0 as its position.
@@ -387,59 +380,72 @@ public class SoftArea implements Area {
         final DoubleSupplier w,
         final DoubleSupplier h
     ) {
-        this.x = new SoftScalar(Objects.requireNonNull(x));
-        this.y = new SoftScalar(Objects.requireNonNull(y));
-        this.w = new SoftScalar(Objects.requireNonNull(w));
-        this.h = new SoftScalar(Objects.requireNonNull(h));
+        this(new SoftPos(x, y), new SoftSize(w, h));
+    }
+
+    /**
+     * Uses width = 0.0 and height = 0.0 as its size.
+     * @param pos The position.
+     */
+    public SoftArea(final AdjustablePos pos) {
+        this(pos, new SoftSize());
+    }
+
+    /**
+     * Uses x = 0.0 and y = 0.0 as its position.
+     * @param size The size.
+     */
+    public SoftArea(final AdjustableSize size) {
+        this(new SoftPos(), size);
+    }
+
+    /**
+     * Ctor.
+     * @param pos The position.
+     * @param size The size.
+     */
+    private SoftArea(final AdjustablePos pos, final AdjustableSize size) {
+        this.pos = Objects.requireNonNull(pos);
+        this.size = Objects.requireNonNull(size);
     }
 
     @SuppressWarnings("PMD.ShortMethodName")
     @Override
     public final double x() {
-        return this.x.value();
+        return this.pos.x();
     }
 
     @SuppressWarnings("PMD.ShortMethodName")
     @Override
     public final double y() {
-        return this.y.value();
+        return this.pos.y();
     }
 
     @SuppressWarnings("PMD.ShortMethodName")
     @Override
     public final double w() {
-        return this.w.value();
+        return this.size.w();
     }
 
     @SuppressWarnings("PMD.ShortMethodName")
     @Override
     public final double h() {
-        return this.h.value();
+        return this.size.h();
     }
 
     @Override
     public final CleanValue cleanW() {
-        return this.w;
+        return this.size.cleanW();
     }
 
     @Override
     public final CleanValue cleanH() {
-        return this.h;
+        return this.size.cleanH();
     }
 
     @Override
     public final void adjustment(final Adjustment adjustment) {
-        this.x.adjustment(
-            current -> adjustment.posAdjustment().adjustedFirst((int) current)
-        );
-        this.y.adjustment(
-            current -> adjustment.posAdjustment().adjustedFirst((int) current)
-        );
-        this.w.adjustment(
-            current -> adjustment.posAdjustment().adjustedFirst((int) current)
-        );
-        this.h.adjustment(
-            current -> adjustment.posAdjustment().adjustedFirst((int) current)
-        );
+        this.pos.adjustment(adjustment.posAdjustment());
+        this.size.adjustment(adjustment.sizeAdjustment());
     }
 }

@@ -44,7 +44,7 @@ public class OverlapAreaOf implements OverlapArea {
      * @param height The height of the area.
      */
     public OverlapAreaOf(final int width, final int height) {
-        this(new MixArea(width, height));
+        this(new SoftArea(width, height));
     }
 
     /**

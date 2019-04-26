@@ -109,7 +109,7 @@ public final class OverlapAreaOfTest {
         MatcherAssert.assertThat(
             new AsTuple(
                 new OverlapAreaOf(
-                    new MixArea(x, y, width, height)
+                    new FixArea(x, y, width, height)
                 )
             ),
             new CorrectResult(
@@ -133,7 +133,7 @@ public final class OverlapAreaOfTest {
         final int height = 1;
         MatcherAssert.assertThat(
             new OverlapAreaOf(
-                new MixArea(x, y, width, height)
+                new FixArea(x, y, width, height)
             ).contains(x, y),
             Matchers.is(true)
         );
@@ -153,7 +153,7 @@ public final class OverlapAreaOfTest {
         final int height = 1;
         MatcherAssert.assertThat(
             new OverlapAreaOf(
-                new MixArea(x, y, width, height)
+                new FixArea(x, y, width, height)
             ).contains(x + 1, y + 1),
             Matchers.is(false)
         );
@@ -172,7 +172,7 @@ public final class OverlapAreaOfTest {
         final int height = 0;
         MatcherAssert.assertThat(
             new OverlapAreaOf(
-                new MixArea(x, y, width, height)
+                new FixArea(x, y, width, height)
             ).contains(x, y),
             Matchers.is(false)
         );
@@ -191,7 +191,7 @@ public final class OverlapAreaOfTest {
         final int height = 561;
         MatcherAssert.assertThat(
             new OverlapAreaOf(
-                new MixArea(x, y, width, height)
+                new FixArea(x, y, width, height)
             ).contains(x + width / 2, y + height / 2),
             Matchers.is(true)
         );
@@ -210,7 +210,7 @@ public final class OverlapAreaOfTest {
         final int height = 563;
         MatcherAssert.assertThat(
             new OverlapAreaOf(
-                new MixArea(x, y, width, height)
+                new FixArea(x, y, width, height)
             ).contains(x, y),
             Matchers.is(true)
         );
@@ -229,7 +229,7 @@ public final class OverlapAreaOfTest {
         final int height = 752;
         MatcherAssert.assertThat(
             new OverlapAreaOf(
-                new MixArea(x, y, width, height)
+                new FixArea(x, y, width, height)
             ).contains(x + width - 1, y + height - 1),
             Matchers.is(true)
         );
@@ -248,7 +248,7 @@ public final class OverlapAreaOfTest {
         final int height = 856;
         MatcherAssert.assertThat(
             new OverlapAreaOf(
-                new MixArea(x, y, width, height)
+                new FixArea(x, y, width, height)
             ).contains(x - 1, y - 1),
             Matchers.is(false)
         );
@@ -267,7 +267,7 @@ public final class OverlapAreaOfTest {
         final int height = 454;
         MatcherAssert.assertThat(
             new OverlapAreaOf(
-                new MixArea(x, y, width, height)
+                new FixArea(x, y, width, height)
             ).contains(x + width, y + height),
             Matchers.is(false)
         );
@@ -286,7 +286,7 @@ public final class OverlapAreaOfTest {
         final int height = 452;
         MatcherAssert.assertThat(
             new OverlapAreaOf(
-                new MixArea(x, y, width, height)
+                new FixArea(x, y, width, height)
             ).contains(x - width /  2, y),
             Matchers.is(false)
         );
@@ -305,7 +305,7 @@ public final class OverlapAreaOfTest {
         final int height = -30;
         MatcherAssert.assertThat(
             new OverlapAreaOf(
-                new MixArea(x, y, width, height)
+                new FixArea(x, y, width, height)
             ).contains(
                 x + Math.abs(width) / 2,
                 y + Math.abs(height) / 2
@@ -327,7 +327,7 @@ public final class OverlapAreaOfTest {
         final int height = -63;
         MatcherAssert.assertThat(
             new OverlapAreaOf(
-                new MixArea(x, y, width, height)
+                new FixArea(x, y, width, height)
             ).contains(
                 x - Math.abs(width) / 2,
                 y - Math.abs(height) / 2

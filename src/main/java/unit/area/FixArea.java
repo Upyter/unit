@@ -23,44 +23,43 @@ package unit.area;
 
 import java.util.Objects;
 import java.util.function.DoubleSupplier;
+import unit.pos.AdjustablePos;
+import unit.pos.FixPos;
+import unit.pos.SoftPos;
 import unit.scalar.CleanValue;
-import unit.scalar.FixScalar;
-import unit.scalar.Scalar;
+import unit.size.AdjustableSize;
+import unit.size.FixSize;
+import unit.size.SoftSize;
 
 /**
- * An area that ignores all adjustments.
+ * An area that ignores all adjustments for the values it creates.
+ * <p>Example:</p>
+ * <pre>{@code new FixArea(new SoftPosition(50.0, 50.0));
+ * // The position would be soft and the not specified size (which will be
+ * // created by the FixArea) would be fix.
+ * }
+ * </pre>
  * <p>Whether this class is immutable or thread-safe depends on the given
  * constructor arguments.</p>
  * @since 0.108
  */
 public class FixArea implements Area {
     /**
-     * The supplier that contains the path to the x coordinate.
-     * @checkstyle MemberName (3 lines)
+     * The position.
      */
-    @SuppressWarnings("PMD.AvoidFieldNameMatchingMethodName")
-    private final DoubleSupplier x;
+    private final AdjustablePos pos;
 
     /**
-     * The supplier that contains the path to the y coordinate.
-     * @checkstyle MemberName (3 lines)
+     * The size.
      */
-    @SuppressWarnings("PMD.AvoidFieldNameMatchingMethodName")
-    private final DoubleSupplier y;
+    private final AdjustableSize size;
 
     /**
-     * The scalar for the width. It is necessary for {@link #cleanW()}.
-     * @checkstyle MemberName (3 lines)
+     * Uses x = 0.0 and y = 0.0 as its position and its size.
      */
-    @SuppressWarnings("PMD.AvoidFieldNameMatchingMethodName")
-    private final Scalar w;
-
-    /**
-     * The scalar for the height. It is necessary for {@link #cleanH()}.
-     * @checkstyle MemberName (3 lines)
-     */
-    @SuppressWarnings("PMD.AvoidFieldNameMatchingMethodName")
-    private final Scalar h;
+    public FixArea() {
+        this(0.0, 0.0, 0.0, 0.0);
+    }
 
     /**
      * Uses x = 0.0 and y = 0.0 as its position.
@@ -387,48 +386,72 @@ public class FixArea implements Area {
         final DoubleSupplier w,
         final DoubleSupplier h
     ) {
-        this.x = Objects.requireNonNull(x);
-        this.y = Objects.requireNonNull(y);
-        this.w = new FixScalar(w);
-        this.h = new FixScalar(h);
+        this(new FixPos(x, y), new FixSize(w, h));
+    }
+
+    /**
+     * Uses width = 0.0 and height = 0.0 as its size.
+     * @param pos The position.
+     */
+    public FixArea(final AdjustablePos pos) {
+        this(pos, new SoftSize());
+    }
+
+    /**
+     * Uses x = 0.0 and y = 0.0 as its position.
+     * @param size The size.
+     */
+    public FixArea(final AdjustableSize size) {
+        this(new SoftPos(), size);
+    }
+
+    /**
+     * Ctor.
+     * @param pos The position.
+     * @param size The size.
+     */
+    private FixArea(final AdjustablePos pos, final AdjustableSize size) {
+        this.pos = Objects.requireNonNull(pos);
+        this.size = Objects.requireNonNull(size);
     }
 
     @SuppressWarnings("PMD.ShortMethodName")
     @Override
     public final double x() {
-        return this.x.getAsDouble();
+        return this.pos.x();
     }
 
     @SuppressWarnings("PMD.ShortMethodName")
     @Override
     public final double y() {
-        return this.y.getAsDouble();
+        return this.pos.y();
     }
 
     @SuppressWarnings("PMD.ShortMethodName")
     @Override
     public final double w() {
-        return this.w.value();
+        return this.size.w();
     }
 
     @SuppressWarnings("PMD.ShortMethodName")
     @Override
     public final double h() {
-        return this.h.value();
+        return this.size.h();
     }
 
     @Override
     public final CleanValue cleanW() {
-        return this.w;
+        return this.size.cleanW();
     }
 
     @Override
     public final CleanValue cleanH() {
-        return this.h;
+        return this.size.cleanH();
     }
 
     @Override
     public final void adjustment(final Adjustment adjustment) {
-        // The area is fix and therefore ignores adjustments
+        this.pos.adjustment(adjustment.posAdjustment());
+        this.size.adjustment(adjustment.sizeAdjustment());
     }
 }
