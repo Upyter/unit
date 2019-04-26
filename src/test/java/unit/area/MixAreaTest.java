@@ -35,9 +35,9 @@ import unit.tuple.matcher.CorrectResult;
  * Tests for {@link Area}.
  * @since 0.6
  */
-public final class AreaOfTest {
+public final class MixAreaTest {
     /**
-     * {@link AreaOf#result(BiFunction)} returns the correct result.
+     * {@link MixArea#result(BiFunction)} returns the correct result.
      */
     @Test
     public void correctResult() {
@@ -47,8 +47,8 @@ public final class AreaOfTest {
         final var resW = 34324;
         final var resH = 233;
         MatcherAssert.assertThat(
-            new unit.area.AsTuple(
-                new AreaOf(
+            new AsTuple(
+                new MixArea(
                     new FixPos(resX, resY),
                     new FixSize(resW, resH)
                 )
@@ -61,14 +61,14 @@ public final class AreaOfTest {
     }
 
     /**
-     * {@link AreaOf#AreaOf(Pos)} has a width of 0 and a height of 0.
+     * {@link MixArea#AreaOf(Pos)} has a width of 0 and a height of 0.
      */
     @Test
     public void constructsZeroSize() {
         // @checkstyle LocalFinalVariableName (2 lines)
         final var x = 76.0;
         final var y = 52.0;
-        final var area = new AreaOf(new FixPos(x, y));
+        final var area = new MixArea(new FixPos(x, y));
         MatcherAssert.assertThat(area.x(), Matchers.equalTo(x));
         MatcherAssert.assertThat(area.y(), Matchers.equalTo(y));
         MatcherAssert.assertThat(area.w(), Matchers.equalTo(0.0));
@@ -76,14 +76,14 @@ public final class AreaOfTest {
     }
 
     /**
-     * {@link AreaOf#AreaOf(Size)} has a pos of x = 0 and y = 0.
+     * {@link MixArea#AreaOf(Size)} has a pos of x = 0 and y = 0.
      */
     @Test
     public void constructsZeroPos() {
         // @checkstyle LocalFinalVariableName (2 lines)
         final var w = -566.0;
         final var h = -54.0;
-        final var area = new AreaOf(new FixSize(w, h));
+        final var area = new MixArea(new FixSize(w, h));
         MatcherAssert.assertThat(area.x(), Matchers.equalTo(0.0));
         MatcherAssert.assertThat(area.y(), Matchers.equalTo(0.0));
         MatcherAssert.assertThat(area.w(), Matchers.equalTo(w));
@@ -91,8 +91,8 @@ public final class AreaOfTest {
     }
 
     /**
-     * {@link AreaOf#AreaOf(int, int, int, int)} )} constructs an area with the
-     * right x, y, width and height.
+     * {@link MixArea#MixArea(int, int, int, int)} )} constructs an area with
+     * the right x, y, width and height.
      */
     @Test
     public void distributedConstruct() {
@@ -101,7 +101,7 @@ public final class AreaOfTest {
         final var y = 12.0;
         final var w = 423.0;
         final var h = 4534.0;
-        final var area = new AreaOf(x, y, w, h);
+        final var area = new MixArea(x, y, w, h);
         MatcherAssert.assertThat(area.x(), Matchers.equalTo(x));
         MatcherAssert.assertThat(area.y(), Matchers.equalTo(y));
         MatcherAssert.assertThat(area.w(), Matchers.equalTo(w));
@@ -109,7 +109,7 @@ public final class AreaOfTest {
     }
 
     /**
-     * {@link AreaOf#AreaOf(int, int)} constructs an area with x = 0, y = 0,
+     * {@link MixArea#MixArea(int, int)} constructs an area with x = 0, y = 0,
      * and the given width and size.
      */
     @Test
@@ -117,23 +117,9 @@ public final class AreaOfTest {
         final int width = 313;
         final int height = 238;
         MatcherAssert.assertThat(
-            new AsTuple(new AreaOf(width, height)),
+            new AsTuple(new MixArea(width, height)),
             new CorrectResult(
                 new FixPos(), new FixSize(width, height)
-            )
-        );
-    }
-
-    /**
-     * {@link AreaOf#AreaOf()} )} constructs an area with x = 0, y = 0,
-     * width = 0 and height = 0.
-     */
-    @Test
-    public void emptyConstruct() {
-        MatcherAssert.assertThat(
-            new AsTuple(new AreaOf()),
-            new CorrectResult(
-                new FixPos(), new FixSize()
             )
         );
     }

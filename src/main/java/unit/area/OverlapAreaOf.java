@@ -44,7 +44,7 @@ public class OverlapAreaOf implements OverlapArea {
      * @param height The height of the area.
      */
     public OverlapAreaOf(final int width, final int height) {
-        this(new AreaOf(width, height));
+        this(new MixArea(width, height));
     }
 
     /**
@@ -61,7 +61,7 @@ public class OverlapAreaOf implements OverlapArea {
      * @param size The size of the area.
      */
     public OverlapAreaOf(final AdjustablePos pos, final AdjustableSize size) {
-        this(new AreaOf(pos, size));
+        this(new MixArea(pos, size));
     }
 
     /**

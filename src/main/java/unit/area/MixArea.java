@@ -21,31 +21,23 @@
 
 package unit.area;
 
-/*
-I am not happy about this naming, but my other idea's regarding the interface
-name and the basic implementation weren't good either (impl or simple for
-example). So I took the more annoying name for the implementation to lower the
-chance that a user might use the class name as a parameter type
-*/
-
 import java.util.Objects;
 import unit.pos.AdjustablePos;
-import unit.pos.FixPos;
-import unit.pos.Pos;
+import unit.pos.SoftPos;
 import unit.scalar.CleanValue;
 import unit.size.AdjustableSize;
-import unit.size.FixSize;
-import unit.size.Size;
+import unit.size.SoftSize;
 
 /**
- * Basic concrete implementation of {@link Area}.
+ * An area that can be composed with fix and soft positions, sizes and scalars.
  * <p>Whether this class is immutable or thread-safe, depends on the given
- * {@link Pos} and {@link Size}. This class
- * doesn't mutate state by itself. Additionally note that the methods provide
- * the actual objects without any safe-copies.</p>
+ * constructor arguments.</p>
+ * @see FixArea
+ * @see SoftArea
+ * @see Adjustment
  * @since 0.6
  */
-public class AreaOf implements Area {
+public class MixArea implements Area {
     /**
      * The pos of this area.
      */
@@ -57,66 +49,60 @@ public class AreaOf implements Area {
     private final AdjustableSize size;
 
     /**
-     * Ctor. Uses x = 0, y = 0, width = 0 and height = 0 as its values.
+     * The created area will have a soft position of x = 0 and y = 0.
+     * @param w The width.
+     * @param h The height.
+     * @checkstyle ParameterName (2 lines)
      */
-    public AreaOf() {
-        this(0, 0, 0, 0);
-    }
-
-    /**
-     * Ctor. The created area will have a position of x = 0 and y = 0.
-     * @param width The width of the area.
-     * @param height The height of the area.
-     */
-    public AreaOf(final int width, final int height) {
-        this(0, 0, width, height);
+    public MixArea(final int w, final int h) {
+        this(0, 0, w, h);
     }
 
     /**
      * Ctor.
-     * @param x The x coordinate of the area.
-     * @param y The y coordinate of the area.
-     * @param width The width of the area.
-     * @param height The height of the area.
+     * @param x The x coordinate.
+     * @param y The y coordinate.
+     * @param w The width.
+     * @param h The height.
      * @checkstyle ParameterNumber (3 lines)
      * @checkstyle ParameterName (2 lines)
      */
-    public AreaOf(final int x, final int y, final int width, final int height) {
-        this((double) x, (double) y, (double) width, (double) height);
+    public MixArea(final int x, final int y, final int w, final int h) {
+        this((double) x, (double) y, (double) w, (double) h);
     }
 
     /**
      * Ctor.
-     * @param x The x coordinate of the area.
-     * @param y The y coordinate of the area.
-     * @param width The width of the area.
-     * @param height The height of the area.
+     * @param x The x coordinate.
+     * @param y The y coordinate.
+     * @param w The width.
+     * @param h The height.
      * @checkstyle ParameterNumber (3 lines)
      * @checkstyle ParameterName (3 lines)
      */
-    public AreaOf(
-        final double x, final double y, final double width, final double height
+    public MixArea(
+        final double x, final double y, final double w, final double h
     ) {
         this(
-            new FixPos(x, y),
-            new FixSize(width, height)
+            new SoftPos(x, y),
+            new SoftSize(w, h)
         );
     }
 
     /**
-     * Ctor. Uses x = 0 and y = 0 as its coordinates.
+     * Uses x = 0 and y = 0 as its coordinates. The position is soft.
      * @param size The size of the area.
      */
-    public AreaOf(final AdjustableSize size) {
-        this(new FixPos(), size);
+    public MixArea(final AdjustableSize size) {
+        this(new SoftPos(), size);
     }
 
     /**
-     * Ctor. Uses width = 0 and height = 0 as its size.
+     * Uses width = 0 and height = 0 as its size. The size is soft.
      * @param pos The pos of the area.
      */
-    public AreaOf(final AdjustablePos pos) {
-        this(pos, new FixSize());
+    public MixArea(final AdjustablePos pos) {
+        this(pos, new SoftSize());
     }
 
     /**
@@ -124,7 +110,7 @@ public class AreaOf implements Area {
      * @param pos The pos of the area.
      * @param size The size of the area.
      */
-    public AreaOf(final AdjustablePos pos, final AdjustableSize size) {
+    public MixArea(final AdjustablePos pos, final AdjustableSize size) {
         this.pos = Objects.requireNonNull(pos);
         this.size = Objects.requireNonNull(size);
     }

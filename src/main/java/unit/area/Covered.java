@@ -81,8 +81,6 @@ public class Covered implements Area {
                 h = start.h();
                 while (iterator.hasNext()) {
                     final var next = iterator.next();
-                    // TEMPORAL COUPLING. w and h must be calculated before x
-                    // and y!
                     w = Math.max(
                         next.x() + next.w() - Math.min(next.x(), x),
                         x + w - Math.min(next.x(), x)
@@ -95,7 +93,7 @@ public class Covered implements Area {
                     y = Math.min(next.y(), y);
                 }
             }
-            return new AreaOf(x, y, w, h);
+            return new MixArea(x, y, w, h);
         };
     }
 

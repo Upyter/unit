@@ -63,7 +63,7 @@ public final class CoveredTest {
         MatcherAssert.assertThat(
             new AsTuple(
                 new Covered(
-                    new AreaOf(x, y, width, height)
+                    new MixArea(x, y, width, height)
                 )
             ),
             new CorrectResult(
@@ -88,8 +88,8 @@ public final class CoveredTest {
             new AsTuple(
                 new Covered(
                     List.of(
-                        new AreaOf(x, y, width, height),
-                        new AreaOf(x + width, y, width, height)
+                        new MixArea(x, y, width, height),
+                        new MixArea(x + width, y, width, height)
                     )
                 )
             ),
@@ -114,8 +114,8 @@ public final class CoveredTest {
         MatcherAssert.assertThat(
             new AsTuple(
                 new Covered(
-                    new AreaOf(x, y + height, width, height),
-                    new AreaOf(x, y, width, height)
+                    new MixArea(x, y + height, width, height),
+                    new MixArea(x, y, width, height)
                 )
             ),
             new CorrectResult(
@@ -141,8 +141,8 @@ public final class CoveredTest {
         MatcherAssert.assertThat(
             new AsTuple(
                 new Covered(
-                    new AreaOf(x1, y1, width, height),
-                    new AreaOf(x2, y2, width, height)
+                    new MixArea(x1, y1, width, height),
+                    new MixArea(x2, y2, width, height)
                 )
             ),
             new CorrectResult(
@@ -169,9 +169,9 @@ public final class CoveredTest {
         MatcherAssert.assertThat(
             new AsTuple(
                 new Covered(
-                    new AreaOf(x1, y1, width, height),
-                    new AreaOf(x1, y1, width / 2.0, height / 2.0),
-                    new AreaOf(x2, y2, width, height)
+                    new MixArea(x1, y1, width, height),
+                    new MixArea(x1, y1, width / 2.0, height / 2.0),
+                    new MixArea(x2, y2, width, height)
                 )
             ),
             new CorrectResult(
@@ -197,8 +197,8 @@ public final class CoveredTest {
         MatcherAssert.assertThat(
             new AsTuple(
                 new Covered(
-                    new AreaOf(x, y1, width1, height),
-                    new AreaOf(x, y2, width2, height)
+                    new MixArea(x, y1, width1, height),
+                    new MixArea(x, y2, width2, height)
                 )
             ),
             new CorrectResult(
