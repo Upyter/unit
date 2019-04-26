@@ -21,14 +21,17 @@
 
 package unit.scalar.adjustment;
 
+import unit.scalar.CleanValue;
+
 /**
- * An adjustment that takes the value and returns it without change.
+ * An adjustment that takes the value and returns it without change
+ * ({@link CleanValue#cleanValue()} will be called).
  * <p>This class is immutable and thread-safe.</p>
  * @since 0.100
  */
-public class Identity implements Adjustment {
+public class NoAdjustment implements Adjustment {
     @Override
-    public final double adjusted(final double current) {
-        return current;
+    public final double adjusted(final CleanValue current) {
+        return current.cleanValue();
     }
 }

@@ -19,30 +19,16 @@
  * DEALINGS IN THE SOFTWARE.
  */
 
-package unit.scalar.adjustment;
+package unit.scalar.border;
 
 /**
- * An adjustment that will keep the values from getting below the given
- * boundaries.
+ * A border that makes no changes.
  * <p>This class is immutable and thread-safe.</p>
- * @since 0.68
+ * @since 0.114
  */
-public class Min implements Adjustment {
-    /**
-     * The border of the value.
-     */
-    private final double border;
-
-    /**
-     * Ctor.
-     * @param border The border of the value.
-     */
-    public Min(final double border) {
-        this.border = border;
-    }
-
+public class NoBorder implements Border {
     @Override
     public final double adjusted(final double current) {
-        return Math.max(this.border, current);
+        return current;
     }
 }

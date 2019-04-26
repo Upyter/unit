@@ -172,10 +172,10 @@ public class SoftSize implements AdjustableSize {
         final TupleAdjustment<Integer, Integer> adjustment
     ) {
         this.width.adjustment(
-            current -> adjustment.adjustedFirst((int) current)
+            current -> adjustment.adjustedFirst((int) current.cleanValue())
         );
         this.height.adjustment(
-            current -> adjustment.adjustedSecond((int) current)
+            current -> adjustment.adjustedSecond((int) current.cleanValue())
         );
     }
 }

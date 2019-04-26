@@ -165,8 +165,12 @@ public class SoftPos implements AdjustablePos {
     public final void adjustment(
         final TupleAdjustment<Integer, Integer> adjustment
     ) {
-        this.x.adjustment(current -> adjustment.adjustedFirst((int) current));
-        this.y.adjustment(current -> adjustment.adjustedSecond((int) current));
+        this.x.adjustment(current -> adjustment.adjustedFirst(
+            (int) current.cleanValue())
+        );
+        this.y.adjustment(current -> adjustment.adjustedSecond(
+            (int) current.cleanValue())
+        );
     }
 
     @SuppressWarnings("PMD.OnlyOneReturn")

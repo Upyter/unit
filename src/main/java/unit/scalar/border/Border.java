@@ -19,23 +19,17 @@
  * DEALINGS IN THE SOFTWARE.
  */
 
-package unit.scalar.adjustment;
-
-import unit.scalar.CleanValue;
+package unit.scalar.border;
 
 /**
- * An adjustment of a float based scalar.
- * @see unit.area.Adjustment
- * @see unit.pos.Pos
- * @see unit.size.Size
- * @since 0.98
+ * Keeps the value of the scalar inside a certain border.
+ * @since 0.114
  */
-public interface Adjustment {
+public interface Border {
     /**
-     * Returns an adjusted version of the given value.
-     * @param current The value and the information about whether the value
-     *  comes from a fixed scalar.
+     * Adjusts the value to stay inside the specified border.
+     * @param current The current value.
      * @return The adjusted value.
      */
-    double adjusted(CleanValue current);
+    double adjusted(double current);
 }

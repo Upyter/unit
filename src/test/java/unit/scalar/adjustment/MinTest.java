@@ -25,6 +25,7 @@ import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
 import unit.number.Delta;
+import unit.scalar.border.Min;
 
 /**
  * Tests for {@link Min}.

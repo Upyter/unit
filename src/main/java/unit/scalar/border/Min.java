@@ -19,23 +19,30 @@
  * DEALINGS IN THE SOFTWARE.
  */
 
-package unit.scalar.adjustment;
-
-import unit.scalar.CleanValue;
+package unit.scalar.border;
 
 /**
- * An adjustment of a float based scalar.
- * @see unit.area.Adjustment
- * @see unit.pos.Pos
- * @see unit.size.Size
- * @since 0.98
+ * An adjustment that will keep the values from getting below the given
+ * boundaries.
+ * <p>This class is immutable and thread-safe.</p>
+ * @since 0.68
  */
-public interface Adjustment {
+public class Min implements Border {
     /**
-     * Returns an adjusted version of the given value.
-     * @param current The value and the information about whether the value
-     *  comes from a fixed scalar.
-     * @return The adjusted value.
+     * The border of the value.
      */
-    double adjusted(CleanValue current);
+    private final double border;
+
+    /**
+     * Ctor.
+     * @param border The border of the value.
+     */
+    public Min(final double border) {
+        this.border = border;
+    }
+
+    @Override
+    public final double adjusted(final double current) {
+        return Math.max(this.border, current);
+    }
 }

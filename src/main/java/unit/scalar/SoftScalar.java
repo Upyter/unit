@@ -24,7 +24,9 @@ package unit.scalar;
 import java.util.Objects;
 import java.util.function.DoubleSupplier;
 import unit.scalar.adjustment.Adjustment;
-import unit.scalar.adjustment.Identity;
+import unit.scalar.adjustment.NoAdjustment;
+import unit.scalar.border.Border;
+import unit.scalar.border.NoBorder;
 
 /**
  * A one-dimensional soft value. It uses the given adjustment.
@@ -44,7 +46,7 @@ public class SoftScalar implements Scalar {
     /**
      * An additional adjustment to keep the scalar in a certain boundary.
      */
-    private final Adjustment border;
+    private final Border border;
 
     /**
      * The adjustment of the value.
@@ -73,7 +75,7 @@ public class SoftScalar implements Scalar {
      * @param supplier The supplier that gives this scalar its value.
      */
     public SoftScalar(final DoubleSupplier supplier) {
-        this(supplier, new Identity());
+        this(supplier, new NoBorder());
     }
 
     /**
@@ -82,18 +84,16 @@ public class SoftScalar implements Scalar {
      * @param border An additional adjustment to keep the scalar in a certain
      *  boundary.
      */
-    public SoftScalar(final DoubleSupplier supplier, final Adjustment border) {
+    public SoftScalar(final DoubleSupplier supplier, final Border border) {
         this.supplier = Objects.requireNonNull(supplier);
         this.border = Objects.requireNonNull(border);
-        this.adjustment = new Identity();
+        this.adjustment = new NoAdjustment();
     }
 
     @Override
     public final double value() {
         return this.border.adjusted(
-            this.adjustment.adjusted(
-                this.cleanValue()
-            )
+            this.adjustment.adjusted(this)
         );
     }
 
