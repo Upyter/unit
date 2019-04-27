@@ -19,33 +19,27 @@
  * DEALINGS IN THE SOFTWARE.
  */
 
-package unit.size;
-
-import unit.scalar.CleanValue;
-import unit.size.raw.RawSize;
+package unit.size.raw;
 
 /**
- * The two dimensional cartesian based size of a rectangular area.
- * Implementations of this interface are equal to each other.
- * @since 0.4
+ * The two dimensional cartesian based size of a rectangular area that delivers
+ * its data as primitives.
+ * @since 0.124
  */
-public interface Size extends RawSize {
+public interface RawSize {
     /**
-     * Returns the unadjusted height.
-     * @return The unadjusted height.
+     * Returns the width.
+     * @return The width.
+     * @checkstyle MethodName (3 lines)
      */
-    CleanValue cleanW();
+    @SuppressWarnings("PMD.ShortMethodName")
+    double w();
 
     /**
-     * Returns the unadjusted height.
-     * @return The unadjusted height.
+     * Returns the height.
+     * @return The height.
+     * @checkstyle MethodName (3 lines)
      */
-    CleanValue cleanH();
-
-    /**
-     * Registers the given adjustment and uses it for its values (perhaps). This
-     * method overwrites the previously given adjustments.
-     * @param adjustment The adjustment to register.
-     */
-    void adjustment(Adjustment adjustment);
+    @SuppressWarnings("PMD.ShortMethodName")
+    double h();
 }

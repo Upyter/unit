@@ -19,33 +19,8 @@
  * DEALINGS IN THE SOFTWARE.
  */
 
-package unit.size;
-
-import unit.scalar.CleanValue;
-import unit.size.raw.RawSize;
-
 /**
- * The two dimensional cartesian based size of a rectangular area.
- * Implementations of this interface are equal to each other.
- * @since 0.4
+ * The raw size and components for it.
+ * @since 0.124
  */
-public interface Size extends RawSize {
-    /**
-     * Returns the unadjusted height.
-     * @return The unadjusted height.
-     */
-    CleanValue cleanW();
-
-    /**
-     * Returns the unadjusted height.
-     * @return The unadjusted height.
-     */
-    CleanValue cleanH();
-
-    /**
-     * Registers the given adjustment and uses it for its values (perhaps). This
-     * method overwrites the previously given adjustments.
-     * @param adjustment The adjustment to register.
-     */
-    void adjustment(Adjustment adjustment);
-}
+package unit.size.raw;

@@ -21,16 +21,6 @@
 
 package unit.pos;
 
-/*
-This interface is necessary (compared to using x and y each time) because this
-library depends on the possibility to implement own implementations like a
-moving pos
-
-I changed the name from Position to Pos, because that's a class that will be
-used in many places and I think this cut will safe some characters without
-sacrificing readability
-*/
-
 import unit.scalar.CleanValue;
 
 /**
