@@ -23,21 +23,26 @@ package unit.scalar;
 
 /**
  * Has the same functionality as {@link java.util.function.ToDoubleBiFunction}
- * with two {@link CleanValue}s. It's needed because generics can't be
+ * with four {@link CleanValue}s. It's needed because generics can't be
  * overloaded.
- * <p>This interface is intended to be used with {@link unit.pos.Pos} and
- * {@link unit.size.Size}. Therefore the first value will either be the
- * x coordinate or the width (probably).</p>
- * @see QuadValFunction
- * @since 0.117
+ * <p>This interface is intended to be used with {@link unit.area.Area}.
+ * Therefore the arguments will probably be an x, y, the width and the height
+ * (probably).</p>
+ * @see BiValFunction
+ * @since 0.118
  */
 @FunctionalInterface
-public interface BiValFunction {
+public interface QuadValFunction {
     /**
      * Applies the function with the given values to create a result.
      * @param first The first value.
      * @param second The second value.
+     * @param third The third value.
+     * @param fourth The fourth value.
      * @return The result.
+     * @checkstyle ParameterNumber (3 lines)
      */
-    double applyAsDouble(CleanValue first, CleanValue second);
+    double applyAsDouble(
+        CleanValue first, CleanValue second, CleanValue third, CleanValue fourth
+    );
 }

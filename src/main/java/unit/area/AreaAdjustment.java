@@ -21,8 +21,9 @@
 
 package unit.area;
 
-import unit.functional.ToDoubleQuadFunction;
+import java.util.function.DoubleUnaryOperator;
 import unit.scalar.CleanValue;
+import unit.scalar.QuadValFunction;
 
 /**
  * A shortcut to create area based adjustments.
@@ -34,29 +35,25 @@ public class AreaAdjustment implements Adjustment {
      * The adjustment of the x coordinate.
      * @checkstyle MemberName (3 lines)
      */
-    private final ToDoubleQuadFunction
-        <CleanValue, CleanValue, CleanValue, CleanValue> xAdjustment;
+    private final QuadValFunction xAdjustment;
 
     /**
      * The adjustment of the y coordinate.
      * @checkstyle MemberName (3 lines)
      */
-    private final ToDoubleQuadFunction
-        <CleanValue, CleanValue, CleanValue, CleanValue> yAdjustment;
+    private final QuadValFunction yAdjustment;
 
     /**
      * The adjustment of the width.
      * @checkstyle MemberName (3 lines)
      */
-    private final ToDoubleQuadFunction
-        <CleanValue, CleanValue, CleanValue, CleanValue> wAdjustment;
+    private final QuadValFunction wAdjustment;
 
     /**
      * The adjustment of the height.
      * @checkstyle MemberName (3 lines)
      */
-    private final ToDoubleQuadFunction
-        <CleanValue, CleanValue, CleanValue, CleanValue> hAdjustment;
+    private final QuadValFunction hAdjustment;
 
     /**
      * Ctor.
@@ -86,10 +83,8 @@ public class AreaAdjustment implements Adjustment {
      */
     public AreaAdjustment(
         final unit.pos.Adjustment posAdjustment,
-        final ToDoubleQuadFunction
-            <CleanValue, CleanValue, CleanValue, CleanValue> wAdjustment,
-        final ToDoubleQuadFunction
-            <CleanValue, CleanValue, CleanValue, CleanValue> hAdjustment
+        final QuadValFunction wAdjustment,
+        final QuadValFunction hAdjustment
     ) {
         this(
             // @checkstyle ParameterName (2 lines)
@@ -102,16 +97,60 @@ public class AreaAdjustment implements Adjustment {
 
     /**
      * Ctor.
+     * @param xAdjustment The adjustment of the x coordinate. It will get the
+     *  current value (from {@link CleanValue#cleanValue()}).
+     * @param yAdjustment The adjustment of the y coordinate. It will get the
+     *  current value (from {@link CleanValue#cleanValue()}).
+     * @param sizeAdjustment The adjustment of the size.
+     * @checkstyle ParameterName (5 lines)
+     */
+    public AreaAdjustment(
+        final DoubleUnaryOperator xAdjustment,
+        final DoubleUnaryOperator yAdjustment,
+        final unit.size.Adjustment sizeAdjustment
+    ) {
+        this(
+            // @checkstyle ParameterName (4 lines)
+            (x, y, w, h) -> xAdjustment.applyAsDouble(x.cleanValue()),
+            (x, y, w, h) -> yAdjustment.applyAsDouble(y.cleanValue()),
+            (x, y, w, h) -> sizeAdjustment.adjustedW(w, h),
+            (x, y, w, h) -> sizeAdjustment.adjustedH(w, h)
+        );
+    }
+    
+    /**
+     * Ctor.
+     * @param xAdjustment The adjustment of the x coordinate. It will get the
+     *  current value.
+     * @param yAdjustment The adjustment of the y coordinate. It will get the
+     *  current value.
+     * @param sizeAdjustment The adjustment of the size.
+     * @checkstyle ParameterName (5 lines)
+     */
+    public AreaAdjustment(
+        final unit.scalar.adjustment.Adjustment xAdjustment,
+        final unit.scalar.adjustment.Adjustment yAdjustment,
+        final unit.size.Adjustment sizeAdjustment
+    ) {
+        this(
+            // @checkstyle ParameterName (4 lines)
+            (x, y, w, h) -> xAdjustment.adjusted(x),
+            (x, y, w, h) -> yAdjustment.adjusted(y),
+            (x, y, w, h) -> sizeAdjustment.adjustedW(w, h),
+            (x, y, w, h) -> sizeAdjustment.adjustedH(w, h)
+        );
+    }
+
+    /**
+     * Ctor.
      * @param xAdjustment The adjustment of the x coordinate.
      * @param yAdjustment The adjustment of the y coordinate.
      * @param sizeAdjustment The adjustment of the size.
      * @checkstyle ParameterName (7 lines)
      */
     public AreaAdjustment(
-        final ToDoubleQuadFunction
-            <CleanValue, CleanValue, CleanValue, CleanValue> xAdjustment,
-        final ToDoubleQuadFunction
-            <CleanValue, CleanValue, CleanValue, CleanValue> yAdjustment,
+        final QuadValFunction xAdjustment,
+        final QuadValFunction yAdjustment,
         final unit.size.Adjustment sizeAdjustment
     ) {
         this(
@@ -133,14 +172,10 @@ public class AreaAdjustment implements Adjustment {
      * @checkstyle ParameterName (10 lines)
      */
     public AreaAdjustment(
-        final ToDoubleQuadFunction
-            <CleanValue, CleanValue, CleanValue, CleanValue> xAdjustment,
-        final ToDoubleQuadFunction
-            <CleanValue, CleanValue, CleanValue, CleanValue> yAdjustment,
-        final ToDoubleQuadFunction
-            <CleanValue, CleanValue, CleanValue, CleanValue> wAdjustment,
-        final ToDoubleQuadFunction
-            <CleanValue, CleanValue, CleanValue, CleanValue> hAdjustment
+        final QuadValFunction xAdjustment,
+        final QuadValFunction yAdjustment,
+        final QuadValFunction wAdjustment,
+        final QuadValFunction hAdjustment
     ) {
         this.xAdjustment = xAdjustment;
         this.yAdjustment = yAdjustment;
