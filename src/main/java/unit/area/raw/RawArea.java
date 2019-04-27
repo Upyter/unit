@@ -19,38 +19,43 @@
  * DEALINGS IN THE SOFTWARE.
  */
 
-package unit.area;
-
-import unit.adjustment.Adjustable;
-import unit.area.raw.RawArea;
-import unit.scalar.CleanValue;
+package unit.area.raw;
 
 /**
- * A cartesian two dimensional rectangular area of a shape.
- * @since 0.6
+ * A cartesian two dimensional rectangular area of a shape that delivers its
+ * data as primitives.
+ * @since 0.122
  */
-public interface Area extends RawArea, Adjustable<Adjustment> {
+public interface RawArea {
     /**
-     * Returns the unadjusted x coordinate.
-     * @return The unadjusted x coordinate.
+     * Returns the x coordinate.
+     * @return The x coordinate.
+     * @checkstyle MethodName (3 lines)
      */
-    CleanValue cleanX();
+    @SuppressWarnings("PMD.ShortMethodName")
+    double x();
 
     /**
-     * Returns the unadjusted y coordinate.
-     * @return The unadjusted y coordinate.
+     * Returns the y coordinate.
+     * @return The y coordinate.
+     * @checkstyle MethodName (3 lines)
      */
-    CleanValue cleanY();
+    @SuppressWarnings("PMD.ShortMethodName")
+    double y();
 
     /**
-     * Returns the unadjusted width.
-     * @return The unadjusted height.
+     * Returns the width.
+     * @return The width.
+     * @checkstyle MethodName (3 lines)
      */
-    CleanValue cleanW();
+    @SuppressWarnings("PMD.ShortMethodName")
+    double w();
 
     /**
-     * Returns the unadjusted height.
-     * @return The unadjusted height.
+     * Returns the height.
+     * @return The height.
+     * @checkstyle MethodName (3 lines)
      */
-    CleanValue cleanH();
+    @SuppressWarnings("PMD.ShortMethodName")
+    double h();
 }

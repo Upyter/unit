@@ -19,38 +19,8 @@
  * DEALINGS IN THE SOFTWARE.
  */
 
-package unit.area;
-
-import unit.adjustment.Adjustable;
-import unit.area.raw.RawArea;
-import unit.scalar.CleanValue;
-
 /**
- * A cartesian two dimensional rectangular area of a shape.
- * @since 0.6
+ * The raw area and components for it.
+ * @since 0.122
  */
-public interface Area extends RawArea, Adjustable<Adjustment> {
-    /**
-     * Returns the unadjusted x coordinate.
-     * @return The unadjusted x coordinate.
-     */
-    CleanValue cleanX();
-
-    /**
-     * Returns the unadjusted y coordinate.
-     * @return The unadjusted y coordinate.
-     */
-    CleanValue cleanY();
-
-    /**
-     * Returns the unadjusted width.
-     * @return The unadjusted height.
-     */
-    CleanValue cleanW();
-
-    /**
-     * Returns the unadjusted height.
-     * @return The unadjusted height.
-     */
-    CleanValue cleanH();
-}
+package unit.area.raw;
