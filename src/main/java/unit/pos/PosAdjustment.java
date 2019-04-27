@@ -21,6 +21,7 @@
 
 package unit.pos;
 
+import java.util.function.DoubleSupplier;
 import java.util.function.ToDoubleBiFunction;
 import java.util.function.ToDoubleFunction;
 import unit.scalar.CleanValue;
@@ -42,6 +43,62 @@ public class PosAdjustment implements Adjustment {
      * @checkstyle MemberName (2 lines)
      */
     private final ToDoubleBiFunction<CleanValue, CleanValue> yAdjustment;
+
+    /**
+     * Ctor.
+     * @param xSupplier The supplier of the x coordinate. Ignores the current
+     *  values and adjusts the x coordinate to a new value.
+     * @param ySupplier The supplier of the y coordinate. Ignores the current
+     *  values and adjusts the y coordinate to a new value.
+     * @checkstyle ParameterName (3 lines)
+     */
+    public PosAdjustment(
+        final DoubleSupplier xSupplier, final DoubleSupplier ySupplier
+    ) {
+        this(
+            // @checkstyle ParameterName (2 lines)
+            (x, y) -> xSupplier.getAsDouble(),
+            (x, y) -> ySupplier.getAsDouble()
+        );
+    }
+
+    /**
+     * Ctor.
+     * @param xAdjustment The adjustment of the x coordinate. Gets x to create
+     *  the new x coordinate.
+     * @param ySupplier The supplier of the y coordinate. Ignores the current
+     *  values and adjusts the y coordinate to a new value.
+     * @checkstyle ParameterName (4 lines)
+     */
+    public PosAdjustment(
+        final ToDoubleFunction<CleanValue> xAdjustment,
+        final DoubleSupplier ySupplier
+    ) {
+        this(
+            xAdjustment,
+            // @checkstyle ParameterName (1 line)
+            y -> ySupplier.getAsDouble()
+        );
+    }
+
+    /**
+     * Ctor.
+     * @param xSupplier The supplier of the x coordinate. Ignores the current
+     *  values and adjusts the x coordinate to a new value.
+     * @param yAdjustment The adjustment of the y coordinate. Gets y to create
+     *  the new y coordinate.
+     * @checkstyle ParameterName (4 lines)
+     */
+    public PosAdjustment(
+        final DoubleSupplier xSupplier,
+        final ToDoubleFunction<CleanValue> yAdjustment
+    ) {
+        this(
+            // @checkstyle ParameterName (1 line)
+            x -> xSupplier.getAsDouble(),
+            yAdjustment
+        );
+    }
 
     /**
      * Ctor.

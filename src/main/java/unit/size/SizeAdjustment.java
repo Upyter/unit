@@ -21,6 +21,7 @@
 
 package unit.size;
 
+import java.util.function.DoubleSupplier;
 import java.util.function.ToDoubleBiFunction;
 import java.util.function.ToDoubleFunction;
 import unit.scalar.CleanValue;
@@ -42,6 +43,62 @@ public class SizeAdjustment implements Adjustment {
      * @checkstyle MemberName (2 lines)
      */
     private final ToDoubleBiFunction<CleanValue, CleanValue> hAdjustment;
+
+    /**
+     * Ctor.
+     * @param wSupplier The supplier of the width. Ignores the current values
+     *  and adjusts the width to a new value.
+     * @param hSupplier The supplier of the height. Ignores the current values
+     *  and adjusts the height to a new value.
+     * @checkstyle ParameterName (3 lines)
+     */
+    public SizeAdjustment(
+        final DoubleSupplier wSupplier, final DoubleSupplier hSupplier
+    ) {
+        this(
+            // @checkstyle ParameterName (2 lines)
+            (w, h) -> wSupplier.getAsDouble(),
+            (w, h) -> hSupplier.getAsDouble()
+        );
+    }
+
+    /**
+     * Ctor.
+     * @param wSupplier The supplier of the width. Ignores the current values
+     *  and adjusts the width to a new value.
+     * @param hAdjustment The adjustment of the height. Gets the current height
+     *  to transform it into a new height.
+     * @checkstyle ParameterName (4 lines)
+     */
+    public SizeAdjustment(
+        final DoubleSupplier wSupplier,
+        final ToDoubleFunction<CleanValue> hAdjustment
+    ) {
+        this(
+            w -> wSupplier.getAsDouble(),
+            // @checkstyle ParameterName (1 line)
+            hAdjustment
+        );
+    }
+
+    /**
+     * Ctor.
+     * @param wAdjustment The adjustment of the width. Gets the current width
+     *  to transform it into a new width.
+     * @param hSupplier The supplier of the height. Ignores the current values
+     *  and adjusts the height to a new value.
+     * @checkstyle ParameterName (4 lines)
+     */
+    public SizeAdjustment(
+        final ToDoubleFunction<CleanValue> wAdjustment,
+        final DoubleSupplier hSupplier
+    ) {
+        this(
+            wAdjustment,
+            // @checkstyle ParameterName (1 line)
+            h -> hSupplier.getAsDouble()
+        );
+    }
 
     /**
      * Ctor.
