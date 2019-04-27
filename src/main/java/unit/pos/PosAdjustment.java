@@ -22,6 +22,7 @@
 package unit.pos;
 
 import java.util.function.ToDoubleBiFunction;
+import java.util.function.ToDoubleFunction;
 import unit.scalar.CleanValue;
 
 /**
@@ -44,8 +45,29 @@ public class PosAdjustment implements Adjustment {
 
     /**
      * Ctor.
-     * @param xAdjustment The adjustment of the x coordinate.
-     * @param yAdjustment The adjustment of the y coordinate.
+     * @param xAdjustment The adjustment of the x coordinate. Gets x to create
+     *  the new x coordinate.
+     * @param yAdjustment The adjustment of the y coordinate. Gets y to create
+     *  the new y coordinate.
+     * @checkstyle ParameterName (4 lines)
+     */
+    public PosAdjustment(
+        final ToDoubleFunction<CleanValue> xAdjustment,
+        final ToDoubleFunction<CleanValue> yAdjustment
+    ) {
+        this(
+            // @checkstyle ParameterName (2 lines)
+            (x, y) -> xAdjustment.applyAsDouble(x),
+            (x, y) -> yAdjustment.applyAsDouble(y)
+        );
+    }
+
+    /**
+     * Ctor.
+     * @param xAdjustment The adjustment of the x coordinate. Gets x and y to
+     *  create the new x coordinate.
+     * @param yAdjustment The adjustment of the y coordinate. Gets x and y to
+     *  create the new y coordinate.
      * @checkstyle ParameterName (4 lines)
      */
     public PosAdjustment(

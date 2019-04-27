@@ -22,6 +22,7 @@
 package unit.size;
 
 import java.util.function.ToDoubleBiFunction;
+import java.util.function.ToDoubleFunction;
 import unit.scalar.CleanValue;
 
 /**
@@ -44,8 +45,29 @@ public class SizeAdjustment implements Adjustment {
 
     /**
      * Ctor.
-     * @param wAdjustment The adjustment of the width.
-     * @param hAdjustment The adjustment of the height.
+     * @param wAdjustment The adjustment of the width. Gets the current width to
+     *  transform it into the new width.
+     * @param hAdjustment The adjustment of the height. Gets the current height
+     *  to transform it into a new height.
+     * @checkstyle ParameterName (4 lines)
+     */
+    public SizeAdjustment(
+        final ToDoubleFunction<CleanValue> wAdjustment,
+        final ToDoubleFunction<CleanValue> hAdjustment
+    ) {
+        this(
+            // @checkstyle ParameterName (2 lines)
+            (w, h) -> wAdjustment.applyAsDouble(w),
+            (w, h) -> hAdjustment.applyAsDouble(h)
+        );
+    }
+
+    /**
+     * Ctor.
+     * @param wAdjustment The adjustment of the width. Gets the current width
+     *  and height to create the new width.
+     * @param hAdjustment The adjustment of the height. Gets the current width
+     *  and height to create the new height.
      * @checkstyle ParameterName (4 lines)
      */
     public SizeAdjustment(
