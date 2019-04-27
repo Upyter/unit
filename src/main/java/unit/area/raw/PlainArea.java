@@ -32,24 +32,41 @@ import java.util.function.DoubleSupplier;
 public class PlainArea implements RawArea {
     /**
      * The supplier of the x coordinate.
+     * @checkstyle MemberName (3 lines)
      */
+    @SuppressWarnings("PMD.AvoidFieldNameMatchingMethodName")
     private final DoubleSupplier x;
 
     /**
      * The supplier of the y coordinate.
+     * @checkstyle MemberName (3 lines)
      */
+    @SuppressWarnings("PMD.AvoidFieldNameMatchingMethodName")
     private final DoubleSupplier y;
 
     /**
      * The supplier of the width.
+     * @checkstyle MemberName (3 lines)
      */
+    @SuppressWarnings("PMD.AvoidFieldNameMatchingMethodName")
     private final DoubleSupplier w;
 
     /**
      * The supplier of the height.
+     * @checkstyle MemberName (3 lines)
      */
+    @SuppressWarnings("PMD.AvoidFieldNameMatchingMethodName")
     private final DoubleSupplier h;
 
+    /**
+     * Ctor.
+     * @param x The supplier of the x coordinate.
+     * @param y The supplier of the y coordinate.
+     * @param w The supplier of the width.
+     * @param h The supplier of the height.
+     * @checkstyle ParameterName (7 lines)
+     * @checkstyle ParameterNumber (2 lines)
+     */
     public PlainArea(
         final DoubleSupplier x,
         final DoubleSupplier y,
@@ -62,21 +79,29 @@ public class PlainArea implements RawArea {
         this.h = h;
     }
 
+    // @checkstyle ParameterName (3 lines)
+    @SuppressWarnings("PMD.ShortMethodName")
     @Override
     public final double x() {
         return this.x.getAsDouble();
     }
 
+    // @checkstyle ParameterName (3 lines)
+    @SuppressWarnings("PMD.ShortMethodName")
     @Override
     public final double y() {
         return this.y.getAsDouble();
     }
 
+    // @checkstyle ParameterName (3 lines)
+    @SuppressWarnings("PMD.ShortMethodName")
     @Override
     public final double w() {
         return this.w.getAsDouble();
     }
 
+    // @checkstyle ParameterName (3 lines)
+    @SuppressWarnings("PMD.ShortMethodName")
     @Override
     public final double h() {
         return this.h.getAsDouble();
