@@ -22,8 +22,8 @@
 package unit.pos;
 
 import java.util.function.DoubleSupplier;
-import java.util.function.ToDoubleBiFunction;
-import java.util.function.ToDoubleFunction;
+import java.util.function.DoubleUnaryOperator;
+import unit.scalar.BiValFunction;
 import unit.scalar.CleanValue;
 
 /**
@@ -36,13 +36,32 @@ public class PosAdjustment implements Adjustment {
      * The adjustment of the x coordinate.
      * @checkstyle MemberName (2 lines)
      */
-    private final ToDoubleBiFunction<CleanValue, CleanValue> xAdjustment;
+    private final BiValFunction xAdjustment;
 
     /**
      * The adjustment of the y coordinate.
      * @checkstyle MemberName (2 lines)
      */
-    private final ToDoubleBiFunction<CleanValue, CleanValue> yAdjustment;
+    private final BiValFunction yAdjustment;
+
+    /**
+     * Ctor.
+     * @param xSupplier The supplier of the x coordinate. Ignores the current
+     *  values and adjusts the x coordinate to a new value.
+     * @param yOperator The operator to be applied to get the adjusted y
+     *  coordinate. It gets the current y coordinate (from
+     *  {@link CleanValue#cleanValue()}).
+     * @checkstyle ParameterName (3 lines)
+     */
+    public PosAdjustment(
+        final DoubleSupplier xSupplier, final DoubleUnaryOperator yOperator
+    ) {
+        this(
+            // @checkstyle ParameterName (2 lines)
+            (x, y) -> xSupplier.getAsDouble(),
+            (x, y) -> yOperator.applyAsDouble(y.cleanValue())
+        );
+    }
 
     /**
      * Ctor.
@@ -71,7 +90,7 @@ public class PosAdjustment implements Adjustment {
      * @checkstyle ParameterName (4 lines)
      */
     public PosAdjustment(
-        final ToDoubleFunction<CleanValue> xAdjustment,
+        final unit.scalar.adjustment.Adjustment xAdjustment,
         final DoubleSupplier ySupplier
     ) {
         this(
@@ -91,7 +110,7 @@ public class PosAdjustment implements Adjustment {
      */
     public PosAdjustment(
         final DoubleSupplier xSupplier,
-        final ToDoubleFunction<CleanValue> yAdjustment
+        final unit.scalar.adjustment.Adjustment yAdjustment
     ) {
         this(
             // @checkstyle ParameterName (1 line)
@@ -109,13 +128,13 @@ public class PosAdjustment implements Adjustment {
      * @checkstyle ParameterName (4 lines)
      */
     public PosAdjustment(
-        final ToDoubleFunction<CleanValue> xAdjustment,
-        final ToDoubleFunction<CleanValue> yAdjustment
+        final unit.scalar.adjustment.Adjustment xAdjustment,
+        final unit.scalar.adjustment.Adjustment yAdjustment
     ) {
         this(
             // @checkstyle ParameterName (2 lines)
-            (x, y) -> xAdjustment.applyAsDouble(x),
-            (x, y) -> yAdjustment.applyAsDouble(y)
+            (x, y) -> xAdjustment.adjusted(x),
+            (x, y) -> yAdjustment.adjusted(y)
         );
     }
 
@@ -125,11 +144,10 @@ public class PosAdjustment implements Adjustment {
      *  create the new x coordinate.
      * @param yAdjustment The adjustment of the y coordinate. Gets x and y to
      *  create the new y coordinate.
-     * @checkstyle ParameterName (4 lines)
+     * @checkstyle ParameterName (3 lines)
      */
     public PosAdjustment(
-        final ToDoubleBiFunction<CleanValue, CleanValue> xAdjustment,
-        final ToDoubleBiFunction<CleanValue, CleanValue> yAdjustment
+        final BiValFunction xAdjustment, final BiValFunction yAdjustment
     ) {
         this.xAdjustment = xAdjustment;
         this.yAdjustment = yAdjustment;

@@ -22,8 +22,8 @@
 package unit.size;
 
 import java.util.function.DoubleSupplier;
-import java.util.function.ToDoubleBiFunction;
-import java.util.function.ToDoubleFunction;
+import java.util.function.DoubleUnaryOperator;
+import unit.scalar.BiValFunction;
 import unit.scalar.CleanValue;
 
 /**
@@ -36,13 +36,31 @@ public class SizeAdjustment implements Adjustment {
      * The adjustment of the width.
      * @checkstyle MemberName (2 lines)
      */
-    private final ToDoubleBiFunction<CleanValue, CleanValue> wAdjustment;
+    private final BiValFunction wAdjustment;
 
     /**
      * The adjustment of the height.
      * @checkstyle MemberName (2 lines)
      */
-    private final ToDoubleBiFunction<CleanValue, CleanValue> hAdjustment;
+    private final BiValFunction hAdjustment;
+
+    /**
+     * Ctor.
+     * @param wSupplier The supplier of the width. Ignores the current values
+     *  and adjusts the width to a new value.
+     * @param hOperator The operator to be applied to get the adjusted height.
+     *  It gets the current height (from {@link CleanValue#cleanValue()}).
+     * @checkstyle ParameterName (3 lines)
+     */
+    public SizeAdjustment(
+        final DoubleSupplier wSupplier, final DoubleUnaryOperator hOperator
+    ) {
+        this(
+            // @checkstyle ParameterName (2 lines)
+            (w, h) -> wSupplier.getAsDouble(),
+            (w, h) -> hOperator.applyAsDouble(h.cleanValue())
+        );
+    }
 
     /**
      * Ctor.
@@ -72,7 +90,7 @@ public class SizeAdjustment implements Adjustment {
      */
     public SizeAdjustment(
         final DoubleSupplier wSupplier,
-        final ToDoubleFunction<CleanValue> hAdjustment
+        final unit.scalar.adjustment.Adjustment hAdjustment
     ) {
         this(
             w -> wSupplier.getAsDouble(),
@@ -90,7 +108,7 @@ public class SizeAdjustment implements Adjustment {
      * @checkstyle ParameterName (4 lines)
      */
     public SizeAdjustment(
-        final ToDoubleFunction<CleanValue> wAdjustment,
+        final unit.scalar.adjustment.Adjustment wAdjustment,
         final DoubleSupplier hSupplier
     ) {
         this(
@@ -109,13 +127,13 @@ public class SizeAdjustment implements Adjustment {
      * @checkstyle ParameterName (4 lines)
      */
     public SizeAdjustment(
-        final ToDoubleFunction<CleanValue> wAdjustment,
-        final ToDoubleFunction<CleanValue> hAdjustment
+        final unit.scalar.adjustment.Adjustment wAdjustment,
+        final unit.scalar.adjustment.Adjustment hAdjustment
     ) {
         this(
             // @checkstyle ParameterName (2 lines)
-            (w, h) -> wAdjustment.applyAsDouble(w),
-            (w, h) -> hAdjustment.applyAsDouble(h)
+            (w, h) -> wAdjustment.adjusted(w),
+            (w, h) -> hAdjustment.adjusted(h)
         );
     }
 
@@ -125,11 +143,10 @@ public class SizeAdjustment implements Adjustment {
      *  and height to create the new width.
      * @param hAdjustment The adjustment of the height. Gets the current width
      *  and height to create the new height.
-     * @checkstyle ParameterName (4 lines)
+     * @checkstyle ParameterName (3 lines)
      */
     public SizeAdjustment(
-        final ToDoubleBiFunction<CleanValue, CleanValue> wAdjustment,
-        final ToDoubleBiFunction<CleanValue, CleanValue> hAdjustment
+        final BiValFunction wAdjustment, final BiValFunction hAdjustment
     ) {
         this.wAdjustment = wAdjustment;
         this.hAdjustment = hAdjustment;
