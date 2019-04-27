@@ -22,7 +22,6 @@
 package unit.pos;
 
 import java.util.function.DoubleSupplier;
-import java.util.function.DoubleUnaryOperator;
 import unit.scalar.BiValFunction;
 import unit.scalar.CleanValue;
 
@@ -43,25 +42,6 @@ public class PosAdjustment implements Adjustment {
      * @checkstyle MemberName (2 lines)
      */
     private final BiValFunction yAdjustment;
-
-    /**
-     * Ctor.
-     * @param xSupplier The supplier of the x coordinate. Ignores the current
-     *  values and adjusts the x coordinate to a new value.
-     * @param yOperator The operator to be applied to get the adjusted y
-     *  coordinate. It gets the current y coordinate (from
-     *  {@link CleanValue#cleanValue()}).
-     * @checkstyle ParameterName (3 lines)
-     */
-    public PosAdjustment(
-        final DoubleSupplier xSupplier, final DoubleUnaryOperator yOperator
-    ) {
-        this(
-            // @checkstyle ParameterName (2 lines)
-            (x, y) -> xSupplier.getAsDouble(),
-            (x, y) -> yOperator.applyAsDouble(y.cleanValue())
-        );
-    }
 
     /**
      * Ctor.

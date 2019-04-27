@@ -21,7 +21,6 @@
 
 package unit.area;
 
-import java.util.function.DoubleUnaryOperator;
 import unit.scalar.CleanValue;
 import unit.scalar.QuadValFunction;
 
@@ -92,52 +91,6 @@ public class AreaAdjustment implements Adjustment {
             (x, y, w, h) -> posAdjustment.adjustedY(x, y),
             wAdjustment,
             hAdjustment
-        );
-    }
-
-    /**
-     * Ctor.
-     * @param xAdjustment The adjustment of the x coordinate. It will get the
-     *  current value (from {@link CleanValue#cleanValue()}).
-     * @param yAdjustment The adjustment of the y coordinate. It will get the
-     *  current value (from {@link CleanValue#cleanValue()}).
-     * @param sizeAdjustment The adjustment of the size.
-     * @checkstyle ParameterName (5 lines)
-     */
-    public AreaAdjustment(
-        final DoubleUnaryOperator xAdjustment,
-        final DoubleUnaryOperator yAdjustment,
-        final unit.size.Adjustment sizeAdjustment
-    ) {
-        this(
-            // @checkstyle ParameterName (4 lines)
-            (x, y, w, h) -> xAdjustment.applyAsDouble(x.cleanValue()),
-            (x, y, w, h) -> yAdjustment.applyAsDouble(y.cleanValue()),
-            (x, y, w, h) -> sizeAdjustment.adjustedW(w, h),
-            (x, y, w, h) -> sizeAdjustment.adjustedH(w, h)
-        );
-    }
-
-    /**
-     * Ctor.
-     * @param xAdjustment The adjustment of the x coordinate. It will get the
-     *  current value.
-     * @param yAdjustment The adjustment of the y coordinate. It will get the
-     *  current value (from {@link CleanValue#cleanValue()}).
-     * @param sizeAdjustment The adjustment of the size.
-     * @checkstyle ParameterName (5 lines)
-     */
-    public AreaAdjustment(
-        final unit.scalar.adjustment.Adjustment xAdjustment,
-        final DoubleUnaryOperator yAdjustment,
-        final unit.size.Adjustment sizeAdjustment
-    ) {
-        this(
-            // @checkstyle ParameterName (4 lines)
-            (x, y, w, h) -> xAdjustment.adjusted(x),
-            (x, y, w, h) -> yAdjustment.applyAsDouble(y.cleanValue()),
-            (x, y, w, h) -> sizeAdjustment.adjustedW(w, h),
-            (x, y, w, h) -> sizeAdjustment.adjustedH(w, h)
         );
     }
 

@@ -22,7 +22,6 @@
 package unit.size;
 
 import java.util.function.DoubleSupplier;
-import java.util.function.DoubleUnaryOperator;
 import unit.scalar.BiValFunction;
 import unit.scalar.CleanValue;
 
@@ -43,24 +42,6 @@ public class SizeAdjustment implements Adjustment {
      * @checkstyle MemberName (2 lines)
      */
     private final BiValFunction hAdjustment;
-
-    /**
-     * Ctor.
-     * @param wSupplier The supplier of the width. Ignores the current values
-     *  and adjusts the width to a new value.
-     * @param hOperator The operator to be applied to get the adjusted height.
-     *  It gets the current height (from {@link CleanValue#cleanValue()}).
-     * @checkstyle ParameterName (3 lines)
-     */
-    public SizeAdjustment(
-        final DoubleSupplier wSupplier, final DoubleUnaryOperator hOperator
-    ) {
-        this(
-            // @checkstyle ParameterName (2 lines)
-            (w, h) -> wSupplier.getAsDouble(),
-            (w, h) -> hOperator.applyAsDouble(h.cleanValue())
-        );
-    }
 
     /**
      * Ctor.
