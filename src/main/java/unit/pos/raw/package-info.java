@@ -19,14 +19,8 @@
  * DEALINGS IN THE SOFTWARE.
  */
 
-package unit.size;
-
-import unit.adjustment.Adjustable;
-import unit.size.raw.RawSize;
-
 /**
- * The two dimensional cartesian based size of a rectangular area.
- * Implementations of this interface are equal to each other.
- * @since 0.4
+ * The raw position and components for it.
+ * @since 0.126
  */
-public interface Size extends RawSize, CleanSize, Adjustable<Adjustment> { }
+package unit.pos.raw;

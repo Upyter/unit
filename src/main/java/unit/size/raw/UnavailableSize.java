@@ -21,7 +21,8 @@
 
 package unit.size.raw;
 
-import unit.size.Size;
+import java.util.List;
+import unit.size.CleanSize;
 
 /**
  * Determines the size that is not available for adjustments. This includes
@@ -37,13 +38,21 @@ public class UnavailableSize implements RawSize {
     /**
      * The sizes to determine the available width and height from.
      */
-    private final Iterable<Size> sizes;
+    private final Iterable<CleanSize> sizes;
 
     /**
      * Ctor.
      * @param sizes The sizes to determine the available width and height from.
      */
-    public UnavailableSize(final Iterable<Size> sizes) {
+    public UnavailableSize(final CleanSize... sizes) {
+        this(List.of(sizes));
+    }
+
+    /**
+     * Ctor.
+     * @param sizes The sizes to determine the available width and height from.
+     */
+    public UnavailableSize(final Iterable<CleanSize> sizes) {
         this.sizes = sizes;
     }
 
@@ -54,7 +63,7 @@ public class UnavailableSize implements RawSize {
         double result = 0.0;
         for (final var size : this.sizes) {
             if (size.cleanW().isFix()) {
-                result += size.w();
+                result += size.cleanW().cleanValue();
             }
         }
         return result;
@@ -67,7 +76,7 @@ public class UnavailableSize implements RawSize {
         double result = 0.0;
         for (final var size : this.sizes) {
             if (size.cleanH().isFix()) {
-                result += size.h();
+                result += size.cleanH().cleanValue();
             }
         }
         return result;

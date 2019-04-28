@@ -19,14 +19,24 @@
  * DEALINGS IN THE SOFTWARE.
  */
 
-package unit.size;
+package unit.pos;
 
-import unit.adjustment.Adjustable;
-import unit.size.raw.RawSize;
+import unit.scalar.CleanValue;
 
 /**
- * The two dimensional cartesian based size of a rectangular area.
- * Implementations of this interface are equal to each other.
- * @since 0.4
+ * A position containing {@link CleanValue}s.
+ * @since 0.126
  */
-public interface Size extends RawSize, CleanSize, Adjustable<Adjustment> { }
+public interface CleanPos {
+    /**
+     * Returns the unadjusted x coordinate.
+     * @return The unadjusted x coordinate.
+     */
+    CleanValue cleanX();
+
+    /**
+     * Returns the unadjusted y coordinate.
+     * @return The unadjusted y coordinate.
+     */
+    CleanValue cleanY();
+}

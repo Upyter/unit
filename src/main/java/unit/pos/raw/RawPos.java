@@ -19,14 +19,27 @@
  * DEALINGS IN THE SOFTWARE.
  */
 
-package unit.size;
-
-import unit.adjustment.Adjustable;
-import unit.size.raw.RawSize;
+package unit.pos.raw;
 
 /**
- * The two dimensional cartesian based size of a rectangular area.
- * Implementations of this interface are equal to each other.
- * @since 0.4
+ * The two dimensional cartesian based position that delivers its data as
+ * primitives.
+ * @since 0.124
  */
-public interface Size extends RawSize, CleanSize, Adjustable<Adjustment> { }
+public interface RawPos {
+    /**
+     * Returns the x coordinate.
+     * @return The x coordinate.
+     * @checkstyle MethodName (3 lines)
+     */
+    @SuppressWarnings("PMD.ShortMethodName")
+    double x();
+
+    /**
+     * Returns the y coordinate.
+     * @return The y coordinate.
+     * @checkstyle MethodName (3 lines)
+     */
+    @SuppressWarnings("PMD.ShortMethodName")
+    double y();
+}

@@ -21,12 +21,22 @@
 
 package unit.size;
 
-import unit.adjustment.Adjustable;
-import unit.size.raw.RawSize;
+import unit.scalar.CleanValue;
 
 /**
- * The two dimensional cartesian based size of a rectangular area.
- * Implementations of this interface are equal to each other.
- * @since 0.4
+ * A size containing {@link CleanValue}s.
+ * @since 0.126
  */
-public interface Size extends RawSize, CleanSize, Adjustable<Adjustment> { }
+public interface CleanSize {
+    /**
+     * Returns the unadjusted height.
+     * @return The unadjusted height.
+     */
+    CleanValue cleanW();
+
+    /**
+     * Returns the unadjusted height.
+     * @return The unadjusted height.
+     */
+    CleanValue cleanH();
+}

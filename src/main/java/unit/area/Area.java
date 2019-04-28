@@ -23,34 +23,14 @@ package unit.area;
 
 import unit.adjustment.Adjustable;
 import unit.area.raw.RawArea;
-import unit.scalar.CleanValue;
+import unit.pos.CleanPos;
+import unit.size.CleanSize;
 
 /**
  * A cartesian two dimensional rectangular area of a shape.
  * @since 0.6
  */
-public interface Area extends RawArea, Adjustable<Adjustment> {
-    /**
-     * Returns the unadjusted x coordinate.
-     * @return The unadjusted x coordinate.
-     */
-    CleanValue cleanX();
+public interface Area extends RawArea, CleanPos,
+    CleanSize, Adjustable<Adjustment> {
 
-    /**
-     * Returns the unadjusted y coordinate.
-     * @return The unadjusted y coordinate.
-     */
-    CleanValue cleanY();
-
-    /**
-     * Returns the unadjusted width.
-     * @return The unadjusted height.
-     */
-    CleanValue cleanW();
-
-    /**
-     * Returns the unadjusted height.
-     * @return The unadjusted height.
-     */
-    CleanValue cleanH();
 }

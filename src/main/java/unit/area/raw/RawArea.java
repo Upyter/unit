@@ -21,41 +21,12 @@
 
 package unit.area.raw;
 
+import unit.pos.raw.RawPos;
+import unit.size.raw.RawSize;
+
 /**
  * A cartesian two dimensional rectangular area of a shape that delivers its
  * data as primitives.
  * @since 0.122
  */
-public interface RawArea {
-    /**
-     * Returns the x coordinate.
-     * @return The x coordinate.
-     * @checkstyle MethodName (3 lines)
-     */
-    @SuppressWarnings("PMD.ShortMethodName")
-    double x();
-
-    /**
-     * Returns the y coordinate.
-     * @return The y coordinate.
-     * @checkstyle MethodName (3 lines)
-     */
-    @SuppressWarnings("PMD.ShortMethodName")
-    double y();
-
-    /**
-     * Returns the width.
-     * @return The width.
-     * @checkstyle MethodName (3 lines)
-     */
-    @SuppressWarnings("PMD.ShortMethodName")
-    double w();
-
-    /**
-     * Returns the height.
-     * @return The height.
-     * @checkstyle MethodName (3 lines)
-     */
-    @SuppressWarnings("PMD.ShortMethodName")
-    double h();
-}
+public interface RawArea extends RawPos, RawSize { }
