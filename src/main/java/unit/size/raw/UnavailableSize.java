@@ -38,7 +38,7 @@ public class UnavailableSize implements RawSize {
     /**
      * The sizes to determine the available width and height from.
      */
-    private final Iterable<CleanSize> sizes;
+    private final Iterable<? extends CleanSize> sizes;
 
     /**
      * Ctor.
@@ -52,7 +52,7 @@ public class UnavailableSize implements RawSize {
      * Ctor.
      * @param sizes The sizes to determine the available width and height from.
      */
-    public UnavailableSize(final Iterable<CleanSize> sizes) {
+    public UnavailableSize(final Iterable<? extends CleanSize> sizes) {
         this.sizes = sizes;
     }
 
