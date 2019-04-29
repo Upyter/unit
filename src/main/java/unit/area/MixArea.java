@@ -22,6 +22,7 @@
 package unit.area;
 
 import java.util.Objects;
+import unit.area.raw.RawArea;
 import unit.pos.Pos;
 import unit.pos.PosAdjustment;
 import unit.scalar.CleanValue;
@@ -131,6 +132,28 @@ public class MixArea implements Area {
     }
 
     @Override
+    public final boolean equals(final Object obj) {
+        if (obj == this) {
+            return true;
+        }
+        if (!(obj instanceof RawArea)) {
+            return false;
+        }
+        final RawArea other = (RawArea) obj;
+        return Double.compare(this.x(), other.x()) == 0 &&
+            Double.compare(this.y(), other.y()) == 0 &&
+            Double.compare(this.w(), other.w()) == 0 &&
+            Double.compare(this.h(), other.h()) == 0;
+    }
+
+    @Override
+    public final int hashCode() {
+        return com.google.common.base.Objects.hashCode(
+            this.x(), this.y(), this.w(), this.h()
+        );
+    }
+
+    @Override
     public final String toString() {
         return new StringBuilder("Area")
             .append("(x = ").append(this.x())
@@ -138,6 +161,6 @@ public class MixArea implements Area {
             .append(", width = ").append(this.w())
             .append(", height = ").append(this.h())
             .append(')')
-        .toString();
+            .toString();
     }
 }

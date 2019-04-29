@@ -21,14 +21,10 @@
 
 package unit.area;
 
-import java.util.Objects;
 import java.util.function.DoubleSupplier;
 import unit.pos.Pos;
-import unit.pos.PosAdjustment;
 import unit.pos.SoftPos;
-import unit.scalar.CleanValue;
 import unit.size.Size;
-import unit.size.SizeAdjustment;
 import unit.size.SoftSize;
 
 /**
@@ -39,17 +35,7 @@ import unit.size.SoftSize;
  * constructor arguments.</p>
  * @since 0.110
  */
-public class SoftArea implements Area {
-    /**
-     * The position.
-     */
-    private final Pos pos;
-
-    /**
-     * The size.
-     */
-    private final Size size;
-
+public class SoftArea extends MixArea {
     /**
      * Uses x = 0.0 and y = 0.0 as its position and its size.
      */
@@ -382,7 +368,7 @@ public class SoftArea implements Area {
         final DoubleSupplier w,
         final DoubleSupplier h
     ) {
-        this(new SoftPos(x, y), new SoftSize(w, h));
+        super(new SoftPos(x, y), new SoftSize(w, h));
     }
 
     /**
@@ -390,7 +376,7 @@ public class SoftArea implements Area {
      * @param pos The position.
      */
     public SoftArea(final Pos pos) {
-        this(pos, new SoftSize());
+        super(pos, new SoftSize());
     }
 
     /**
@@ -398,88 +384,6 @@ public class SoftArea implements Area {
      * @param size The size.
      */
     public SoftArea(final Size size) {
-        this(new SoftPos(), size);
-    }
-
-    /**
-     * Ctor.
-     * @param pos The position.
-     * @param size The size.
-     */
-    private SoftArea(final Pos pos, final Size size) {
-        this.pos = Objects.requireNonNull(pos);
-        this.size = Objects.requireNonNull(size);
-    }
-
-    @SuppressWarnings("PMD.ShortMethodName")
-    @Override
-    public final double x() {
-        return this.pos.x();
-    }
-
-    @SuppressWarnings("PMD.ShortMethodName")
-    @Override
-    public final double y() {
-        return this.pos.y();
-    }
-
-    @SuppressWarnings("PMD.ShortMethodName")
-    @Override
-    public final double w() {
-        return this.size.w();
-    }
-
-    @SuppressWarnings("PMD.ShortMethodName")
-    @Override
-    public final double h() {
-        return this.size.h();
-    }
-
-    @Override
-    public final CleanValue cleanX() {
-        return this.pos.cleanX();
-    }
-
-    @Override
-    public final CleanValue cleanY() {
-        return this.pos.cleanY();
-    }
-
-    @Override
-    public final CleanValue cleanW() {
-        return this.size.cleanW();
-    }
-
-    @Override
-    public final CleanValue cleanH() {
-        return this.size.cleanH();
-    }
-
-    @Override
-    public final void adjustment(final Adjustment adjustment) {
-        this.pos.adjustment(
-            new PosAdjustment(
-                // @checkstyle ParameterName (1 line)
-                (x, y) -> adjustment.adjustedX(
-                    x, y, this.cleanW(), this.cleanH()
-                ),
-                // @checkstyle ParameterName (1 line)
-                (x, y) -> adjustment.adjustedY(
-                    x, y, this.cleanW(), this.cleanH()
-                )
-            )
-        );
-        this.size.adjustment(
-            new SizeAdjustment(
-                // @checkstyle ParameterName (1 line)
-                (w, h) -> adjustment.adjustedW(
-                    this.cleanX(), this.cleanY(), w, h
-                ),
-                // @checkstyle ParameterName (1 line)
-                (w, h) -> adjustment.adjustedH(
-                    this.cleanX(), this.cleanY(), w, h
-                )
-            )
-        );
+        super(new SoftPos(), size);
     }
 }

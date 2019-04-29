@@ -21,6 +21,7 @@
 
 package unit.area.raw;
 
+import com.google.common.base.Objects;
 import java.util.function.DoubleSupplier;
 
 /**
@@ -105,5 +106,36 @@ public class PlainArea implements RawArea {
     @Override
     public final double h() {
         return this.h.getAsDouble();
+    }
+
+    @Override
+    public final boolean equals(final Object obj) {
+        if (obj == this) {
+            return true;
+        }
+        if (!(obj instanceof RawArea)) {
+            return false;
+        }
+        final RawArea other = (RawArea) obj;
+        return Double.compare(this.x(), other.x()) == 0 &&
+            Double.compare(this.y(), other.y()) == 0 &&
+            Double.compare(this.w(), other.w()) == 0 &&
+            Double.compare(this.h(), other.h()) == 0;
+    }
+
+    @Override
+    public final int hashCode() {
+        return Objects.hashCode(this.x(), this.y(), this.w(), this.h());
+    }
+
+    @Override
+    public final String toString() {
+        return new StringBuilder("RawArea")
+            .append("(x = ").append(this.x())
+            .append(", y = ").append(this.y())
+            .append(", width = ").append(this.w())
+            .append(", height = ").append(this.h())
+            .append(')')
+            .toString();
     }
 }
