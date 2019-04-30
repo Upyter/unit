@@ -23,9 +23,12 @@ package unit.area;
 
 import java.util.Objects;
 import unit.area.raw.RawArea;
+import unit.pos.MixPos;
 import unit.pos.Pos;
 import unit.pos.PosAdjustment;
 import unit.scalar.CleanValue;
+import unit.scalar.Scalar;
+import unit.size.MixSize;
 import unit.size.Size;
 import unit.size.SizeAdjustment;
 
@@ -38,6 +41,7 @@ import unit.size.SizeAdjustment;
  * @see Adjustment
  * @since 0.6
  */
+@SuppressWarnings("PMD.TooManyMethods")
 public class MixArea implements Area {
     /**
      * The pos of this area.
@@ -48,6 +52,21 @@ public class MixArea implements Area {
      * The size of this area.
      */
     private final Size size;
+
+    /**
+     * Ctor.
+     * @param x The x coordinate.
+     * @param y The y coordinate.
+     * @param w The width.
+     * @param h The height.
+     * @checkstyle ParameterNumber (4 lines)
+     * @checkstyle ParameterName (3 lines)
+     */
+    public MixArea(
+        final Scalar x, final Scalar y, final Scalar w, final Scalar h
+    ) {
+        this(new MixPos(x, y), new MixSize(w, h));
+    }
 
     /**
      * Ctor.
@@ -131,6 +150,7 @@ public class MixArea implements Area {
         );
     }
 
+    @SuppressWarnings("PMD.OnlyOneReturn")
     @Override
     public final boolean equals(final Object obj) {
         if (obj == this) {
@@ -140,10 +160,10 @@ public class MixArea implements Area {
             return false;
         }
         final RawArea other = (RawArea) obj;
-        return Double.compare(this.x(), other.x()) == 0 &&
-            Double.compare(this.y(), other.y()) == 0 &&
-            Double.compare(this.w(), other.w()) == 0 &&
-            Double.compare(this.h(), other.h()) == 0;
+        return Double.compare(this.x(), other.x()) == 0
+            && Double.compare(this.y(), other.y()) == 0
+            && Double.compare(this.w(), other.w()) == 0
+            && Double.compare(this.h(), other.h()) == 0;
     }
 
     @Override

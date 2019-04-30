@@ -23,8 +23,6 @@ package unit.size;
 
 import java.util.function.DoubleSupplier;
 import java.util.function.IntSupplier;
-import unit.scalar.CleanValue;
-import unit.scalar.Scalar;
 import unit.scalar.SoftScalar;
 
 /**
@@ -33,21 +31,7 @@ import unit.scalar.SoftScalar;
  * saving.</p>
  * @since 0.66
  */
-public class SoftSize implements Size {
-    /**
-     * The width.
-     * @checkstyle MemberName (3 lines)
-     */
-    @SuppressWarnings("PMD.AvoidFieldNameMatchingMethodName")
-    private final Scalar w;
-
-    /**
-     * The height.
-     * @checkstyle MemberName (3 lines)
-     */
-    @SuppressWarnings("PMD.AvoidFieldNameMatchingMethodName")
-    private final Scalar h;
-
+public class SoftSize extends MixSize {
     /**
      * Uses 0 as the width and the height.
      */
@@ -135,48 +119,6 @@ public class SoftSize implements Size {
      * @checkstyle ParameterName (2 lines)
      */
     public SoftSize(final DoubleSupplier w, final DoubleSupplier h) {
-        this(
-            new SoftScalar(w),
-            new SoftScalar(h)
-        );
-    }
-
-    /**
-     * Ctor.
-     * @param w The width.
-     * @param h The height.
-     * @checkstyle ParameterName (2 lines)
-     */
-    public SoftSize(final Scalar w, final Scalar h) {
-        this.w = w;
-        this.h = h;
-    }
-
-    @SuppressWarnings("PMD.ShortMethodName")
-    @Override
-    public final double w() {
-        return this.w.value();
-    }
-
-    @SuppressWarnings("PMD.ShortMethodName")
-    @Override
-    public final double h() {
-        return this.h.value();
-    }
-
-    @Override
-    public final CleanValue cleanW() {
-        return this.w;
-    }
-
-    @Override
-    public final CleanValue cleanH() {
-        return this.h;
-    }
-
-    @Override
-    public final void adjustment(final Adjustment adjustment) {
-        this.w.adjustment(current -> adjustment.adjustedW(current, this.h));
-        this.h.adjustment(current -> adjustment.adjustedH(this.w, current));
+        super(new SoftScalar(w), new SoftScalar(h));
     }
 }

@@ -135,7 +135,7 @@ public class SoftScalar implements Scalar {
     public final String toString() {
         return String.join(
             "",
-            "SoftScalar(",
+            "Scalar(",
             Double.toString(this.supplier.getAsDouble()),
             ", adjusted: ",
             Double.toString(this.value()),

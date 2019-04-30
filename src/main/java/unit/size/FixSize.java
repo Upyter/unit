@@ -21,12 +21,9 @@
 
 package unit.size;
 
-import java.util.Objects;
 import java.util.function.DoubleSupplier;
 import java.util.function.IntSupplier;
-import unit.scalar.CleanValue;
 import unit.scalar.FixScalar;
-import unit.scalar.Scalar;
 
 /**
  * A size that doesn't adjust itself.
@@ -34,17 +31,7 @@ import unit.scalar.Scalar;
  * arguments in the constructor.</p>
  * @since 0.4
  */
-public class FixSize implements Size {
-    /**
-     * The width of the size.
-     */
-    private final Scalar width;
-
-    /**
-     * The height of the size.
-     */
-    private final Scalar height;
-
+public class FixSize extends MixSize {
     /**
      * Creates a size with width = 0 and height = 0.
      */
@@ -54,136 +41,84 @@ public class FixSize implements Size {
 
     /**
      * Ctor.
-     * @param width The width for the size.
-     * @param height The height for the size.
+     * @param w The width.
+     * @param h The height.
+     * @checkstyle ParameterName (2 lines)
      */
-    public FixSize(final int width, final int height) {
-        this(() -> width, () -> height);
+    public FixSize(final int w, final int h) {
+        this(() -> w, () -> h);
     }
 
     /**
      * Ctor.
-     * @param width The width for the size.
-     * @param height The height for the size.
+     * @param w The width.
+     * @param h The height.
+     * @checkstyle ParameterName (2 lines)
      */
-    public FixSize(final int width, final IntSupplier height) {
-        this(() -> width, height);
+    public FixSize(final int w, final IntSupplier h) {
+        this(() -> w, h);
     }
 
     /**
      * Ctor.
-     * @param width The width for the size.
-     * @param height The height for the size.
+     * @param w The width.
+     * @param h The height.
+     * @checkstyle ParameterName (2 lines)
      */
-    public FixSize(final IntSupplier width, final int height) {
-        this(width, () -> height);
+    public FixSize(final IntSupplier w, final int h) {
+        this(w, () -> h);
     }
 
     /**
      * Ctor.
-     * @param width The width for the size.
-     * @param height The height for the size.
+     * @param w The width.
+     * @param h The height.
+     * @checkstyle ParameterName (2 lines)
      */
-    public FixSize(
-        final IntSupplier width, final IntSupplier height
-    ) {
+    public FixSize(final IntSupplier w, final IntSupplier h) {
         this(
-            () -> (double) width.getAsInt(),
-            () -> (double) height.getAsInt()
+            () -> (double) w.getAsInt(),
+            () -> (double) h.getAsInt()
         );
     }
 
     /**
      * Ctor.
-     * @param width The width for the size.
-     * @param height The height for the size.
+     * @param w The width.
+     * @param h The height.
+     * @checkstyle ParameterName (2 lines)
      */
-    public FixSize(final double width, final double height) {
-        this(() -> width, () -> height);
+    public FixSize(final double w, final double h) {
+        this(() -> w, () -> h);
     }
 
     /**
      * Ctor.
-     * @param width The width for the size.
-     * @param height The height for the size.
+     * @param w The width.
+     * @param h The height.
+     * @checkstyle ParameterName (2 lines)
      */
-    public FixSize(final DoubleSupplier width, final double height) {
-        this(width, () -> height);
+    public FixSize(final DoubleSupplier w, final double h) {
+        this(w, () -> h);
     }
 
     /**
      * Ctor.
-     * @param width The width for the size.
-     * @param height The height for the size.
+     * @param w The width.
+     * @param h The height.
+     * @checkstyle ParameterName (2 lines)
      */
-    public FixSize(final double width, final DoubleSupplier height) {
-        this(() -> width, height);
+    public FixSize(final double w, final DoubleSupplier h) {
+        this(() -> w, h);
     }
 
     /**
      * Ctor.
-     * @param width The width for the size.
-     * @param height The height for the size.
+     * @param w The width.
+     * @param h The height.
+     * @checkstyle ParameterName (2 lines)
      */
-    public FixSize(
-        final DoubleSupplier width, final DoubleSupplier height
-    ) {
-        this.width = new FixScalar(width);
-        this.height = new FixScalar(height);
-    }
-
-    @SuppressWarnings("PMD.ShortMethodName")
-    @Override
-    public final double w() {
-        return this.width.value();
-    }
-
-    @SuppressWarnings("PMD.ShortMethodName")
-    @Override
-    public final double h() {
-        return this.height.value();
-    }
-
-    @Override
-    public final CleanValue cleanW() {
-        return this.width;
-    }
-
-    @Override
-    public final CleanValue cleanH() {
-        return this.height;
-    }
-
-    @SuppressWarnings("PMD.OnlyOneReturn")
-    @Override
-    public final boolean equals(final Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (!(obj instanceof Size)) {
-            return false;
-        }
-        final Size other = (Size) obj;
-        return Double.compare(this.w(), other.w()) == 0
-            && Double.compare(this.h(), other.h()) == 0;
-    }
-
-    @Override
-    public final int hashCode() {
-        return Objects.hash(this.w(), this.h());
-    }
-
-    @Override
-    public final String toString() {
-        return new StringBuilder("Size")
-            .append("(width = ").append(this.w())
-            .append(", height = ").append(this.h())
-            .append(')')
-            .toString();
-    }
-
-    @Override
-    public final void adjustment(final Adjustment adjustment) {
-        // fix size ignores adjustments
+    public FixSize(final DoubleSupplier w, final DoubleSupplier h) {
+        super(new FixScalar(w), new FixScalar(h));
     }
 }

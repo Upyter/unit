@@ -21,11 +21,8 @@
 
 package unit.pos;
 
-import java.util.Objects;
 import java.util.function.DoubleSupplier;
 import java.util.function.IntSupplier;
-import unit.scalar.CleanValue;
-import unit.scalar.Scalar;
 import unit.scalar.SoftScalar;
 
 /**
@@ -34,21 +31,7 @@ import unit.scalar.SoftScalar;
  * saving.</p>
  * @since 0.71
  */
-public class SoftPos implements Pos {
-    /**
-     * The x coordinate of the position.
-     * @checkstyle MemberName (3 lines)
-     */
-    @SuppressWarnings("PMD.AvoidFieldNameMatchingMethodName")
-    private final Scalar x;
-
-    /**
-     * The y coordinate of the position.
-     * @checkstyle MemberName (3 lines)
-     */
-    @SuppressWarnings("PMD.AvoidFieldNameMatchingMethodName")
-    private final Scalar y;
-
+public class SoftPos extends MixPos {
     /**
      * Ctor. Sets x = 0 and y = 0 as its values.
      */
@@ -134,73 +117,6 @@ public class SoftPos implements Pos {
      * @checkstyle ParameterName (2 lines)
      */
     public SoftPos(final DoubleSupplier x, final DoubleSupplier y) {
-        this(new SoftScalar(x), new SoftScalar(y));
-    }
-
-    /**
-     * Ctor.
-     * @param x The x coordinate.
-     * @param y The y coordinate.
-     * @checkstyle ParameterName (2 lines)
-     */
-    public SoftPos(final Scalar x, final Scalar y) {
-        this.x = Objects.requireNonNull(x);
-        this.y = Objects.requireNonNull(y);
-    }
-
-    @SuppressWarnings("PMD.ShortMethodName")
-    @Override
-    public final double x() {
-        return this.x.value();
-    }
-
-    @SuppressWarnings("PMD.ShortMethodName")
-    @Override
-    public final double y() {
-        return this.y.value();
-    }
-
-    @Override
-    public final CleanValue cleanX() {
-        return this.x;
-    }
-
-    @Override
-    public final CleanValue cleanY() {
-        return this.y;
-    }
-
-    @Override
-    public final void adjustment(final Adjustment adjustment) {
-        this.x.adjustment(current -> adjustment.adjustedX(current, this.y));
-        this.y.adjustment(current -> adjustment.adjustedY(this.x, current));
-    }
-
-    @SuppressWarnings("PMD.OnlyOneReturn")
-    @Override
-    public final boolean equals(final Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (!(obj instanceof Pos)) {
-            return false;
-        }
-        final Pos other = (Pos) obj;
-        return Double.compare(this.x(), other.x()) == 0
-            && Double.compare(this.y(), other.y()) == 0;
-    }
-
-    @Override
-    public final int hashCode() {
-        return Objects.hash(this.x(), this.y());
-    }
-
-    @Override
-    public final String toString() {
-        return new StringBuilder("Pos")
-            .append("(x = ").append(this.x())
-            .append(", y = ").append(this.y())
-            .append(')')
-            .toString();
+        super(new SoftScalar(x), new SoftScalar(y));
     }
 }

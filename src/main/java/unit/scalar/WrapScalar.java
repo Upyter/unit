@@ -21,93 +21,92 @@
 
 package unit.scalar;
 
-import java.util.Objects;
 import java.util.function.DoubleSupplier;
+import unit.functional.Cached;
+import unit.functional.Lazy;
 import unit.scalar.adjustment.Adjustment;
 
 /**
- * A one-dimensional fixed value. It ignores adjustments.
- * <p>Whether this class is immutable or thread-safe depends on the constructor
- * arguments.</p>
+ * A scalar that chooses between its implementation depending on whether it
+ * should be fix or soft. This class behaves as a copy of a {@link Scalar}.
+ * <b>Note that this class doesn't take adjustments into account. It delivers
+ * new adjustments to the encapsulated scalar but assumes that all adjustments
+ * have gone through this class.</b>
+ * <p>This class is mutable and not thread-safe because it caches the decision
+ * of the actual scalar and this decision will be made when a method is called.
+ * </p>
+ * @see FixScalar
  * @see SoftScalar
- * @see unit.pos.Pos
- * @see unit.size.Size
- * @since 0.97
+ * @since 0.129
  */
-public class FixScalar implements Scalar {
+public class WrapScalar implements Scalar {
     /**
-     * The supplier that gives this scalar its value.
+     * The scalar to wrap.
      */
-    private final DoubleSupplier supplier;
+    private final Lazy<Scalar> scalar;
 
     /**
-     * Uses 0.0 as its value.
+     * Ctor.
+     * @param value The CleanValue to wrap.
      */
-    public FixScalar() {
-        this(0.0);
+    public WrapScalar(final CleanValue value) {
+        this(
+            value.isFix(),
+            value::cleanValue
+        );
     }
 
     /**
      * Ctor.
-     * @param value The value that this scalar will have.
+     * @param isFix Whether the scalar should be fix or soft.
+     * @param value The value of the scalar.
+     * @checkstyle ParameterName (3 lines)
      */
-    public FixScalar(final double value) {
-        this(() -> value);
-    }
-
-    /**
-     * Ctor.
-     * @param supplier The supplier that gives this scalar its value.
-     */
-    public FixScalar(final DoubleSupplier supplier) {
-        this.supplier = Objects.requireNonNull(supplier);
+    public WrapScalar(final boolean isFix, final DoubleSupplier value) {
+        // @checkstyle ReturnCount (2 lines)
+        this.scalar = new Cached<>(
+            () -> {
+                if (isFix) {
+                    return new FixScalar(value);
+                } else {
+                    return new SoftScalar(value);
+                }
+            }
+        );
     }
 
     @Override
     public final double value() {
-        return this.supplier.getAsDouble();
+        return this.scalar.value().value();
     }
 
     @Override
     public final double cleanValue() {
-        return this.value();
+        return this.scalar.value().cleanValue();
     }
 
     @Override
     public final boolean isFix() {
-        return true;
+        return this.scalar.value().isFix();
     }
 
     @Override
     public final void adjustment(final Adjustment adjustment) {
-        // a fixed scalar ignores adjustments
+        this.scalar.value().adjustment(adjustment);
     }
 
-    @SuppressWarnings("PMD.OnlyOneReturn")
     @Override
     public final boolean equals(final Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (!(obj instanceof Scalar)) {
-            return false;
-        }
-        final Scalar other = (Scalar) obj;
-        return Double.compare(this.value(), other.value()) == 0;
+        return this.scalar.value().equals(obj);
     }
 
     @Override
     public final int hashCode() {
-        return Objects.hashCode(this.supplier.getAsDouble());
+        return this.scalar.value().hashCode();
     }
 
     @Override
     public final String toString() {
-        return String.join(
-            "",
-            "Scalar(",
-            Double.toString(this.supplier.getAsDouble()),
-            ")"
-        );
+        return this.scalar.value().toString();
     }
 }

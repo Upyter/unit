@@ -108,6 +108,7 @@ public class PlainArea implements RawArea {
         return this.h.getAsDouble();
     }
 
+    @SuppressWarnings("PMD.OnlyOneReturn")
     @Override
     public final boolean equals(final Object obj) {
         if (obj == this) {
@@ -117,10 +118,10 @@ public class PlainArea implements RawArea {
             return false;
         }
         final RawArea other = (RawArea) obj;
-        return Double.compare(this.x(), other.x()) == 0 &&
-            Double.compare(this.y(), other.y()) == 0 &&
-            Double.compare(this.w(), other.w()) == 0 &&
-            Double.compare(this.h(), other.h()) == 0;
+        return Double.compare(this.x(), other.x()) == 0
+            && Double.compare(this.y(), other.y()) == 0
+            && Double.compare(this.w(), other.w()) == 0
+            && Double.compare(this.h(), other.h()) == 0;
     }
 
     @Override
