@@ -21,7 +21,7 @@
 
 package unit.size;
 
-import unit.adjustment.Adjustable;
+import unit.Adjustable;
 import unit.size.raw.RawSize;
 
 /**

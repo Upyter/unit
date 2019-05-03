@@ -21,7 +21,7 @@
 
 package unit.pos;
 
-import unit.adjustment.Adjustable;
+import unit.Adjustable;
 import unit.pos.raw.RawPos;
 
 /**

@@ -19,7 +19,7 @@
  * DEALINGS IN THE SOFTWARE.
  */
 
-package unit.adjustment;
+package unit;
 
 /**
  * A unit that takes an adjustment.
