@@ -88,4 +88,32 @@ public class MixSize implements Size {
         this.w.adjustment(current -> adjustment.adjustedW(current, this.h));
         this.h.adjustment(current -> adjustment.adjustedH(this.w, current));
     }
+
+    @SuppressWarnings("PMD.OnlyOneReturn")
+    @Override
+    public final boolean equals(final Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (!(obj instanceof Size)) {
+            return false;
+        }
+        final Size other = (Size) obj;
+        return Double.compare(this.w(), other.w()) == 0
+            && Double.compare(this.h(), other.h()) == 0;
+    }
+
+    @Override
+    public final int hashCode() {
+        return Objects.hash(this.w(), this.h());
+    }
+
+    @Override
+    public final String toString() {
+        return new StringBuilder("Size")
+            .append("(width = ").append(this.w())
+            .append(", height = ").append(this.h())
+            .append(')')
+            .toString();
+    }
 }

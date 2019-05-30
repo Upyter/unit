@@ -126,23 +126,4 @@ public final class FixScalarTest {
             Matchers.closeTo(value, new Delta(value).value())
         );
     }
-
-    /**
-     * {@link FixScalar#toString()} must return a string that looks like this:
-     * <p>FixScalar(...value...)</p>.
-     */
-    @Test
-    public void correctToString() {
-        final double value = 534.12;
-        MatcherAssert.assertThat(
-            new FixScalar(value).toString(),
-            Matchers.hasToString(
-                Matchers.allOf(
-                    Matchers.containsString("FixScalar("),
-                    Matchers.containsString("53"),
-                    Matchers.containsString(")")
-                )
-            )
-        );
-    }
 }

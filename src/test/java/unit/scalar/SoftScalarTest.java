@@ -160,28 +160,4 @@ public final class SoftScalarTest {
             )
         );
     }
-
-    /**
-     * {@link FixScalar#toString()} must return a string that looks like this:
-     * <p>FixScalar(...value..., adjustment: ...adjusted value...)</p>.
-     */
-    @Test
-    public void correctToString() {
-        final var value = 241.12;
-        final var adjusted = 573.4;
-        final var scalar = new SoftScalar(value);
-        scalar.adjustment(current -> adjusted);
-        MatcherAssert.assertThat(
-            scalar,
-            Matchers.hasToString(
-                Matchers.allOf(
-                    Matchers.containsString("SoftScalar("),
-                    Matchers.containsString("24"),
-                    Matchers.containsString(", adjusted"),
-                    Matchers.containsString("57"),
-                    Matchers.containsString(")")
-                )
-            )
-        );
-    }
 }

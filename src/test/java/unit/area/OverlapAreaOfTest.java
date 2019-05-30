@@ -24,11 +24,6 @@ package unit.area;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
-import unit.pos.FixPos;
-import unit.pos.Pos;
-import unit.size.FixSize;
-import unit.size.Size;
-import unit.tuple.matcher.CorrectResult;
 
 /**
  * Tests for {@link OverlapAreaOf}.
@@ -36,89 +31,6 @@ import unit.tuple.matcher.CorrectResult;
  */
 @SuppressWarnings("PMD.TooManyMethods")
 public final class OverlapAreaOfTest {
-    /**
-     * {@link OverlapAreaOf#OverlapAreaOf(int, int)} must construct an area
-     * with the given width and height and a position of x = 0 and y = 0.
-     */
-    @Test
-    public void widthHeightConstruct() {
-        final int width = 452;
-        final int height = 264;
-        MatcherAssert.assertThat(
-            new AsTuple(new OverlapAreaOf(width, height)),
-            new CorrectResult(
-                new FixPos(),
-                new FixSize(width, height)
-            )
-        );
-    }
-
-    /**
-     * {@link OverlapAreaOf#OverlapAreaOf(Size)} must construct an area with the
-     * given size and a position of x = 0 and y = 0.
-     */
-    @Test
-    public void sizeConstruct() {
-        final int width = 652;
-        final int height = 752;
-        MatcherAssert.assertThat(
-            new AsTuple(new OverlapAreaOf(new FixSize(width, height))),
-            new CorrectResult(
-                new FixPos(),
-                new FixSize(width, height)
-            )
-        );
-    }
-
-    /**
-     * {@link OverlapAreaOf#OverlapAreaOf(Pos, Size)} must construct an area
-     * with the given position and size.
-     */
-    @Test
-    public void posSizeConstruct() {
-        // @checkstyle LocalFinalVariableName (2 lines)
-        final int x = 238;
-        final int y = 33;
-        final int width = 452;
-        final int height = 264;
-        MatcherAssert.assertThat(
-            new AsTuple(
-                new OverlapAreaOf(
-                    new FixPos(x, y),
-                    new FixSize(width, height)
-                )
-            ),
-            new CorrectResult(
-                new FixPos(x, y),
-                new FixSize(width, height)
-            )
-        );
-    }
-
-    /**
-     * {@link OverlapAreaOf#OverlapAreaOf(Area)} must construct an area
-     * with the given area.
-     */
-    @Test
-    public void areaConstruct() {
-        // @checkstyle LocalFinalVariableName (2 lines)
-        final int x = 235;
-        final int y = 742;
-        final int width = 52;
-        final int height = 4;
-        MatcherAssert.assertThat(
-            new AsTuple(
-                new OverlapAreaOf(
-                    new FixArea(x, y, width, height)
-                )
-            ),
-            new CorrectResult(
-                new FixPos(x, y),
-                new FixSize(width, height)
-            )
-        );
-    }
-
     /**
      * {@link OverlapAreaOf#contains(int, int)} must be true for an x and y that
      * are equal to the x and y of the area when the size of the area is w = 1

@@ -21,7 +21,6 @@
 
 package unit.area;
 
-import java.util.function.BiFunction;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
@@ -29,36 +28,12 @@ import unit.pos.FixPos;
 import unit.pos.Pos;
 import unit.size.FixSize;
 import unit.size.Size;
-import unit.tuple.matcher.CorrectResult;
 
 /**
  * Tests for {@link Area}.
  * @since 0.6
  */
 public final class MixAreaTest {
-    /**
-     * {@link MixArea#result(BiFunction)} returns the correct result.
-     */
-    @Test
-    public void correctResult() {
-        // @checkstyle LocalFinalVariableName (4 lines)
-        final var resX = 42;
-        final var resY = 563;
-        final var resW = 34324;
-        final var resH = 233;
-        MatcherAssert.assertThat(
-            new AsTuple(
-                new MixArea(
-                    new FixPos(resX, resY),
-                    new FixSize(resW, resH)
-                )
-            ),
-            new CorrectResult(
-                new FixPos(resX, resY),
-                new FixSize(resW, resH)
-            )
-        );
-    }
 
     /**
      * {@link MixArea#AreaOf(Pos)} has a width of 0 and a height of 0.
@@ -106,21 +81,5 @@ public final class MixAreaTest {
         MatcherAssert.assertThat(area.y(), Matchers.equalTo(y));
         MatcherAssert.assertThat(area.w(), Matchers.equalTo(w));
         MatcherAssert.assertThat(area.h(), Matchers.equalTo(h));
-    }
-
-    /**
-     * {@link MixArea#MixArea(int, int)} constructs an area with x = 0, y = 0,
-     * and the given width and size.
-     */
-    @Test
-    public void zeroPosConstructor() {
-        final int width = 313;
-        final int height = 238;
-        MatcherAssert.assertThat(
-            new AsTuple(new FixArea(width, height)),
-            new CorrectResult(
-                new FixPos(), new FixSize(width, height)
-            )
-        );
     }
 }

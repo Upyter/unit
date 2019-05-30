@@ -31,7 +31,8 @@ import org.junit.Test;
  */
 public final class FixSizeTest {
     /**
-     * {@link FixSize#toString()}} returns the right string.
+     * {@link FixSize#toString()} returns a string like: Size(width = ...,
+     * height = ...).
      */
     @Test
     public void correctToString() {
